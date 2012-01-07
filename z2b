@@ -66,8 +66,8 @@ def write_file(filename, body):
 def format_body(body, props):
     return (
         '<%inherit file="_templates/site.mako" />\n' +
-        '<%%def name="title()">%s</%%def>\n' % props['title'] +
-        '<%%def name="short_title()">%s</%%def>\n' % props['short_title'] +
+        '<%%def name="title()">%s</%%def>\n' % props.get('title') +
+        '<%%def name="short_title()">%s</%%def>\n' % props.get('short_title') +
         '\n' +
         body)
 
