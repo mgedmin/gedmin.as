@@ -1,5 +1,5 @@
 <%inherit file="base.mako" />\
-<% base_url, lang = bf.config.site.url, bf.config.get_cur_lang() %>\
+<% base_url, lang = bf.config.site.url, get_cur_lang() %>\
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
                       "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
@@ -37,53 +37,8 @@
 <a href="${base_url}/sitemap/index-${lang}.html">${_('Site Map')}</a>
 <span class="hide">|</span>
 </span>
-<%!
-from mako.template import Template
-import blogofile_bf as bf
-
-def get_trail_templates(filename, lang):
-    filename = os.path.abspath(filename)
-    result = [filename]
-    path = os.path.dirname(filename)
-    while True:
-        path = os.path.dirname(path)
-        filename = os.path.join(path, 'index-%s.html.mako' % lang)
-        if not os.path.exists(filename):
-            break
-        result.append(filename)
-    result.reverse()
-    return result
-
-
-def get_template(filename):
-    with open(filename) as f:
-        return Template(f.read().decode("utf-8"),
-                        output_encoding="utf-8",
-                        lookup=bf.writer.template_lookup)
-
-
-def get_template_info(filename):
-    cache = bf.setdefault('my_template_info_cache', {})
-    if filename not in cache:
-        template = get_template(filename)
-        title = template.get_def('title').render().decode('UTF-8')
-        short_title = template.get_def('short_title').render().decode('UTF-8')
-        cache[filename] = (title, short_title)
-    return cache[filename]
-
-
-def get_trail(filename, lang):
-    templates = get_trail_templates(filename, lang)
-    root = os.path.dirname(templates[0])
-    result = []
-    for filename in templates:
-        subpath = os.path.dirname(filename)[len(root):]
-        title, short_title = get_template_info(filename)
-        result.append((subpath, short_title, title))
-    return result
-%>
 <%
-    trail = get_trail(bf.template_context.template_name, lang)
+    trail = get_trail()
     subfolders = [
 ##      ('/study/python', 'Python', 'Python programming language'),
 ##      ('/study/icpc', 'ICPC', 'ACM ICPC'),
@@ -129,16 +84,7 @@ ${next.body()}
         alt="Valid CSS!" height="31" width="88" /></a>
 </span>
 <span class="lastupdated">
-<%! import time, os %>
-<%
-    filename = bf.template_context.template_name
-    try:
-        mtime = os.stat(filename).st_mtime
-    except OSError:
-        mtime = time.time()
-    last_updated = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(mtime))
-%>
-${_('Last updated:')} ${last_updated}
+${_('Last updated:')} ${get_mtime_str()}
 </span>
 
 </body>
