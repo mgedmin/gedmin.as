@@ -10,6 +10,9 @@
 #
 ######################################################################
 
+import os
+import logging
+
 ######################################################################
 # Basic Settings
 #  (almost all sites will want to configure these settings)
@@ -19,13 +22,16 @@
 #  If you're hosting a blogofile powered site as a subdirectory of a larger
 #  non-blogofile site, then you would set the site_url to the full URL
 #  including that subdirectory: "http://www.yoursite.com/path/to/blogofile-dir"
-site.url = "http://gedmin.as"
+##site.url = "http://gedmin.as"
 site.url = "http://localhost:8080"
 
-#### Blog Settings ####
-blog = controllers.blog
 
-## blog_enabled -- Should the blog be enabled?
-#  (You don't _have_ to use blogofile to build blogs)
-blog.enabled = False
+def post_build():
+    log = logging.getLogger('blogofile._config')
+    output_dir = bf.writer.output_dir
+    for dirpath, dirnames, filenames in os.walk(output_dir):
+        filename = os.path.join(dirpath, 'index.html')
+        if not os.path.exists(filename):
+            log.info('Creating symlink %s' % filename)
+            os.symlink('index-en.html', filename)
 

@@ -1,9 +1,8 @@
 - TEST .htaccess rewrite rules for old news/about redirect
-- magic language negotiation
+- magic language negotiation?
 - navbaro subfolderiai
 - /sitemap
 - /study/inf98/*.html (DTML failaiaaaaaa!)
 - port all remaining content (esp. study)
-+ modification time from filesystem, not from wall clock
++ modification time from filesystem, not from wall clock (not necessarily good idea)
 - crawl and nuke ancient websites/emails (grep for b4net.lt, ice.dammit.lt, delfi.lt)
-- /debian packages are missing!
