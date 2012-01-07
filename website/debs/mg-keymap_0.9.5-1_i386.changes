@@ -1,0 +1,20 @@
+Format: 1.7
+Date: Fri, 20 Feb 2004 16:05:56 +0200
+Source: mg-keymap
+Binary: mg-keymap
+Architecture: source i386
+Version: 0.9.5-1
+Distribution: unstable
+Urgency: low
+Maintainer: Marius Gedminas <mgedmin@b4net.lt>
+Changed-By: Marius Gedminas <mgedmin@b4net.lt>
+Description: 
+ mg-keymap  - Lithuanian "programmers" keymap for X
+Changes: 
+ mg-keymap (0.9.5-1) unstable; urgency=low
+ .
+   * Fixed broken pc/lt-mg layout (hopefully).
+Files: 
+ e92e576c23614d10d6ba32f1d10f1ac1 228 x11 optional mg-keymap_0.9.5-1.dsc
+ 062f21226cc6f1d89c15e2d95b93dda2 25999 x11 optional mg-keymap_0.9.5-1.tar.gz
+ 58c812df255e9ed0dbb868c0e890426e 21406 x11 optional mg-keymap_0.9.5-1_i386.deb

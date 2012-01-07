@@ -1,0 +1,23 @@
+Format: 1.7
+Date: Sat,  6 Dec 2003 00:32:46 +0200
+Source: mgstats
+Binary: mgstats
+Architecture: source i386
+Version: 0.12-1
+Distribution: unstable
+Urgency: low
+Maintainer: Marius Gedminas <mgedmin@b4net.lt>
+Changed-By: Marius Gedminas <mgedmin@b4net.lt>
+Description: 
+ mgstats    - Simple system statistics with RRD
+Changes: 
+ mgstats (0.12-1) unstable; urgency=low
+ .
+   * Fixed a bug in graphs/ftpstats (reduce with an empty sequence)
+   * Added a try/except to graphs/entropy to avoid error emails from cron on
+     2.2 kernels.
+   * Added a new option 'bits' to graphs/network
+Files: 
+ 5103da41c8e93556b89da812b211db56 256 admin optional mgstats_0.12-1.dsc
+ 5621de54051b2fdb2caec819c80f9390 13283 admin optional mgstats_0.12-1.tar.gz
+ a8744080987fa6abd5e0f2bf5e010140 12866 admin optional mgstats_0.12-1_i386.deb

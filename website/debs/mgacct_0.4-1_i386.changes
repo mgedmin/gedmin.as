@@ -1,0 +1,22 @@
+Format: 1.7
+Date: Fri, 28 May 2004 03:09:12 +0300
+Source: mgacct
+Binary: mgacct
+Architecture: source i386
+Version: 0.4-1
+Distribution: unstable
+Urgency: low
+Maintainer: Marius Gedminas <mgedmin@b4net.lt>
+Changed-By: Marius Gedminas <mgedmin@b4net.lt>
+Description: 
+ mgacct     - Simple traffic accounting with RRD
+Changes: 
+ mgacct (0.4-1) unstable; urgency=low
+ .
+   * Changed all shebang lines to explicitly ask for python2.2 (2.3
+     gives FutureWarnings for bit shifting operations).
+   * Changed email address.
+Files: 
+ 59a9a081bb0975cbc6f27fd90247a2db 250 admin optional mgacct_0.4-1.dsc
+ 1f2664bbb7fd8a15b2dc4e283945693d 9220 admin optional mgacct_0.4-1.tar.gz
+ f5eeb60b9930668113643c500f2e5eb8 7584 admin optional mgacct_0.4-1_i386.deb
