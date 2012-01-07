@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Įvairūs skriptai</%def>
 <%def name="short_title()">Įvairūs</%def>
 

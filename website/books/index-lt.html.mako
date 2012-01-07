@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Mėgiamos knygos</%def>
 <%def name="short_title()">Knygos</%def>
 

@@ -82,8 +82,8 @@ def get_template_info(filename):
     cache = bf.setdefault('my_template_info_cache', {})
     if filename not in cache:
         template = get_template(filename)
-        title = template.get_def('title').render()
-        short_title = template.get_def('short_title').render()
+        title = template.get_def('title').render().decode('UTF-8')
+        short_title = template.get_def('short_title').render().decode('UTF-8')
         cache[filename] = (title, short_title)
     return cache[filename]
 

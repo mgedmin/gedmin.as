@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Debian packages</%def>
 <%def name="short_title()">APT</%def>
 

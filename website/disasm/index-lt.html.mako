@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Disasembleris 8086</%def>
 <%def name="short_title()">Disasembleris</%def>
 

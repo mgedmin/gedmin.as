@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Objektinės technologijos</%def>
 <%def name="short_title()">OT</%def>
 

@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Lithuanian fonts for xdosemu</%def>
 <%def name="short_title()">Fonts</%def>
 

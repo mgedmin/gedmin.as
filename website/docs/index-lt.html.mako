@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Lietuviška dokumentacija</%def>
 <%def name="short_title()">Dokumentacija</%def>
 

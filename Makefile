@@ -1,6 +1,6 @@
 .PHONY: build
 build: env/bin/blogofile
-	env/bin/blogofile -s website build
+	env/bin/blogofile -s website build -v
 
 .PHONY: run
 run: build

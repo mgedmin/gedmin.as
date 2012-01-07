@@ -1,4 +1,4 @@
-<%%inherit file="_templates/site.mako" />
+<%inherit file="_templates/site.mako" />
 <%def name="title()">Lietuviško teksto perkodavimas</%def>
 <%def name="short_title()">LTT</%def>
 
