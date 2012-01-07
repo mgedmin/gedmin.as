@@ -1,0 +1,366 @@
+/*
+ * Style
+ */
+
+body {
+    color: black;
+    background: white;
+}
+
+div.title {
+    margin: 0px;
+    padding: 0px;
+}
+
+div.title h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+img {
+    border: none;
+}
+
+/*
+ * Toolbox
+ */
+
+div.toolbox {
+    float: right;
+    margin-left: 1ex;
+    margin-bottom: 1ex;
+    border: 1px solid gray;
+    padding: 1ex;
+    color: black;
+    background: white;
+    font-size: small;
+}
+div.toolbox h2,
+div.toolbox div.title {
+    margin-top: 0ex;
+    margin-left: 0ex;
+    margin-right: 0ex;
+    margin-bottom: 1ex;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid gray;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0.6ex;
+    text-align: center;
+    font-size: small;
+    font-weight: bold;
+    color: gray;
+    background: inherit;
+}
+div.toolbox ul {
+    margin: 0px;
+    padding: 0px;
+}
+div.toolbox li {
+    list-style: none;
+}
+div.toolbox a:hover {
+    background: #ffa;
+}
+
+div.shadow {
+    border: none;
+    color: #ccc;
+    background: #ddd;
+    padding: 4px;
+    margin-bottom: -4px;
+    margin-right: -4px;
+}
+div.inner {
+    background: white;
+    border: 1px solid gray;
+    color: black;
+    margin-top: -8px;
+    margin-left: -8px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding: 1ex;
+}
+
+div.langbox {
+    text-align: center;
+    border: none;
+}
+div.langbox a:hover {
+    background: transparent;
+}
+div.langbox img {
+    position: relative;
+    top: 3px;
+}
+div.langbox span.sep {
+    position: relative;
+    top: -1px;
+    color: gray;
+    background: inherit;
+}
+div.langbox div.title {
+    display: none;
+}
+
+div.navbar {
+    clear: both;
+    margin-top: 1ex;
+    margin-bottom: 1.5ex;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    color: gray;
+    background: inherit;
+}
+div.navbar span.sep {
+    margin-left: 0.5ex;
+    margin-right: 0.5ex;
+}
+div.navbar a:link {
+    color: gray;
+    background: inherit;
+}
+div.navbar a:visited {
+    color: gray;
+    background: inherit;
+}
+div.navbar .right {
+    float: right;
+}
+
+/*
+ * Content
+ */
+
+div.content {
+    clear: both;
+    min-height: 200px;
+}
+
+p, ul, ol, dl {
+    max-width: 800px;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    border-bottom: 1px dotted gray;
+}
+
+div.news {
+    width: 20em;
+}
+
+div.news dl {
+    margin: 0px;
+}
+dl.news {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+}
+dl.news dt {
+    color: green;
+    background: inherit;
+    float: left;
+    margin-right: 1em;
+}
+dl.news dd {
+    margin-left: 7em;
+}
+div.news dl.news dd {
+    margin-left: 1em;
+}
+
+p.more {
+    margin-top: 0.5ex;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    text-align: right;
+}
+
+form th {
+    font-weight: bold;
+    text-align: left;
+    margin-right: 1ex;
+}
+
+form td {
+    margin-right: 1ex;
+}
+
+a:link {
+    color: #00f;
+    background: inherit;
+}
+a:visited {
+    color: #00b;
+    background: inherit;
+}
+
+a.broken {
+    color: red;
+    background: inherit;
+}
+a.unknown {
+    color: #c88;
+    background: inherit;
+}
+
+a.internal {
+    color: #04f;
+    background: inherit;
+}
+a.internal:visited {
+    color: #02b;
+    background: inherit;
+}
+
+a.foreign {
+    color: #40f;
+    background: inherit;
+}
+a.foreign:visited {
+    color: #20b;
+    background: inherit;
+}
+
+img.broken {
+    background: #fee;
+    color: red;
+    border: 1px dotted red;
+    padding: 0.5ex;
+}
+
+blockquote.example {
+    color: black;
+    background: #fcfffc;
+    border: 1px solid #cfc;
+    padding: 1ex;
+}
+
+blockquote.example pre {
+    margin: 0px;
+    padding: 0px;
+}
+
+pre.example {
+    color: black;
+    background: #fcfffc;
+    border: 1px solid #cfc;
+    padding: 1ex;
+}
+
+dl.package dt {
+    font-weight: bold;
+}
+
+dl.obsolete.package dt {
+    text-decoration: line-through
+}
+
+.small {
+    font-size: small;
+}
+
+/*
+ * Code examples
+ */
+
+.shebang    { color: #444444; }
+.docstring  { color: #008000; }
+.def        { color: #2040a0; font-weight: bold; }
+.keyword    { color: #000000; }
+.name       { color: #2040a0; }
+.string     { color: #008000; }
+.comment    { color: #ff0000; }
+.number     { color: #a02040; }
+
+
+/*
+ * Footer
+ */
+
+div.bottombar {
+    clear: both;
+    margin-top: 1ex;
+    border-top: 1px solid gray;
+    padding-top: 1ex;
+    text-align: right;
+    color: gray;
+    background: inherit;
+}
+
+span.valid {
+    float: left;
+    margin-bottom: 0.5ex;
+}
+
+/*
+ * Tables
+ */
+
+table.simple {
+    border-collapse: collapse;
+}
+table.simple th {
+    border-bottom: 1px solid black;
+}
+
+table.simple tr.odd {
+}
+
+table.simple tr.even {
+    background: #eeeeee;
+}
+
+table.simple td {
+    vertical-align: top;
+    padding: 1px 1ex;
+}
+
+td.right {
+    text-align: right;
+}
+td.center {
+    text-align: center;
+}
+
+/* http://mg.b4net.lt/study/cna */
+
+tr.taken td {
+    text-decoration: line-through;
+    color: gray;
+}
+tr.conflict td {
+    text-decoration: line-through;
+    color: red;
+}
+
+/*
+ * Debug stuff
+ */
+
+.hide {
+    display: none;
+}
+
+div.debug {
+    margin-top: 1ex;
+    border: 1px solid red;
+    padding: 1ex;
+}
+div.debug:before {
+    content: "DEBUG";
+    display: block;
+    color: red;
+    background: inherit;
+    margin-bottom: 1ex;
+}
+
+/* vim: set ft=css sw=4 sts=4 et: */
