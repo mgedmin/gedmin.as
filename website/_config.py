@@ -20,6 +20,7 @@
 #  non-blogofile site, then you would set the site_url to the full URL
 #  including that subdirectory: "http://www.yoursite.com/path/to/blogofile-dir"
 site.url = "http://gedmin.as"
+site.url = "http://localhost:8080"
 
 #### Blog Settings ####
 blog = controllers.blog
