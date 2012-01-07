@@ -5,3 +5,5 @@
 - /study/inf98/*.html (DTML failaiaaaaaa!)
 - port all remaining content (esp. study)
 + modification time from filesystem, not from wall clock
+- crawl and nuke ancient websites/emails (grep for b4net.lt, ice.dammit.lt, delfi.lt)
+- /debian packages are missing!
