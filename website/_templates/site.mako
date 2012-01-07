@@ -1,5 +1,5 @@
 <%inherit file="base.mako" />\
-<% base_url = bf.config.site.url %>\
+<% base_url, lang = bf.config.site.url, bf.config.get_cur_lang() %>\
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
                       "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
@@ -19,23 +19,7 @@
 
 <div class="toolbox langbox">
 <div class="title">Language</div>
-<%
-    if 'index-lt' in bf.template_context.template_name:
-        lang = 'lt'
-    else:
-        lang = 'en'
-    languages = [
-        ('lt', 'Lithuanian'),
-        ('en', 'English'),
-    ]
-    translations = {
-        'Last updated:': {'lt': 'Paskutiniai pakeitimai:'},
-        'Site Map': {'lt': 'Turinys'},
-    }
-    def _(msg):
-        return translations.get(msg, {}).get(lang, msg)
-%>
-% for n, (code, title) in enumerate(languages):
+% for n, (code, title) in enumerate(bf.config.site.languages):
 %     if n:
   <span class="sep">::</span>
 %     endif

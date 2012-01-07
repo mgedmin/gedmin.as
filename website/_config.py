@@ -26,6 +26,42 @@ import logging
 site.url = "http://localhost:8080"
 
 
+#
+# Homebrew multilingual solution
+#
+
+site.default_lang = 'en'
+
+site.languages = [
+    ('lt', 'Lithuanian'),
+    ('en', 'English'),
+]
+site.translations = {
+    'Last updated:':
+        dict(lt='Paskutiniai pakeitimai:'),
+    'Site Map':
+        dict(lt='Turinys'),
+}
+
+def translate(msg):
+    translations = site.translations
+    lang = bf.template_context.lang
+    return translations.get(msg, {}).get(lang, msg)
+
+def get_cur_lang():
+    if 'lang' in bf.template_context:
+        return bf.template_context.lang
+    for code, title in site.languages:
+        suffix = '-%s.html.mako' % code
+        if bf.template_context.template_name.endswith(suffix):
+            break
+    else:
+        code = site.default_lang
+    bf.template_context.lang = code
+    return code
+
+site.template_vars._ = translate
+
 def post_build():
     log = logging.getLogger('blogofile._config')
     output_dir = bf.writer.output_dir
@@ -33,5 +69,5 @@ def post_build():
         filename = os.path.join(dirpath, 'index.html')
         if not os.path.exists(filename):
             log.info('Creating symlink %s' % filename)
-            os.symlink('index-en.html', filename)
+            os.symlink('index-%s.html' % site.default_lang, filename)
 
