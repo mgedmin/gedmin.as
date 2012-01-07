@@ -1,0 +1,110 @@
+# This file contains Lithuanian time zone and the neccessary rules taken from
+# `europe' file in `tzdata2003a.tar.gz' package by Arthur David
+# Olson et.al.  You can find that package at ftp://elsie.nci.nih.gov/pub/
+
+# EU rules are for the European Union, previously known as the EC, EEC,
+# Common Market, etc.
+
+# Rule	NAME	FROM	TO	TYPE	IN	ON	AT	SAVE	LETTER/S
+Rule	EU	1977	1980	-	Apr	Sun>=1	 1:00u	1:00	S
+Rule	EU	1977	only	-	Sep	lastSun	 1:00u	0	-
+Rule	EU	1978	only	-	Oct	 1	 1:00u	0	-
+Rule	EU	1979	1995	-	Sep	lastSun	 1:00u	0	-
+Rule	EU	1981	max	-	Mar	lastSun	 1:00u	1:00	S
+Rule	EU	1996	max	-	Oct	lastSun	 1:00u	0	-
+
+# Older C-Eur rules are for convenience in the tables.
+# From 1977 on, C-Eur differs from EU only in that C-Eur uses standard time.
+Rule	C-Eur	1916	only	-	Apr	30	23:00	1:00	S
+Rule	C-Eur	1916	only	-	Oct	 1	 1:00	0	-
+Rule	C-Eur	1917	1918	-	Apr	Mon>=15	 2:00s	1:00	S
+Rule	C-Eur	1917	1918	-	Sep	Mon>=15	 2:00s	0	-
+Rule	C-Eur	1940	only	-	Apr	 1	 2:00s	1:00	S
+Rule	C-Eur	1942	only	-	Nov	 2	 2:00s	0	-
+Rule	C-Eur	1943	only	-	Mar	29	 2:00s	1:00	S
+Rule	C-Eur	1943	only	-	Oct	 4	 2:00s	0	-
+Rule	C-Eur	1944	only	-	Apr	 3	 2:00s	1:00	S
+# Whitman gives 1944 Oct 7; go with Shanks.
+Rule	C-Eur	1944	only	-	Oct	 2	 2:00s	0	-
+Rule	C-Eur	1977	1980	-	Apr	Sun>=1	 2:00s	1:00	S
+Rule	C-Eur	1977	only	-	Sep	lastSun	 2:00s	0	-
+Rule	C-Eur	1978	only	-	Oct	 1	 2:00s	0	-
+Rule	C-Eur	1979	1995	-	Sep	lastSun	 2:00s	0	-
+Rule	C-Eur	1981	max	-	Mar	lastSun	 2:00s	1:00	S
+Rule	C-Eur	1996	max	-	Oct	lastSun	 2:00s	0	-
+
+# Rule	NAME	FROM	TO	TYPE	IN	ON	AT	SAVE	LETTER/S
+Rule	Russia	1917	only	-	Jul	 1	23:00	1:00	MST	# Moscow Summer Time
+Rule	Russia	1917	only	-	Dec	28	 0:00	0	MMT	# Moscow Mean Time
+Rule	Russia	1918	only	-	May	31	22:00	2:00	MDST	# Moscow Double Summer Time
+Rule	Russia	1918	only	-	Sep	16	 1:00	1:00	MST
+Rule	Russia	1919	only	-	May	31	23:00	2:00	MDST
+Rule	Russia	1919	only	-	Jul	 1	 2:00	1:00	S
+Rule	Russia	1919	only	-	Aug	16	 0:00	0	-
+Rule	Russia	1921	only	-	Feb	14	23:00	1:00	S
+Rule	Russia	1921	only	-	Mar	20	23:00	2:00	M # Midsummer
+Rule	Russia	1921	only	-	Sep	 1	 0:00	1:00	S
+Rule	Russia	1921	only	-	Oct	 1	 0:00	0	-
+# Act No.925 of the Council of Ministers of the USSR (1980-10-24):
+Rule	Russia	1981	1984	-	Apr	 1	 0:00	1:00	S
+Rule	Russia	1981	1983	-	Oct	 1	 0:00	0	-
+# Act No.967 of the Council of Ministers of the USSR (1984-09-13), repeated in
+# Act No.227 of the Council of Ministers of the USSR (1989-03-14):
+Rule	Russia	1984	1991	-	Sep	lastSun	 2:00s	0	-
+Rule	Russia	1985	1991	-	Mar	lastSun	 2:00s	1:00	S
+#
+Rule	Russia	1992	only	-	Mar	lastSat	 23:00	1:00	S
+Rule	Russia	1992	only	-	Sep	lastSat	 23:00	0	-
+Rule	Russia	1993	max	-	Mar	lastSun	 2:00s	1:00	S
+Rule	Russia	1993	1995	-	Sep	lastSun	 2:00s	0	-
+Rule	Russia	1996	max	-	Oct	lastSun	 2:00s	0	-
+
+# Lithuania
+
+# From Paul Eggert (1996-11-22):
+# IATA SSIM (1992/1996) says Lithuania uses W-Eur rules, but since it is
+# known to be wrong about Estonia and Latvia, assume it's wrong here too.
+
+# From Marius Gedminas <mgedmin@pub.osf.lt> (1998-08-07):
+# I would like to inform that in this year Lithuanian time zone
+# (Europe/Vilnius) was changed.
+
+# From <a href="http://www.elta.lt/">ELTA</a> No. 972 (2582) (1999-09-29),
+# via Steffen Thorsen:
+# Lithuania has shifted back to the second time zone (GMT plus two hours)
+# to be valid here starting from October 31,
+# as decided by the national government on Wednesday....
+# The Lithuanian government also announced plans to consider a
+# motion to give up shifting to summer time in spring, as it was
+# already done by Estonia.
+
+# From the <a href="http://www.tourism.lt/informa/ff.htm">
+# Fact File, Lithuanian State Department of Tourism
+# </a> (2000-03-27): Local time is GMT+2 hours ..., no daylight saving.
+
+# From a user via Klaus Marten (2003-02-07):
+# As a candidate for membership of the European Union, Lithuania will
+# observe Summer Time in 2003, changing its clocks at the times laid
+# down in EU Directive 2000/84 of 19.I.01 (i.e. at the same times as its
+# neighbour Latvia). The text of the Lithuanian government Order of
+# 7.XI.02 to this effect can be found at
+# http://www.lrvk.lt/nut/11/n1749.htm
+
+
+# Zone	NAME		GMTOFF	RULES	FORMAT	[UNTIL]
+Zone	Europe/Vilnius	1:41:16	-	LMT	1880
+			1:24:00	-	WMT	1917	    # Warsaw Mean Time
+			1:35:36	-	KMT	1919 Oct 10 # Kaunas Mean Time
+			1:00	-	CET	1920 Jul 12
+			2:00	-	EET	1920 Oct  9
+			1:00	-	CET	1940 Aug  3
+			3:00	-	MSK	1941 Jun 24
+			1:00	C-Eur	CE%sT	1944 Aug
+			3:00	Russia	MSK/MSD	1991 Mar 31 2:00s
+			2:00	1:00	EEST	1991 Sep 29 2:00s
+			2:00	C-Eur	EE%sT	1998
+			2:00	-	EET	1998 Mar 29 1:00u
+			1:00	EU	CE%sT	1999 Oct 31 1:00u
+			2:00	-	EET	2003 Jan  1
+			2:00	EU	EE%sT
+

@@ -1,0 +1,150 @@
+%% Copyright (c) 2001 Marius Gedminas <mgedmin@delfi.lt>
+%% LaTeX paketas studijø konspektams
+%%
+%% $Id: konspekt.sty,v 1.1 2001/10/05 20:55:11 mg Exp $
+
+\ProvidesPackage{konspekt}
+
+\usepackage{lt}
+
+\usepackage{theorem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% -- Titulinis puslapis-------------------------------------------------------
+
+% Naudoti \title viduje: \title{XXX \subtitle{yyy}}
+\newcommand{\subtitle}[1]{\par\medskip{\small #1\par}}
+
+% -- Puslapiø valdymas -------------------------------------------------------
+
+% Puslapiø valdymas
+\newcommand{\longpage}{\enlargethispage{\baselineskip}}
+\newcommand{\shortpage}{\enlargethispage{-\baselineskip}}
+
+% -- Teksto þymëjimai --------------------------------------------------------
+
+% \Def{xxx} - apibrëþiamø þodþiø iðryðkinimas
+\newcommand{\Def}[1]{\textit{\textbf{#1}}}
+
+% -- Lietuviðkos tradicijos --------------------------------------------------
+
+% Simboliø iðvaizda
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\liminf}{\varliminf}
+\renewcommand{\limsup}{\varlimsup}
+
+% Maybe be consistent with Lithuanian traditions?
+%\renewcommand{\tan}{\mathop{\operator@font tg}\nolimits} 
+%\renewcommand{\arctan}{\mathop{\operator@font arctg}\nolimits} 
+%\renewcommand{\cot}{\mathop{\operator@font ctg}\nolimits} 
+%\renewcommand{\arccot}{\mathop{\operator@font arcctg}\nolimits} 
+
+% -- Matematika --------------------------------------------------------------
+
+% Pagalbiniai simboliai
+\newcommand{\tada}{\ensuremath{\quad\Longrightarrow\quad}}
+\newcommand{\ttt}{\ensuremath{\quad\Longleftrightarrow\quad}}
+
+% Graikiðkos raidës
+\newcommand{\Beta}{\mathrm{B}}
+
+% Aibës
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\C}{\mathbb{C}}
+
+% Integravimas
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\dx}{\ud x}
+\newcommand{\dy}{\ud y}
+\newcommand{\dz}{\ud z}
+\newcommand{\dt}{\ud t}
+\newcommand{\du}{\ud u}
+\newcommand{\dv}{\ud v}
+\newcommand{\dr}{\ud r}
+\newcommand{\dl}{\ud l}
+\newcommand{\dphi}{\ud\phi}
+\newcommand{\dtheta}{\ud\theta}
+
+% Funkcijos
+\newcommand{\const}{\mathop{\operator@font const}\nolimits}
+\newcommand{\sgn}{\mathop{\operator@font sgn}\nolimits}
+\newcommand{\grad}{\mathop{\operator@font grad}\nolimits}
+\newcommand{\arccot}{\mathop{\operator@font arccot}\nolimits}
+
+% -- "Teoremos" --------------------------------------------------------------
+
+\theoremstyle{change}
+\theorembodyfont{\rmfamily}
+
+% Numeruojamos teoremos
+\newtheorem{ap}{apibrëþimas.}[section]
+\newtheorem{app}[ap]{apibrëþimai.}
+\newtheorem{tg}[ap]{teiginys.}
+\newtheorem{tgg}[ap]{teiginiai.}
+\newtheorem{tr}[ap]{teorema.}
+\newtheorem{trr}[ap]{teoremos.}
+\newtheorem{lm}[ap]{lema.}
+\newtheorem{lmm}[ap]{lemos.}
+\newtheorem{ps}[ap]{pastaba.}
+\newtheorem{pss}[ap]{pastabos.}
+\newtheorem{isv}[ap]{iðvada.}
+\newtheorem{isvv}[ap]{iðvados.}
+\newtheorem{pvz}[ap]{pavyzdys.}
+\newtheorem{pvzz}[ap]{pavyzdþiai.}
+
+% Pagalbinë aplinka
+\newenvironment{pseudo*}[1]%
+  {\par\normalfont\noindent\textbf{#1}}%
+  {}
+
+% Nenumeruojamos teoremos
+\newenvironment{ap*}%
+  {\begin{pseudo*}{Apibrëþimas.}}%
+  {\end{pseudo*}}
+\newenvironment{ps*}%
+  {\begin{pseudo*}{Pastaba.}}%
+  {\end{pseudo*}}
+\newenvironment{pss*}%
+  {\begin{pseudo*}{Pastabos.}}%
+  {\end{pseudo*}}
+\newenvironment{pvz*}%
+  {\begin{pseudo*}{Pavyzdys.}}%
+  {\end{pseudo*}}
+\newenvironment{pvzz*}%
+  {\begin{pseudo*}{Pavyzdþiai.}}%
+  {\end{pseudo*}}
+
+% Iðvada su rankomis nurodytu numeriu (kartà prireikë :-)
+\newenvironment{pseudoisv}[1]%
+  {\begin{pseudo*}{#1 iðvada}}%
+  {\end{pseudo*}}
+
+% Pagalbinë aplinka
+\newenvironment{pseudoir}[1]%
+  {\begin{pseudo*}{#1}$\vartriangleright$\quad\begin{em}\ignorespaces}%
+  {\end{em}\hspace{\stretch{1}}$\vartriangleleft$\end{pseudo*}}
+
+% Teoremos árodymas
+\newenvironment{ir}%
+  {\begin{pseudoir}{Árodymas\quad}}%
+  {\end{pseudoir}}
+% Teoremos ¥árodymas´
+\newenvironment{kir}%
+  {\begin{pseudoir}{,,Árodymas``\quad}}%
+  {\end{pseudoir}}
+% Teoremos árodymas be jokiø áþangø
+\newenvironment{ir*}%
+  {\begin{pseudoir}{}}%
+  {\end{pseudoir}}
+
+% -- Viskas ------------------------------------------------------------------

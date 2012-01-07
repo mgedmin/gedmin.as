@@ -1,0 +1,1035 @@
+\documentclass[draft,a4paper]{article}
+\usepackage{lt}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{multicol}
+\title{Diskreèiosios matematikos konspektai}
+\author{Marius Gedminas}
+\date{2003 m. pavasaris\\ (VU informatikos magistrantûros studijø 2 semestras)}
+
+\newcommand{\Def}{\emph}
+\newcommand{\true}{\mathbf{t}}
+\newcommand{\false}{\mathbf{f}}
+\renewcommand{\land}{\mathop{\&}}
+
+\begin{document}
+\maketitle
+
+% XXX: ei, disjunktai ar disjungtai?
+
+% ----------------------------------------------------------------------------
+
+\section{Formulës}
+
+Apibrëþimas: \Def{$n$-vieèiu predikatu} aibëje $M$ vadiname funkcijà $P: M^n
+\to \{\true, \false\}$.  Aibë $M$ vadinama \Def{individiniø konstantø aibe}.
+
+\Def{Predikatinis kintamasis} yra predikatas (ne koks nors konkreèiai, o
+apskritai).
+
+\Def{Formulë} apibrëþiama taip:
+\begin{enumerate}
+\item $P$ -- formulë, jei $P$ yra predikatinis kintamasis.
+\item $\neg F$ -- formulë, jei $F$ -- formulë.
+\item $(F \land G)$, $(F \lor G)$, $(F \to G)$ yra formulës, jei $F$ ir $G$
+yra formulës.
+\item $\forall x F$, $\exists x F$ (skaitoma ¥visiems $x$´, ¥egzistuoja $x$´)
+yra formulës, jei $F$ yra formulë.
+\item $\Box F$, $\Diamond F$ (skaitoma ¥bûtinai $F$´, ¥galbût $F$´) yra
+formulës, jei $F$ yra formulë.
+\end{enumerate}
+
+Punktai 1--4 apibrëþia predikatø logikà, 1--5 --- modalumo logikà.
+
+$\Box F$, $\Diamond F$ galima interpretuoti ávairiai, pvz.,
+¥visada´/¥kartais´, ¥visur´/¥kai kur´.  Semantika nusakoma aksiomomis, pvz.,
+$\Box F \to F$, $F \to \Diamond F$.
+
+Ateityje dar bus laiko logika: $\odot F$ (¥kitas $F$´).
+% FIXME: ten ne \odot o tiesiog tuðèio tokio dydþio apskritimo reikia.
+% \circ yra per maþas, \Bigcirc per didelis.  :(
+
+$\forall$, $\exists$ vadinami \Def{kvantoriais}, $\Box$, $\Diamond$ --
+\Def{operatoriais}.
+
+Sàvokos:
+% XXX reiktø apibrëþti.
+\begin{itemize}
+\item kvantoriø bei operatoriø \Def{veikimo sritis}
+\item operatoriaus \Def{áeitis} (angl. occurrence)
+\item áeities veikimo sritis
+\item \Def{laisvoji} ir \Def{suvarþytoji} individinio kintamojo áeitis
+      (suvarþytoji -- jei patenka á atitinkamo kvantoriaus veikimo sritá).
+      Kad bûtø paprasèiau, tarkime, jog reið\-ki\-niai a la $\forall x (P(x)
+      \land \exists x Q(x))$ nelegalûs.
+\end{itemize}
+
+Formulë vadinama \Def{uþdaraja}, jei ji neturi laisvø kintamøjø áeièiø.
+
+% ----------------------------------------------------------------------------
+
+\section{Semantika}
+
+\Def{Struktûra} (arba \Def{interpretacija}) yra rinkinys
+\[S = \langle M; Q_1, \dots, Q_n; x_1, \dots, x_m\rangle\]
+kur $M$ -- individiniø konstantø aibë, $Q_i$ -- predikatai, $x_j$ -- konkretûs
+$M$ elementai.
+
+Formulë $F$ yra \Def{ávykdoma struktûroje $S$}, jei pakeitæ formulëje
+predikatus á $Q_i$, o laisvus kintamuosius á $x_j$ turime teisingà formulæ.
+
+Pvz.: $\forall x \forall y \forall z ((P(x,y) \land P(y,z)) \to P(x,z)))$
+yra ávykdoma struktûroje $S = \langle R; x<y \rangle$.
+
+Pvz.: $\forall x \exists y (P(x,y) \land \neg \forall z P(z,z))$ yra ávykdoma
+struktûroje $S = \langle N; x < y \rangle$.
+
+Pvz.: $Q(x, x, x)$ yra ávykdoma struktûroje $S = \langle Z; x = y = z; 0
+\rangle$ arba $S = \langle R; x^2 + y^2 = z^2; 0 \rangle$.
+
+Pvz.: $\forall x P(x, y) \to \exists z R(y, z, z)$ yra ávykdoma struktûroje $S
+= \langle R; x > y, x = y = z; 0 \rangle$.
+
+Formulë $F$ yra \Def{ávykdoma}, jei egzistuoja struktûra, kurioje ji yra
+ávykdoma.
+
+(Bendru atveju neámanoma algoritmiðkai nustatyti, ar formulë ávykdoma.)
+
+Formulë $F$ yra \Def{tapaèiai teisinga}, jei ji ávykdoma visose struktûrose.
+
+Formulës $F$ ir $G$ yra \Def{ekvivalenèios} ($F \equiv G$), jei su kiekviena
+struktûra jos yra kartu teisingos arba kartu klaidingos.
+
+(Beje, ne visose logikose $\neg\neg F \equiv F$).
+
+% ----------------------------------------------------------------------------
+
+\section{Modalumo logikos semantika}
+
+\newcommand{\Strukt}{\ensuremath{\langle M, R, \mathcal{V} \rangle}}
+
+S. Kripke \Def{semantika}: \[ S = \Strukt \] kur $M$ -- galimø pasauliø aibë,
+$R$ -- dvivietis predikatas (sàryðis) aibëje $M$ (rodo ið kuriø pasauliø á
+kuriuos galima patekti), $\mathcal{V}$ -- interpretacijø aibë (priklauso nuo
+pasaulio).
+
+Fiksuojame pasaulá $\alpha \in M$.  $\mathcal{V}$ suteikia reikðmes visiem
+loginiams kintamiesiems ðiame pasaulyje.
+
+\begin{enumerate}
+
+  \item Jei $F$ -- loginis kintamasis, formulë teisinga tada, kai ji teisinga
+  pasaulyje $\alpha$.
+
+  \item Jei $F = \neg G$, formulë teisinga tada, kai $G$ klaidinga pasaulyje
+  $\alpha$.
+
+  \item Jei $F = G \land H$, formulë teisinga tada, kai ir $G$ ir $H$
+  teisingos pasaulyje $\alpha$.
+
+  \item Jei $F = G \lor H$, formulë teisinga tada, kai bent viena ið $G$, $H$
+  teisinga pasaulyje $\alpha$.
+
+  \item Jei $F = G \to H$, formulë teisinga tada, kai $G$ teisinga arba $H$
+  klaidinga pasaulyje $\alpha$.
+
+  \item Jei $F = \Box G$, formulë teisinga tada, kai $G$ teisinga visuose
+  pasauliuose $\alpha'$, kuriems $R(\alpha, \alpha') = \true$.
+
+  \item Jei $F = \Diamond G$, formulë teisinga tada, kai atsiras bent vienas
+  pasaulis $\alpha'$, toks, kad $R(\alpha, \alpha') = \true$ ir $G$ teisinga
+  pasaulyje $\alpha'$.
+
+\end{enumerate}
+
+Formulë $F$ yra \Def{ávykdoma}, jei egzistuoja tokia struktûra $\Strukt$ ir
+pasaulis $\alpha \in M$, kad $F$ ávykdoma pasaulyje $\alpha$.
+
+Formulë $F$ yra \Def{tapaèiai teisinga}, jei ji teisinga bet kurios struktûros
+kiekviename pasaulyje.
+
+Formulë $F$ yra \Def{tapaèiai klaidinga}, jei ji klaidinga bet kurios
+struktûros kiekviename pasaulyje.
+
+
+Pvz.: $F = \Box p$.  $M$ -- pasaulio ðalys.  $R(x, y) = \true$ tada ir tik
+tada, kai valstybës $x$ ir $y$ turi bendrà sienà.  $p$ -- teiginys ¥sausis yra
+ðalèiausias mënuo´.  Pasaulyje $\alpha = \text{Lietuva}$ $F$ prasmë yra
+¥visose Lietuvos kaimynëse sausis -- ðalèiausias mënuo´.  Ðiame pasaulyje $F$
+yra teisinga, o pvz., pasaulyje ¥Kongas´ ji yra klaidinga.
+
+Pvz.: $F = p \to \Box\Box p$, $M$ -- sveikøjø skaièiø aibë, $R(x, y) =
+\true$ tada ir tik tada, kai $y = x + 1$, $p$ -- ¥pasaulis nusakomas neigiamu
+skaièiumi´.  Kai $\alpha = -1$, $p = \true$, $\Box\Box p = \false$, o
+formulë $F$ klaidinga.  ($\Box\Box p$ prasmë yra daugmaþ ar $\alpha + 2
+< 0$, ar ne.)
+
+
+Formulës $F$ \Def{projekcija} $pr(F)$ gaunama iðbraukus ið $F$ visas modalumo
+logikos operatoriø áeitis.
+
+Pvz.: $F = p \to \Box\Diamond(q \lor \Box r)$, tada $pr(F) = p \to (q
+\lor r)$.
+
+Jei $pr(F)$ nëra tapaèiai teisinga, tai $F$ taip pat nëra tapaèiai teisinga
+(bet ne at\-vir\-kð\-èiai).
+
+$pr(F)$ ekvivalenti $F$ kai $M = \{\alpha\}$ ir $R(\alpha, \alpha) = \true$.
+
+Pvz.: $M = Z$, $R(x, y) = (y = x+1) \lor (y = x+2)$, $p$ -- ¥pasaulis --
+lyginis skaièius´, $q = \neg p$.  Pasaulyje 2 $\Box(p\lor q) = \true$,
+$\Box p = \false$, $\Box q = \false$.
+
+
+Formulës $F$ transformacija á teiginiø logikà þymima $[F]_\tau$ ir
+skaièiuojama pagal ðias taisykles:
+\begin{eqnarray*}
+  [\Box F]_\tau &=& \forall v (R(\tau, v) \to [F]_v) \\{}
+  [\Diamond F]_\tau &=& \exists v (R(\tau, v) \land [F]_v) \\{}
+  [\neg F]_\tau &=& \neg [F]_\tau \\{}
+  [F \land G]_\tau &=& [F]_\tau \land [G]_\tau \\{}
+  [F \lor G]_\tau &=& [F]_\tau \lor [G]_\tau \\{}
+  [F \to G]_\tau &=& [F]_\tau \to [G]_\tau \\{}
+  [p]_\tau &=& P(\tau)
+\end{eqnarray*}
+
+Pvz.:
+\begin{align*}
+[\Box\Diamond p]_\tau &=
+  \forall v (R(\tau, v) \to \exists u (R(v, u) \land P(u))), \\
+[\Box p \to \Diamond (q \lor \Diamond r)]_\tau &=
+  \forall v \big(R(\tau, v) \to P(\tau)\big) \to
+  \\&\qquad \exists v \big(R(\tau, v) \land
+                        \big(Q(v) \lor \exists u (R(v, u) \land Z(u))\big)\big).
+\end{align*}
+
+NB norint, kad formulë bûtø teisinga ir paèiame pasaulyje, reikia, kad $R$ bûtø
+refleksyvus, t.y. $R(x, x) = \true$.  Tai galima nusakyti aksioma $\Box p
+\to p$.
+
+Jei norime $R$ tranzityvumo, t.y. $\forall x \forall y \forall z ((R(x, y)
+\land R(y, z)) \to R(x, z))$, galime tai uþraðyti aksioma $\Box p \to
+\Box \Box p$.
+
+% ----------------------------------------------------------------------------
+
+\section{Hilberto tipo skaièivimas}
+
+Nagrinësime modalumo logikas, kuriose perëjimo funkcija $R(x, y)$ tenkina tam
+tikrus apribojimus.  Du baziniai apribojimai, tinkantys visiems taikymams:
+\begin{itemize}
+\item refleksyvumas, t.y. $\forall x R(x, x)$
+\item tranzityvumas, t.y. $\forall x \forall y \forall z ((R(x, y) \land R(y,
+z)) \to R(x, z))$
+\end{itemize}
+
+Kaip patikrinti formulës $F$ tapatø teisingumà?  Vien tik struktûros
+apibrëþimo nepakanka -- visø struktûrø neiðraðysim, ten jau nebeskaiti aibë.
+Vienas (vienintëlis ið þinomø) bûdø -- ávairûs formalûs skaièiavimai, kuriose
+árodomos tik ir tik tapaèiai teisingos formulës.  Tuomet galime ieðkoti
+árodymo kuriame nors skaièiavime.
+
+Yra sugalvoti trys skaièiavimai: Hilberto tipo, sekvenciniai ir rezoliucijø.
+Juos galima pritaikyti ávairioms logikoms (klasikinei, predikatø, modalumo,
+laiko).
+
+Hilberto tipo skaièiavime naudojama tokia aksiomø sistema ($A, B, C$ --
+formulës):
+\begin{enumerate}
+\item[1.1] $A \to (B \to A)$
+\item[1.2] $(A \to (B \to C)) \to ((A \to B) \to (A \to C))$
+\item[2.1] $(A \land B) \to A$
+\item[2.2] $(A \land B) \to B$
+\item[2.3] $(A \to B) \to ((A \to C) \to (A \to (B \land C)))$
+\item[3.1] $A \to (A \lor B)$
+\item[3.2] $B \to (A \lor B)$
+\item[3.3] $(A \to C) \to ((B \to C) \to ((A \lor B) \to C))$
+\item[4.1] $(A \to B) \to (\neg B \to \neg A)$
+\item[4.2] $A \to \neg\neg A$
+\item[4.3] $\neg\neg A \to A$
+\item[5.1] $\Box(A \to B) \to (\Box A \to \Box B)$
+\item[5.2] $\Box A \to A$ (refleksyvumas)
+\item[5.3] $\Box A \to \Box \Box A$ (tranzityvumas).
+% dar yra aksiomø su \Diamond, bet jos bus vëliau
+\end{enumerate}
+Aksiomos 1.1--4.3 apraðo teiginiø logikà, 5.1--5.3 prideda modalumo logikà
+Kadangi $\Diamond A \equiv \neg \Box \neg A$, o $\Box A \equiv \neg \Diamond
+\neg A$, tad aksiomø pakanka.
+
+Hilberto tipo skaièiavime yra dvi taisyklës:
+\begin{enumerate}
+\item \Def{MP} -- \Def{modus ponens}:
+      $\displaystyle\frac{A, A\to B}{B}$
+\item \Def{AT}:
+      $\displaystyle\frac{A}{\Box A}$
+\end{enumerate}
+Teiginiø logikai pakanka vienos modus ponens taisyklës.  Modalumo logikai
+reikia ir antros.
+
+Formulës $F$ \Def{iðvedimas} $\vdash F$ -- baigtinë formuliø seka $F_1, \dots,
+F_n$, kad
+\begin{enumerate}
+\item $F_n = F$ ir
+\item $\forall i$ arba $F_i$ -- aksioma, arba ji gauta pagal kurià nors
+taisykle ið kairiau esanèiø formuliø.
+\end{enumerate}
+
+
+Hilberto skaièiavimas -- bazinis, patogus teoriniams samprotavimams, o ne
+praktiniam naudojimui.
+
+Pvz.: Árodykime, kad $\vdash A \to \Diamond A$, kitaip tariant, kad $\vdash A
+\to \neg \Box \neg A$.
+\begin{enumerate}
+\item $\Box \neg A \to \neg A$ (aksioma 5.2)
+\item $(\Box \neg A \to \neg A) \to (\neg \neg A \to \neg \Box \neg A)$
+      (aksioma 4.1)
+\item $\neg \neg A \to \neg \Box \neg A$ arba $\neg\neg A \to \Diamond A$ (MP
+      ið 1 ir 2)
+\item $A \to \neg \neg A$ (aksioma 4.2)
+\item $A \to \Diamond A$ (implikacijos tranzityvumas, kurá reiktø sunkiai
+      ir ilgai árodinëti remiantis aksioma 1.2)
+%\item $(A \to (\neg \neg A \to \neg \Box \neg A)) \to
+%       ((A \to \neg \neg A) \to (A \to \neg \Box \neg A))$ (aksioma 1.2)
+\end{enumerate}
+
+% ----------------------------------------------------------------------------
+
+\section{Sekvencinis skaièiavimas}
+
+\Def{Sekvencija} yra reiðkinys $\Gamma \vdash \Delta$, kur $\Gamma, \Delta$ --
+(galbût tuðèios) baigtinës formuliø aibës (formuliø tvarka nesvarbi).
+
+Aksioma:
+\[ \Gamma_1, A, \Gamma_2 \vdash \Delta_1, A, \Delta_2 \]
+
+Taisyklës:
+\begin{multicols}{2}
+\begin{enumerate}
+\item $\displaystyle\frac{A, \Gamma \vdash \Delta}
+                         {\Gamma \vdash \Delta, \neg A}$
+\item $\displaystyle\frac{\Gamma \vdash \Delta, A}
+                         {\neg A, \Gamma \vdash \Delta}$
+\item $\displaystyle\frac{A, B, \Gamma \vdash \Delta}
+                         {A \land B, \Gamma \vdash \Delta}$
+\item $\displaystyle\frac{\Gamma \vdash \Delta, A \quad \Gamma \vdash \Delta, B}
+                         {\Gamma \vdash \Delta, A \land B}$
+\item $\displaystyle\frac{A, \Gamma \vdash \Delta \quad B, \Gamma \vdash \Delta}
+                         {A \lor B, \Gamma \vdash \Delta}$
+\item $\displaystyle\frac{\Gamma \vdash \Delta, A, B}
+                         {\Gamma \vdash \Delta, A \lor B}$
+\item $\displaystyle\frac{A, \Gamma \vdash \Delta, B}
+                         {\Gamma \vdash \Delta, A \to B}$
+\item $\displaystyle\frac{\Gamma \vdash \Delta, A \quad B, \Gamma \vdash \Delta}
+                         {A \to B, \Gamma \vdash \Delta}$
+\end{enumerate}
+\end{multicols}
+
+Iðvedimas turi medþio pavidalà: pradedam ið apaèios (nuo ðaknies) $\Gamma
+\vdash \Delta$ ir keliaujam aukðtyn.  Sekvencija yra \Def{iðvedama}, jei visos
+ðakos baigiasi aksiomomis.
+
+Bet kokiai tapaèiai teisingai formulei $F$ atsiras iðvedimas $\vdash F$.
+
+Kiekviena taisyklë panaikina vienà loginæ operacijà, tad medþio gylis ribotas.
+
+% FIXME: negraþu...
+\newcommand{\F}{\displaystyle\frac}
+\newcommand{\U}{\underline}
+Pvz.: $\vdash (A \land B) \to (A \lor B)$
+\[
+  \F{\F{\F{A, B \vdash A, B}
+          {A \land B \vdash A, B}}
+          {A \land B \vdash A \lor B}}
+          {\vdash (A \land B) \to (A \lor B)}
+\]
+
+Kitas pvz:
+\[
+  \F{\F{\F{\F{B\to C, \U{A} \vdash \U{A}, C
+              \quad \F{\U{B}, A \vdash \U{B}, C
+                       \quad B, \U{C}, A \vdash \U{C}}
+                      {B, B\to C, A \vdash C}}
+             {A\to B, B\to C, A \vdash C}}
+          {A\to B, B\to C \vdash A \to C}}
+       {A\to B \vdash (B \to C) \to (A \to C)}}
+    {\vdash (A\to B) \to ((B \to C) \to (A \to C))}
+\]
+
+% 2003-03-05
+
+Dar vienas pvz:
+\renewcommand{\F}[2]{\scriptstyle\frac{\scriptstyle #1}{\scriptstyle #2}}
+\[
+  \F{\F{(B \land C) \to D, \U{A}, B \vdash C \land D, \U{A}
+        \quad \F{\dots}
+                {B \to C, (B \land C) \to D, A, B \vdash C \land D}}
+       {A \to (B\to C), (B \land C) \to D, A, B \vdash C \land D}}
+    {A \to (B\to C), (B \land C) \to D, A \land B \vdash C \land D}
+\]
+kur
+\[
+  \F{(B \land C) \to D, A, \U{B} \vdash C \land D, \U{B}
+     \quad \F{A, B, \U{C}, (B \land C) \to D \vdash \U{C}
+              \quad \F{\dots}{A, B, C, (B \land C) \to D \vdash D}}
+             {C, (B \land C) \to D, A, B \vdash C \land D}}
+    {B \to C, (B \land C) \to D, A, B \vdash C \land D}
+\]
+kur
+\[
+  \F{\F{A, \U{B}, C \vdash \U{B}
+        \quad A, B, \U{C} \vdash \U{C}}
+       {A, B, C \vdash B \land C}
+     \quad A, B, C, \U{D} \vdash \U{D}}
+    {A, B, C, (B \land C) \to D \vdash D}
+\]
+
+Ir dar vienas
+\renewcommand{\F}{\displaystyle\frac}
+\[
+  \F{\F{\F{\F{\U{B}, A \vdash C, D, \U{B}}
+             {B \vdash C, D, A \to B}
+           \quad \U{C}, B \vdash \U{C}, D}
+          {(A \to B) \to C, B \vdash C, D}}
+       {(A \to B) \to C, B \vdash C \lor D}}
+    {(A \to B) \to C, \neg (C \lor D), B \vdash}
+\]
+
+Ilgà laikà nebuvo sekvencinio skaièiavimo pritaikymo modalumo logikai.  Ðtai
+papildomos taisyklës:
+\begin{multicols}{2}
+\begin{enumerate}
+\item[9.] $\displaystyle\frac{F, \Box F, \Gamma \vdash \Delta}
+                             {\Box F, \Gamma \vdash \Delta}$
+\item[10.] $\displaystyle\frac{\Box \Gamma \vdash F}
+                              {\Sigma, \Box \Gamma \vdash \Delta, \Box F}$
+\end{enumerate}
+\end{multicols}
+kur $\Box \Gamma$ -- visos formulës, kurios prasideda operatoriumi $\Box$;
+$\Sigma$ -- visos kitos formulës.  Taisykles operatoriui $\Diamond$ galima
+iðsivesti.
+
+Iðvedimas sudëtingesnis, nes galima vienu keliu patekti á aklavietæ, teks
+gráþti ir bandyti kitaip.
+
+% Geguþës prieðpaskutinæ savaitæ treèiadiená kontrolinis, paskutinæ savaitæ
+% aiðkins, kas ir kaip.
+% Ið mûsø 25 gaus áskaitas uþ taðkelius.
+
+Pvz.:
+\[
+  \F{\F{\F{\F{\U{p}, q, \Box(p \land q) \vdash \U{p}}
+             {(p \land q), \Box(p \land q) \vdash p}}
+          {\Box(p \land q) \vdash p}}
+       {\Box(p \land q) \vdash \Box p} \quad
+     \F{\F{\F{p, \U{q}, \Box(p \land q) \vdash \U{q}}
+             {(p \land q), \Box(p \land q) \vdash q}}
+          {\Box(p \land q) \vdash q}}
+       {\Box(p \land q) \vdash \Box q}}
+    {\Box(p \land q) \vdash \Box p \land \Box q}
+\]
+
+Pvz.:
+\[
+  \F{\F{\F{\F{\F{\F{\F{\F{\F{\Box \neg (A \lor \Box \neg A), \U{A} \vdash \U{A}, \Box \neg A }
+                            {\Box \neg (A \lor \Box \neg A), A \vdash (A \lor \Box \neg A) }}
+                         {\Box \neg (A \lor \Box \neg A), A, \neg (A \lor \Box \neg A) \vdash}}
+                      {\Box \neg (A \lor \Box \neg A), A \vdash}}
+                   {\Box \neg (A \lor \Box \neg A) \vdash \neg A}}
+                {\Box \neg (A \lor \Box \neg A) \vdash A, \Box \neg A}}
+             {\Box \neg (A \lor \Box \neg A) \vdash (A \lor \Box \neg A)}}
+          {\neg (A \lor \Box \neg A), \Box \neg (A \lor \Box \neg A) \vdash}}
+       {\Box \neg (A \lor \Box \neg A) \vdash}}
+    {\vdash \neg \Box \neg (A \lor \Box \neg A)}
+\]
+
+NB $\Diamond A \equiv \neg \Box \neg A$.
+
+Pabandykim árodyti ekvivalentumus:
+\begin{align*}
+\Box \Box A \equiv \Box A\\
+\Box \Diamond A \equiv \Diamond A\\
+\Box \Diamond A \equiv \Box A
+\end{align*}
+
+% XXX bandymai pagraþinti:
+% \renewcommand{\F}[2]{{#1 \atop \overline{#2}}}
+\[
+\F{\Box{A}, \Box \Box A \vdash \U{\Box A}}
+  {\Box \Box A \vdash \Box A}
+\quad
+\F{\U{\Box A} \vdash \U{\Box A}}
+  {\Box A \vdash \Box \Box A}
+\]
+
+\[
+\F{\U{\neg \Box \neg A}, \Box \neg \Box \neg A \vdash \U{\neg \Box \neg A}}
+  {\Box \neg \Box \neg A \vdash \neg \Box \neg A}
+\quad
+\F{\text{neiðeina}}
+  {\neg \Box \neg A \vdash \Box \neg \Box \neg A}
+\]
+
+\[
+\F{\text{neiðeina}}
+  {\Box \neg \Box \neg A \vdash \Box A}
+\quad
+\F{\F{\F{\F{\U{A}, \Box A, \Box \neg A \vdash \U{A}}
+           {A, \neg A, \Box A, \Box \neg A \vdash}}
+        {\Box A, \Box \neg A \vdash}}
+     {\Box A \vdash \neg \Box \neg A}}
+  {\Box A \vdash \Box \neg \Box \neg A}
+\]
+
+\section{Kvantorinë modalumo logika}
+
+% Kalba, patogi þiniø bazëms apraðyti -- modalumo logikos kalba.
+% Kol kas mes iðsiaiðkinom modalumo logikà teiginiams.  Laikas pereiti prie
+% predikatø.
+
+Priminisime sekvencinio skaièiavimo taisykles modalumo logikos operatoriams:
+\begin{multicols}{2}
+\begin{enumerate}
+\item[9.] $\displaystyle\frac{F, \Box F, \Gamma \vdash \Delta}
+                             {\Box F, \Gamma \vdash \Delta}$
+\item[10.] $\displaystyle\frac{\Box \Gamma \vdash F}
+                              {\Sigma, \Box \Gamma \vdash \Delta, \Box F}$
+\end{enumerate}
+\end{multicols}
+kvantorinë modalumo logika papildo jas ðiomis:
+\begin{enumerate}
+\item[11.] $\displaystyle\frac{\Gamma \vdash \Delta, F(z)}
+                              {\Gamma \vdash \Delta, \forall x F(x)}$
+           \quad kur $z$ yra naujas kintamasis (nesutinkamas niekur kitur).
+\item[12.] $\displaystyle\frac{\Gamma \vdash \Delta, F(u), \exists x F(x)}
+                              {\Gamma \vdash \Delta, \exists x F(x)}$
+           \quad èia $u$ -- bet koks laisvas kintamasis.
+           % idëja: parenkam konkreèià reikðmæ x = u ir bandom árodyti, bet
+           % jei neiðeina, galime bandyti parinkti kità reikðmæ
+% o ðitie du simetriðki (keliant á kità pusæ atsiranda neigimas)
+\item[13.] $\displaystyle\frac{F(u), \forall x F(x), \Gamma \vdash \Delta}
+                              {\forall x F(x), \Gamma \vdash \Delta}$
+           \quad èia $u$ -- bet koks laisvas kintamasis.
+\item[14.] $\displaystyle\frac{F(z), \Gamma \vdash \Delta}
+                              {\exists x F(x), \Gamma \vdash \Delta}$
+           \quad kur $z$ yra naujas kintamasis (nesutinkamas niekur kitur).
+\end{enumerate}
+
+% Digression:
+%   galima sugalvoti kaþkoká teiginá F(n), kurá galima árodyti kiekvienam
+%   n, bet neámanoma árodyti bendrai, nëra vieningos schemos.
+
+Pvz.:
+\[
+\F{\F{\F{\U{A(u)}, \forall x A(x) \vdash \U{A(u)}, \exists x A(x)}
+        {A(u), \forall x A(x) \vdash \exists x A(x)}}
+     {\forall x A(x) \vdash \exists x A(x)}}
+  {\vdash \forall x A(x) \to \exists x A(x)}
+\]
+o
+\[
+\F{\F{\F{A(z_1) \vdash A(z_2)}
+        {A(z_1) \vdash \forall x A(x)}}
+     {\exists x A(x) \vdash \forall x A(x)}}
+  {\vdash \exists x A(x) \to \forall x A(x)}
+\quad\text{arba}\quad
+\F{\F{\F{A(z_1) \vdash A(z_2)}
+        {\exists x A(x) \vdash A(z_2)}}
+     {\exists x A(x) \vdash \forall x A(x)}}
+  {\vdash \exists x A(x) \to \forall x A(x)}
+\]
+neiðvedama.
+
+Pvz.:
+\[
+\F{\F{\F{\F{\F{\U{A(a, b)}, \forall y A(x, y) \vdash \U{A(a, b)}, \exists x A(x, b)}
+              {A(a, b), \forall y A(x, y) \vdash \exists x A(x, b)}}
+           {\forall y A(a, y) \vdash \exists x A(x, b)}}
+        {\forall y A(a, y) \vdash \forall y \exists x A(x, y)}}
+     {\exists x \forall y A(x, y) \vdash \forall y \exists x A(x, y)}}
+  {\vdash \exists x \forall y A(x, y) \to \forall y \exists x A(x, y)}
+\]
+
+Pvz.:
+\[
+\F{\F{\F{\F{A(b, a), \forall y \exists x A(x, y)
+            \vdash A(b, c), \exists x \forall y A(x, y)}
+           {A(b, a), \forall y \exists x A(x, y)
+            \vdash \forall y A(b, y), \exists x \forall y A(x, y)}}
+        {A(b, a), \forall y \exists x A(x, y)
+         \vdash \exists x \forall y A(x, y)}}
+     {\exists x A(x, a), \forall y \exists x A(x, y)
+      \vdash \exists x \forall y A(x, y)}}
+  {\forall y \exists x A(x, y) \vdash \exists x \forall y A(x, y)}
+\]
+neiðvedama.
+
+% Árodyti, kad neiðvedama sunkiau, nei árodyti, kad iðvedama.  Skaièiavimu
+% árodyti neiðvedamumo neámanoma, reikia kaþkaip pagrásti þodþiais.
+% Jei formulë tapaèiai teisinga, iðvedimà anksèiau ar vëliau surasim.
+% Jei ne, neámanoma sugalvoti jokio skaièiavimo, kuris tai parodytø.
+
+Ar $\forall x \Box A(x) \equiv \Box \forall x A(x)$?
+\[
+\F{\F{\F{\F{\F{\text{neárodoma}}{A(a), \Box A(a) \vdash A(b)}}
+           {\Box A(a) \vdash A(b)}}
+        {\Box A(a) \vdash \forall x A(x)}}
+     {\Box A(a), \forall x \Box A(x) \vdash \Box \forall x A(x)}}
+  {\forall x \Box A(x) \vdash \Box \forall x A(x)}
+\quad
+\F{\F{\F{\F{\U{A(a)}, \forall x A(x), \Box \forall x A(x) \vdash \U{A(a)}}
+           {\forall x A(x), \Box \forall x A(x) \vdash A(a)}}
+        {\Box \forall x A(x) \vdash A(a)}}
+     {\Box \forall x A(x) \vdash \Box A(a)}}
+  {\Box \forall x A(x) \vdash \forall x \Box A(x)}
+\]
+
+% 2003-03-19 (nebuvau, nusiraðiau nuo Ramûno)
+
+Ar $\Diamond \exists x P(x) \equiv \exists x \Diamond P(x)$?
+\[
+\F{\F{\F{\text{neárodoma}}
+        {\vdash \neg \exists x P(x)}}
+     {\vdash \Box \neg \exists x P(x), \exists x \neg \Box \neg P(x)}}
+  {\neg \Box \neg \exists x P(x) \vdash \exists x \neg \Box \neg P(x)}
+\quad
+\F{\F{\F{\F{\F{\F{\U{P(z)}, \Box \neg \exists x P(x) \vdash \U{P(z)}, \exists x P(x)}
+                 {P(z), \Box \neg \exists x P(x) \vdash \exists x P(x)}}
+              {P(z), \neg \exists x P(x), \Box \neg \exists x P(x) \vdash}}
+           {\Box \neg \exists x P(x) \vdash \neg P(z)}}
+        {\Box \neg \exists x P(x) \vdash \Box \neg P(z)}}
+     {\neg \Box \neg P(z) \vdash \neg \Box \neg \exists x P(x)}}
+  {\exists x \neg \Box \neg P(x) \vdash \neg \Box \neg \exists x P(x)}
+\]
+
+% $\forall x \Box A(x) \not\vdash \Box \forall x A(x)$ -- kad árodytume reikia
+% daugiau informacijos, tada galime ásivesti aksiomà $\forall x \Box A(x) \to
+% \Box \forall x A(x)$, jei reikia.
+% Sekvencinis skaièiavimas blogas tuo, kad taisykliø skaièius auga
+% eksponentiðkai.
+
+\section{Reoliucijø tipo metodai}
+
+% Tai ¥paneigimo metodas´?
+
+Kaip patikrinti, ar ið formuliø $F_1$, \dots, $F_n$ seka formulë $F$?
+Uþraðome reiðkinio \[F_1 \land \dots \land F_n \land \neg F\] normalinæ
+konjunkcinæ formà $S = \{D_1, \dots, D_k\}$, kur $D_i$ -- disjunktai (literø
+disjunkcija; litera yra arba loginis kintamasis, arba jo neiginys).  Taisyklë
+\[ \frac{p \lor D', \neg p \lor D''}{D' \lor D''} \]
+Jei jà taikydami gauname apaèioje tuðèià reiðkiná (þymima $\bot$), árodyta.
+
+% XXX kas nors paaiðkinkit?
+
+Pvz.: Ámonëje yra trys cechai: A, B ir C, susitaræ dël projektø tvirtinimo
+tvarkos.  Jei cechas B nedalyvauja, tai nedalyvauja ir A tvirtinant projektà.
+Jei B dalyvauja, tai kartu dalyvauja ir A, ir C.  Klausimas: ar privalo cechas
+C dalyvauti tvirtinant projektà, kai tvirtina A?
+
+Kitais þodþiais tariant, ar ið $\neg B \to \neg A$, $B \to (A \land C)$
+iðplaukia $A \to C$?
+\begin{align*}
+&(\neg B \to \neg A) \land (B \to (A \land C)) \land \neg (A \to C) \\
+&S = \{ B \lor \neg A, \neg B \lor A, \neg B \lor C, A, \neg C \} \\
+&\frac{B \lor \neg A, A}{B}
+\quad \frac{\neg B \lor C, B}{C}
+\quad \frac{C, \neg C}{\bot} \\
+\end{align*}
+% Árodyta.
+
+Kitas pvz.: jei Biblija yra teisinga ir jà reikia suprasti paþodþiui, tai
+egzistuoja Dievas, be to Adomo ir Ievos iðvarymo istorija yra teisinga.  Jei
+tiesa, kad Dievas iðtaip iðvsrë ið rojaus Adomà ir Ievà, tai jis yra
+kerðtingas ir nemielaðirdingas.  Taèiau, jei, kaip teigia Biblija, Dievas yra,
+tai jis visagalis ir mielaðirdingas.  Vadinasi Biblija yra tik graþi pasaka
+arba nereikia jos suprasti paþodþiui.
+
+\begin{itemize}
+% XXX reduce spacing
+\item[b] -- Biblija yra teisinga
+\item[p] -- Biblijà reikia suprasti paþodþiui
+\item[d] -- egzistuoja Dievas
+\item[a] -- Adomo ir Ievos iðvarymo istorija yra teisinga
+\item[e] -- Dievas yra kerðtingas
+\item[m] -- Dievas yra mielaðirdingas
+\item[v] -- Dievas yra visagalis
+\end{itemize}
+
+Duota: $(b \land p) \to (d \land a)$, $a \to (e \land \neg m)$, $d \to (v
+\land m)$.  Árodyti: $\neg b \lor \neg p$.
+\begin{align*}
+%& ((b \land p) \to (d \land a))                                 \land (a \to (e \land \neg m))                   \land (d \to (v \land m))                   \land \neg (\neg b \lor \neg p) \\
+%& ((\neg b \lor \neg p) \lor (d \land a))                       \land (\neg a \lor (e \land \neg m))             \land (\neg d \lor (v \land m))             \land b \land p \\
+%& (\neg b \lor \neg p \lor d) \land (\neg b \lor \neg p \lor a) \land (\neg a \lor e) \land (\neg a \lor \neg m) \land (\neg d \lor v) \land (\neg d \lor m) \land b \land p
+&(b \land p) \to (d \land a)
+ = (\neg b \lor \neg p) \lor (d \land a)
+ = (\neg b \lor \neg p \lor d) \land (\neg b \lor \neg p \lor a) \\
+&a \to (e \land \neg m)
+ = \neg a \lor (e \land \neg m)
+ = (\neg a \lor e) \land (\neg a \lor \neg m)\\
+&d \to (v \land m)
+ = \neg d \lor (v \land m)
+ = (\neg d \lor v) \land (\neg d \lor m) \\
+&\neg (\neg b \lor \neg p)
+ = b \land p
+\end{align*}
+\[
+S = \{ \neg b \lor \neg p \lor d, \neg b \lor \neg p \lor a,
+       \neg a \lor e, \neg a \lor \neg m,
+       \neg d \lor v, \neg d \lor m,
+       b, p \}
+\]
+\begin{align*}
+&\frac{\neg b \lor \neg p \lor a, b}{\neg p \lor a} \quad
+\frac{\neg p \lor a, p}{a} \quad
+\frac{a, \neg a \lor \neg m}{\neg m} \quad
+\frac{\neg d \lor m, \neg m}{\neg d} \\&
+\frac{\neg d, \neg b \lor \neg p \lor d}{\neg b \lor \neg p} \quad
+\frac{\neg b \lor \neg p, p}{\neg b} \quad
+\frac{\neg b, b}{\bot}
+\end{align*}
+
+\medskip
+
+Kaip elgtis su modalumo logikos operatoriais?  Taisyklës tokios:
+\[
+\frac{\Box p \lor D', \neg p \lor D''}{D \lor D''} \quad
+\frac{\Box p \lor D', \Diamond \neg p \lor D''}{D \lor D''}
+\]
+
+% Tai tinka tik atskirais atvejais, kai operatorius taikomas vienam loginiam
+% kintamajam.  Bendrà atvejá iðnagrinësime vëliau.
+
+Pvz.:  Jei ðá pavasará nusipirksiu maðinà arba susitaisysiu senàjà, tai
+vaþiuosiu á Latvijà, o tada bûtinai uþsuksiu á Birþus.  Jei tikrai uþsuksiu á
+Birþus, tai aplankysiu tëvus.  Jei uþsuksiu pas tëvus, jie galbût áðnekins
+mane kartu praleisti vasarà.  Tokiu atveju pasiliksiu ten iki rudens.  Bet jei
+uþsibûsiu ten iki rudens, tai Latvijos ðià vasarà turbût nepasieksiu.  Taigi,
+galbût neapsimoka taisyti senosios maðinos.
+
+\begin{itemize}
+% XXX reduce spacing
+\item[n] -- nusipirksiu maðinà
+\item[s] -- susitaisysiu senàjà
+\item[l] -- vaþiuosiu á Latvijà
+\item[b] -- uþsuksiu á Birþus
+\item[a] -- aplankysiu tëvus
+\item[v] -- kartu praleisiu vasarà
+\item[r] -- pasiliksiu pas tëvus iki rudens
+\end{itemize}
+
+Duota: $(n \lor s) \to (l \land \Box b)$, $\Box b \to a$, $a \to \Diamond v$,
+$v \to r$, $r \to \neg l$. Patikrinti, ar $\Diamond \neg s$.
+
+% a \to b === \neg a \lor b
+\begin{align*}&
+(n \lor s) \to (l \land \Box b)
+ = (\neg n \land \neg s) \lor (l \land \Box b)
+\\&\phantom{(n \lor s) \to (l \land \Box b)} = (\neg n \lor l) \land (\neg n \lor \Box b) \land (\neg s \lor l) \land (\neg s \lor \Box b) \\&
+\Box b \to a = \neg \Box b \lor a = \Diamond \neg b \lor a\\&
+a \to \Diamond v = \neg a \lor \Diamond v \\&
+v \to r = \neg a \lor r \\&
+r \to \neg l = \neg r \lor \neg l \\&
+\neg \Diamond \neg s = \Box s
+\end{align*}
+\[
+S = \{ \neg n \lor l, \neg n \lor \Box b, \neg s \lor l, \neg s \lor \Box b,
+       \Diamond \neg b \lor a,
+       \neg a \lor \Diamond v,
+       \neg a \lor r,
+       \neg r \lor \neg l,
+       \Box s \}
+\]
+\begin{align*}&
+\frac{\Box s, \neg s \lor \Box b}{\Box b} \quad
+\frac{\Box s, \neg s \lor l}{l} \quad
+\frac{l, \neg r \lor \neg l}{\neg r} \quad
+\frac{\neg r, \neg a \lor r}{\neg a} \quad
+\frac{\neg a, \Diamond \neg b \lor a}{\Diamond \neg b} \quad
+\frac{\Box b, \Diamond \neg b}{\bot}
+\end{align*}
+
+% Teiginiø logikoj rezoliucijø metodo nereikia -- galima susidaryti teisingumo
+% lentelæ.  Modalumo logikoj tai jau nebeiðeina (jei imsim \Box x kaip atskirà
+% kintamàjá, reikës atsiþvelgti á aksiomas a la $\Box x \to x$, $(\Box (A \to
+% B)) \to (\Box A \to B).
+
+% Kà daryti, jei modalumo operatoriai taikomi poformulëms?  Nebeiðeina
+% transformuoti reiðkinio á normaliàjà konjunkcinæ formà.  Bet gudrûs þmonës
+% sugalvojo NKF atitikmená.  Bëda, kad tai þymiai sudëtingiau.
+
+Ar $a \equiv b \vdash \Box a \equiv \Box b$?
+\[
+\F{\F{\F{\text{neiðeina}}
+        {\Box a \vdash b}}
+     {a \to b, b \to a, \Box a \vdash \Box b}}
+   {a \to b, b \to a \vdash \Box a \to \Box b}
+\]
+% Bet kokiu atveju deðinëje valydami \Box nuo b kairëje nieko naudingo negausime
+Ne.
+% Moralas: modalumo logikos formulës á ekvivalenèià taip paprastai
+% nepertvarkysim.  T.y. jei formulës F poformulis A \equiv B, bet jis yra
+% kaþkokio modalumo operatoriaus galiojimo srityje, tai mes negalime jo
+% pakeisti...
+
+% Apie 1990 m. Stenforde kaþkoks gudruolis pastebëjo paprastà kelià:
+
+Jei turime formulæ F su kaþkokiu poformuliu A ir turime $A \equiv B$, tai
+nieko, bet jei turime $\Box (A \equiv B)$, tuomet formulëje F galime poformulá
+A pakeisti á B.
+% \Box (A \equiv B) \vdash F(A) \equiv F(B)
+
+Pvz.: $\Box p \lor \Diamond (q \land r)$.  Pasiþymëkime $a := (q \land r)$.
+Keiskime $\Box (a \equiv (q \land r) \vdash \Box p \lor \Diamond a$ ir t.t.:
+\begin{align*}&
+\vdash \Box p \lor \Diamond \underbrace{q \land r}_{a} \\&
+\Box (a \equiv (q \land r) \vdash \Box p \lor \underbrace{\Diamond a}_{b} \\&
+\Box (a \equiv (q \land r), \Box (b \equiv \Diamond a) \vdash \underbrace{\Box p}_c \lor b \\&
+\Box (a \equiv (q \land r), \Box (b \equiv \Diamond a), \Box (c \equiv \Box p)
+\vdash \underbrace{c \lor b}_l \\&
+\Box (a \equiv (q \land r), \Box (b \equiv \Diamond a), \Box (c \equiv \Box
+p), \Box (l \equiv c \lor b) \vdash
+\end{align*}
+
+Taisyklës yra ðios
+\begin{align*}&
+ \Box (a \equiv (b \lor c))
+   : \Box (a \to (b \lor c)), \Box ((b \lor c) \to a)
+   : \Box (\neg a \lor b \lor c), \U{\Box (a \lor \neg c)}, \U{\Box (a \lor \neg b)} \\&
+ \Box (a \equiv (b \land c))
+   : \Box (a \to (b \land c)), \Box ((b \land c) \to a)
+   : \Box (\neg a \lor b), \Box (a \lor c), \U{\Box (\neg b \lor \neg c \lor a)} \\&
+ \Box (a \equiv \neg b)
+   : \Box (a \to \neg b), \Box (\neg b \to a)
+   : \Box (\neg a \lor \neg b), \U{\Box (b \lor a)} \\&
+ \Box (a \equiv \Box b)
+   : \Box (a \to \Box b), \Box (\Box b \to a)
+   : \Box (\neg a \lor \Box b), \U{\Box (\Diamond \neg b \lor a)} \\&
+ \Box (a \equiv \Diamond b)
+   : \Box (a \to \Diamond b), \Box (\Diamond b \to a)
+   : \Box (\neg a \lor \Diamond b), \U{\Box (\Box \neg b \lor a)} \\&
+\end{align*}
+% XXX: gerai bûtø pasitikrinti!!!
+Iðraðæ tai gauname disjunktø aibës atitikmená modalumo logikai.
+
+Jei formulëje neigimas yra tik prieð loginius kintamuosius, pakanka tik
+pabrauktø disjunktø.
+% Pvz \neg (\Box p \land \Diamond (q \lor \Box \neg r)) \equiv
+%      \Diamond \neg p \lor \Box (\neg q \land \Diamond r)
+% tad èia galima.
+
+% Gauname daaaug maþyèiø formulø -- rankom nepatogu, kompams paprasta
+
+% 2003-04-02 (nebuvau, nusiraðiau nuo Ramûno)
+
+\section{Rezoliucijø metodas modalumo teiginiø logikoje}
+
+Formulë $F$ yra iðvedama ($\vdash F$), jei atsiras formuliø seka $\Box D_1,
+\dots, \Box D_s, l \vdash$, kur $D_i$ -- modalumo logikos disjunktai (modalumo
+logikos literø konjunkcijos, kur modalumo logikos litera yra $\Box l$,
+$\Diamond l$ arba $l$, o $l$ yra áprastinë teiginiø logikos litera).
+
+Rezoliucijø metodo taisyklës:
+\[ \frac{F, G}{res(F, G)} % -- \text{priklauso nuo $F$ ir $G$ pavidalo.}
+\]
+\begin{multicols}{2}\noindent
+\[ \frac{res(\Box F, \Box G)}{\Box res(F, G)}
+\]
+\[ \frac{res(\Box F, G)}{res(F, G)}
+\]
+\[ \frac{res(\Box F, \Diamond G)}{\Diamond res(F, G)}
+\]
+\[ \frac{res(F \lor G, H)}{F \lor res(G, H)}
+\]
+\[ \frac{res(l, \neg l)}{\bot}
+\]
+\end{multicols}
+Prastinimas:
+\begin{multicols}{3}\noindent
+\[ \frac{F \lor \bot}{\bot}
+\]
+\[ \frac{\Box \bot}{\bot}
+\]
+\[ \frac{\Diamond \bot}{\bot}
+\]
+\end{multicols}
+% $res$ yra tam tikras operatorius, kuris vëliau dingsta.
+% XXX WTH?
+
+% Grr
+
+% BTW \Box \Box F === \Box F
+%     \Diamond \Diamond F === \Diamond F
+%     \neg \neg F === F
+
+% Toliau eina tik pvz.  XXX: todo
+
+% 2003-04-09
+
+\paragraph{Iðvedimo paieðka.}  Turime disjunktø aibæ $S = \{D_1, \dots D_s\}$.
+Galime imti bet kuriuos du disjunktus ir ið jø iðvesti naujà:
+\[ \frac{D_i, D_j}{D'} \]
+
+\paragraph{Tiesinë taktika.}
+
+% Truputá nesupratau.  Perbëgam ið kairës á deðinæ.
+%   turime {D_1, ..., D_s}
+%   D_i, D_j
+%   --------
+%      D'      D_{f_1}
+%      ---------------
+%             D''        D_{l}
+%             ----------------
+%                  D'''
+%
+% Teiginiø logikai to pakanka, visada rasime iðvedimà.  Modalumo logikoje
+% iðeina ne visada.
+%
+
+Perbëgame disjunktus ið kairës á deðinæ.  Naujai gautus dedame á eilës galà.
+Iðvedimo medis atrodo labai tiesiðkai (kiekviename mazge deðinioji ðaka yra
+lapas).
+
+\paragraph{Absorbcijos taktika.}  Turime disjunktø aibæ
+\[ S = \{ D_1, D_2, \dots, D_s \}
+\]
+Paimame gautus disjunktus $C_1, C_2$  Taktika: susiaurinti iðvedamø disjunktø
+aibæ.  Galime taikyti $\frac{C_1, C_2}{C}$ tik jei
+\begin{enumerate}
+\item arba vienas ið $C_1, C_2$ priklauso pradinei aibei $S$
+\item nei vienas ið $C_1, C_2$ nepriklauso $S$, tada galime taikyti tik jei
+      $C_1 = p \lor D'$, $C_2 = \neg p \lor D''$ ir $D' \subset D''$ arba
+      $D'' \subset D'$ (èia $A \subset B$ reiðkia, kad $A$ yra $B$ dalis, pvz,
+      $q \lor \neg r \subset q \lor s \lor \neg r$)
+\end{enumerate}
+
+Pvz.:
+\[ \F{\F{p \lor \Box q \quad \F{D_1}{\neg q \lor r}}    % XXX align bottoms
+        {p \lor r}          \quad              \F{D_2}{\Box \neg r \lor s}}
+     {p \lor s} \quad \text{-- ðis taikymas netaisyklingas pagal absorbcijos
+                               taktikà}
+\]
+galime perkelti tà netaisyklingà taikymà aukðèiau:
+\[ \F{\F{\F{D_1}{\neg q \lor r} \quad \F{D_2}{\Box \neg r \lor s}}
+        {\neg q \lor s} \text{-- paþeidimas dabar èia}
+        \quad p \lor \Box q}
+     {p \lor s} 
+\]
+
+Kitas pvz:
+\[ (*)
+   \F{\F{\Box(p \lor q) \quad \F{D_1}{\Diamond \neg q \lor r}}
+        {\Box p \lor \Box r}                    \quad \F{D_2}{\Box(\neg r \lor s)}}
+     {\Diamond p \lor \Diamond s}
+\]
+perkeliam aukðèiau
+\[ 
+   \F{\F{\F{D_1}{\Box \neg q \lor r} \quad \F{D_2}{\Box(\neg r \lor s)}}
+        {\Diamond \neg q \lor \Diamond s} \quad \Box(p \lor q)}
+     {\Diamond p \lor \Diamond s}
+\]
+
+\paragraph{Rezoliucijø metodas klasikinëje predikatø logikoje}
+
+Bendra schema: turime $F_1, \dots, F_n$, norime árodyti $F$. $(F_1 \land \dots
+\land F_n) \to F$ yra tapaèiai teisinga tada ir tik tada, kai $F_1 \land \dots
+\land \neg F$ yra tapaèiai klaidinga.
+\begin{enumerate}
+\item suvedame á normalinæ prieðdëlinæ formà
+\item skulemizacija (egzistavimo kvantoriaus eliminavimas),
+      bendrumo kvantorius $\forall$ praleidþiame
+\item suvedame á normalinæ konjunkcinæ formà.
+\end{enumerate}
+Rezultatas -- turime disjunktø aibæ $D = \{ D_1 \dots D_s\}$ ir ieðkome
+iðvedimo.
+
+Normalinë prieðdëlinë forma yra $Q_1 x_1 Q_2 x_2 \dots Q_n x_n G$, kur $Q_i
+\in \{ \forall, \exists \}$, o formulëje $G$ kvantoriø nëra.
+
+Leidþiamos transformacijos:
+\begin{multicols}{2}\noindent
+\[ \forall x A(x) \equiv \forall y A(y) \]
+\[ \exists x A(x) \equiv \exists y A(y) \]
+\[ \neg \forall x A(x) \equiv \exists x \neg A(x) \]
+\[ \neg \exists x A(x) \equiv \forall x \neg A(x) \]
+\[ \forall x A(x) \land B \equiv \forall x (A(x) \land B) \]
+\[ \exists x A(x) \land B \equiv \exists x (A(x) \land B) \]
+\[ \forall x A(x) \lor B \equiv \forall x (A(x) \lor B) \]
+\[ \exists x A(x) \lor B \equiv \exists x (A(x) \lor B) \]
+\end{multicols}
+\nobreak
+jei formulëje $B$ nëra kintamojo $x$ (jei jis yra, galima pervadinti).
+% \begin{multicols}{2}\noindent
+\[ \forall x A(x) \land \forall x B(x) \equiv \forall x (A(x) \land B(x)) \]
+\[ \forall x A(x) \lor \forall x B(x) \equiv \forall x \forall y (A(x) \land B(y)) \]
+\[ \exists x A(x) \land \exists x B(x) \equiv \exists x \exists y (A(x) \land B(y)) \]
+\[ \exists x A(x) \lor \exists x B(x) \equiv \exists x (A(x) \lor B(x)) \]
+% \end{multicols}
+
+Pvz.: % rasti norm. pr. form
+\begin{align*} &
+\exists x \forall y A(x, y) \to \forall y \exists x B(x, y) \\&
+\neg \exists x \forall y A(x, y) \lor \forall y \exists x B(x, y) \\&
+\forall x \neg \forall y A(x, y) \lor \forall y \exists x B(x, y) \\&
+\forall x \exists y \neg A(x, y) \lor \forall y \exists x B(x, y) \\&
+\forall x(\exists y \neg A(x, y) \lor \forall y \exists x B(x, y))\\&
+\forall x(\exists y \neg A(x, y) \lor \forall y \exists u B(u, y))\\&
+\forall x \exists y(\neg A(x, y) \lor \forall v \exists u B(u, v))\\&
+\forall x \exists y \forall v(\neg A(x, y) \lor \exists u B(u, v))\\&
+\forall x \exists y \forall v \exists u(\neg A(x, y) \lor B(u, v))
+% FIXME: ant lentos iðëjo \forall x \forall z \exists y (\neg A(x,y) \lor B(y,z))
+% Turëtø bûti \equiv...
+\end{align*}
+
+Skulemizacija -- egzistavimo kvantoriø eliminavimas.  Kiekvienà kintamàjá
+$\exists x$ keièiame naujai ávestu funkciniu simboliu, kuris priklauso nuo
+visø kairiau esanèiø bendrumo kvantoriø.
+
+O bendrumo kvantorius tiesiog praleidþiame.  Pvz.:
+\[ \exists x \forall y \exists z \forall u \forall v \exists s F(x, y, z, u,
+v, s)
+\to
+   F(a, y, f(y), u, v, g(y, u, v))
+\]
+
+Dabar tereikia suvesti $F$ á normalinæ konjunkcinæ formà ir gausime disjunktø
+aibæ.
+
+% XXX imho vis dëlto disjungtas...
+
+\medskip
+% Nauja sàvoka
+
+\Def{Keitinys} $\sigma = (t_1/x_1, \dots, t_n/x_n)$ kur $x_i$ -- kintamieji, o
+$t_i$ -- termai.
+
+Jei $F(x_1, \dots x_n)$ -- formulë, tai $F\sigma = F(t_1, \dots t_n)$ yra ta
+pati formulë, kurioje kintamieji $x_1 \dots x_n$ pakeisti termais $t_1 \dots
+t_n$.
+
+Keitinys vadinamas \Def{unifikatoriumi} formulëms $F$ ir $G$, jei $F\sigma =
+G\sigma$.
+
+Keitinys $\sigma$ yra bendriausias unifikatorius jei bet koks kitas
+unifikatorius $\beta$ yra kompozicija $F\sigma \phi = F\beta$.
+% XXX èia sumalta kaþkas ne á temà.  Kas yra bendriausias unif?
+
+Pvz. formuliø $P(x, f(a), g(z))$ ir $P(f(y), z, g(f(a))$ unifikatorius yra
+$\sigma = (f(a)/x, a/y, f(a)/z)$, o bendriausias unifikatorius yra $(f(y)/x,
+f(a)/z)$ (á kà keièiamas $y$ nefiksuojama, nes tai nesvarbu).
+
+Ne visas formules galima unifikuoti.
+
+Galima taikyti taisyklæ
+\[\frac{C_1 \quad C_2}{C}, \quad\text{kur $P(t_1, \dots, t_n) \in C_1$, o
+                                          $\neg P(g_1, \dots g_n) \in C_2$,}\]
+jei egzistoja unifikatorius $\sigma$, kad $P(t_1, \dots, t_n) \sigma = P(g_1,
+\dots g_n) \sigma$.  Tik tuomet keisime visur:
+\[\frac{C_1\sigma \quad C_2\sigma}{C\sigma}
+\]
+
+% grr
+
+% Geguþës 21 d. kontrolinis, geguþës 28 d. pasiraðinëjimai
+
+\end{document}

@@ -1,0 +1,75 @@
+Disasm 1.0.0
+============
+Copyright (c) 1999 Marius Gedminas <mgedmin@delfi.lt>
+This program is Free Software.  See file COPYING for details.
+
+It is a small disassembler for Intel 8086 and 8088 processors.  It can only
+read .COM files not bigger than 60 Kb (61440 bytes).  Newer processors are
+not supported; the 8087 coprocessor instructions are not supported either.
+
+The output file is a standard .ASM file that should compile with TASM or
+MASM.  Only TASM version 3.2 was tested.  The file reassembled from this
+source may differ from the original executable, especially, if the latter
+one was originally assembled with a different assembler.  This is due to the
+fact that many assembler instructions can be encoded in different but
+semantically equivalent ways.
+
+The purpose of this program is to help me avoid the exam in Computer
+Architecture.  It was also an interesting exercise.
+
+Disasm was developed with TASM 3.2.  It will not assemble with MASM, as it
+uses TASM's IDEAL mode.  The code was written using the VIM text editor
+under Red Hat Linux and debugged with the help of DOSEMU.  The 8086/8088
+instruction table (opcodes.dat) was created with the aid of Tech Help! 4.0a
+and verified with the Info documentation from Netwide Assembler.  Note: both
+sources contain errors!  Later, this table was verified directly by feeding
+hex codes to Netwide Disassembler and looking at the output.  The table was
+converted to .asm include file with a Perl script (opasm.pl).
+
+First version of Disasm was written in Free Pascal.  This was done for a
+couple reasons:
+  * In the beginning I did not know it had to be written in assembler
+  * This greatly helped me to design the assembler version; even if I
+    knew from the beginning about the need to program in assembler, I
+    would first create a Pascal prototype
+
+Actually, if I tried to produce the first version already in assembler, I
+would probably have failed or given up.  The Pascal version showed me this
+task was not very complex (actually, it looks pretty simple now).
+
+Note: I did not try to reverse-engineer (i.e. disassemble or inspect with a
+debugger) the compiled Pascal version.  Writing assembler code is hard
+enough, but inspecting disassembled code is much harder.
+
+The Pascal version is also distributed (although it is now obsolete and
+contains a couple of bugs fixed in the assembler version).
+
+
+The author: Marius Gedminas <mgedmin@delfi.lt>.
+
+References:
+* VIM -- Vi IMproved (version 5.4) by Bram Moolenaar et al.
+  http://www.vim.org/
+
+* Red Hat Linux distribution
+  http://www.redhat.com/
+
+* DOSEMU -- The DOS emulator (version 0.99.13)
+  http://www.dosemu.org/
+
+* TASM -- Turbo Assembler (version 3.2) by Borland International
+  http://www.inprise.com/
+
+* Tech Help! 4.0a by Dan Rollins, Flambeaux Software, Inc.
+
+* NASM -- Netwide Assembler 0.98 (also contains Netwide Disassembler)
+  http://www.cryogen.com/Nasm/
+
+* Perl -- a very popular scripting language
+  http://www.perl.org/
+  http://www.perl.com/
+
+* Free Pascal Compiler
+  http://www.freepascal.org/
+
+$Id: README,v 1.1 2002/10/20 18:01:10 mg Exp $

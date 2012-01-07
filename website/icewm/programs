@@ -1,0 +1,128 @@
+menu "Administration" folder {
+	prog "Help Tool" helptool helptool 
+	prog "Load Monitor" xload xload 
+	prog "Text-mode tool menu" setup xterm -e setup 
+	prog "top" top xterm -e top 
+	prog "xosview" xosview xosview 
+	prog "xsysinfo" xsysinfo xsysinfo 
+}
+menu "Amusements" folder {
+	prog "xearth" xearth xearth -fork
+	prog "xeyes" xeyes xeyes 
+	prog "xscreensaver (1min timeout)" xscreensaver xscreensaver -timeout 1 -cycle 1 
+}
+menu "Applications" folder {
+	prog "Address Book" Address Book gnomecard 
+	prog "Calendar" Calendar gnomecal 
+	prog "emacs Editor" emacs Editor emacs 
+	prog "GHex" GHex ghex 
+	prog "Glade" Glade glade 
+	prog "gnotepad+" gnotepad+ gnp 
+	prog "Gnumeric spreadsheet" Gnumeric spreadsheet gnumeric 
+	prog "GXedit" GXedit gxedit 
+	prog "Time tracking tool" Time tracking tool gtt 
+	prog "XFig" XFig /usr/X11R6/bin/xfig 
+	prog "xPDF" xPDF xpdf 
+}
+menu "Documentation" folder {
+	prog "Red Hat Linux Getting Started Guide" rhl-gsg netscape file:/usr/doc/rhl-gsg-6.1en/index.html
+	prog "Red Hat Linux Installation Guide" rhl-ig netscape file:/usr/doc/rhl-ig-6.1en/index.html
+	prog "Red Hat Linux Reference Guide" rhl-rg netscape file:/usr/doc/rhl-rg-6.1en/index.html
+}
+menu "Games" folder {
+	prog "AisleRiot" AisleRiot sol 
+	prog "FreeCell" FreeCell freecell 
+	prog "Gnibbles" Gnibbles gnibbles 
+	prog "GnobotsII" GnobotsII gnobots2 
+	prog "Gnome Mines" Gnome Mines gnomine 
+	prog "Gnome-Stones" Gnome-Stones gnome-stones 
+	prog "Gnotravex" Gnotravex gnotravex 
+	prog "GTali" GTali gtali 
+	prog "GTuring" GTuring gturing 
+	prog "Iagno" Iagno iagno 
+	prog "Mahjongg" Mahjongg mahjongg 
+	prog "Same Gnome" Same Gnome same-gnome 
+	prog "xlander" xlander xlander 
+}
+menu "Graphics" folder {
+	menu "Viewers" folder {
+		prog "Ghostview" gv gv 
+		prog "XDvi" xdvi xdvi 
+	}
+	prog "Electric Eyes" Electric Eyes ee 
+	prog "GQview" GQview gqview 
+	prog "The GIMP" gimp gimp 
+	prog "The GIMP" The GIMP gimp 
+	prog "XDvi" XDvi /usr/bin/xdvi 
+	prog "xpaint" xpaint xpaint 
+	prog "xv" xv xv 
+}
+menu "Internet" folder {
+	prog "Dialup Configuration Tool" Dialup Configuration Tool rp3-config 
+	prog "gftp" gftp gftp 
+	prog "GNOME Mailman" GNOME Mailman gmailman 
+	prog "NcFTP" NcFTP ncftp 
+	prog "Netscape Communicator" Netscape Communicator /usr/bin/netscape-communicator 
+	prog "PPP dialup utility" PPP dialup utility gnome-ppp 
+	prog "RH Network Monitor" RH Network Monitor usernet 
+	prog "RH PPP Dialer" RH PPP Dialer rp3 
+	prog "Synchronize" Synchronize gnome-sync 
+	prog "Talk" Talk gtalk 
+	prog "telnet" telnet telnet 
+	prog "X-Chat IRC client" X-Chat IRC client xchat 
+}
+menu "Multimedia" folder {
+	prog "Audio Mixer" Audio Mixer gmix 
+	prog "CD Player" CD Player gtcd 
+	prog "ESD Volume Meter" ESD Volume Meter vumeter 
+	prog "Extace Waveform Display" Extace Waveform Display extace 
+	prog "XMMS" XMMS xmms 
+}
+menu "Networking" folder {
+	prog "Minicom" minicom xterm -e minicom 
+	prog "ncftp" ncftp xterm -e ncftp 
+}
+menu "System" folder {
+	prog "About Myself" About Myself userinfo 
+	prog "Change Password" Change Password userpasswd 
+	prog "Desktop Switching Tool" Desktop Switching Tool switchdesk 
+	prog "Disk Management" Disk Management usermount 
+	prog "GnoRPM" GnoRPM gnorpm 
+	prog "Update Agent" Update Agent /usr/bin/up2date 
+}
+menu "Utilities" folder {
+	menu "Misc" folder {
+		prog "Ical" ical ical
+		prog "info" info xterm -e info 
+		prog "lynx" lynx xterm -e lynx 
+		prog "slrn" slrn xterm -e slrn 
+		prog "trn" trn xterm -e trn 
+	}
+	menu "Sound" folder {
+		prog "XMixer" xmixer xmixer 
+		prog "XPlayCD" xplaycd xplaycd 
+	}
+	prog "Calculator" xcalc xcalc 
+	prog "Color Browser..." Color Browser... gcolorsel 
+	prog "emacs" emacs emacs 
+	prog "Font Selector" xfontsel xfontsel 
+	prog "Font Selector..." Font Selector... gfontsel 
+	prog "GNOME DiskFree" GNOME DiskFree gdiskfree 
+	prog "GNOME Search Tool" GNOME Search Tool gsearchtool 
+	prog "GNOME terminal" GNOME terminal gnome-terminal 
+	prog "gvim" gvim gvim 
+	prog "Rxvt" rxvt rxvt 
+	prog "Simple Calculator" Simple Calculator gcalc 
+	prog "Stripchart Plotter" Stripchart Plotter gstripchart 
+	prog "System Info..." System Info... guname 
+	prog "System monitor" System monitor gtop 
+	prog "Text File Viewer" Text File Viewer gless --nostdin 
+	prog "User Listing" User Listing gw 
+	prog "xditview" xditview xditview 
+	prog "xedit" xedit xedit 
+	prog "xmailbox" xmailbox xmailbox 
+	prog "xman" xman xman 
+	prog "xrn" xrn xrn 
+	prog "xxgdb" xxgdb xxgdb 
+}
+prog "Help system" Help system gnome-help-browser 

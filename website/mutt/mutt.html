@@ -1,0 +1,191 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1257" />
+  <title>Pašto programa Mutt</title>
+  <meta name="Author" content="Marius Gedminas" />
+  <link rev=made href="mailto:mgedmin@b4net.lt" />
+</head>
+<body>
+
+<h1>Pašto programa Mutt</h1>
+
+<img src="mutt_button.png" alt="Mutt" width="88" height="31" />
+
+<h2>Įžanga</h2>
+
+<p>
+Mutt -- pati geriausia iš mano matytų pašto programų.  Tiesa, mūsų skoniai gali
+skirtis.  Mutt yra skirta ne tik Linux'ui, bet ir visai Unix operacinių sistemų
+šeimai ir tęsia geriausias Unix tradicijas.  Viena iš šių tradicijų --
+„programa turi daryti <em>vieną</em> darbą ir daryti jį <em>gerai</em>“.  Mutt
+darbas -- ne siųsti ir gauti paštą, bet pateikti jį vartotojui.  Pilnavertę
+Unix pašto sistemą sudaro kelios nepriklausomos programos:
+<ul>
+  <li> MTA (<em>Mail Transfer Agent</em>) -- rūpinasi laiškų transportavimu
+       iš vienos sistemos į kitą.  Pvz.: <tt>sendmail</tt>, <tt>qmail</tt>, 
+       <tt>exim</tt>, <tt>postfix</tt>.
+  <li> MDA (<em>Mail Delivery Agent</em>) -- rūpinasi laiškų patalpinimu
+       vietinių vartotojų pašto dėžutėse.  Pvz.: <tt>procmail</tt>,
+       <tt>mail.local</tt>, <tt>/bin/mail</tt>.
+  <li> MUA (<em>Mail User Agent</em>) -- pateikia paštą vartotojui.  Pvz.:
+       <tt>Mutt</tt>, <tt>pine</tt>, <tt>elm</tt>.
+</ul>
+Tiesa, Mutt taip pat turi POP3 bei IMAP protokolų palaikymą, tad ji užgriebia
+šiek tiek daugiau nei įprastas MUA funkcijas.  Ką gi, šie protokolai (ypač
+IMAP) nelabai įsipaišo į tradicinę sistemą.  IMAP atveju Mutt leidžia su
+nutolusia pašto dėžute elgtis taip kaip su lokaliais aplankais
+(<em>folders</em>), tačiau POP3 atveju atskiros programos (pvz.,
+<tt>fetchmail</tt>) naudojimas suteiktų daugiau galimybių ir patogumo.
+</p>
+
+<h2>Kuo Mutt ypatinga</h2>
+
+<p>
+Mutt dirba tekstiniame režime, tad ji yra universalesnė (pvz., galima paštą
+skaityti prisitelnetinus prie kito kompiuterio) ir patogesnė (čia jau kaip kam
+:-). Štai kaip ji atrodo:
+</p>
+  <p><img src="mutt-index.png" alt="Mutt index" width=740 height=417><br>
+  <b>1 pav.</b>
+  Mutt laiškų sąrašas.  Gražų foną bei trimačius mygtukus viršuje pateikia
+  <tt>Eterm</tt> terminalo programa X Window sistemai, rėmelius bei lango
+  mygtukus -- IceWM langų menedžeris <!-- „vadybininkas“ kažkaip neskamba :)
+  --> (<em>window manager</em>).
+  </p>
+
+<p>
+Iš karto galime pastebėti kelis privalumus:
+<ul>
+  <li> Laiškų grupavimas pagal diskusijas (<em>threading</em>).  Nepaprastai
+       patogi savybė, egzistuojanti kiekvienoje Usenet naujienų peržiūros
+       programoje, tačiau retokai pasitaikanti pašto programose.
+  <li> Laiškų išskyrimas spalvomis -- pas mane tamsiai žalia spalva rodomi
+       mano, o viesiai žalia -- man skirti laiškai.  Raudonai rodomi laiškų
+       dublikatai (paveiksle jų nėra), kuriuos atpažįsta <tt>procmail</tt>
+       pagal pasikartojančią Message-Id: antraštę (<em>header</em>).  Žinoma,
+       visa tai galima susikonfigūruoti pagal savo poreikius.
+</ul>
+Paveiksle nesimato kitų privalumų:
+<ul>
+  <li> Didžiulis konfigūravimo lankstumas.  Spalvos, klavišai, automatinis
+       antraščių pakeitimas (pvz. galima nurodyti vieną From: adresą siunčiant
+       asmeninius laiškus ir visai kitą siunčiant laiškus į konferencijas) ir
+       t.t.
+  <li> Aktyvus pašto standartų palaikymas (pvz., automatinis perkodavimas iš
+       svetimos kodavimo lentelės į vietinę rodant laiškus; MIME; PGP).
+  <li> Pašto konferencijų (<em>mailing lists</em>) palaikymas, pvz. atskiri
+       klavišai "atsakyti asmeniškai" ir "atsakyti viešai".
+  <li> Galimybė rodyti ne visus laiškus, o tik atitinkančius tam tikrą
+       kriterijų (pvz. asmeniškus ar pasiųstus į konkrečią vieną konferenciją).
+</ul>
+Štai dar vienas paveikslėlis, rodantis Mutt laiško peržiūros režime:
+</p>
+  <p><img src="mutt-pager.png" alt="Mutt pager"width=740 height=417><br>
+  <b>2 pav.</b>
+  Mutt laiško peržiūra.  Dėl rėmelių bei fono žr. paaiškinimą prie ankstesnio
+  pav.  Vienas dalykas, kurio čia nesimato -- skirtingo lygio citatos rodomos
+  skirtingomis spalvomis, o www/el. pašto adresai tekste išryškinami.  Visa tai,
+  žinoma, galima konfigūruoti.
+  </p>
+
+<h2>Mutt ir lietuvių kalba</h2>
+
+<p>
+Vienas iš malonių Mutt bruožų -- puikus el. pašto standartų palaikymas.  Todėl
+su lietuvių kalba parašytais laiškais problemų nebūna.  Beveik. :)  Problemų
+gali iškilti, jei laiško siuntėjas pažeidžia standartus, pvz., pasiųsdamas
+lietuvišką laišką, parašyta naudojantis ISO-8859-13 lentele, bet antraštėje
+užrašydamas neteisingą kodavimo lentelę (paprastai ISO-8859-1).
+</p>
+
+<p>
+Visais kitais atvejais Mutt nėra lygių.  Tereikia pasiekti, kad pati sistema
+žinotų ISO-8859-13 lentelę (šiais laikais visos Linux distribucijos turi ją
+aprašantį failą /usr/share/i18n/charmaps/ kataloge), užkrauti šią lentelę
+atitinkantį šriftą (tai priklauso nuo konkrečios situacijos -- ar tai bus Linux
+konsolė, ar xterm langas, ar Microsoft Telnet programa) ir apie tai pranešti
+Mutt'ui komanda
+</p>
+<blockquote><pre>
+:set charset=iso-8859-13
+</pre></blockquote>
+<p>
+Patogiausia, žinoma, šią komandą įrašyti į <tt>.muttrc</tt> konfigūracinį
+failą.  Tokiu atveju dvitaškio eilutės pradžioje nereikia.
+</p>
+
+<p>
+Mutt 1.1 ir naujesnės versijos turi dar vieną kintamąjį --
+<tt>send_charset</tt>, kuris nurodo, į kokią lentelę reikia perkoduoti
+išsiunčiamus laiškus (tuo atveju, kai visi simboliai laiške patenka į 7 bitų
+ASCII lentelę, pastaroji ir bus nurodoma, nes ji yra universaliausia ir
+plačiausiai palaikoma).  Nuo Mutt 1.3 versijos galima kaip
+<tt>send_charset</tt> reikšmę nurodyti kelias koduotes, atskirtas dvitaškiais.
+Tuomet Mutt pasirinks pirmąją, kuria galima atvaizduoti visus jūsų laiške
+naudojamus simbolius.  Pavyzdžiui, nurodžius
+</p>
+<blockquote><pre>
+:set send_charset="us-ascii:iso-8859-1:iso-8859-13:utf-8"
+</pre></blockquote>
+<p>
+laiškai be lietuviškų raidžių keliaus us-ascii arba iso-8859-1 koduote.
+</p>
+
+<p>
+<strong>Pastaba dėl versijų</strong>: Mutt versiją sudaro trys skaičiai <tt>x.y.z.</tt>
+Versijos, kurių vidurinis skaitmuo nelyginis, yra „eksperimentinės“, skirtos
+tik labai drąsiems, norintiems naujausių galimybių bei nebijantiems galimų
+problemų vartotojams.
+</p>
+
+<p>
+Jei jums iškils problemų su „Windows-1257“ lentele parašytais laiškais,
+pabandykite į savo <tt>.muttrc</tt> failą įrašyti štai tokią eilutę:
+</p>
+<blockquote><pre>
+charset-hook windows-1257 cp1257
+</pre></blockquote>
+
+<p>
+Beje, Mutt nuo 1.3.13 versijos gali šnekėtis su jumis ne tik angliškai, bet ir
+lietuviškai (arba kitomis kalbomis).  Tereikia nustatyti shell kintamąjį $LANG,
+pvz.:
+</p>
+<blockquote><pre>
+<b>$</b> export LANG=lithuanian
+</pre></blockquote>
+
+<p>
+Pastaba: dažnai žmonės prieštarauja lietuviškų raidžių vartojimui laiškuose,
+dėl to, kad jie skaito paštą prisijungę per telnetą prie, tarkime, universiteto
+serverio.  Aš padariau tokį eksperimentą: iš Windows 98 kompiuterio su
+standartine Microsoft Telnet programa prisijungiau prie savo Linux
+sistemos ir pasileidęs Mutt'ą pabandžiau sau išsiųsti laišką su lietuviškomis
+raidėmis.  Rezultatą matote antrame paveiksle viršuje.  Tiesa, minėtame Windows
+98 kompiuteryje buvo įdiegtas LitWin98 paketas (iš <a
+href="http://www.kada.lt/litwin/">www.kada.lt/litwin/</a>), tad gal tik su juo
+Telnet programa sugeba parodyti lietuviškas raides?  Nors mano nuomone
+šis paketas turėtų būti instaliuotas <em>kiekviename</em> kompiuteryje -- jis
+yra nemokamas bei leidžia naudotis visų mėgstamu „Baltic“ (raidės vietoje
+skaičių) ir mano mėgstamu „Programmers“ (miręs klavišas + lotyniškos raidės)
+klaviatūros išdėstymais.  Ačiū autoriams!
+</p>
+
+<h2>Nuorodos</h2>
+<ul>
+  <li> Mutt namų puslapis: <a href="http://www.mutt.org/">www.mutt.org</a>
+  <li> Mano <a href="muttrc.html">.muttrc</a> failas
+  <li> Mano <a href="procmailrc.html">.procmailrc</a> failas
+  <li> <a href="http://www.liks.lt/elpaliet.htm">Lietuviškų rašmenų vartojimas
+       elektroninio pašto laiškuose</a>
+</ul>
+
+Komentarus dėl šio puslapio siųskite man: <a
+href="mailto:mgedmin@b4net.lt">mgedmin@b4net.lt</a>
+
+<p>
+Marius Gedminas <br>
+2000 vasario 17 d. <br>
+atnaujinta 2001 gegužės 17-18 d.
+</body>
+</html>

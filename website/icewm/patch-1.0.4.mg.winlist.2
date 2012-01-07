@@ -1,0 +1,81 @@
+Show addidional information in IceWM's window list:
+  [ workspace ] title (status)
+
+Remaining issues:
+  - the window list should be redrawn when something chanegs (e.g. a window is
+    minimized or moved to a different workspace)
+  - hardcoded text "[ * ]" for sticky windows is not the best solution.
+
+Marius Gedminas
+mgedmin@delfi.lt
+http://ice.dammit.lt/~mgedmin/icewm/
+
+diff -u ./src/wmclient.h.orig ./src/wmclient.h
+--- ./src/wmclient.h.orig	Mon Nov  8 13:45:52 1999
++++ ./src/wmclient.h	Mon Jun 26 02:17:50 2000
+@@ -28,6 +28,8 @@
+ #endif
+     virtual const char *getTitle() = 0;
+     virtual const char *getIconTitle() = 0;
++    virtual long getWorkspace() const = 0;
++    virtual bool isSticky() const = 0;
+     virtual void activateWindow(bool raise) = 0;
+     virtual bool isHidden() const = 0;
+     virtual bool isMinimized() const = 0;
+
+diff -u ./src/wmwinlist.cc.orig ./src/wmwinlist.cc
+--- ./src/wmwinlist.cc.orig	Sat Dec 18 18:57:57 1999
++++ ./src/wmwinlist.cc	Mon Jun 26 02:16:50 2000
+@@ -23,9 +23,12 @@
+ 
+ WindowListItem::WindowListItem(ClientData *frame): YListItem() {
+     fFrame = frame;
++    text = 0;
++    text_size = 0;
+ }
+ 
+ WindowListItem::~WindowListItem() {
++    delete[] text;
+     if (fFrame) {
+         fFrame->setWinListItem(0);
+         fFrame = 0;
+@@ -44,7 +47,25 @@
+ }
+ 
+ const char *WindowListItem::getText() {
+-    return getFrame()->getTitle();
++    ClientData *w = getFrame();
++    const char* state = "";
++    if (w->isHidden())
++       state = " (hidden)";
++    else if (w->isMinimized())
++       state = " (minimized)";
++    const char* workspace = w->isSticky() ? " * "
++                                          : workspaceNames[w->getWorkspace()];
++    const char* title = w->getTitle();
++    if (title == 0)
++       title = "";
++    size_t need_size = 4 + strlen(workspace) + strlen(title) + strlen(state);
++    if (need_size > text_size) {
++       delete[] text;
++       text_size = need_size;
++       text = new char[text_size];
++    }
++    snprintf(text, text_size, "[%s] %s%s", workspace, title, state);
++    return text;
+ }
+ 
+ YIcon *WindowListItem::getIcon() {
+
+diff -u ./src/wmwinlist.h.orig ./src/wmwinlist.h
+--- ./src/wmwinlist.h.orig	Sat Nov 13 14:57:11 1999
++++ ./src/wmwinlist.h	Fri Jun 23 19:42:37 2000
+@@ -23,6 +23,8 @@
+     ClientData *getFrame() const { return fFrame; }
+ private:
+     ClientData *fFrame;
++    char *text;
++    size_t text_size;
+ };
+ 
+ class WindowListBox: public YListBox, public YActionListener {

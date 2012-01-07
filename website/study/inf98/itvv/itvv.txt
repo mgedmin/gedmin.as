@@ -1,0 +1,3020 @@
+IT veiklos valdymas
+aldas.glemza@lt.ey.com
+
+Pirmadieniais, 17:30 - 20:00
+
+
+----------------------------------------------------------------------------
+Mon Sep  8 17:37:00 EEST 2003
+
+Mes buvom 300 auditorijoj vietoj 203-ios.
+
+rugsėjo 22 d. paskaitos nebus
+
+
+CoBIT -- Control Objectives for information and related technologies
+
+vienas iš daugelio standartų
+
+Kiti standartai:
+    ISO 9000 -- kokybė
+    BS 7799 -- IT sistemų saugumas
+    (British Standard)
+    ITIL (Information Technology Infrastructure Library) -- kaip turi vykti
+      kasdienės operacijos (priežiūra, maintenance)
+
+CoBIT -- tam tikra kompiliacija iš >40 standartų.
+
+Jį sukūrė ISACA (http://www.isaca.org)
+
+CoBIT pradžioj labai nenatūralus, bet galima pagauti, apie ką čia šneka eina ir
+kaip atsakinėti per egzą.
+
+
+CoBIT:
+  Veikla suskirstyta į 4 sritis:
+    planavimas & organizacija
+    įsigijimas & įdiegimas
+    vystymas & palaikymas
+    monitoringas (stebėjimas)
+  Kitas pjūvis: resursai
+    žmonės
+    technologijos (tiek hardwaras tiek softwaras)
+    įrengimai (ir patalpos)
+    duomenys
+    aplikacijos (taikomosios programos)
+  Trečias pjūvis: 7 informaciniai kriterijai
+    efektyvumas
+    konfidencialumas
+    pasiekiamumas
+    patikimumas
+    suderinamumas
+    tinkamumas
+    vientisumas
+
+  Tokios va 3 dimensijos
+
+
+  Informacinis aspektas: effectiveness -- tinkamumas
+
+    didelė dalis informacijos, kuri yra kaupiama ir cirkuliuoja IT sistemoje
+    yra netinkama -- nenaudinga, neturinti vertės, nenaudojama.
+
+    Pvz.: informacinė sistema generuoja ataskaitas.  Metinė ataskaita kainavo
+          6000 lt (12 developerio darbo dienų), o buvo panaudota du kartus, ir
+          tai ne pagal paskirtį (kažkas pažiūrėjo kovo mėnesį).
+
+  Dar vienas inf. aspektas: efficiency -- efektyvumas
+
+    Tai ir ergonominiai kriterijai (formų pildymas verčia šokinėti, ataskaitos,
+    kurias reikia rankomis vieną su kita suderinti) -- info yra, bet netinkamai
+    pateikta.
+
+  Daug aspektų dėl saugumo: confidentiality -- konficencialumas
+
+    Prie tam tikros info ne visi gali prieiti.
+
+    Kas valdo konficencialumą?  (Dažniausiai sysadminai, kurie nieko nežino
+    apie firmos vidinę politiką.)
+
+  Dar: integrity -- vientisumas
+
+    Data integrity.  Info turi būti vientisa ir laike, ir per visus pjūvius
+    (sumuojant pajamas pagal pjūvi A turim gauti tiek pat, kiek ir pagal pjūvį
+    B)
+
+  Dar: availability -- prieinamumas
+
+    info turi būti prieinama tuo metu, kai jos prireikia.  (1 ar 16 d. sistema
+    gali būti sulūžus.  Bet jei sistema neveiks 29 d., gausim milijonines
+    baudas.)
+
+  Dar: reliability -- patikimumas
+
+    panašu į prieinamumą, bet.
+
+    Pvz.: blogai jei printini mėnesio ataskaitą per mėn vidurį, bet joje
+    neindikuojama spausdinimo data, ar kad tai nepilna ataskaita.  Paskui turi
+    du vienodus dokus su skirtingais skaičiais ir nežinai, kuriuo tikėti.
+
+  Dar: compatibility -- suderinamumas
+
+    Pvz.: perkam voniai čiaupą.  Nesinešam su savim matavimų, tikimės, kad yra
+    standartai.  Taip pat su duomenų apsikeitimu.  (ODBC, ANSI SQL)
+
+Šitie reikalavimai padengia visą sritį ir nepersidengia.
+
+Tai nėra vienintelis būdas skaidyti.  Kiti skaido paprasčiau.
+
+BTW šiame kurse kalbama apie dideles organizacijas, kur su IT veikla susiję
+dešimtys ar daugiau žmonių.
+
+
+Pirmoji sritis (domain): planavimas ir organizacija (Plannind and Organisation,
+PO)
+
+  pirmasis procesas (PO1): IT strategijos nustatymas.  Turim strateginį IT
+  planą.  Ūūū, gerai.
+
+    (Mūsuose tai nemadinga.  Iki 30% kompanijų turi tokį.)
+
+    Strategija turi atsižvelgti į visus resursus.
+
+    Svarbiausi strategijos aspektai: efektyvumas ir tinkamumas.
+
+    Apie IT strategiją (jos efektyvumą ar tinkamumą) nieko negalim pasakyti,
+    jei neturim veiklos strategijos.
+
+    Pvz.: draudimo agentai.  Artėja pensijų reforma.  („Aš Sodra nepasitikiu.
+    Galit užsirašyti“ -- Glemža).  Nuperka krūvą Palmų, o paskui žiūri, kad
+    šnipštas.  Nemoku atpasakoti.  Reikia vieningos strategijos, ba
+    išsinuomosi 5 metams 20 wireless linkų iki regioninių centrų, o po
+    pusmečio centrinė vadovybė sugalvos centralizaciją ir paliks tik 5 centrus.
+
+    Rizikos skaičiavimai: kiek kainuoja serverio lūžimas 2x per metus po
+    pusvalandžiui.  Atsarginis serveris kainuotų 30000 lt.  Perkam ar ne?
+
+    Dar reikia atsižvelgti į tai, kiek įmonė ruošiasi investuoti į IT.  Galima
+    daug grandiozinių sistemų prisigalvoti.
+
+    Svarbiausias dalykas -- veiklos strategija.  Bet išgauti iš organizacijos,
+    ko ji siekia per artimiausius 5 metus -- „atsitrenksit į sieną“.
+
+        Veiklos strategija <-----------> IT strategija
+
+    rodyklė dvipusė.  IT galimybės gali įtakoti veiklos strategiją.
+
+    IT strategijos (ilgalaikio plano) trukmė paprastai 3 -- 5 metai.  Ilgiau --
+    galima, bet labai sunku (kiek kainuos telekomunikacinės paslaugos 2015 m?).
+    Kodėl bent 3 metai?  Kad planas galėtų kelti sau tikslus, kurie nepadaromi
+    per 1 metus.
+
+    Trumpalaikė strategija (metiniai planai).
+
+    Pvz.: liekam su windais, ar einam prie Linuxo ir apskritai AK?  Ar galime
+    tikėtis, kad po 5 metų AK programos bus palaikomos komerciškai?  Ar ir
+    toliau kišam $$$ į windus ar rizikuojam likti be palaikymo?  Gal ruošiamės,
+    taupom pinigus, kaupiam potencialą ir po dviejų metų šokam prie AK.  Tai
+    ilgalaikis sprendimas.
+
+    Nieko nėra blogiau kaip nepabaigti diegti didelės sistemos iki galo.
+    Nebent išaiškėtų, kad pradinės mūsų prielaidos buvo neteisingos.
+
+    Vykdom planą ir matom, kad jis neatitinka teisybės.  Ką daryti?  Strategija
+    ilgalaikis dalykas, jos keisti kasdien ar kas mėnesį neišeina ($$$
+    nuostoliai)?  Reikia numatyti strategijos keitimo tvarką.  Turi būti
+    apibrėžti faktoriai, kurie sako, kad arba būtina peržiūrėti IT strategiją
+    (o tą reikia daryti bent kartą metuose): prielaidų klaidingumas, išoriniai
+    faktoriai (veiklos pasikeitimas, organizaciniai pokyčiai (Lukoilas
+    nusipirko LK; turbūt pasikeitė abiejų IT strategijos), dingo kažkurios
+    naudojamos sistemos palaikymas).
+
+    Dar svarbus dalykas: dažnai tos IT strategijos egzistuoja, bet niekas apie
+    jas nežino.  Jas reikia komunikuoti.
+
+      Sėdi programeriai, dirba su FoxPro, dejuoja: Petras Švedijoj su CORBA
+      dirba, Jonas irgi užsienyje įdomų darbą dirba, o mes...  Jei jiems
+      nepasakys "chebra, dabaikit ataskaitas, o mes jau sutartį pasirašinėjam,
+      ateityje SAPą diegsim", jie gali imti ir išsilakstyti.
+
+    Informuoti reikia ne tik org viduje, bet ir verslo partnerius.  (Tie tipai
+    6 metus tą patį daro, o mes ruošiamės migruoti prie kitos sistemos; eisim
+    ieškoti kitų konsultantų).
+
+    Jei nėra IT strategijos, paremtos verslo poreikiais, ...
+
+      Tipinis įsitikinimas: IT veikla == sąnaudos (kiek sukišom, tiek suėdė,
+      naudos bala žino... Čia kaip elektra, popierius -- davai sumažinam 2x
+      popieriaus, sutaupysim.  Sumažinam 2x IT, sutaupysim.)
+
+      Iš vidaus žiūrint pirkėjas yra vadovybė, investuotojai -- jie klausia
+      „kiek kainuos“.  Tai reikia nugalėti -- parodyti, kiek mes sutaupysim,
+      o tik tada, kiek tai kainuos.  IT veiklą reikia parodyti kaip partnerių
+      veiklą, o ne sąnaudų šaltinį,
+
+    IT veikla taip pat reiškia tam tikros atsakomybės prisiėmimą.
+
+    Strategijos elementai: IT produktai ir paslaugos (servisai).
+
+      „Nepykit, bet aš naudosiu kai kuriuos negražius lietuviškus žodžius, kaip
+      "servisai"“
+            -- Glemža
+
+      Tam tikri įsipareigojimai, paslaugos, paslaugų lygis.  "Sugedusį kompą
+      pakeisim per 2 valandas".
+
+    IT galimybės (capabilities) -- per tam tikrą laiką pasiekti tam tikrą
+    rezultatą.
+
+      ar sugebėsim savo klientams siųsti SMSą?  Konkurentai turi planą: "kalbi
+      daugiau, moki mažiau".  Ar gali mūsų bilingo sistema tai apskaičiuoti?
+      Kada galės?  Ar galės per 3 mėnesius?  Jei adminas susilaužo koją, ar
+      turiu aš kitą adminą, ar ne?  Jei kažkas apkaltins konfidencialumo
+      pažeidimu (vienas rimčiausių įstatymų Lietuvoje IT srityje: asmens
+      duomenų konfidencialumas), ar sugebėsiu įrodyti, kad mano valdomi asmens
+      duomenys buvo tvarkomi pagal reikalavimus?
+
+    IT valdymo modelis.
+
+      BTW kas tvirtina strateginį IT planą -- IT skyrius ar kas aukščiau?
+
+      Idealus atvejis: vienas iš vadovų -- IT sponsorius (CTO)
+
+      Labai blogai, jei nėra tokio ar yra koks nupiepelis, negalintis apginti
+      argumentų.
+
+      Šiais laikais maržos (marginai) mažos, norint didelio pelno reikia
+      didelio verslo efektyvumo.  Tam reikia efektyvaus informacijos valdymo.
+      Įmonė, kuri nenaudoja IT, arba dirba blogai, arba nedirba iš viso.
+
+      Vienas IT valdymo modelis: sukalam tvirtą gerą susitarimą ir outsourcinam
+      visą IT kitai organizacijai.
+
+      BTW Įmonių, kurios turėtų savo programerius beveik neliko.  Tendencija:
+      programeriai įmonėse nedirba.  Pvz Vilniaus Banke dirba 70 programerių.
+      Ruošiasi juos šalinti.
+
+      Ką atiduosi, ką neatiduosi, bet PO1 neatiduosi.  Veiklos poreikiai visad
+      eis iš kompanijos.  IT strategiją gali padaryti ir kiti, jei turi daug
+      patirties tavo veikloje, žino taikomąją sritį, visas tendencijas, etc.
+
+      (Daug kas nepasakyta, bet bus galima sugrįžti ir vėliau)
+
+  P02: Informacinės architektūros nustatymas (arba apibrėžimas).
+
+    Realiai čia kalbama apie du resursus:
+
+    - duomenys
+    - aplikacijos
+
+    Technologijos čia nėra esminis momentas.
+
+    P02 tikslas:
+
+      Lietuvoje kurį laiką vienintelė IT sistema naudojama org-joje buvo
+      buhalterinės apskaitos programos (dažniausiai lietuviškos, paskutiniu
+      metu padaugėjo užsienietiškų -- Navision, Concorde).  Nepaisant to vis
+      tiek yra viena sistema, kuri gal vėliau keičias duomenimis su kitais
+      duomenimis (Exceliu, dar rankomis padirbam, įvedam rankomis, etc).
+      Dar jungiamės prie banko, dar yra paštas, personalas kažką su Exceliu
+      skaičiuoja.  Krūva reikalavimų turėti visų ateinančių ir išeinančių
+      dokumentų žurnalus.  Bet kurioj org. yra daug sistemų ir daug duomenų
+      srautų.  Kiekviena org turi savitą tam tikrą IT architektūros modelį.
+      Kelios db, sistemos.  Srautai, apimtys, periodiškumai.
+
+      Reikia identifikuoti didelius srautus, kurių realizavimas yra
+      neefektyvus.  Pvz., banking sistema, atkeliauja elektroniniai pavedimai.
+      Reikia juos dabar įvedinėti rankomis.  Uck.  Nebaisu, jei per dieną
+      ateina 16 mokėjimų -- buhalterė susitvarkys per pusvalandį.  Jei 16000,
+      tai blogai.  4000 valandų per dieną.  Reikia 10 buhalterių.  Ai.  Tai
+      kainuoja.  Užsakom interfeisą už 10000 Lt, jis atsiperka per 3 mėn.
+
+      Tokius dalykus pastebėti galima tik jei yra išsiaiškinti duom srautai
+      ir galimybės.
+
+      Būtų klaida remtis tik egzistuojančiais srautais.  Reikia žiūrėti į
+      veiklą.
+
+      Mokesčių inspekcija: standartizavo formas.  Galima jas ir skanuoti. O
+      kam?  Gal leista jas išvis per internetą įvedinėti.  (Reikia tik el.
+      parašo infrastruktūros, kurios kol kas nėra.  O kada ji bus įgyvendinta?
+      Pašnekėsim 2007, Glemža mano, kad jau bus.)
+
+      Duomenỳ žodynas -- Data dictionary.  (Kas žino apie CASE?  Tai yra būdas
+      aprašyti org. naudojamus duomenis RDBMS kalba.)
+
+      Ką aš gaunu iš banko -- ten bus banko kodas, sąskaitos kodas, įmonės
+      kodas, suma.  Yra tam tikra atitinkamybė, kaip mokėjimas bus vaizduojamas
+      pas mane.  Rišim su mano sistema per įmonės kodą, kuris, negana to, yra
+      7-ženklis (kol EU reikalavimai nėra tenkinami), plius kontrolinis
+      skaitmuo et cetera.  Kur prekės, kur kiekis, kiekis >= 0, etc.
+
+      Dažniausiai užtenka turėti tokį duom. žodyną, kurio pakanka aplikacijoms
+      integruoti.
+
+      Neapsirašius DŽ labai sunku atlikti duomenų klasifikaciją.  Kas už ką
+      atsakingas (personalas, buhalterija, etc.), kas tvarko accessą (neužmiršk
+      konfidencialumo) etc.
+
+      Duomenų saugumo (konfidencialumo) lygiai.  Du galimi priėjimai:
+        1. negalima nieko, bet galima foo bar baz
+        2. galima viskas, išskyrus gurple warmpft
+
+      Viena svarbiausių sąvokų -- duomenų savininkas (tai nėra IT poskyris!
+      išskyrus administracines sistemas), susijusi -- duomenų tvarkytojas.
+      Adminai neturi šiaip sau leisti sau keisti accesso reguliavimus.
+
+
+Šios paskaitos pabaiga 19:15.
+
+Egzas.
+
+  Pasiruošti viena iš temų.  Šneka 30 min, paskui 15 min diskusijos.
+  Kelios temos, galima atsinešti savų.  Galima demonstruot ant sienų,
+  pakanka žodžiu.
+
+    1. IT projektų valdymas.
+    2. IT rizikos valdymas.
+    3. Išorinių paslaugų pirkimas (outsourcing).
+    4. Saugumo valdymas. (kiek paspecializuoti, pvz.,)
+    5. Investicijų į IS grąža.  (teks susidurti)
+    6. IT paslaugų lygio valdymas.
+
+Kas ateis ir pašnekės, gaus iškart 8 egze (kuriuos galima lengvai išauginti
+iki 10); du geriausi iškart gauna 10.
+
+
+----------------------------------------------------------------------------
+Mon Sep 15 17:32:22 EEST 2003
+
+Taip, vėl 300 aud.
+
+Tęsiam:
+
+  PO3: nustatyti techn. plėtros kryptis
+
+    kabina du resursus:
+    - technologijos
+    - įrengimai
+
+    BTW patalpos taip pat yra "įrengimai"
+
+    pagrindiniai tikslai:
+    - tinkamumas (pirminis tikslas)
+    - efektyvumas (antrinis tikslas)
+
+    kaip tai daroma:
+    1. Dabartinių galimybių įvertinimas
+    2. Technologinės plėtros tendencijų sekimas
+
+        NB tendencijos būna klaidingos.  Pvz. OODB buvo laikoma kad ooo, o
+        kažkaip priduso.  Pvz. Java -- nors ankstoka kalbėti.  Pvz. C --
+        "meskit viską kitką, naudosim tik C".  Dabar C gal net mažiau naudojama
+        už Java.  Pvz.  Network Computer (NC) -- thin clientas.  Lia lia lia.
+        Numirė.
+
+        Prie šito reiktų priskirti ir teisinį reguliavimą.  Ū!  Nepaskaitysim,
+        kas planuojama 2007 m. dėl EU reikalavimų, galim nusipirkti ne tą
+        sistemą ir likti 2007 m. ant ledo.
+
+    3. Koncepcijos ("proof of concept"), pilotiniai diegimai
+    4. Grėsmių įvertinimas
+
+        Y2K: daug vargo, jokios apokalipsės -- grėsmė buvo pervertinta.
+        [hm...?]
+
+    5. Investicijų planas
+
+        Ar bus duodama $$$ kasmet antnaujinti 1/3 kompų parko?  Ar kas nors
+        pranešė, kad mes nupirkom UAB "XYZ" ir turim 215 kompų daugiau, nei
+        pernai?
+
+    6. Migravimo strategija
+    7. Ryšiai su tiekėjais (galimybės atlikti 2, 3 punktus)
+
+  PO4: IT organizacijos vieta
+  (define IT organization an relationships)
+
+        Ką daro pvz., buhalterija reglamentuoja įstatymai.  O ką daro IT?
+        Kaip tai vadinsime (skaičiavimo centru?  IT skyriumi?  Vindikacijos
+        ir IT departamentu?)
+
+    resursai:
+    - darbuotojai
+
+    pagrindiniai tikslai:
+    - tinkamumas (pirminis tikslas)
+    - efektyvumas (antrinis tikslas)
+
+    1. Vadovybės atsakomybė už IT
+
+        kas iš vadovybės atsakingas už IT ir kokiu pagrindu?
+
+    2. IT dalyvavimas priimant sprendimus
+    3. IT padalinio ir darbuotojų atsakomybė
+
+        yra daug visokių org. struktūros modelių.  kuo aukščiau IT sponsorius,
+        tuo lengviau prastumti sprendimus.  didžiausia rizika, jei IT vadovas
+        atsakingas ir už dar kurią nors sritį.
+
+        kita problema: sponsorių nėr ar yra daugiau nei vienas; makalynė,
+        šnabždesiai.  sprendimas: laiks nuo laiko susirinkti ir pakalbėti
+        apie priimtus sprendimus.  kas ketvirtį ar kas 2 mėn šaukti IT valdymo
+        komiteto susirinkimus.  labai gerai jei į tą komitetą įeitų kas nors
+        iš valdybos, kas nors iš vadovybės, kas nors iš IT bei iš tiesioginės
+        veiklos padalinių.  Vadovai ir useriai; veikla ir IT.  Jis turi turėti
+        pakankamai galių, kad generalinis ir valdybą negalėtų per daug šakotis.
+        Jei komitetas sprendimą priima, dažniausiai galima jį taip paruošti,
+        kad neįmanoma bus atsisakyti,
+
+        vadovybės atsakomybė: atsakingas sponsorius ir komitetas.
+
+        sprendimų priimimas: per komitetą (pvz. deklaruojam, kad jei $$$ > n
+        tai reikia komiteto pritarimo).
+
+        labai 1 svarbus momentas: kas yra IT padalinio atsakomybė.  ar jis
+        atsakingas, kad kažkas įvedė neteisingus duomenis?  ar jie turi
+        nemokamai sėdėti taisyti sugadintus duomenis?  ar jie atsako už
+        vartotojų apmokymą?  ar jie turi tampyti elektros kabelius, instaliuoti
+        vadovams namuose programas, 12 val. nakties pasakoti kaip prisijungti
+        prie interneto waršuvoje?  dažniausiai turi...
+
+        Savininkas ir prižiūrėtojas (owner & custodian): dvi sąvokos, per
+        kurias viskas turėtų išaiškėti.
+
+        veiklos informacinių sistemų savininkas yra veikla.  Jų prižiūrėtojas
+        yra IT skyrius.  Jei tos sąlygos nesilaikoma, bus konfliktų.
+
+        savininkas pasako, ką jis atiduoda prižiūrėtojui, o ne atvirkščiai.
+
+        Savininkas: projektas.  Prižiūrėtojas: operacijos.
+
+        Labai svarbu jau pirmosiomis projekto minutėmis nustatyti, kas bus
+        savininkas.
+
+        Tai buvo apie sistemas, bet tinka ir duomenims.
+
+      atsakomybės išskyrimas.  negalima kartu vykdyti
+      - sistemos administravimo ir duomenų įvedimo
+
+        sistemos adminas niekada neturi būti sistemos useris
+
+      - sistemos kūrimas/diegimas ir testavimas ir eksploatacija
+
+      - pakeitimų valdymas ir sistemos administravimas
+
+      - saugumo administravimas ir saugumo auditas
+
+      it personalo poreikis
+
+        apsprendžiamas pagal organizaciją
+
+        job description (pareiginės instrukcijos)
+
+        poreikį reikia peržiūrėti bent kas metus
+
+      svarbiausių IT specialistų nustatymas (key personal)
+
+        viską galima pakeisti, išskyrus raktinius specialistus
+        reikia juos identifikuoti, o paskui saugoti.  arba sudubliuoti ir
+        susirinkti dokumentacijoje, bent dalį, ką jie žino.
+
+(pertrauka)
+
+    investicijos (ilgalaikiai)
+    sąnaudos (trumpalaikiai)
+
+  PO5: IT investicijų valdymas
+
+    resursai: visi išskyrus duomenis
+    tikslai: tinkamumas ir efektyvumas (pirminiai); patikimumas (antriniai)
+
+        dažniausiai IT suprantamas kaip kaštų centras, kaip ir valytojai
+
+    1. Metinis IT biudžetas (žr PO1)
+
+        strateginiame plane pasakyta, kiek skirsim kuriais metais.
+
+        kaštus susiskaičiuojam iš istorinių duomenų.  nebent kas nors galingo,
+        pvz., atleidžiam 70 programerių
+
+    2. Naudos ir kaštų santykio (skirtumo) stebėjimas
+
+        "baisiai įdomi tema"
+
+        kaštai -- aišku (komandiruotė Juozui į Braziliją, atlyginimai etc)
+
+        nauda -- gal sutaupėm kaštų (sekam atsargas, pastebim kažką etc.)
+        Jei org užsiima gamyba, lengva pastebėti.  Jei org daro projektus,
+        sunku nustatyti, ką keičia IT.  Nors galima: sutrumpėjo užsakymų
+        vykdymas nuo 3.5--4 savaičių iki 2--2.5.  Ar tai apsimokėjo?
+        Investavau 1 mln.  Jei nebūčiau to padaręs, konkurentas pasiimtų
+        50% rinkos.  Tik kaip tai įrodyti?..
+
+        Žr. PO4: sponsorius vadovybėje sugebės surankioti įtikinimą, kad buvo
+        nauda.
+
+        valdymas: darėm prielaidas ir stebim, ar tai pasiteisina?
+
+    3. Naudos ir kaštų santykio pagrindimas
+
+        reikės įtikinėti, kad kaštai reikalingi.  IT muš gamybininkai,
+        marketingas, administracija.  ITstai bus 4-5 eilėj, kur duoda $.
+        reikės pastoviai ginti pozicijas.
+
+        kaštai turi būti surenkami iš apskaitos sistemos, o ne iš dangaus.
+
+  PO6: Vadovybės tikslų komunikavimas (communication)
+
+    resursai: darbuotojai
+    pagr. dalykai: tinkamumas, suderinamumas (compliance)
+
+    1. Kas organizacijoje laikoma pozityviu dalyku?
+    2. IT politika (tvarka)
+
+      už tai atsakinga vadovybė (kaip žiūrim į overtime, etc., atsakomybė
+      už slaptažodžių saugojimą etc.  ar bus skaitomas darbuotojų emailas.
+      geriau tai paskelbti ir nedaryti nei neskelbti ir daryti)
+
+    3. Tvarkų vykdymas
+
+      tam tikros procedūros.
+
+    4. Intelektinės nuosavybės teisių laikymasis
+
+      nesankcionuota PĮ: galima apibrėžti politikoje -- tavo kompe nelegalus
+      softas, tu padengi visus org-jos nuostolius, kai apsilanko BSA.
+
+    5. Saugumo užtikrinimo svarbos suvokimo (awareness) didinimas
+
+      raktai stalčiuje, slaptažodžiai po klaviatūra...
+      pvz: prizas už geriausia pasiūlymą saugumui padidinti
+      kokie nors aplinkraščiai, mėnesinis žurnaliukas su komiksais.
+
+  PO7: ŽI (žmogiškųjų išteklių) valdymas
+
+    resursai: darbuotojai
+    kriterijai: tinkamumas ir efektyvumas (abu pirminiai)
+
+        gandas: 50% navision diegimų nesėkmingi (anželika).  ???
+        glemža: lietuvoj > 1000 navision diegimų, iš jų 800 valst. sektoriuje.
+        negali būti tiek nesėkmingų diegimų.
+
+    1. Priėmimas, karjeros planavimas
+
+        susiję dalykai: ateik dabar už 2000 lt, jei gerai dirbsi, mes tau
+        mokėsim $xxx, o jei dar išsilaikai aną sertifikatą, mokėsim $yyy
+        ir gausi kūrimo skyrių.  Mašina?  po trijų metų.
+
+    2. Vaidmuo ir atsakomybė
+
+        priėmimu užsiima personalas.  priėmimas vykdomas į tam tikrą poziciją
+        (vaidmenį) su tam tikra atsakomybe.
+
+    3. Kvalifikacija
+
+        pozicija susijus su kvalifikacija.  DB adminas turi turėti oraklo
+        sertifikatą, techninės anglų kalbos žinių, etc.  Projektų vadovui
+        reikia šnekamosios anglų k., aukštasis magistro lygio informatikos
+        ar dar ko išsilavinimas etc.
+
+        priėmime galime daryti nuolaidas: imam tuos, kurie tenkina 80%, su
+        sąlyga, kad po pusmečio jie tenkins 100%.  Bet tai personalo reikalas.
+        IT reikalas -- išmušti atlyginimą.
+
+    4. Apmokymai
+
+        susiję su karjeros planavimu.
+
+        "Gausi 32 metines valandas apmokymų, iš jų 16 ne Lietuvoj".
+
+    5. Kryžminė kompetencija, dubliavimas
+
+        kiekvienas iš darbuotojų turi būti pakeičiamas.  Pvz. asmuo ==
+        sysadminas ir vidutiniškas programeris.
+
+        išleidžiam pagrindinius atostogų, jiems neskambinam, ir ta proga
+        pamatom, ko verti dubleriai.
+
+    6. Įdarbinimas ir išdarbinimas, pareigų keitimas
+
+        procedūrų buvimas.
+        išdarbinimai: pakeisti visų sistemų passwordus, atsiimti visus namo
+        pasirinktus diskus, kompus etc.
+        tas pats ir keičiant pareigas
+
+    7. Darbo įvertinimas (job evaluation)
+
+        būtinas.
+        visa krūva dalykų.
+        atsakomybė, pozicija, kvalifikacija.
+
+
+kitą savaitę paskaitos nebus.
+
+
+----------------------------------------------------------------------------
+Mon Sep 29 17:35:55 EEST 2003
+
+
+  PO8: Suderinamumas su išoriniais reikalavimais
+
+    tikslai:
+      tinkamumas, suderinamumas (pirminiai)
+      patikimumas (antrinis)
+
+    resursai: darbuotojai, aplikacijos, duomenys
+
+    1. Išorinių reikalavimų sąrašo sudarymas ir palaikymas
+
+        {ataskaitos visokioms valstybinėms biurokratijoms etc.}
+        {kažką seka IT, kažką seka teisės departamentas}
+
+    2. Tvarkų ir procedūrų, skirtų suderinamumui su išoriniais reikalavimais,
+       sukūrimas ir palaikymas
+
+        periodiniai patikrinimai
+        procedūrų inicijavimas atsiradus naujiems reikalavimams
+
+    3. Ergonomikos ir (darbuotojų) saugumo reikalavimai
+
+        pvz negalima įrenginėti CO2 priešgaisrinės serverinėj, nes uždus
+        sysadminai
+
+    4. Intelektinės nuosavybės reikalavimai
+
+        BSA
+
+    5. Duomenų apsikeitimo reikalavimai
+
+    6. Draudimo sąlygų laikymasis
+
+
+  PO9: Rizikos valdymas
+
+    visi kriterijai, visi resursai
+
+        angl.: risks management
+        galima būtų versti "grėsmių valdymas"
+
+        rizika vs pažeidžiamumas (risk/vulnerability)
+            rizika yra pastovi grėsmės tikimybė
+            pažeidžiamumas... pvz: pažeidžiamumas -- serverinė rūsyje; rizika
+            -- užpils vandeniu.
+
+        IT specifika nėra esminis dalykas valdant rizikas
+
+    1. Rizikos vertinime dalyvauja veikla
+
+        didžioji dalis šito turi ateiti iš veiklos (įvairūs specialistai --
+        finansai, marketingas, gamyba, teisiningai -- visi)
+        ITstų reikalas išversti tai į IT terminus (kuris serveris palaiko aną
+        sistemą?)
+
+        veiklos tęstinumo planas -- IT rizikos yra tik dalis jo
+
+    2. Rizikos įvertinimo metodika
+
+        kiekvienai rizikai reikia suteikti bent šiuos matavimus: tikimybę bei
+        poveikį/įtaką, atsakingus už riziką
+
+    3. Rizikų identifikavimas
+
+        galima eiti per silpnas vietas, brangiausią turtą, informaciją,
+        funkcijas.
+
+    4. Rizikos matavimas
+
+        tikimybė, poveikis kartais sunku išmatuoti.  poveikį dažniausiai galime
+        apskaičiuoti kaip finansinę žalą.  poveikis gali reikštis laike (we
+        lose $$$/month).  tikimybė dažniausiai matuojama metams ar mėnesiui (1%
+        kad sistema sugrius kitais metais)
+
+        pvz.: tikimybė, kad nuo 25 iki 30 d. sistema neveiks (tikimybė 0.001),
+        per 10 metų niekad to nebuvo, įvertinom teoriškai.  bet jei taip yra
+        buvę, reiktų tikimybę skaičiuoti remiantis istoriniais duomenimis.
+
+        visos rizikos turėtų būti išdėliojamos diagramoje.  Ox -- tikimybę, Oy
+        -- nuostoliai (virš tam tikros ribos jau nebeįdomu).
+
+        įvertinti skaičiais sunku (galima ką nors paerzinti: "ir be to jūs
+        nežinote, kiek kainuoja sąskaitos pateikimas klientui"), galima
+        apvalinti "maža", "vidutinė", "didelė"; reiktų detalizuoti (maža žala
+        -- iki 10000lt per metus)
+
+        visų riziktų neišvengsim.  imam toj diagramoje viršutinį dešinį kampą.
+        {XXX o kodėl ne trikampį}, kitas rizikas ignoruojam
+
+        turi atsirasti rizikos valdymo planas
+
+        rizikas, kurias suvaldyti kainuoja daugiau nei tikimybė * nuostolis,
+        ignoruojam
+
+        rizikos valdymo priemonės yra 3:
+
+        - prevencija: užlopom silpną vietą, tai minimizuoja tikimybę (perkeliam
+          serverinę iš rūsio į palėpę, dingsta potvynio rizika)
+        - korekcija: mažina tiesiogines pasėkmes (pvz., gaisro gesinimo
+          įranga)
+        - atstatymas: kompensuoja tikimybės ir žalos sandaugą (pvz., draudimas,
+          duomenų atstatymas iš backupų).
+
+        {istorija apie elektromagnetą duryse, tip top iš Cryptonomicono; sako reali,
+        apie tai rašė kažkoks respektabilus leidinys.  aš netikiu.}
+
+        gali padėti schemutės: vienoj ašy skubu/neskubu, antroj ašy svarbu/nesvarbu
+
+        4D taisyklė: drop it, delay it, delegate it, do it
+
+          neskubu, nesvarbu = drop it
+          skubu, nesvarbu = delegate it
+          neskubu, svarbu = delay it
+          skubu, svarbu = do it
+
+        prisimeni apie duomenis bei duomenų savininkus?  taip ir rizikos turi
+        savininkus.  su duomenimis mažiau nei 1% duomenų savininkai yra IT --
+        gal slaptažodžiai ir pan.  su rizikomis -- daugiau, bet vis tiek.
+        poveikis organizacijai yra iš veiklos, o ne iš IT pusės (nebent IT yra
+        organizacijos veikla).
+
+        rizikos vedliai -- veiklos žmonės, tikimybes poveikius turėtų vertinti
+        jie ir pasirašyti vadovybė.
+
+
+
+  PO10, PO11 yra labai plačios, joms skirtos storos knygos ir didelės
+  organizacijos
+
+
+  PO10: Projektų valdymas
+
+        žiov.  "anksčiau buvo Waterfall: analizė, dizainas, kūrimas,
+        testavimas, diegimas, palaikymas"
+        yra kitų būdų (RUP, etc.)
+
+        turi būti viskas susakyta.  jei daroma daug projektų, tai turi būti
+        rutina, turi būti kažkokie standartai.
+
+        ne visi projektai susiję su sistemų kūrimu ar diegimu
+
+        visa veikla skirstoma į
+        - operacijas (didžioji dalis: rutina, taisyklės, standartai)
+        - projektai (kiekvienas projektas yra unikalus, turi pradžią ir pabaigą)
+
+        projektas dažniausiai leidžia įvesti naujas operacijas
+
+        projekto pvz: turime 23 specus IT srityje, jie dengia 20 pozicijų, bet
+        iš jų 13 pozicijų padengtos tik vienu specu.  Norime, kad visas
+        pozicijas dengtų bent du.
+
+        taigi, pasirenkam projektų valdymo metodiką. (tai priklauso ir nuo
+        resursų; pradėti reikia paprastus projektus paprastais metodais)
+
+    kriterijai: tinkamumas, efektyvumas
+
+    resursai: visi išskyrus duomenis {neaišku, kodėl}
+
+    1. Projektų metodologija
+
+        modelis, koncepcija, frameworkas, whatever
+
+    2. Projekto apibrėžimas
+
+        "tai padarėm tą, ką reikėjo, ar ne?"
+
+        tai turi būti aiškiai apibrėžtas pamatuojamas faktas.
+
+    3. Vartotojai
+
+        projekte turi dalyvauti tie, kurie turės naudą iš šito projekto
+        jie turėtų būti ir iniciatoriai bei sponsoriai
+
+        sistemos diegimo stūmimas neturi būti daromas iš IT pusės
+
+        iš veiklos reikalavimų reikia pamatyti IT reikalavimus.
+
+        NB jei premijinis fondas < 20%, jis neveikia
+
+    4. Projekto komanda
+
+        įeina vartotojai, įeina IT, įeina kažkas iš vadovybės
+
+
+% checkpointas: paskaita pasibaigė
+
+
+  PO11: Kokybės valdymas
+
+        ISO 9000 serija etc.
+
+
+prašo padaryti kokį 45 min pristatymą apie PO10 ar PO11.
+
+----------------------------------------------------------------------------
+Mon Oct  6 17:36:34 EEST 2003
+
+
+Grįžkim prie projektų valdymo (PO10).
+
+        kuo daugiau projektų daroma, tuo blogiau: tuo sunkiau rasti resursų,
+        reprezentacinių asmenų etc.
+
+        projektas turi tikslus, juos reikia aiškiai įvardinti ir apibrėžti.
+
+        "projektas įvyko, projektas baigėsi sėkmingai".
+        akreditavimas: projektas baigėsi, pažiūrim, ar mum pavyko, ar ne.
+        akreditavimo kriterijai turi būti susiję su projekto tikslais ir
+        našumo/efektyvumo indikatoriais (performance indicators).
+
+        Svarbu pasiekti, kad tiek tikslai, tiek indikatoriai būtų kiekybiniai,
+        o ne kokybiniai.  "gerinti klientų aptarnavimą, mažinti sąnaudas" -- ne
+        tikslai.  Tai yra laabai sunku pasiekti.  ("Kiek kainuoja 1 kliento
+        atėjimas ir su juo pabalbatavimas?  Kiek kainuoja 1 sąsk
+        printinimas?")
+
+        Tiksliai turi labiau atsakyti "kas", o ne "kaip".
+
+        Dar svarbu labai aiškiai apibrėžti tinkamumo kriterijus (pass/fail)
+
+        { smagus dalykas kontrakte įkišti datą, kada projektas baigiasi. :) }
+
+        { IT buhalteriam painiojasi su ilgalaikiu turtu }
+
+        vienas iš būdų išsiaiškinti padėtį -- supeikti.  { Europiečių nuostata,
+        kultūra: nesirūpinama stiprybėmis, bet stengiamasi kovoti su trūkumais.
+        }
+
+        Kuo pasižymi blogai valdomi projektai?
+          - jiems blogai vadovaujama (vadovo nėra, vadovas direktorius ir
+            neturi laiko, vadovas išvykęs 3 mėn, o projektas baigias po 1.5,
+            yra du vadovai, kurie pešasi)
+          - projektai vėluoja
+          - viršija kaštus
+          - palaidi projektai (run-away, scope creep)
+          - techniškai sudėtingi (iki neįmanomumo)
+          - neturi tarpinio finišo
+          - projektai nepriimami (akredituojami), t.y. nėra formalios pabaigos
+          - nevertinama/nepakankamai įvertinama rizika
+            { šitą labai sunku numatyti }
+          - akreditavimo metu nebuvo pakankamai testuota (servas sukas,
+            orą šildo, bet reikiamo TPS skaičiaus nepasiekia)
+          - nenumatyti arba nevyko apmokymai
+            { sutarty negalima rašyti "apmokysime jūsų darbuotojus", nes
+            neaišku, ar pavyks; reikia rašyti "atliksime mokymus" ;) }
+          - podiegiminė (post-implementation) peržiūra (po 2-3 mėn.)
+            { akreditavimo negalima padaryti iškart, turi praeiti porą mėnesių
+            sistemos vartojimo.  vėl idėja įdėti skaitiklius ataskaitoms ir
+            pan. }
+
+        tiek apie projektus (nors galima būtų šnekėt labai ilgai, bet "norint
+        išmokti plaukti reikia plaukti").
+
+
+  PO11: Kokybės valdymas
+
+        PO09, PO10, PO11 yra pakankamai filosofinės temos.
+
+        kokybė -- atitikimo reikalavimams laipsnis (pagal ISO 9000)
+
+    kriterijai:
+      tinkamumas, efektyvumas, vientisumas (pirminiai)
+      patikimumas (antrinis)
+
+    kabina visus resursus, išskyrus duomenis.
+
+    1. Kokybės planas -- IT strategijos dalis.
+
+        reikia organizacijoj turėti kokybės planą
+        "kaip reikia gerinti IT procesus?"
+        reikia dokumentuoti pagrindinius procesus
+        { galima žiūrėti į CoBITo 34 procesų brandos lygius -- kuo didesni
+        lygiai, tuo kokybiškiau dirbama }
+
+    2. Kokybės užtikrinimas
+
+      - peržiūros
+      - patikrinimai, auditai
+      - skiriamas dėmesys
+      - komunikavimas
+
+        reikia matuoti reglamentuotą kokybę ir užtikrinti kokybės lygį.
+        s/kokybė/saugumas/ -- matom, kad labai panašu.  visa tai yra bendrosios
+        praktikos, tinka tiek rizikų valdymui, tiek bet kam.
+
+        bendra schema: planuoti -> vykdyti -> stebėti -> taisyti -> planuoti
+
+        kas yra programavimas?  inžinerija.  jei kalbam apie kokybę, reiškia,
+        tai ne menas.
+
+      kokybė -- atitikimas standartams ir procedūroms
+
+      reikia dokumentuoti:
+
+      1. sistemų kūrimo gyvavimo ciklas (System Developement Life Cycle):
+         analizė, dizainas, kūrimas, testavimas, diegimas, palaikymas
+
+         šita veikla turi būti reglamentuota.
+
+      2. SDLC turi būti atnaujinamas
+
+        {naudojom waterfall, sugalvojom pereiti prie RUP}
+
+      2. komunikavimas tarp IT, vartotojų ir sistemų kūrėjų
+
+      4. techninės infrastruktūros įsigijimas ir palaikymas.
+
+      5. ryšiai su trečiom šalim (third party)
+
+        pvz., "turi būti ne daugiau kaip 4-5 hardwaro tiekėjai".
+
+      6. dokumentavimo standartai
+
+      7. testavimo standartai
+
+      8. pilotiniai projektai; lygiagreti eksploatacija
+
+
+  AI1 (Acquisition & Implementation): Automatizuotų sprendimų identifikavimas
+
+    "ko mums iš tikrųjų reikia"
+    o jau paskui "ar turim $$$, ar yra kas daro, etc"
+
+    kriterijai: tinkamumas (pirminis), efektyvumas (antrinis)
+    resursai: aplikacijos, technologijos, įrengimai
+
+        {nukrypom į mokyklų tvarkaraščių generavimą.  hm, įdomu.
+        mailinti adomui}
+
+    iš veiklos turime gauti informacinius reikalavimus
+    bet vien informacinių reikalavimų nepakanka; negalima pamiršti veiklos
+
+    kas yra svarbu renkantis sprendimą:
+
+      1) kokie sprendimai yra rinkoje; kokios yra geriausios praktikos
+
+      2) įsigijimo ir diegimo metodas
+
+      3) vartotojų įsitraukimas
+
+      4) atitinka IT strategiją
+
+      5) galimybių tyrimas (feasibility studies) -- kaina, galimybė, nauda.
+
+      6) tiekėjo įsipareigojimai
+
+
+    1. Nustatyti informacinius reikalavimus
+
+----------------------------------------------------------------------------
+Mon Oct 13 17:33:45 EEST 2003
+
+  AI1: Automatizuotų sprendimų identifikavimas (tęsinys)
+
+    1. Apibrėžti informacinius reikalavimus
+
+    2. Alternatyvių sprendimų identifikavimas
+
+    3. Įsigijimo būdo nustatymas
+
+    4. Išorinių paslaugų apimties įvertinimas
+
+    5. Technologinis tinkamumas
+
+    6. Ekonominis tinkamumas
+
+    7. Atitikimas informacinei architektūrai
+
+    8. Rizikos įvertinimas
+
+    9. Saugumo "kontrolių" numatymas (safety controls?)
+
+    10. Veiksmų sistemoje auditas (audit trails)
+
+        pakanka informacijos atsekti bet kurį rezultatą iki pradinių duomenų
+
+        saugumu ir auditu reikia rūpintis iš anksto, nes tai labai sunku
+        integruoti į egzistuojančią sistemą
+
+    yra ir daugiau punktų, bet ten nieko naujo (ergonominiai reikalavimai,
+    įsigijimo valdymas etc.)
+
+    Dažniausios klaidos:
+    - neieškoma alternatyvų arba jos nevertinamos
+    - ignoruojami standartiniai rinkoje jau esantys paketai
+    - blogas techninių galimybių įvertinimas
+
+        "kam pirkti sistemą už 50 000 Lt, jei galima pirkti už 390 000 Lt"
+        (pirkėjas gaudavo 5% nuo sumos)
+
+        techiai mėgsta pirkti bleeding edge (mes nusipirkom galingiausią
+        pabaltijyje SP2 kompą... o jis vartojamas 3-5% pajėgumo).
+
+    - informacinės architektūros neįvertinimas
+
+        pvz., Lietuvos tarpbankinė apmokėjimo sistema.  Yra N laukų, iš kurių
+        vienas -- mokėjimo paskirtis -- laisvas tekstas.  pas vienus "už
+        sąskaitą ###", pas kitus "###", pas trečius išvis numerio nėra.  Mes
+        nusiperkam sprendimą automatiniam sąskaitų dengimui.  Bet jis neveikia,
+        nes sąskaitos nr. neturime...
+
+    - aplinkos įvertinimas
+
+        mutinių kontrolės sistema: laužydavo klaviatūras, traukydavo laidus,
+        įvedinėdavo neigiamus skaičius kur reikia kur nereikia, o paskui
+        "nežinau, kažkodėl sistema neveikia, mes dirbam kaip anksčiau".
+
+
+  AI2: Taikomųjų programų įsigijimas ir palaikymas
+
+        Sprendimą sudaro hardwaras, softwaras, procedūros (palaikymo,
+        administravimo, pakeitimo).  Sudėtingiausia dalis -- softwaras.
+
+        Vertinant ekonominį sprendimų pagrįstuma vertinama visa turėjimo
+        kaina -- TCO (total cost of ownership).
+
+    kriterijai: tinkamumas, efektyvumas (pirminiai);
+                vientisumas, suderinamumas, patikimumas (antriniai)
+
+    resursai: aplikacijos
+
+        labai sunku palyginti tarpusavyje dvi aplikacijas iš kurių vieną
+        ruošiamės sukurti, o kita yra perkamas paketas
+
+        perkamą paketą galima testuoti, kuriamo - ne (galima tik įsipareigoti)
+        čia 90% esmės
+
+        kuriamą sprendimą galima individualizuoti labiau.
+
+    Sprendimai:
+
+      1) Paruoštai (paketinei) įrangai teikti daugiau balų
+
+          kūrimas daaaug rizikingesnis
+
+      2) Labai detaliai specifikuoti reikalavimus
+         - didelės sąnaudos
+         - užkertamas kelias kitiems sprendimams
+
+    1. Kūrimo metodo parinkimas
+
+        esminis momentas: kaip bus bendraujama su vartotoju (užsakovu)?
+
+    2. Pasikeitimai egzistuojančiose sistemose
+
+        reikia juos įvertinti
+
+        { geras būdas diplominio temai: imam temą kur jau nieko naujo
+          nėra ir pridedam žodį "Lietuvoje" }
+
+    3. Sistemos dizaino patvirtinimas
+
+    4. Duomenų modelio apibrėžimas
+
+    5. Sistemos modulių specifikacijos
+
+        o dabar pertraukėlė
+
+
+DS: Delivery and Support (Tiekimas ir palaikymas)
+
+        (kalba Virginija)
+
+  DS1: Aptarnavimo lygio apibrėžimas ir valdymas
+
+    Verslo poreikis
+    - nustatyti bendrą serviso lygio supratimą
+
+    Kriterijai: tinkamumas ir efektyvumas - pirminiai; visi kiti - antriniai
+
+    Resursai: visi
+
+    Serviso lygio valdymas -- ciklinis procesas.  Pirmiausia reikia SL
+    apibrėžti, ir t.t.
+
+    Planavimas -> paruošiamieji darbai (implementation) -> serviso katalogas
+      -> projektas (draft) -> derybos su klientu -> SLA (Service Level
+      Agreement) peržiūra -> SLA patvirtinimas -> peržiūra (review) ->
+      ataskaita (report) -> stebėjimas (monitor) -> SLM (Service Level
+      Management) procesų apžvalga -> SLA audito apžvalga -> serviso katalogas
+      (sukamės cikle)
+
+    Specifika: ataskaita.  Reikia, kad kiek galima daugiau rodiklių būtų
+    nustatomi automatiškai, objektyviai.
+
+    SLA - svarbiausias dalykas
+
+    SLA:
+    I. Pagrindiniai - įžanginiai elementai:
+      1. šalys
+      2. signatūros (vardas, pavardė, parašas)
+      3. serviso aprašymas
+    II. Pagrindiniai - apžvalgos ir ataskaitos
+      1. ataskaitų turinys
+      2. dažnumas
+    III. Pagrindiniai - paskatinimai ir baudos
+    IV. Palaikymo (support)
+      1. serviso atlikimo valandos
+      2. reakcijos laikas, atstatymo laikas
+      3. pakeitimai (pvz. standartinės užklausos)
+      4. aprašomoji dalis (kas, kur, kaip)
+    V. Teikimas
+      1. tinkamumas
+      2. patikimumas (pvz. 99.9% uptime)
+      3. tęstinumas ir saugumas (rolės, atsakomybė, procedūros)
+      4. atsiskaitymas
+      5. tranzakcijų atlikimo laikas (pvz. 1 MB dokas atsidaro per < 15 sek)
+      6. našumas (vartotojų skaičius)
+
+    Ypatingai reikia akcentuoti
+      - tiekėjo atsakomybės ribas
+      - paklausimų (service request) svarbumo nustatymas
+
+        kartais minimas terminas "incidentų eskalavimo tvarka"
+
+      - ką turi pateikti klientas (elektrą, physical access)
+      - ką konkrečiai turi atlikti vykdytojas
+      - paslaugos kokybės vertinimo kriterijai
+
+    OLA (Operation Level Agreement): palaiko SLA ir yra suderintas su
+    tiekėjais, kad būtų pristatyti galutinio serviso komponentai.
+    Jis paprastai sudaromas paslaugų tiekėjo viduje tarp padalinių.
+
+    SIP (Service Improvement Plan): jei serviso lygis netenkina reikalavimų,
+    siekiama jį pagerinti: sudaromas svarstomas ir sukamas SIPas.
+
+        NB reikia iš anksto ruošti sistemas, kad galima būtų jų priežiūrą
+        perduoti trečioms organizacijoms.  T.y. skaitikliai: ką reiškia,
+        kad sistema veikia?
+
+
+  DS2: Trečiųjų šalių paslaugų valdymas
+  ("outsourcingas")
+
+    Ar verta?
+    - savo specialistą samdyti brangu, jo reikia nedažnai
+    - bet trečioji šalis gali neišmanyti veiklos srities
+    - sunku išlaikyti saugumo lygį
+
+    Jei jau apsisprendėm pirkti paslaugą, reikia pasirinkti gerą tiekėją.
+    Svarbu:
+    - finansinis stabilumas
+    - tiekėjo dydis (balansuojam kainą ir patogumą su rizika)
+    - interesų konfliktas (nepirksim paslaugos iš X, jie aptarnauja mūsų
+      konkurentus)
+    - tiekėjo kompetencija (kokie atsiliepimai, rekomendacijos, sertifikatai)
+    - ar yra dokumentuotos procedūros
+    - ar tiekėjas gali mus aptarnauti (pakanka žmonių, etc)
+
+    Verslo poreikis
+    - užtikrinti, kad 3rd šalių rolės ir įsipareigojimai aiškiai apibrėžti ir
+      vykdomi
+
+    Kriterijai: tinkamumas ir efektyvumas - pirminiai; visi kiti - antriniai
+
+    Resursai: visi
+
+
+----------------------------------------------------------------------------
+Mon Oct 20 17:33:32 EEST 2003
+
+  AI2: Taikomųjų programų įsigijimas ir palaikymas (tęsinys)
+
+    6. Pradinių duomenų surinkimas (source data collection)
+
+    7. Reikalavimų pradiniams duomenims nustatymas ir dokumentavimas
+
+        kokiais duomenim mes tikim, ir kiek tikrinsim pradinių duomenų
+        teisingumą
+
+        anksčiau buvo linkstama visus pradinius duomenis tikrinti
+
+        kartais pigiau susitarti su duomenų tiekėju ir jei kas ne taip duoti
+        jam į dantis.
+
+    8. Reikalavimų interfeisams dokumentavimas
+
+    9. Vartotojo interfeiso specifikavimas
+
+        svarbu atsižvelgti į du dalykus:
+        1) kiek vartotojų atliks tam tikrą operaciją
+        2) kaip dažnai jie tą darys
+
+        reikia šlifuoti tas user interfeiso dalis, kur vyksta daugiausia darbo
+        (pvz 150 darbuotojų kasdien įveda po 10 užsakymų)
+
+        didžioji dalis userių niekad nesakys, kad UI patogus; svarbu, kad
+        didžioji dalis nesakytų, kad nepatogus.
+
+    10. Apdorojimo reikalavimų nustatymas ir dokumentavimas
+
+        čia dar ne konkretūs algoritmai.
+
+        pvz: reikia sugebėti per 1 valandą apdoroti 1000 paraiškų.
+
+    11. Reikalavimų išvedamai informacijai nustatymas ir dokumentavimas
+
+        gali būti ir produktyvumo reikalavimai: atprintinti 80,000 sąskaitų
+        per dieną, printeris paveža 100,000, vadinas, sąskaita turi tilpti
+        į lapą.
+
+        kokiu būdu išvedinėsim: spaudinsim, PDFai, emailas, dar kas nors?
+
+    12. Sistemos valdomumas
+
+        padarom labai gudrią labai gerą sistemą, pas adminą pasirodo užrašas
+        "man gerai" arba "man blogai" -- jei tik toks valdomumas, sistema
+        blogai padaryta, nepakankamai praneša, kaip vyksta darbas.  Turėtų
+        būti skydelis, rodantis, kaip kas vyksta (kokios eilės įvedime,
+        kiek operacijų per sekundę apdorojam ir t.t.) ir galimybes tai valdyti
+        (pristabdyti, padidinti eilių ilgį, įjungti/išjungti statistikos
+        rinkimą, pasakyti, kad vidutiniškai tranzakcija trunka 1.4-7.2 sek ir
+        jei matai tranzakcijas po 60 sek tai mėtyk warningus etc).
+
+    13. Sistemos prieinamumas/pasiekiamumas (availability)
+
+        iš dalies tai sprendžiama techninėm priemonėm (klasteriai, atsarginės
+        duomenų linijos etc.)
+
+        pvz. yra vienas linkas su nekilnojamo turto registru; ekskavatorius
+        perkasa kabelį, kas tada?  mes turim praeitos dienos snapshotą,
+        pereinam į backupinį režimą, skaičiuojam; kai ryšys atsiranda,
+        pažiūrim, ar duomenys nepasikeitė ir perskaičiuojam, ką reikia.  o
+        gal ir nereikia nieko perskaičiuoti.
+
+    14. Vientisumas (integrity)
+
+        jei sistema neužtikrina vientisumo (arba joje yra klaidų), reiktų
+        pvz kas savaitę tikrinti duomenis, ar ten viskas ok.  galima duomenis
+        pjaustyti įvairiais pjūviais ir žiūrėti, ar visi galai susieina (pvz
+        suma pagal X sutampa su suma pagal Y).
+
+        pvz. du operatoriai suveda duomenis ir žiūrima, ar jie sutampa, ar ne
+
+    15. Testavimas
+        - testavimo scenarijų paruošimas
+
+        turi būti tam tikras paslaugų lygis -- programeris turi pats
+        pasitestuoti prieš atiduodamas testuotojams; turi būti kažkokia
+        finansinė atsakomybė
+
+        jei testuotojai neturi formalių scenarijų, jie ten pamaigo knopkes
+        ir sako, "o, viskas gerai.  patestavau."
+
+        aišku, nereikia persistengti; testavimas kainuoja $$$
+
+    16. Sistemos dokumentacijos vartotojams (ir administratoriams) paruošimas
+
+        aišku, niekas jos neskaitys... bent jau kol nesusidurs su problemomis.
+
+        Lietuvos grybai: "perlaužus kotelį jaučiamas kumarino kvapas (džiovintų
+        barkūnų)".
+
+        dzenbudistinis klausimas: ar reikia dokumentaciją perkelti į online
+        helpą, ar ne?  išvis, ar reikia dokumentacijos, ar ne, gal vartotojai
+        labai patyrę?
+
+    17. Sistemos modelio peržiūra
+
+        kol ją darėm, gal kas nors smarkiai pasikeitė? pvz tam tikra ataskaitų
+        grupė niekad nenaudojama, nereikia papildomų duomenų, kurie kainuoja
+        50,000 lt per metus, gal dabar galima skanuoti tuos duomenis, kuriuos
+        rankom įvedinėjom, gal dabar visi emailą turi ir nebereikia popierinių
+        ataskaitų.  gal įmonė išsiskyrė ir mes nebegalim daryti dalies
+        funkcijų.
+
+
+  AI3: Technologinės infrastruktūros įsigijimas ir palaikymas
+
+    resursai: technologijos
+    kriterijai: tinkamumas, efektyvumas (pirminiai); vientisumas (antrinis)
+
+    1. Įvertinti naujus HW ir SW
+
+        galim nuvažiuoti kur kitur ir pažiūrėti, ką jie naudoja ir ar
+        patenkinti
+
+    2. Prevencinė HW priežiūra (Preventative maintenance)
+
+    3. Naujos sistemos įtaka saugumo užtikrinimui
+
+    4. Instaliavimas pagal standartus
+
+        instaliavimą turi atlikti specialistai; instaliavimas turi atitikti
+        reikalavimus techninei įrangai, etc, etc, etc
+
+    (5-6 neįdomūs pagal Glemžą)
+
+    7. Sisteminių utilitų panaudojimo stebėjimas
+
+        galingos administracinės utilitos, kurios normalioje eigoje neturi
+        būti naudojamos; priėjimas prie jų turi būti apribotas, bet koks
+        panaudojimas turi būti loginamas.
+
+
+        tik visai neseniai (prieš porą metų) techninė įranga Lietuvoje sudarė >
+        50% išlaidų; pasaulyje techninė įranga yra 25%, visa kita -- softwaras,
+        konsultavimas, etc.
+
+
+  AI4: Procedūrų sukūrimas ir palaikymas
+
+    resursai: žmonės (darbuotojai)
+    kriterijai: tinkamumas (pirminis), efektyvumas (antrinis)
+
+
+    1. Reikalavimai operacijų atlikimui ir aptarnavimo lygis
+
+    2. Vartotojo procedūrų vadovas
+
+        kaip minimum: į ką kreiptis (jei kažkas neaišku, negerai etc.)
+        gali būti daugiau: kaip pasikeisti pwd, kaip užsirašyti apmokymams,
+        kaip duoti feedbacką.
+
+        NB normalu, kad vartotojų įvedamos informacijos kiekis skirasi 10x
+
+    3. Savalaikis procedūrų atnaujinimas
+
+        buvo helpdeskas tik darbo valandomis; ITstai pradeda dirbti iki 20 val,
+        bet niekas apie tai nežino ir po 17 val. neskambina.
+
+        dokumentacija turi atitikti realybę.  Jei nors vieną kartą neatitiks,
+        yra rizika, kad jį ją daugiau niekas nebežiūrės.
+
+    4. Vartotojų mokymo medžiaga
+
+        ne viskas sistemoje yra darbas su kompu; pvz. įvedu paraišką, kompas
+        sugeneruoja unikalų nr ir tada turiu jį įrašyti rankutėmis to dokumento
+        kampe langelyje.
+
+        vėl: vartotojus reikia mokyti, o ne apmokyti -- dažnai pakiša
+        vartotojus, kurių apmokyti neįmanoma ;)
+
+
+----------------------------------------------------------------------------
+Mon Oct 27 17:35:38 EET 2003
+
+  AI5: Sistemų įdiegimas ir akreditavimas
+
+    kriterijai: tinkamumas (pirminis), vientisumas, prieinamumas (antriniai)
+    resursai: visi penki
+
+    1. Mokymai
+
+    2. Sistemos pajėgumų optimizavimas/pritaikymas (Performance sizing)
+
+    3. Diegimo plano sudarymas
+
+    4. Sistemų konversija
+
+    5. Duomenų konversija
+       sunkumai:
+        a) kita duomenų struktūra
+        b) trūksta istorinių duomenų
+        c) lygiagretus sistemų darbas
+
+        4 ir 5 punktuose labai svarbu pagalvoti apie trečiasias sistemas,
+        kurios bendrauja su mūsų senąja/naująja sistemomis
+
+        pakonvertavus duomenis reiktų juos patikrinti -- paleisti kelias
+        ataskaitas, pasumuoti pagal kelis pjūvius, pažiūrėti, ką iš tų duomenų
+        ištraukia trečiosios sistemos, pažiūrėti, ar nenubarstėm
+        klasifikatorių.
+
+            data warehousing: OLAP (on-line analytical processing) modelis:
+            yra faktai, yra kriterijai, yra klasifikatoriai, yra pjūviai.
+
+        dažniausiai klasifikatoriai nėra perkeliami, jie yra nustatomi
+        iš naujo -- reikia patikrinti, ar nauji klasifikatoriai apima
+        senus duomenis.
+
+    6. Testavimo planu paruošimas
+
+    7. Testavimo aplinkos paruošimas
+
+        per visą sistemos gyvavimo laiką yra trys aplinkos: kūrimo, testavimo
+        ir gamybinė (production)
+
+        būtina užtikrinti, kad sistema iš kūrimo į gamybinę aplinką gali
+        patekti tik praėjusi testavimą.  Tam tikras testavimas (pvz., galutinis
+        priėmimas -- final acceptance) gali/turi vykti gamybinėj aplinkoj.
+
+    8. Lygiagretus sistemų eksploatavimas
+
+        kam to reikia:
+        - įsitikinti, kad nauja sistema išmeta tuos pačius atsakymus
+        - kad nereiktų stabdyti veiklos, kol nepabaigsim konversijos
+
+        kuo tai skirias nuo paprasto testavimo: čia yra žmogeliukai,
+        kurie daro daug interakcijos, maigo kažką ir t.t.
+
+        abi sistemas turi eksploatuoti tie patys vartotojai!
+
+        NB sabotuoti naująją sistemą labai lengva, jei niekas nepagauna.
+
+        taigi, per visą laikotarpį exploatuojam abi sistemas, laikotarpio
+        pabaigoj paleidžiam ataskaitas ir jei daugmaž lygu, gerai.
+
+        kai baigėm, jei viskas sustampa, galim seną sistemą išjungti ir toliau
+        naudoti tik naują.  jei matom, kad kažkas ne taip, apleidžiam naują
+        sistemą, grįžtam į laboratorijas, grįšim ir darysim perdiegimą po
+        pusmečio
+
+        problematika:
+        - vartotojams darbo padvigubėja
+
+        lygiagretaus testavimo gal nereiktų daryti visoje organizacijoje --
+        nusišaus, dar sistemą atmes.  reikia pratestuoti keliose
+        departamentuose, filialuose (bet reikia visas funkcijas pereiti!),
+        svarbu, kad būtų pasišventęs žmogus, jaučiantis atsakomybę už sistemos
+        praėjimą
+
+        btw dėl duomenų perkėlimo: ne viską apsimoka perkelti.  veikla sakys
+        "keliam viską", bet tai sunku, be to ne visi duomenys naudingi ar
+        reikalingi.
+
+        ta chebra, kuri pasako, kurią duomenų dalį reikia pasiimti, turi būti
+        atsakingi už duomenų perkėlimo patikrinimą -- tada jie bus suinteresuoti
+        kelti kiek galima mažiau duomenų, kad būtų mažiau jiems darbo, bet
+        turės perkelti visus reikiamus duomenis.
+
+    9. Galutinio priėmimo testavimas
+
+        turi būti tas momentas, kai sistemos diegėjai paleidžiami (apmokamos
+        sąskaitos ir t.t.) ir vartotojai lieka vieni (btw dar yra garantinė
+        priežiūra).  testavimo periodas negali tęstis per ilgai (tai kainuoja).
+
+        reikia paimti kažkokį palankų momentą, kad galima būtų pažiūrėti,
+        kaip uždaromas mėnuo, ketvirtis, metai.  pvz. nėra gera idėja
+        pradėti diegimą antrą mėnesį (bet kartais nėr kur dingti -- mes stojam
+        į EU gegužę).
+
+        galutinis priėmimas nėra tai, kad dieną intensyviai darom testą.
+        galutinis priėmimas -- apsidairom ir pasakom, gerai, su tuo, ką turim,
+        galim gyventi.  mes mokam, mes žinom, mes prasitestavom daugelį
+        procedūrų (ne viską, natūraliai), mes įsitikinę, kad nominaliai veiklai
+        sistema ir organizacija paruošta.
+
+        tai gali būti tas momentas, kai sakoma, kad galima gęsinti senąją
+        sistemą.
+
+        aiškiai apibrėžtas kriterijus, aiškiai apibrėžtos sąlygos:
+        'priimam/nepriimam'.
+
+    10. Saugumo testavimas ir priėjimas (== akreditavimas)
+
+        realiai tai yra 8/9 dalis, bet CoBITas išskiria.
+
+    11. Veiklos testavimas
+
+        realiai tai yra 8/9 dalis, bet CoBITas išskiria.
+
+    12. Eksploatacijos pradžia (Promotion to production)
+
+        yra du taškai:
+        - visa organizacija pradeda naudotis sistema
+        - paleidžiamas diegėjas
+
+        šitie punkteliai ryškiai ne chronologine tvarka
+
+    13. Vartotojų poreikių tenkinimo (user satisfaction) įvertinimas
+
+    14. Podiegiminė peržiūra
+
+        reikia įsitikinti, kad sistema pasiekė jai keliamus tikslus
+        ir padarė tai ekonomišku/efektyviu būdu.
+
+
+  AI6: Pakeitimų valdymas
+
+    kriterijai: tinkamumas, efektyvumas, vientisumas, prieinamumas (pirminiai),
+                patikimumas (antrinis)
+    resursai: visi
+
+        pusė metų po diegimo dokumentacija nebeatitinka sistemos, pusė
+        pakeitimų nedokumentuoti ir padaryti "ant ciongo", nes paskambino jis
+        arba ji ir jiems to tada reikėjo; didesnė dalis vartotojų nežino, kad
+        ataskaitoje ten kur parašyta "bendra suma" iš tikrųjų nėra bendra
+        suma.
+
+    1. Pakeitimų inicijavimas ir valdymas
+
+        Pakeitimai turi būti valdomi.  Vadinas jie turi būti matomi.  Turi
+        būti nusakyta vieninga procedūra, kaip jie yra atliekami.
+
+        Pakeitimas turėtų eiti iš sistemos savininko pusės (veiklos), nors
+        kartais jie eina iš eksploatuojančios pusės (IT?  "mums backupai
+        nelenda, davai nekeiskit kasdien šitų duomenų").
+
+        Gali būti keletas procedūrą (maži pakeitimai, dideli pakeitimai).
+
+        Svarbus momentas: prioritetai (vieni kurie yra siūlomi, kiti, kurie
+        yra nustatyti).
+
+        Laiks nuo laiko sistemos savininkas turėtų tuos pakeitimus svarstyti.
+
+        Pakeitimai statomi į eilę (ten tuščia beveik niekad nebūna).
+
+        Klaidos taisymas taip pat pakeitimas.
+
+        Svarbūs momentai:
+        a) standartas
+        b) prioritetai
+        c) iniciatoriaus informavimas (ar pakeitimas atmestas ar priimtas, ir
+           kada jo laukti)
+
+    2. Poveikio įvertinimas
+
+    3. Pakeitimai turi būti suderinti su konfigūracijos valdymu
+
+        gali būti pakeitimai, kurie sąveikauja tarpusavyje -- atlikus juos
+        atskirai sistema nestabili, atlikus visus, sistema pereina iš vienos
+        stabilios būsenos į kitą stabilią būseną.
+
+        konfigūracija -- softo ir hardo komponentų visuma
+
+        pats pakeitimas gali būti ne kas kita, kaip konfigūracijos pakeitimas
+
+    4. Skubūs pakeitimai -- sąlygos ir procedūros
+
+        Emergency change
+
+        Skubos tvarka atliekami pakeitimai: aaa, trys dienos iki kol printinsim
+        formas visai lietuvai ir pastebim, kad ten ą nosinės trūksta.
+        Turi būti kriterijai, kad žmonės nespekuliuotų.
+
+        Idealiu atveju, kai pakeitimai jau padaryti, jie prastumiami per visą
+        schemą -- ar nepražiūrėjom ko skubiai ką nors pakeitę?
+
+    5. Dokumentacija ir procedūros
+
+        "Nuo to periodo spausdinamuose duomenyse 5 stulpelis rodo nebe
+        vidurkį, o svertinį vidurkį".
+
+    6. Pakeitimų valdymą reikia stebėti/tikrinti
+
+        Reikia stebėti, ar visi įnešti pakeitimai yra pagrįsti tam tikrais
+        sprendimais ir dokumentuoti.
+
+        Auditas: imam 6.1.7 sourceus, imam 6.1.6 sourceus, diffinam, lyginam su
+        mūsų pakeitimų aprašais.
+
+        Suorganizuoti, kad pakeitimų procesas būtų "nepramušamas" labai sunku.
+
+    7. Išleidimo (release) tvarka (policy)
+
+        etapai: patvirtinimas, įgyvendinimas, testavimas, įtraukimas į naują
+        versiją
+
+    8. Pakeitimų išplatinimas
+
+----------------------------------------------------------------------------
+Mon Nov  3 17:41:43 EET 2003
+
+    % kitą savaitę paskaitos nebus
+
+
+DS: Delivery and Support (Tiekimas ir palaikymas)
+
+  DS1: Aptarnavimo lygio apibrėžimas ir valdymas
+
+    (apie tai jau šnekėjo Virginija, dabar tik trumpai prabėgsim)
+
+    Kriterijai: tinkamumas ir efektyvumas (pirminiai), visi kiti (antriniai)
+    Resursai: visi
+
+        Žiūrim iš IT perspektyvos: IT padalinys gauna pinigus ir turi tiekti
+        tam tikras paslaugas.  Reikia įvardinti, kokios paslaugos bus
+        teikiamos.  Vienas svarbiausių dalykų sutartyse -- apsibrėžti ribas.
+        Labai sveika yra parašyti, ko mes nedarysim, kas neįeina, etc.  Fors
+        mažorai -- taisyklė.  "Taip, mes teiksim ataskaitas, bet ne mūsų
+        reikalas yra sugalvoti, pagal kokias formules tuos stulpelius
+        skaičiuosim")
+
+    1. Stebėjimas ir atskaitomybė
+
+        ką reiškia "tinklas neprieinamas"?  kaip parodysim, kad duomenys nėra
+        archyviojami?  atskaitomybė -- kas kiek laiko ir kam bus atsiskaitoma
+        už suteiktas paslaugas?  atsiskaito už paslaugas tas, kas jas teikia.
+        jei už nevykdymą priklauso baudos, paslaugų tiekėjo atsakomybė pasakyti
+        visus atvejus, kai jas priklauso mokėti (kita pusė gali/turi stebėti,
+        ar teisingai tai daroma)
+
+        turi būti konkretūs skaičiai (internetas prieinamas 99.5% laiko,
+        prieinamumas tikrinamas pinginant ten ir ten)
+
+        matavimai turi būti automatizuoti (dėl pigumo)
+
+        Apie outsourcingą: "70% atveju (nes negalima šnekėti apie viską be
+        išimties) klaidos bus ištaisomos per 2 valandas".  Ir 3 mėn turi būti
+        daromas statistinis matavimas, ar tai realu.  HP outsourcinami ABB ar
+        pan. darbai: sutartys skaičiuojamos milijardais, jų sudaroma viena ar
+        dvi, laukiančių derybų fazėje yra apie 20, iš jų su 10 gal sudarysim,
+        10 nesudarysim.
+
+        Stebėjimo statistika turi būti peržiūrima nedelsiant, apie sutrikimus
+        pranešama iškart, turi būti sudaromas kažkoks protokolas, kurį pasirašo
+        tiek tiekėjas, tiek gavėjas
+
+    2. Aptarnavimo lygio peržiūrėjimas
+
+        sudarėm kažkokią sutartį.  Mums davė rinktis reakcijos laiką: 8 val, 4
+        val, 2 val.  Mes pasirinkom 2 val.  Per pusmetį iškilo 2 incidentai,
+        kurie buvo sutvarkyti per 10 min.  Po pusmečio aš žiūriu: o kam aš tada
+        rinkausi 2 val?  Imsiu dabar 8 val ir žiūrėsiu, kas bus.
+
+        Arba atvirkščiai: mums nepakanka, norime aukštesnio aptarnavimo lygio
+        (turėsim mokėti $$$, bet mums reikia).
+
+        Kas kažkiek laiko tą sutartį galima peržiūrėti
+
+    3. Kainodara (baudos)
+
+        "už ką aš moku".  Pvz. el. pašto sistemos nuoma -- moku už dėžutę, už
+        disko vietą, už kiekvieną persiųstą laišką.
+
+        Taip pat reikia pašnekėti, už ką skaičiuojam baudas ir koks yra baudų
+        dydis.  Paprastai taisyklė tokia: bauda negali viršyti mėnesio mokesčių.
+
+        (Beje, visada galima gražiai susitarti)
+
+        visada kai perkamos paslaugos iš išorės reikia pasižiūrėti, kad man tai
+        pigiau, nei daryti pačiam.  (nb šiais laikais nuomuoti kompus brangiau,
+        nei pirkti naujus)
+
+        TCO -- pilna turėjimo kaina.  (Pvz: serverio kaina, admino alga 5
+        metams, etc. sudaro tiek 5 metams, o nuomuotis tam pačiam laikui
+        kainuoja va aniek.  O, pigiau!)
+
+        Kitas argumentas: masto ekonomija (economy of scale): man reikia 2.2
+        DBA -- na ir aš turiu samdytiu 3 žmones.  Kitai organizacijai reikia
+        1.3, dar kitai 1.5.  O jei visos tris samdys DBA iš kitos
+        organizacijos, pakaks 5 DBA.  Visos truputį sutaupo.  Ir nėra rizikos,
+        kad ištreniruosiu žmogų brangiais kursais ir jis pabėgs.
+
+        (Įdomus pavyzdys: vienas mažas Lietuvos miestukas, jame viena didelė
+        organizacija, šiaip apsimokėtų outsourcinti paslaugas, bet tiekėjams
+        neapsimoka dėl tos vienos organizacijos keliauti į miestą N...)
+
+
+  DS2: Sutarčių su paslaugų tiekėjais valdymas
+
+    Kriterijai: tinkamumas ir efektyvumas (pirminiai), visi kiti (antriniai)
+    Resursai: visi
+
+        Mes jau esam apsibrėžę aptarnavimo lygį, ir tai yra esminis sutarties
+        turinys.  Tai labai sunku.  Be aptarnavimo lygio sutartis turi
+        apibrėžti: su kuo mes kontaktuojam (kas atsakingas už ką), techniniai
+        interfeisai (pvz. stebėjimo įranga, duomenų perdavimo formatai).
+
+    1. Kontaktų su tiekėjais ir interfeisų dokumentavimas
+
+    2. "Vadybininko" priskyrimas tiekėjams
+
+        organizacijoje turi būti asmuo/padalinys, atsakingas už kontaktus su
+        tiekėju.
+
+        svarbu: jei "vadybininkas" iš 2-o punko pateko į avarijų/gavo gripą,
+        bus iš dokumentacijos (1-as punktas) bus aišku, kurios vietos, kurie
+        tiekėjai, ir apskritai, kas liko apleista.
+
+    3. Tiekėjų kvalifikacija
+
+        ar daug šansų Hanzabankui tiekti paslaugas turi P. Nabuchodononosarovo
+        individuali įmonė?  Turi būti kažkoks track recordas, apyvarta ir t.t.
+        Patirtis, dydis, garantijos (baudos), tęstinumas.
+
+        Pvz.: ateina krūta chebra, sako, va, studijavom Londone ir Miunchene, va
+        mūsų sertifikatai, esam tikri, kad problemų nebus, jei kas bus, apsimokam
+        sumokėti baudą 50,000 lt -- tai gali keisti kvalifikaciją.
+
+        Renktantis tiekėją reikia iš karto sugalvoti, kokio tiekėjo mes nenorim
+        ("nesipraususio").
+
+    4. Paslaugų tiekimo tęstinumas
+
+        Viena iš rizikų: o ką, jeigu jie nesugebės vykdyti savo įsipareigojimų?
+
+        Kiek mums kainuos surasti naują Progresso specialistą (o jei jis
+        Klaipėdoje su šeima ir reikės įkalbinėti keltis į Vilnių).  Aišku, reikia
+        mušti tuos, kurie pasirinko tokį sprendimą.
+
+        Arba jei neduoda mums tiekėjai source kodo, tik įsipareigoja daryti
+        modifikacijas.
+
+        Escrow: yra susitarimai -- trečioj šaly (pvz. banko seife) guli kodas,
+        galima įsitikinti, kad jis ne senesnis nei 3 mėnesiai (tokiuose
+        patikrinimuose dalyvauja visos trys pusės).  Jei tiekėjas nebesugebės
+        teikti paslaugos 2 savaites (darbuotojai išsibėgiojo, įmonė bankrutavo),
+        aš gaunu source kodą ir galiu kapstytis pas.  Taip yra su kūrimu.
+        Lietuvoj to niekas dar nedaro.  (Nebent kai yra sutartys tarp lietuvių
+        ir užsieniečių, kai pasiūlo užsieniečiai, o lietuviai sutinka)
+
+    5. Saugumo reikalavimai
+
+        Svarbu apibrėžti, kokių saugumo reikalavimų bus laikomasi.  Pvz.:
+        outsourcinami tinklo adminai turi priėjimą prie mūsų vidinio LANo.
+        Arba developinamas softas bus testuojamas (kuriuo nors momentu) su
+        tikrai duomenimis (kurie yra konfidencialūs).
+
+        Turi būti apibrėžtas mechanizmas, kaip įrodyti, kad tie reikalavimai
+        pažeisti.  Kažkokie logai ar pan.
+
+        Baisiausias dalykas yra tai, kad tai reikia įrodyti.
+
+
+  DS3: Našumo ir talpos valdymas
+
+    Kriterijai: tinkamumas ir efektyvumas (pirminiai), pasiekiamumas (antrinis)
+    Resursai: taikomosios sistemos, technologijos, įrengimai/patalpos
+
+        Vienas iš eksploatacinių klausimų: ar organizacijos sistema pasiruošusi
+        susidoroti su darbo apimtimi ir laikyti pakankamą kiekį duomenų.
+
+    1. Pasiekiamumo ir našumo reikalavimai
+
+        "Organizacija turi sugebėti pateikti 100 000 sąsk per vieną dieną".
+        "Saugoti 10 000 dokumentų, sugebėti padaryti bet kokio saugomo
+        dokumento kopiją per 5 sekundes" ir t.t.  Bet 1 val. per dieną ir
+        10 val. per mėn. gali sistema ir neveikti.
+
+        Reikalavimai turi būti nuleisti iš veiklos.  Tada jau juos transliuoja
+        į ITstinius reikalavimus (aha, be klasterio neapsieisim.  aha, RAIDas,
+        etc.)
+
+    2. Pasiekiamumo planas (availability plan)
+
+        apibrėžia rodiklius (ar neperkrauti serveriai?  ar turim dar 10%
+        laisvos vietos diske?), stebėjimą (reikia tikrinti 4 kartus per dieną),
+        veiksmus (ką daryti, jei vakar diskas užpildytas 80%, o šiandien 90% --
+        išvalyti mp3kes ir filmus arba bėgti į parduotuvę).
+
+    3. Modeliavimo priemonės ir apkrovimų prognozavimas
+    (modelling tools and workload forecasting)
+
+        Kalbėjom apie 100 000 dokumentų -- o iš kur?  Anksčiau deklaruodavo tik
+        UABai ir ABai.  O nuo kitų metų individualios įmonės ir ūkininkai irgi
+        turės.  Reiškia, dokumentų kiekis išaugs dvigubai.
+
+        Reikia kažkokiu būdu prognozuoti, kokių apimčių reikės ateityje.  Dalį
+        susiskaičiuosim iš savo statistikos.  Bet negaudami informacijos iš
+        veiklos galim nusiprognozuoti.  Va nuo kitų metų nuotraukos bus
+        dokumentuose.  Ką aš žinau, kokio dydžio, kokios bus, tokias skanuosim?
+
+        Taigi: natūralus augimas, pokyčiai, pokyčiai susiję su integracija (o
+        čia jokia veikla nepasakys, čia ITstų išmislas -- suindeksuosim duomenis
+        ir prireiks didesnio disko)
+
+        Jei chebra nieko nesako, reikia juos klibint.  Kai jie sako, kad niekas
+        nesikeis, reikia paimti parašiuką, kad niekas nesikeis.  O tada tyliai
+        modeliuoti, kas keisis, turėti rezervą.  Tada būsim daugmaž pasiruošę,
+        tris mėnesius išgyvensim.
+
+        Visas prognozes paskui reikia tikrinti, žiūrėti.  "O durnas, pamiršau,
+        kad va dar kas kaupiasi.  Prasišoviau, fain, kitais metais mokėsiu
+        skaičiuoti".
+
+        Normaliai turi būti kažkokie standartai, kiek turi būti apkrauti
+        serveriai (pvz., 80--90%)
+
+
+    % kitą savaitę paskaitos nebus
+
+
+----------------------------------------------------------------------------
+Sun Nov 16 17:29:15 EET 2003
+
+  DS4: Veiklos tęstinumo užtikrinimas
+
+    Kriterijai: tinkamumas, pasiekiamumas (pirminiais), efektyvumas (antrinis)
+    Resursai: visi penki
+
+        "ensure continuous service"
+        ištisos knygos prirašytos apie tai
+
+    1. Tęstinumo modelio sudarymas
+
+        pagrindinis dalykas: veikla.  veikla įvardina kritinius resursus,
+        kritines sistemas, kritines galimybes
+
+    2. Tęstinumo planas
+
+        jis turi būti palaikomas, atnaujinamas, aktualus
+
+    3. Plano struktūra
+
+      a) plano vykdytojai -- veikla ir IT
+
+        turi būti žinoma, kas tą planą vykdys
+        vykdys, žinoma, veikla ("nulūžus sistemai pildysime popierinius
+        blankus"), bet ir IT ("nutraukus optinį kabelį naudosim modemus")
+
+      b) reakcijos ir atstatymo procedūros (response & recovery)
+
+        atsiradus kritinei situacijai reikia į ją reaguoti (pranešti visiems
+        useriams, kad nedarytų didelių ataskaitų, pradėti dialinti modemus).
+
+        dingus kritinėms sąlygoms turi būti kažkokios atstatymo procedūros,
+        kurios grąžina į normalią situaciją (pvz. reikia suvesti krūvas
+        popierinių formų)
+
+      c) komunikavimo procedūros
+
+        būtinai turi būti dalis, skirta informavimui organizacijos viduje --
+        kuriuos darbuotojus paveikia tas įvykis.  gali būti, kad teks padaryti
+        kokį nors pareiškimą ir į išorę ("mieli banko klientai, atsiprašome
+        už nepatogumus, šį vakarą bankomatai pradės veikti").
+
+    4. IT veiklos tęstinumo reikalavimų minimizavimas
+
+        dubliavimas/tripliavimas gali padėti atsikratyti "single point of
+        failure".  galim prisistatyti klasterių, turėti po tris LANus, bet jei
+        bus viena vienintelė elektros linija ir dings elektra... bul bul.
+        viską dubliuosim -- kaina šoks tragiškai.  gali būti, kad apsisaugojimo
+        procedūros kainuos daugiau nei išvengti nuostoliai.  apsimoka stengtis
+        sumažinti reikalavimus keliamus veiklos tęstinumui.
+
+        primena saugumo policy: niekam nieko negalima.  o jau tada po truputį
+        atpalaiduojam, leidžiam prieiti kam reikia.  čia: saugojamės nuo visko,
+        paskui žiūrim, nuo ko galime ir nesisaugoti.
+
+    5. Tęstinumo plano palaikymas
+
+        gera praktika tą planą peržiūrėti reguliariai (bent kartą į pusmetį)
+        arba įvykus pasikeitimams.  turi dalyvauti ir veikla ir IT.
+
+    6. Tęstinumo plano testavimas
+
+        kaip patikrinti, ar mūsų planas aktualus?  reikia jį ištestuoti.
+
+        tai yra tam tikras projektas.  reikia jam pasiruošti.  apibrėžti
+        kriterijus, kaip nustatyti, ar testavimas pasisekė, ar ne.
+
+      Ant "gyvų" sistemų testavimas nėra atliekamas!!
+
+        dar sužinosim, kad planas buvo negeras ;)
+
+    7. Tęstinumo plano mokymai
+
+    8. Plano platinimas
+
+        planas nėra laisvai platinamas -- jis šiek tiek konfidencialus.
+        vykdytojai turi būti jį matę, bet pašaliniams geriau nerodyti.
+        "need-to-known": buhalteriui neturi rūpėti, kaip adminai taiso
+        nutrūkusius optinius kabelius.  vienas iš variantų: jie turi žinoti,
+        kur kreiptis (atsargiai: jei yra tik tel. nr, o išeina telefonai...)
+
+      Tiek, kiek reikia žinoti.
+
+    9. Kritinių resursų identifikavimas
+
+      Informacinės sistemos, paslaugų tiekėjai, žmonės (darbuotojai),
+      duomenys ir t.t.
+
+
+        OT. :Testas: keturios figūros, rinktis, kuri labiau patinka.
+
+          trikampis     -- tikslo siekiantys žmonės
+          kvadratas     -- įvairiapusiai (gali ir šokti, ir dainuoti, ir sw
+                           rašyti)
+          raidė z       -- lyderiai (keičia krypti, bet jiems vis tiek gerai)
+          apskritimas   -- sex, drugs & r'n'r
+
+
+  DS5: Saugumo užtikrinimas
+
+    Kriterijai: konfidencialumas, vientisumas (pirminiai), pasiekiamumas,
+                suderinamumas, patikimumas (antriniai)
+    Resursai: visi
+
+        saugumas yra "kenkėjas", trukdo dirbti (passwordus atsimink, keisk
+        periodiškai, negali mp3kių atsisiųsti...)
+
+    Svarbiausias dalykas: kas turi teisę nurodyti priėjimo teises prie
+    informacijos.  Susiklosčiusi praktika, kad tai valdo IT.  Taip neturi būti.
+    Turėtų valdyti IT.  Bet problema: veikla kitaip supranta roles.  Veikloje
+    yra funkcijos F1, F2, F3.  IT sistemoje visa tai persipina.  Sunku
+    sugalvoti veiklos modelį, kad jis 1:1 sueitų į IT sistemos roles.
+
+        pavyzdys: Win2K teisės -- neįmanoma žmoniškai sudėlioti, kad žmogus
+        nejaustų apribojimų ir kad negalėtų piktnaudžiauti.
+
+    Pvz veiklai F2 reikia rolių R21, R23, R24 ir R16 (tos rolės -- tai, kaip
+    veikla buvo suprantama kažkada analizės ir dizaino metu).  Bet vis dėlto
+    tai yra tas idealas, prie kurio reikia eiti.
+
+    1. (praleidom)
+
+    2. Identifikavimas, Autentifikavimas ir Autorizavimas (Priėjimas)
+
+        identifikavimas: aš sakau, kas aš esu
+        autentifikavimas: patikrinimas, ar tikrai aš esu tas, kuo prisistačiau
+        autorizavimas: ar man galima prieiti prie to, prie ko aš bandau prieiti
+
+    3. Vartotojų "akauntų" valdymas
+
+      a) centralizacija (išskyrus administratorių roles)
+
+        Yra noras visoj IT architektūroj turėti centralizuotą akauntų valdymą.
+        Glemžos supratimu tai -- vienas iš geriausių dalykų.  "Single logon"
+        sąvoka.
+
+        Problema: sykį nulaužus, prieinam prie visų sistemų iš karto.
+
+        Privalumas: galim iškart pamatyti, ką vartotojas gali daryti (kitąkart
+        pažiūrėjus nustebsit, ką kokia buhalterė gali daryti)
+
+      b) priėjimo suteikimas dokumentuojamas
+
+        Ką daryti sako veiklos vadovas, vykdo IT adminas.  4 akių principas.
+        Galima bet kada patikrinti, kada ir kodėl šitam useriui buvo suteikta
+        šita privilegija.
+
+      c) veikla prisiima atsakomybę už "akauntų" teises.
+
+        perkeliant žmones iš vienų pareigų į kitas, turi būti informuojamas
+        adminas ir kaip minimum gesinamos teisės.
+
+    % su saugumu dar nebaigėm: liko duomenų klasifikavimo schemos, saugumo
+      supratimas organizacijoj (antivirusai, bendravimas su trečiosiomis
+      šalimis, šifravimas)
+
+% kitą savaitę pratęsim nuo 5.4.  o manęs tai nebus!!!
+
+====================
+Projektų valdymas
+-----------------
+(kalba Jaroslavas)
+
+90% pasakojimo yra iš knygos _A_Guide_to_the_Project_Management_Body_of_
+_Knowledge_ (Project Management Institute, 19??) [PMBoK]
+
+Projektas atsiranda tada, kai atsiranda poreikia pakeitimams.
+
+Sąvokos: Apimtis, laikas, biudžetas, kokybė.
+
+Projektas turi pradžią ir pabaigą.
+
+Projektai yra unikalūs.
+
+Trys pagrindiniai aspektai: laikas, kaina, kokybė -- trikampio viršūnės.
+Realiai sutilpti į šituos rėmus sunku, tad dažniausiai daromas kompromisas:
+fiksuojami du iš jų, trečias svyruoja.
+
+Trikampio plotas yra kaip ir projekto apimtis.
+
+CoBITe apie projektų valdymą kalba PO10.
+
+[PMBoK] projektų valdymas dalinamas į tokias sritis:
+- apimtis (scope)
+- biudžetas (cost)
+- laikas (time)
+- kokybės valdymas (QA)
+- žmogiškieji resursai (HR)
+- komunikacija
+- rizikų valdymas (RM)
+- įsigijimas (procurement)
+- integravimas
+
+Apimtis:
+
+  užtikrinam, kad projektas apima viską, ko reikia projektų poreikiams
+  patenkinti, ir ne daugiau.
+
+  procesai:
+  1. inicijavimas
+  2. apimties planavimas
+  3. apimties apibrėžimas
+  4. apimties verifikavimas (klientas pasirašo)
+  5. apimties pakeitimų valdymas
+
+        iš patirties: daugiausia problemų kelia apimties valdymas.  sunku
+        priverst klientą kažką surašyti ir vienareikšmiškai pareikšti savo
+        norus.  Ateina spekai, klientas sutinka.  Pasirodo prototipai, klienas
+        ateina ir skundžias "a kodėl nėra to ir to".  gera praktika
+        sutarty/specifikacijoj surašyti ne tik, kas bus padaryta, bet ir ko
+        nebus padaryta.
+
+Biudžetas:
+
+  užtikrinam, kad telpam į planuotą kainą
+
+  procesai:
+  1. resursų planavimas
+  2. kaštų įvertinimas (grupuojam pagal veiklas: programuoti modulį,
+     testuoti...)
+  3. kaštų paskirstymas (nustatom biudžeto "beislainą" -- pradinis įvertinimas,
+     kiek projektas turėtų kainuoti)
+  4. biudžeto valdymas (pakeitimai)
+
+% laiko neturėsim viską taip detaliai praeiti
+
+Laikas:
+
+  (praleidom?  spėju, kad panašu į biudžetą.  beje, tai daiktai susiję --
+  laikas kainuoja)
+
+  (nespėjom)
+
+        viena iš didžiausių rizikų: laiku nespėsim.  ką daryti?
+        reikia iš anksto planuose numatyti milestoneus, kada kas turi būti
+        baigta.  reikia žinoti proceso statusą laike.
+
+        kai jau matom, kad nespėsim, reikia priimti sprendimą.  eiti pas
+        klientą derėtis?  nuspręsti ko nedaryti (mažinti apimtį).
+
+        ciniškas požiūris: svarbiausia kažką atiduoti laiku.  dėl kokybės bus
+        galima aiškintis vėliau.
+
+Kokybė:
+  1. kokybės planavimas (kokių standartų laikysimės)
+  2. kokybės užtikrinimas
+  3. kokybės kontrolė
+
+ŽR:
+  1. organizacijos planavimas (kokių rolių ir kokių atsakomybių reikės)
+  2. resursų priskyrimas
+  3. komandų sudarymas
+
+Komunikacija:
+  1. komunikacijos planavimas
+  2. informacijos paskirstymas
+  (loss of coherence here)
+  3. ??? efektyvumo ataskaitos
+  4. ??? projektų uždarymas -- dokumentuojam rezultatus
+     ??? informacijos pateikimas klientui
+
+Rizikų valdymas (RM):
+
+  (nespėjom)
+
+Įsigijimas (procurement):
+
+  nusprendėm ne patys gaminti, o nusipirkti
+  1. įsigijimo planavimas
+  2. reikalavimų paruošimas
+  3. pasiūlymų priėmimas
+  4. subrangovo pasirinkimas
+  5. sutarties valdymas
+  6. sutarties uždarymas
+
+Integravimas:
+
+  (nespėjom)
+
+
+====================
+----------------------------------------------------------------------------
+Mon Nov 24 17:30 -- praleidau, persirašiau
+
+    4. Vartotojai turi informuoti apie rastus ar pastebėtus saugumo pažeidimus
+
+        vartotojų atsakomybė už jų veiksmus ir saugumo incidentų pastebėjimą
+
+    5. Saugumo incidentų identifikavimas ir registravimas
+
+        pvz.: pasižiūrėti, kieno vardu bandoma atspėti kelis kartus passwordą
+
+        Turėtų būti sistema, kuri automatiškai surinktų tokią info ir pateiktų
+        padoriam peržiūrėjimui
+
+        Sistemos atpažįstančios nestandartinius srautus, ar netikėtus sistemos
+        veiksmus.
+
+        Tai, kas įvyko neturėtų būti galima sunaikinti (turi likti pėdsakai)
+
+        Adminas gali daryti viską išskyrus trinti savo veiklos pėdsakus.
+
+    6. Duomenų klasifikavimas
+
+        Klasifikaciją vykdo veikla; veikla pasako, kas atsakingas už kuriuos
+        duomenis.
+
+        Visa informacija turėtų būti suklasifikuota.  Tam svarbu žinoti
+        apskirtai kokie duomenys yra saugomi (labai sunku realybėje tai
+        nusakyti)
+
+        Yra blogai, kai yra informacijos, kurios neaišku, kam reikia, kas
+        naudoja, kas gamina.
+
+    7. Incidentų eskalavimo procedūros.
+
+        Tas kas pastebi incidentą, turi netaisyti, o žinoti, kam pranešti
+        ir tai padaryti.  O tada turi būti aiški procedūra, kuri nusako,
+        kas daro sprendimą ir kam pranešta.
+
+        "End useriams" tos procedūros turėtų būti lakoniškos, kad gerai
+        atsimintų.
+
+    8. IS reakreditavimas
+
+        Reikia sistemas vis patikrintama saugumo peržiūrų, gal perinstaliavus
+        versiją kažkas nepastebėto pakito ir nulaužė saugumą.
+
+    9. Kitos interfeiso šalies identifikavimas, autentifikavimas, autorizavimas
+
+        Gali būti sesijos, tranzakcijos lygyje.
+
+        Jei su kažkokia šalim bendradarbiaujama skirtine linija, jei kas
+        nors su ja negerai, tai tada turėtų būti naudojamas reglamentuotas
+        susijungimas (ar siųsime paštu, ar atnešime ant popieriaus ir pan.)
+
+        Neiškraipymas "autorystė" (non-repudiation) -- patikrinti, kad tas
+        išsiuntė info (kas parašyta) ir kad siuntėjas negalės išsiginti,
+        kad jis tą info išsiuntė.  Tam naudojamas skaitmeninis parašas.
+
+    10. Saugumo funkcijos apsauga.
+
+        Pačią saugumo sistemą irgi reikia saugoti.  Net viešai sakyti, kad
+        esame patenkinti naudodami "Norton" antivirusą ar net lentelių rašymas
+        ant durų, kad čia serverinė ar saugumo skyrius.  Tipo
+        nežinos, negalės pakenkti.
+
+            obscurity as an additional layer of security
+
+    11. Kenksmingos įrangos prevencija, aptikimas ir korekcija
+
+        Ne tik virusai, bet ir wormai, SPAMas ir t.t., nes tai trukdo normaliam
+        darbui.
+
+        prevencija -- portų uždarymas, attachmentų skanavimas
+
+        Ne visada paprasta aptikti.
+
+        Galima išmesti potencialiai užkrėstą info ir atstatyti iš juostų.
+
+    12. Prisijungimo prie viešųjų tinklų kontrolė, firewallai
+
+        Jei tu sujungtas su kita sistema ar organizacija, kuri nebus toki
+        saugi, kaip mūsų.
+
+
+  DS6. Identifikuoti ir priskirti kaštus
+
+        Yra ilgalaikis turtas (kompai, įrankiai ir t.t.) ir trumpalaikiai
+        kaštai (seminarai, remontai ir t.t.).  Ilgalaikis turtas planuojamas
+        (PO5).  Kaštai prognozuojami ir juos reikia "išsimušti" kai prireikia
+        (DS6).
+
+    kriterijai: efektyvumas ir patikimumas (pirminiai)
+    resursai: visi
+
+        efektyvumas -- jei neseksim kaštų, tai mus elementariai išdurs
+        patikimumas -- jei nekeisi nusenusios dalies, tai gali kainuoti dar
+                        daugiau
+
+    1. Nustatyti "apmokamas" (kainuojančias) paslaugas
+       arba nustatyti patiriamus kaštus
+
+        Jei IT teikia paslaugas kitiems skyriams, tai IT turi sugebėti už
+        ką jiems moka/kiek kainuos 1 MB saugojimas,kiek kainuoja printerio
+        turėjimas, kiek kainuos lapai ir tt.
+
+        Įvertinimas tipo toks: 1 GG kainuoja 1000 Lt per 1 metus
+
+    2. Registruoti kaštus
+
+        Geriausia naudotis finansų apskaitos sistemas
+
+    3. Sąskaitų pateikimas apmokėjimui
+
+        (Pasitikrinti planavimą)
+
+    Reikia nustatyti _visus_ kaštus, reikia žinoti, kur mes išleidžiame
+    kiekvieną litą.
+
+  DS7.  Vartotojų mokymas
+
+    kriterijai: tinkamumas (pirminis), efektyvumas (antrinis)
+    resursai: darbuotojai
+
+    1. Mokymo poreikių nustatymas
+
+        reikia žinoti, ką vartotojai žino, ką jie turi žinoti, ir kaip
+        galima juos išmokyti (yra daugiau nei vienas būdas "užlipti").
+
+    2. Mokymų metodas
+
+        jį reikia pasirinkti, ką mokinsim, kokia tvarka ir t.t.
+
+    3. Saugumo principų mokymas, suvokimo ugdymas
+
+        ypatingą dėmesį skiria saugumui.
+
+    Vartotojai turi būti apmokyti su sistema dirbti efektyviai.
+
+    Mokymo poreikius reikia suorganizuoti.
+
+    Svarbu paminėti, kaip surasti norimą informaciją.
+
+
+  DS8.  Pagalba ir patarimai vartotojams
+
+    kriterijai: tinkamumas ir efektyvumas (pirminiai)
+    resursai: darbuotojai, aplikacijos
+
+    1. Turi būti pagalbos tarnyba (help desk)
+
+        jos pagrindinė užduotis yra registruoti paklausimus
+        turi būti apibrėžti ryšiai su problemos sprendimo funkcija.
+
+    2. Registravimas
+
+        gerai, kai yra registravimo savitarnos funkcija
+
+    3. Eskalavimo procedūra
+
+        jei 20 vartotojų paeiliui registruoja tą pačią problemą, jei 1 pataiso,
+        tai nebesikreipiam į problemų sprendimo f-ją, o jau grąžiname žinomą
+        sprendimą kitiems užklausėjams.  Juo geriau jei praneša ir
+        potencialiems užklausėjams
+
+    4. Užklausimo išsprendimas
+
+        Turi būti išspręsti visi užklausimai.
+
+        Gerai, jei yra vartotojų savitarna, pagal kurią jis gali pats
+        pasižiūrėti užklausimo statusą.
+
+    5. Tendencijų analizė ir prevencija
+
+        Jei padaugėjo paklausimų iš kažkokios srities, tai gal ten yra didesnių
+        problemų.
+
+        Apklausų darymas vartotojų pasitenkinimui nustatyti.
+
+(DS9 bus vėliau)
+
+  DS10. Problemų ir incidentų valdymas
+
+    kriterijai: tinkamumas ir efektyvumas (pirminiai), pasiekiamumas (antrinis)
+    resursai: visi 5
+
+        vienkartinis nukrypimas -- incidentas.  Pasikartojantis -- jau
+        problema.
+
+        dalis incidentų įvyksta ir nepastebėti vartotojų.
+
+    1. Turėtų būti sukurta problemų ir incidentų valdymo sistema (IS +
+       procedūros)
+
+    2. Problemų eskalavimas
+
+        (problemų sprendimų perdavimas į aukštesnį lygį, kad greičiau būtų
+        priimtas sprendimas).
+
+        Nusprendimas, kas atsakingas už tą problemą (ir tarp IT padalinio
+        skyrių)
+
+    3. Problemos priežasties nustatymas
+
+        Reikia įsitikinti, kad kovojame ne su pasekmėm, o su priežastimi.
+
+    4. Prieigos suteikimas avarinės situacijos metu
+
+        Leidimų gavimas užtruks per ilgai ir pasėkmės dėl to bus per didelės.
+        Turi būti apibrėžta, kas gali suteikti greitą priėjimą (leidimą)
+        taisyti problemą.
+
+----------------------------------------------------------------------------
+Mon Dec  1 17:36:28 EET 2003
+
+  DS9 Konfigūracijos valdymas
+
+    kriterijai: tinkamumas (pirminis), pasiekiamumas ir patikimumas (antriniai)
+    resursai: technologijos, aplikacijos, įrengimai
+
+        konfigūracija -- infrastruktūros komponentų bei programinės įrangos,
+        aplikacijų, duomenų išdėstymas.
+
+        pasikeitimų autorizavimas ir dokumentavimas.
+
+        patogu naudoti automatizuotas priemones.
+
+    1. Konfigūracijos registravimas
+
+        kaip tai suderinama su finansų apskaitos sistema.  tai gali būti labai
+        svarbu.  finansininkams įdomu "2 kompai ir 1 diskas už xxxx.yy Lt",
+        kompiuteristams svarbu, koks CPU, kiek ramo etc.
+
+        inventorinių lipdukų klijavimas ant kompų/monitorių, serijinių nr.
+        surašymas finansinėje sistemoje.
+
+    2. Bazinė konfigūracija
+
+        mažiau šnekam apie personalines priemones (kompai, nešiojami
+        įrenginiai, personalinės licencijos softui), o daugiau apie serverius bei
+        aplikacijų išdėstymą (pirmam serveryje tos dvi aplikacijos, anam serve
+        štai va anos dvi ir t.t.).  Perėjimas tarp bazinių konfigūracijų bus
+        palaipsninis.
+
+        kiekvienu laiko momentu turėtų būti viskas pagal bazinę konfigūraciją,
+        bet realybėje taip niekad nebūna -- koks nors diskas ištrauktas
+        sugriuvęs taisomas ir t.t.
+
+    3. Būsenos sekimas/registravimas
+
+        visi nukrypimai nuo bazinės konfigūracijos turi būti registruojami,
+        turi būti žinoma jų aktuali būsena (ne tik žinoma, bet ir planuojama).
+
+    4. Konfigūracijos adekvatumas (auditukas)
+
+        reguliariai daryti patikras: tikslines arba atsitiktines.  Pvz., einam
+        pas userį pasiimti seno kompo, žiūrim, kad pas jį kažkas ne tas, kas
+        užrašyta.
+
+    5. Neautorizuota programinė įranga
+
+        a) tai, ką įsikelia vartotojas, žinodamas, ką daro (winampai, vieweriai ir
+           t.t., mp3kės visokios ir filmai)
+        b) virusai ir pan. (apie juos useris nežino)
+
+        grėsmė: ateis BSA, ekonominė policija ar pan. ir prisius (finansiškai
+        gali būti blogiau, nei virusų padaryta žala)
+
+        tam tikros procedūros: arba preventyviai uždrausti (antivirusai, teisių
+        apribojimas vartotojams)
+
+        galima pvz. be diskų dirbti, jei tinklas greitas.
+
+        didelės organizacijos naudoja HP OpenView, IBM Tivoli ir pan. remote
+        admin priemones -- Glemžos nuomone tai neatsiperka, per didelės
+        sąnaudos.  Nors kokiam nors VSD to reikia.  Bendru atveju neapsimoka.
+
+    6. PĮ (ir versijų) apskaita
+
+        tiek savo kurtos, tiek pirktos PĮ.
+
+        labai sunku įvertinti, kas suinstaliuota (pvz., MS Office. Yuk. O dar
+        visokie didesni finansų valdymo paketai -- SAP, Oracle Business Suite,
+        su įvairiais moduliais, kurių kiekvienas dar savo versiją turi.)
+
+    7. Kritinių komponentų sąrašas
+
+        1 adminas 50-60 userių jau yra truputį mažoka.  Jei adminas dar valdo
+        ir konfigūracijos sekimą/valdymą, jau gali būti prastoka.  Galime
+        užsimerkti į smulkias detales, sumažinsim darbo.  O štai serveriai jau
+        labai svarbu.
+
+        sąsaja su DS4 -- nepertraukiamo veikimo užtikrinimu
+
+    8. Vietoje kuriamos PĮ versijų apskaita
+
+        hm, keista mintis: modulis, kai atiduodamas testavimui, gauna kitą
+        versijos nr; kai jis atiduodamas bandomajai eksploatacijai, gauna dar
+        kitą versijos nr.  Ir reikia žinoti, iš kur kas atėjo.
+
+        reikia žinoti, kas kur įdiegta, kad kai išleisim naują versiją,
+        žinotumėm, kur ką upgradinti.
+
+    summary: būtinai susižiūrėti serverius, kritinius komponentus; neužmerkti
+    akių ir į personalinius kompus (nors jų kainos dalis vis krinta palyginus
+    su kitkuo)
+
+
+  DS10 Incidentų ir problemų valdymas
+
+    (panašu, kad apie tai praeitą kartą kalbėjo)
+
+
+  DS11 Duomenų valdymas
+
+    kriterijai: vientisumas, patikimumams (pirminiai)
+    resursai: domenys
+
+      yra informacijos
+        1) surinkimas (jau čia turi būti apibrėžtos operacijos)
+        2) įvedimas
+        3) apdoroijmas
+        4) išvedimas
+
+      galim žiūrėti: (1) gali vykti tiek elektroniškai, tiek ant popieriaus.
+      (2) gali būti irgi elektroninis arba rankinis.  Apie popierinį apdorojimą
+      nešnekėsim.  Išvedimas irgi gali būti elektroninis ar popierinis (t.y.
+      fizinis, čia visokios banko kortelės ir pan. irgi priskaitomos)
+
+      kritinis momentas, kol informacija dar menkai elektronizuota, yra
+      surinkimas ir įvedimas.  reikia stengtis, kad įvedimas vyktų kiek galima
+      arčiau surinkimo šaltinio (ir kiek galima greičiau).
+
+    1. Duomenų/dokumentų paruošimas, surinkimas, autorizavimas, saugojimas.
+
+        kaip palengvinti surinkimą -- pvz., formos turi barkodą, formų išvaizda
+        sistemoje atitinka tą išvaizdą, pagal kurią suveda operatorius
+
+        yra n klientų ir m dokumentų rūšių.  jei dokai surūšiuoti (kiekvieno
+        kliento yra aplanke susęgti m dokų), apsimoka vieną kartą pasirinkti klientą
+        ir suvedinėti jo dokus.  jei dokai palaidi, gal apsimoka juos surūšiuoti?
+
+        tam tikri dokai yra laikomi normaliais, tinkamais dokais; kiti ne --
+        trūksta kokio parašo ar antspaudo.  turi būti užtikrinama, kad iki įvedimo
+        ateinantys dokai jau yra autorizuoti ir kad jos nereikės atmetinėti
+        įvedimo momentu.
+
+        kai kur įstatymai reikalauja archyvą saugoti 5 ar 10 metų.  sukelia
+        daug rūpesčių.
+
+        įvedimo momentu reikia identifikuoti su šaltiniu.  jei turim PVM
+        sąsakaitą faktūrą, tai ok, yra unikalus nr.  kitaip gerai, jei dokas
+        jau yra praėjęs raštinę ir gavęs kokį unikalų nr.  dokas turi turėti
+        indikaciją, kaip jis identifikuojamas sistemoje (pvz. operatorius
+        užrašo doko nr ant doko ir pasirašo, štampuką uždeda).
+
+        dokų valdymo sistema (dokas nr 1234 saugomas 6 angare 3 eilėje 5 dėžėje
+        iš viršaus)
+
+    2. Duomenų įvedimo autorizavimo, informacijos patikimumo užtikrinimas.
+
+        "prieš kiekvieną kablelį turėtų būti žodelis 'procedūra'"
+
+        validacija/patikrinimas sistemoje (amžius neneigiamas sveikas skaičius,
+        data teisinga, mirties data neankstesnė už gimimo datą, asmens kodo
+        kontrolinis skaitmuo teisingas ir t.t.)  ne viską galima patikrinti
+        (vardas, adresas -- nebent yra kokie nors klasifikatoriai, geriausia
+        išoriniai).
+
+        kaip efektyviai pasinaudoti klasifikatoriais?  jei info nėra
+        konfidenciali (pvz., administracinių teritorinių vienetų
+        klasifikatorius) gerai, bet gatvės pervadinamos, atsiranda naujos,
+        atsiranda nauji namai ir t.t.
+
+        kiti patikrinimo būdai: kontrolinės sumos, pakartotinas įvedimas (kurį
+        atlieka kitas asmuo)
+
+        nb įdomu: Lietuvoje egzistuoja žmonių su tuo pačiu asmens kodu.
+
+        patikrinimas, ar visi blankai suvesti (ar neužkrito po stalu kas) --
+        suskaičiuojam, kiek blankų buvo, kiek įvesta.
+
+    3. Duomenų apdorojimas
+
+        patikrinimai, ar duomenų apdorojimas nenubarstė kur duomenų,
+        nepadubliavo ar pan.  kažkur kažką reikia gale palyginti, pvz., ar
+        išskirsčius lėšas galutinė suma sutampa su pradine suma.
+
+        patikrinimo taisyklės turi būti išsakytos veiklos.  kuo daugiau, tuo
+        patikimesnis apdorojimas.
+
+    4. Klaidų identifikavimas, ištaisymas, analizė
+
+        Tai galioja 1-3 punktams.
+
+        Jei klaidos turi masinį charakterį, reikia tai pastebėti.  Pvz.
+        rūbinėse prie numerėlio 6 yra taškas, nes kažkas pastebėjo, kad o,
+        vietoj 6 mes dažnai duodam 9.
+
+    5. Informacijos išvedimo patikrinimas, išplatinimas, sunaikinimas, saugojimas.
+
+        pvz., ar yra lietuviškos raidės, ar kokie nors kringeliai?
+
+        pvz., jei atprintinom 5000 sąskaitų, bet dingo 6000 blankų, kažkas jau
+        negerai.
+
+        patikrinom sistemą, išspausdinom kažkokią ataskaitą -- o ten
+        konfidenciali info, reikia sunaikinti.
+
+        yra tokia trenkta taisyklė, kad sąskaitas faktūras įmonė spausdina 2
+        egzemplioriais ir privalo saugoti.  Maža, kad galiu bet kada galiu tai
+        atgaminti sistemoje.  Reikia saugoti popieriuką.
+
+    6. Rezervinis kopijavimas ir archyvavimas
+
+        kuo skiriasi rezervinis kopijavimas ir archyvavimas?  rezervinis
+        kopijavimas daromas tikintis juo nesinaudoti (jei viskas gerai, kopijos
+        niekad neprireiks).  Archyvavimas daromas tikintis juo naudotis.
+        Rezervinis kopijavimas nesusijęs su duomenų modeliu (šiaip dumpas,
+        nuotraukos padarymas).  Archyvavimas susijęs (ką galiu perkelti, kas
+        jau nenaudojama ir t.t.).  Ir tas ir anas daroma pagal apibrėžtas procedūras.
+
+        Problemos: rezervinis kopijavimas eikvoja resursus, nukenčia sistemos
+        vartotojų darbas.  Na yra architektūrų: mirrorinimas, 2 phase commitai,
+        hot backupai etc.  Kaip dažnai daryti?  Ar užtenka paros senumo
+        kopijos, ar reikia dažniau?  Jei duomenų atkartoti neįmanoma, gal
+        reikia nuolat kopijuoti.
+
+        Reikia įsitikinti, kad rezervinis kopijavimas vykdomas pagal
+        procedūras, grafiką, saugomas tinkamomis sąlygomis.  (Off-site backup;
+        pvz., galima saugoti banke -- namie po lova saugoti negerai).  Duomenų
+        atstatymas turi būti labai smarkiai autorizuojamas.  (Pateikiami įrodymai
+        veiklai, kuri autorizuoja atstatymą, tada dar reikia rūpintis prarastos
+        info atstatymu, jei tai įmanoma).
+
+        Reikia įsitikinti, kad informacija gali būti atstatyta.  (Jautrios info
+        bent dvi kopijos; laiks nuo laiko patikrinama, kad jos dar nuskaitomos.)
+
+    7. (Elektroninės tranzakcijos?)
+
+        ACID -- atomicity, consistency, isolation, durability
+
+        Reikia, kad sistema palaikytų tokias veiklos tranzakcijas.
+
+    NB duomenų valdymas suryja ~50% sistemos eksploatacijos kaštų.
+
+    Lietuvoj nelabai yra įmonės, kurios išsisuktų be rankinio duomenų įvedimo
+    (išskyrus telekomunikacijų įmones na ir gal e-bankingą).
+
+
+  DS12 Įrengimų valdymas
+
+    kriterijai: vientisumas (pirminis), pasiekiamumas (pirminis)
+    resursai: įrengimai
+
+        "pusiau saugumiečių, pusiau žaliųjų skyrelis"
+
+    1. Fizinė apsauga
+
+        Negalima palikti po lova rezervinės kopijos ar nesaugomo įėjimo į
+        serverinę.  Saugoti reikia ne tik įrangą, bet ir infrastruktūrą
+        (kabelius visokius -- kas yra labai sunkiai užtikrinama, ypač jei
+        nuomuojam patalpas ar naudojam WiFi).
+
+    2. Slėpti informaciją apie IT resursus.
+
+        "Low profile on IT site" -- nereikia didelių iškabų 'serverinė',
+        'duomenų kopijos', 'svarbūs įrengimai' etc.
+
+    3. Lankytojų palyda
+
+        Visi lankytojai, užbridę į fiziškai saugomas patalpas, negali daryti ką
+        nori.
+
+    4. Apsauga (sveikata ir pasaulis).
+
+        Pakanka oro, kvadratinių metrų, nenaudoja ten freono ir t.t.
+
+    5. UPS
+
+        Turi būti garantuotas elektros energijos tiekimas.
+
+
+  DS13 Operacijų valdymas
+
+    kriterijai: tinkamumas, efektyvumas (pirminiai), vientisumas, pasiekiamumas (antriniai)
+    resursai: visi išskyrus technologijas
+
+        kalbam apie eksploataciją.  Skiriasi nuo projektų, tuo, kad čia
+        rutininė veikla.  Suarchyvuoti, patikrinti, ar nėra klaidų, pravalyti
+        užsinešusius buferius, defragmentuoti diską, pažiūrėti, ar dar
+        tebeturim 30 dienų iki licencijų galiojimo pabaigos.
+
+    1. Reikia aprašyti operacijas (procedūros)
+
+        aprašyta kas ką daro, kada ir kaip, iš kur ką ima ir kur ką deda.
+
+    2. Startavimo procedūros (žr. DS4)
+
+        ką daryt ir kaip, kai reikia prikelinėt negyvas sistemas
+
+    3. Operacijų planavimas (grafikas)
+
+        kiek laiko kas užims, kokių resursų reikia
+
+    4. Operacijų dokumentavimas
+
+        popieriuje arba sistemoje, checklistas su darbais (kasdieninis,
+        savaitinis, mėnesinis), pacheckinam, pasirašom
+
+    5. Trečių šalių operacijų vadovas
+
+        tokios pat operacijos turėtų būti apibrėžtos ir visiems paslaugų
+        tiekėjams -- informavo, atliko, pasirašė, kad dirbo, ką pakeitė, juos
+        stebėjo darbuotojas toks ir toks etc.
+
+(praeitos paskaitos konspektai nufotkinti iš Adomo, reikia įvesti...)
+
+----------------------------------------------------------------------------
+Mon Dec  8 17:43:36 EET 2003
+
+Egzas sausio 12 d. 9 val.  Bilietai po 2 klausimus.  Žodžiu.
+
+  M1. Procesų stebėjimas
+
+        procesai vyksta, juos reikia stebėti -- ar realybė atitinka planus
+
+    kriterijai: tinkamumas, efektyvumas (pirminiai), visi kiti (antriniai)
+    resursai: visi
+
+    1. Rinkti stebėjimo duomenis (rodiklius)
+
+        rodikliai turėtų būti nustatomi tokie, kurie leistų suformuluoti
+        kažkokį tikslą, kurio mes siekiam; rodikių reikšmes, į kurias norim
+        patekti (angl. benchmark)
+
+        rodikliai gali būti naudojami vidiniai arba išoriniai.  (Pvz.,
+        eksploatacinės išlaidos vienai darbo vietai -- kiek išleidžiu aš,
+        kiek išleidžia konkurentai, jei aš daug mažiau, tai gal aš kažkur
+        smarkiai atsilieku?)
+
+        dalis rodiklių galėtų būti finansiniai, gal juos galima pasiimti iš
+        kitų sistemų
+
+    2. Veikimo (Performance) vertinimas
+
+        vertinam remdamiesi rodikliais.
+
+        KPI -- Key Performance Indicator -- pagrindiniai veiklos rodikliai,
+        rodantys, ar gerai vykdoma veikla (kiek projektų turėjo pilną
+        dokumentaciją, kiek projektų vėlavo, kokie kaštai vienam apmokomam
+        žmogui etc.)
+
+        Yra atskira CoBITo knygelė, kur tie rodikliai išvardinti.
+
+        Veiklą galime vertinti žiūrėdami, kaip gerai mums sekasi vertinti tuos
+        rodiklius.
+
+        Rodiklių dvi rūšys: KGI (Key Goal Indicator) -- tikslo rodiklis; sunku
+        jį įvertinti eigoje, paaiškės tik pabaigoje.  Kita rūšis -- KPI.  Jie
+        rodo, kaip mum sekasi eigoje.  Pagal KPI galime daugmaž prognozuoti
+        KGI.
+
+        Dar yra sąvoka "kritiniai sėkmės faktoriai" -- kokios aplinkybės turi
+        būti užtikrintos, kad pavyktų pasiekti sėkmę.  Vienas iš kritinių
+        faktorių -- vadovybė turi norėti to tikslo.
+
+    3. Vartotojų (arba sistemos naudotojų) pasitenkinimo matavimas
+
+        vartotojų pasitenkinimas -- svarbus kriterijus.  Bet ne vienintėlis
+        ("jo, aš būsiu patenkintas, jei bus 21" LCD, geri garsiakalbiai--namų
+        kino sistema, aha, man labai darbui reikalinga, ...").
+
+    4. Vadovybės informavimas
+
+        Vidaus auditas turi būti organizacijoje prikabintas kiek galima
+        aukščiau ir atkabintas nuo kitų organizacijos dalių.  (Security
+        adminas taip pat, nes jo dabras -- vaikščioti ir kitiems trukdyti
+        dirbti.)
+
+        Reikia informuoti vadovybė, kaip sekasi dirbti, turi būti vertinamos
+        rizikos.
+
+
+  M2. Vidinių kontrolių tinkamumas
+
+    kriterijai: tinkamumas, efektyvumas, suderinamumas (pirminiai), visi kiti
+                antriniai
+    resursai: visi
+
+    1. Vidinių kontrolių stebėjimas
+
+        vidinės kontrolės gaudo tokius dalykus, kaip kad pvz. išsiunčiam visiem
+        klientam 100x didesnes sąskaitas.  Jos įmanomos rutininėj veikloj --
+        neįmanoma sukurti efektyvių kontrolių veikloj, kuri įvyksta
+        spontaniškai, sprendžiant kažkokias nežinomas naujas problemas.
+        Vidinės kontrolės -- visokie self-checkai, assertionai, patikrinimai,
+        statistikos.
+
+    2. Savalaikis kontrolės veikimas (angl. Timely operation of control)
+
+        Jei sąskaitas išsiunčiam kas mėnesį, tai ir kontrolę daryti reikia
+        kas mėnesį, o ne kartą per metus.
+
+        Nereikia persistengti: kiekvienos sąskaitos rankutėmis su
+        kalkuliatoriumi nepatikrinsim.  Neefektyvu.
+
+        Svarbu laiku aptikti klaidas/neatitikimus ir aptikti taip, kad būtųme
+        kaip įmanoma arčiau sprendimo.  (Argumentai unit testingui)
+
+    3. Kontrolės veikimo atskaitomybės lygis
+
+        Kam kontrolė turi pranešinėti apie incidentus/problemas?  Kvaila
+        būtų pranešinėti apie vieno kieto disko gedimus IT skyriaus vadui.
+        Apie incidentus pranešam žemam lygyje.  Jei su incidentais nesusitvarko
+        žemas lygis, tai jau problema ir reikia pranešti aukščiau.  (Jei 50%
+        diskų pareina, turi žinoti ir vadovybė)
+
+    4. Saugumo užtikrinimo kontrolės ir operacijų kontrolės
+
+        Duomenų archyvavimai ir t.t. -- didžiuliai kiekiai informacijos ir
+        didelė atsakomybė už tą informaciją.  Rizika: poveikis * tikimybė.
+        Kuo didesnė rizika, tuo daugiau viena kitą dubliuojančių kontrolių
+        reikia pribarstyti.
+
+
+  M3. Nepriklausomo užtikrinimo gavimas
+
+        (užtikrinimas/įvertinimas == assurance)
+
+        organizacijai/asmeniui save įvertinti sunku.
+        organizacijos vidinė kontrolė visada pažeidžia nesuinteresuotumo
+        principą.
+
+    kriterijai: tinkamumas, efektyvumas, suderinamumas (pirminiai), visi kiti
+                antriniai
+    resursai: visi
+
+    1. a) vidinių saugumo ir IT kontrolių nepriklausomas auditas/įvertinimas
+       b) paslaugų tiekėjų nepriklausomas auditas/įvertinimas
+
+        tarkime aš pasirinkau softą, kuris bus palaikomas 5 metus.  O kažkokia
+        firmutė man teikia paslaugas naudodamasi softu, kuris po pusmečio
+        bus nebepalaikomas.
+
+    2. IT paslaugų tinkamumo įvertinimas
+       a) mano paties
+       b) trečiųjų šalių
+
+    3. Atitikimo išoriniams reikalavimams įvertinimas
+       a) mano paties
+       b) trečiųjų šalių
+
+    4. Nepriklausomo užtikrinimo atlikėjo kompetencija
+
+        momentas: iš išorės ne tik gali daugiau ar objektyviau ką pastebėti,
+        bet jų ir vadovybė labiau klauso -- savam krašte pranašu nebūsi.
+
+        tas, kas vertina, turėtų suprasti, ką jis vertina, turi turėti
+        atitinkamą kompetenciją.
+
+        Lietuvoje sertifikuojami tik finansų auditoriai.  Industrijos
+        sertifikatų yra daug, tik jie čia valstybiniu mastu ar kitaip
+        netvirtinami.
+
+    5. Įvertinimas turi būti prevencinis
+
+        (proactive)
+
+        Pasakyti, kad blogai -- pusė darbo.  Kita, didesnė pusė darbo --
+        pasakyti, kaip lengvai, su mažiausiom sąnaudom pasakyti, kaip padaryti,
+        kad būtų geriau.
+
+
+  M4. Nepriklausomo audito atlikimas
+      (provide for independent audit)
+
+        pastaruoju metu vengiama vartoti žodį "auditas", madinga sakyti
+        "assurance" -- ne tik patikrinsim, kas gerai, bet ir padėsim, jei bus
+        negerai.
+
+        M3 ir M4 Glemžos nuomone nelabai skiriasi
+
+        disclaimeris: CoBITą sugalvojo auditorių ir menedžerių asociacija.
+        "mes auditoriai ir mes sakom, kad audito jums reikia"
+
+    kriterijai: tinkamumas, efektyvumas, suderinamumas (pirminiai), visi kiti
+                antriniai
+    resursai: visi
+
+    1. Audito reglamentas
+
+        auditas -- nepigus malonumas.  Reikia nustatyti, kas organizacijoj
+        atsakingas už audito tikslų nustatymą.  Viskas susiję su rizikom.
+        Ten kur randam didžiausius neatitikimus ir ten, kur rizikos didelės,
+        ten reikia formuluoti pagrindinius audito tikslus.  Įsitikinti,
+        patikrinti, patarti.
+
+        Nereikia brūžinti pagal pilną programą -- bus neefektyvu.  Dažnai
+        auditas daromas periodiškai (pvz. kasmet) ir kiekvieną kartą keliami
+        skirtingi tikslai.
+
+    2. Audito nepriklausomumas
+
+        tie, kas atlieka auditą nėra suinteresuoti audito rezultatais.
+        Uždavinys sunkiai pasiekiamas.  Dažniausiai auditas kaip ir rimtas
+        finansinis auditas atliekamas ne pačios, bet kontroliuojančios
+        organizacijos.  Arba firma A nori įsigyti firmą B ir samdo firmą C,
+        kad paaudituotų B.
+
+        Auditorius negali priklausyti firmai, kuri tuo metu tiekia sprendimus.
+
+        Tie, kas užsakė auditą yra suinteresuoti rezultatais.
+
+    3. Profesinis kodeksas
+
+        IT auditorių asociacija, kuri galėtų parodyti pirštu ir parodyti,
+        va, jie sukčiai.
+
+        Viskas labai faina, kol tokios profesinės sąjungos nepavirsta
+        monopolistų karteliais.
+
+    4. Kompetencija
+
+    5. Planavimas
+
+        turi būti suplanuota, ką auditas ruošiasi tikrinti.
+
+        dažnai būna pradinė fazė (25-30% biudžeto), kuri nustato problemines
+        sritis ir tada jau jos detaliai audituojamos
+
+    6. Rezultatų pateikimas
+
+        išvados turi būti pagrįstos įrodymais (evidence).  Įrodymai nėra
+        pateikiami ataskaitoje, bet prireikus gali būti ištraukti.
+
+    7. Praeito audito rezultatų peržiūra ir padėties įvertinimas
+
+        tuo turėtų prasidėti kiekvienas naujas auditas -- gero tono taisyklė
+        su audito rezultatais turi būti supažindinama ir audituojama
+        organizacija -- dar viena profesinio kodekso dalis.  beje, užsakovas
+        turi žinoti, kad aš rengiuosi rezultatus rodyti audituojamai šaliai.
+        pilnas dokas nėra atiduodamas, bet yra supažindinama su išvadomis.
+
+
+Kita paskaita -- paskutinė, kiek supratau
+----------------------------------------------------------------------------
+Sun Dec 14 17:38:01 EET 2003
+
+CoBIT modelio dalis, skirta įmonės/organizacijos vadovybei.
+
+                          IT
+   +-------------+       +---------+
+   |Organizacijos|       |Priemonės|
+   |subalansuoti | <===> |         |
+   |rodikliai    |       |         |
+   +------+------+       +----+----+
+          |                   |
+          V                   V
+       Tikslai  <--------  Tikslai
+                          ----------
+                          Potiksliai
+
+IT tikslai iš tikrųjų yra tik potiksliai, įgalinantys vykdyti organizacijos
+tikslus.
+
+Pagrindiniai org. vadovybės tikslai -- užtikrinti, kad visi organizacijos
+poreikiai turi būti patenkinti.  Dalis jų patenkinama IT padalinio teikiamomis
+priemonėmis.
+
+Brandumo modelis (maturity model) nusako, kiek organizacijos veikla nutolus
+nuo idealumo.   0 -- spontaniška, neorganizuota veikla.  5 -- tokia kokybė
+ir idealumas, kad realiai pasiekiama tik teoriškai.
+
+Brandumo lygiai apibrėžiami pagal tai, kiek gerai įgyvendinti 34 CoBITo
+procesai.
+
+CoBITas naudoja tolydinį brandumo modelį, t.y. kiekvieno proceso brandumas
+vertinamas atskirai.
+
+Brandumo lygiai:
+  0 -- neegzistuojantis
+        (absoliučiai jokio proceso nėra, organizacija dar net nesuprato,
+         kad tokio proceso reikia)
+  1 -- pradinis (initial)
+        (yra tam tikri įrodymai (evidence), kad poreikis tokiam procesui yra,
+         bet veikla -- 2/3 kartus per metus, kai yra blogas oras, chebra
+         susimeta ir pabando kažką paveikti, o paskui numeta)
+  2 -- kartotinis (repeatable)
+        (veiksmai kartojami, bet nėra tokie patys, t.y. nėra standartizuoti.
+         skirtingi darbuotojai šituos veiksmus atlieka skirtingai)
+  3 -- apibrėžtas (defined)
+        (tai, kas atliekama, yra dokumentuota, vadinas ir standartizuota;
+         negana to, darbuotojai yra apmokomi.  esminis momentas: nukrypimai
+         nestebimi)
+  4 -- valdomas (managed)
+        (matuojama, ar procesai vyksta taip, kaip jie apibrėžti.  sekami
+         nukrypimai, imamasi veiksmų, kad jie būtų ištaisyti.  procesai
+         pastoviai peržiūrimi, siekiant juos pagerinti.  įrankiai ir
+         automatizuotos priemonės naudojamos fragmentiškai, suseka ne visą
+         procesą)
+  5 -- optimizuotas (optimized)
+        (procesai pasiekė galimybių "lubas", nes buvo pastoviai tobulinami,
+        remiantis ne tik šitos, bet ir kitų organizacijų patirtimi; IT
+        naudojamos ir IT procesų valdymui, pvz., automatizuotas paslaugų lygio
+        rodiklių rinkimas.  yra mechanizmas prisitaikyti prie pasikeitusio
+        proceso, nes procesai pastoviai gerinami ir lipa pagal galimybių ribas)
+
+Procesai brandumo lygiuose:
+  0: procesai nevaldomi (arba jų nėra)
+  1: atsitiktiniai procesai
+  2: procesai reguliarūs
+  3: procesai dokumentuoti (viena iš sudėtingiausių dalių)
+  4: procesai matuojami
+  5: geriausios praktikos (aukščiau nėra kur)
+
+Diagrama:
+
+                           .--------------------------------.
+                           | +-----------+  Kritiniai       |
+  Tikslo indikatoriai <--- | | IT veikla |  sėkmės          |
+        (KGI)              | +-----^-----+  faktoriai (CSF) |
+                           `-------|------------------------'
+                                   v
+                         Veiklos indikatoriai (KPI)
+
+  PTR -- pagrindiniai tikslo rodikliai == KGI -- Key Goal Indicators
+  PVR -- pagrindiniai veiklos rodikliai == KPI -- Key Performance Indicators
+  KSF -- kritiniai sėkmės faktoriai == CSF -- Critical Success Factors
+
+  Pvz., KGI: "nuvažiuoti į kauną", CSF: "nenuleido padangų", KPI: "neatsiliekam
+  nuo grafiko".
+
+(NB CoBIT 34 procesai -- "keista, bet pilna klasifikacija, padengianti visą
+sritį".)
+
+Sėkmės faktoriai:
+
+  Esminiai:
+
+  1. Apibrėžti ir dokumentuoti procesai
+  2. Apibrėžta tvarka (politika; angl. policy)
+  3. Apibrėžta atsakomybė
+  4. Vadovybės supratimas ir palaikymas
+
+        labai svarbus faktorius, ypač Lietuvos sąlygomis, reiktų kelti į pirmą
+        vietą.
+
+  5. Veiklos matavimas
+
+        "pvz., aš blogai planuoju savo laiką -- darau 6 darbus, bet nė vieno
+        gerai...  kol nepradėsiu žymėtis, kur aš leidžiu savo laiką, tol
+        nesimatys kelio, nesimatys sprendimo.  čiaudėti su sekundmačiu, aišku,
+        nereikia."
+
+ "tai, kas čia pasakyta skiria tvarką nuo bardako"
+
+Tikslo indikatoriai (rodikliai):
+
+  (jie yra specifiniai procesams)
+
+  Pvz.:
+    1. Atlikti ką nors (per artimiausius 2 metus įdiegti tam tikrą IS)
+    2. Užtikrinti ko nors neįvykimą (pvz., neturėti veiklos sutrikimų arba
+       užtikrinti tolydžią sistemos veiklą)
+    3. Finansiniai rodikliai (sumažinto 30% operacinius IT kaštus; pasiekti,
+       kad darbo vietos kaina per metus būtų žemesnė nei 1500 Lt; užtikrinti,
+       kad 60% paslaugų būtų perkama iš išorės)
+
+Veiklos indikatoriai:
+
+  (jų labai daug ir jie labai specifiniai procesams)
+
+Pati esmė:
+
+  KSF yra pagrindiniai dalykai, kuriuos reikia užtikrinti pasirinkus reikiamą
+  Brandumo lygį, matuojant PVR, siekiant nustatyti apsibrėžtų PTR pasiekiamumą.
+
+Tai tiek.
+
+Greitas pasikartojimas:
+
+  PO1: esmė -- strateginio IT plano turėjimas (o tam būtina turėti tikslus)
+  PO2: IT architektūros apibrėžimas -- didžiausi informacijos srautai turi būti
+       automatizuoti ir kontroliuojami
+  PO3: pasirinkti, kur eisime (OSS ar Microsoftas?  Oraclas ar MSSQL)
+  PO4: pasistengti iškelti IT padalinį kaip bendrai padedantį visai
+       organizacijai, o ne kaip kito departamento padalinį.  Ypatingai
+       svarbu IT valdymo komiteto sukūrimas (ITstai, pagr. veiklos žmonės, bent
+       keli vadovai su sprendimo teise).
+  PO5: investicijos tiek į IT infrastruktūrą, tiek į sistemas, tiek į
+       sprendimus.  Retą sistemą pavyksta pagrįsti litais...  Ypač valdymas,
+       aptarnavimo sfera -- kaip išmatuoti klientų pasitenkinimą, kiek tai
+       duoda vertės organizacijai?  Reikia apsibrėžti investicijų planą ir
+       užsitikrinti finansavimą
+  PO6: tiek auksčiausios vadovybės, tiek IT padalinio tikslų komunikavimas,
+       kad visi suprastų, kur mes einame.
+  PO7: sukaupimas reikiamos kvalifikacijos žmonių.  Visų pirma IT strategijos
+       plane turi būti pasakyta, kokią kompetenciją IT padalinys nori savyje
+       kaupti.  (Jei nesiruošiam programinti, programerius reikia
+       perkvalifikuoti)
+  PO8: suderinamumas su išoriniais reikalavimais: reikia žiūrėti, kas yra
+       svarstoma (dabar numatyta atsisakyti PVM sąskaitų-faktūrų)
+  PO9: rizikų valdymas.  Pagrindinės rizikos turi būti įvardintos IT
+       strategijoje.  Dalis sistemų diegiamos būtent dėl to, kad būtų galima
+       minimizuoti riziką.  Pvz., neseniai visi buvo labai išsigandę, kad
+       Informixas numirs.
+  PO10: projektų valdymas. krioklio modelis, visokios spiralės, kiti modeliai
+  PO11: kokybės užtikrinimas -- vienas iš keisčiausių dalykų; greičiausiai
+       susiveda į dokumentavimą, sekimą ir taisymą
+
+    visų sistemų ir duomenų savininkai turi būti apibrėžti
+
+  AI1: automatizuotų sprendimų aptikimas: reikia pasidalinti, ką darys veikla
+       ir ką pasiūlys IT.  Niekad nebus, kad tik veikla ar tik IT ras
+       sprendimą.  Veikla išsako ko reikia, pasvajoja apie skraidančius
+       kilimus.  IT sako, ar realu, kokie kaštai, ar svajoti toliau, ar
+       kryželis, per brangu, pasakyti terminus, kada technologija atpigs ar
+       taps prieinama Lietuvoje
+  AI2: ne tik vienkartiniai kaštai, bet ir palaikymo sąnaudos (TCO)
+  AI3: infrastruktūros įsigijimas ir palaikymas.  Kiekviena sistema atsineša
+       savo specifinius rutininius veiksmus, kuriuos reikia kažkur įkišti
+  AI4: procedūros (prašokom)
+  AI5: diegimas: atskirtos aplinkos (kūrimo, testavimo, darbinė) ir personalas
+  AI6: pakeitimų valdymas (prašokom)
+
+  DS1, DS2: apibrėžti aptarnavimo lygius (susitarti su veikla), kai žinom,
+       kaip valdyti ir ką matuoti, galim pirkti iš išorės
+  DS3: našumo ir talpos valdymas: sistema sugebės pavežti reikiamos
+       informacijos kiekius
+  DS4: nepertraukiamos veiklos užtikrinimas: tiek IT architektūra, tiek
+       infrastruktūra turi užtikrinti, kad net ir pasireiškus tam tikrom
+       grėsmėm sugebėsim išlaikyti minimalų IT paslaugų tiekimo lygį.
+  DS5: sistemų saugumo užtikrinimas: svarbu (normalioj šaly jei bankas
+       paviešina info apie klientus, iš jo būtų apimta licencija -- pvz.,
+       Šveicarijos bankuose jau 50 metų nebuvo konficencialumo pažeidimų)
+       Svarbu, kad vadovybė suprastų, kad saugumo lygis -- vadovbės sprendimas
+       Nuo kokių scenarijų norime apsaugoti?  NB Šiuo metu lietuvoje
+       darbuotojas -- silpniausia grandis.  Svarbu, kad būtų įmanoma užfiksuoti
+       faktą, kad informacija buvo nubombinta ir turėti priemones (pvz.
+       sutartis su darbuotojų), kad būtų galima nubausti -- bet čia jau užeina
+       už IT ribų.  Tada lieka techninė problema.
+  DS6: ypatingai svarbu, kad veiklos padaliniai sutiktų prisiimti kaštus,
+       susijusius su sistemų eksploatavimus (galbūt ir diegimus).  jiems to
+       reikia, jie turi savo biudžeta, jie turi ir apmokėti.  tada veikla
+       sprendžia, ar jiems reikia sistemos, ar ne.  (Lietuvoj nėra nė vienos
+       org., kuri taip darytų, jei gerai supratau)
+  DS7, DS8: vartotojų mokymas, pagalba vartotojams: kuo labiau apmokysim,
+       tuo mažiau pagalbos bus ir daugiau jiems naudos, bet nereikia
+       permokinti.  pilotiniai diegimai labai gerai sprendžia šį klausimą.
+       labai svarbu sužiūrėti pilotiniame diegime, ko buvo mokomi vartotojai
+       ir kokie buvo jų poreikiai
+  DS9: konfigūracijos valdymas -- kad efektyviai būtų išnaudoti resursai
+       (apkrovimų balansavimas ant skirtingų serverių).  kalbama apie IS bei
+       duomenų išdėstymą ant IT komponentų
+  DS10: pagrdindinis dalykas: visus incidentus registruoti; tada identifikuoti
+       problemas, mąstyti apie prevencinę veiklą, sukurti žinių bazę, kad
+       vartotojai galėtų patys save apsitarnauti arba kitiems IT specams
+       būtų lengviau spręsti pasikartojančias problemas.
+  DS11: duomenų valdymas: 'vandens lašelio kelionė'
+  DS12: įrengimų valdymas -- nieko blatno
+  DS13: operacijų valdymas -- aprašytos, dokumentuotos, optimizuotos
+
+  M1: visi procesai stebimi (KPI); pageidaujama, neskausmingai -- automatiškai
+      arba pakeliui
+  M2: vidinės kontrolės laiku pastebės neatitikimus, neleis joms plisti; dar
+      geriau prevencinės kontrolės, geriausia ir tas ir tas
+  M3, M4: nepriklausomo užtikrinimo bei audito gavimas -- svarbu tikrinti
+      ne tik save, bet ir trečias šalis, teikiančias mums paslaugas
+
+
+Kartoju: Egzas sausio 12 d. 9 val.
+Egzų klausimai bus konferencijoje.
+----------------------------------------------------------------------------
+:vim:set sts=2 sw=2:

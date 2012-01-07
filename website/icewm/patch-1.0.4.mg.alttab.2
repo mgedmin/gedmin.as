@@ -1,0 +1,179 @@
+This is a modified version of Andy Oliver's patch for Alt-Tab window.
+
+Original description:
+
+> This patch changes the Alt-Tab popup window to show all window icons
+> while switching, not just the current one.  The icon for the current
+> window is highlighted with a rectangle.
+>
+> Andy Oliver
+> aoliver@earthlink.net
+> http://home.earthlink.net/~aoliver
+
+Marius Gedminas
+mgedmin@delfi.lt
+http://ice.dammit.lt/~mgedmin/icewm/
+
+diff -u ./src/wmswitch.cc.orig ./src/wmswitch.cc
+--- ./src/wmswitch.cc.orig	Mon Nov  8 13:45:52 1999
++++ ./src/wmswitch.cc	Sat Jun 24 22:40:11 2000
+@@ -18,6 +18,8 @@
+ 
+ #include <string.h>
+ 
++#define ICON_SIZE 32
++
+ YColor *SwitchWindow::switchFg = 0;
+ YColor *SwitchWindow::switchBg = 0;
+ 
+@@ -38,10 +40,9 @@
+     modsDown = 0;
+     isUp = false;
+ 
+-    int sW = 4 + manager->width() / 5 * 3;
+-    int sH = 4 + 32;
+-        //statusFont->max_bounds.ascent +
+-        //statusFont->max_bounds.descent;
++    int sW = ICON_SIZE + 14;
++    // Leave enough space for border, icons, selection rectangle, and name
++    int sH = 18 + ICON_SIZE + switchFont->height();
+ 
+     setGeometry(manager->width() / 2 - sW / 2, manager->height() / 2 - sH / 2,
+                 sW, sH);
+@@ -56,7 +57,51 @@
+     }
+ }
+ 
++int SwitchWindow::iconWidth() {
++    int width = 0;
++
++    YFrameWindow *fFirstWindow = nextWindow(0, true, false);
++    YFrameWindow *fCurrentWindow = fFirstWindow;
++    do {
++        // If there is an icon for this window
++        if (fCurrentWindow->clientIcon() && fCurrentWindow->clientIcon()->large()) {
++            width += fCurrentWindow->clientIcon()->large()->width() + 3;
++        }
++
++        // Advance to next icon
++        fCurrentWindow = nextWindow(fCurrentWindow, true, true);
++    } while (fCurrentWindow != fFirstWindow);
++
++    if (width > 3)
++        width -= 3;
++
++    return width;
++}
++
++void SwitchWindow::resize()
++{
++    int sW = iconWidth() + 14;
++    if (sW < ICON_SIZE + 14)
++        sW = ICON_SIZE + 14;
++    if (fActiveWindow) {
++        const char *str = fActiveWindow->client()->windowTitle();
++        if (str) {
++            int w = switchFont->textWidth(str) + 14;
++            if (sW < w)
++                sW = w;
++        }
++    }
++    if ((unsigned)sW > manager->width())
++        sW = manager->width();
++    int sH = 18 + ICON_SIZE + switchFont->height();
++    setGeometry(manager->width() / 2 - sW / 2, manager->height() / 2 - sH / 2,
++                sW, sH);
++}
++
+ void SwitchWindow::paint(Graphics &g, int /*x*/, int /*y*/, unsigned int /*width*/, unsigned int /*height*/) {
++
++    resize();
++
+     g.setColor(switchBg);
+     g.drawBorderW(0, 0, width() - 1, height() - 1, true);
+     if (switchbackPixmap)
+@@ -65,22 +110,52 @@
+         g.fillRect(1, 1, width() - 3, height() - 3);
+ 
+     if (fActiveWindow) {
+-        int ofs = 0, pos;
+-        if (fActiveWindow->clientIcon() && fActiveWindow->clientIcon()->large()) {
+-            g.drawPixmap(fActiveWindow->clientIcon()->large(), 2, 2);
+-            ofs = fActiveWindow->clientIcon()->large()->width() + 2;
+-        }
++        int ofs;
++        int ICON_SEP = 3;
+         g.setColor(switchFg);
++
++        // Draw all the icons
++        ofs = width() / 2 - iconWidth() / 2;
++        if (ofs < 0)
++            ofs = 0;
++        YFrameWindow *fFirstWindow = nextWindow(0, true, false);
++        YFrameWindow *fCurrentWindow = fFirstWindow;
++        do {
++            // If there is an icon for this window
++            if (fCurrentWindow->clientIcon() && fCurrentWindow->clientIcon()->large()) {
++                // Draw Current Icon
++                g.drawPixmap(fCurrentWindow->clientIcon()->large(), ofs, 7);
++
++                // If the current window is the active window
++                if (fCurrentWindow == fActiveWindow) {
++                    // Determine border corners
++                    int ulx = ofs - 2;
++                    int uly = 5;
++                    int lrx = ulx + fCurrentWindow->clientIcon()->large()->width() + 3;
++                    int lry = uly + fCurrentWindow->clientIcon()->large()->height() + 3;
++
++                    // Draw Border
++                    g.drawLine(ulx, uly, lrx, uly);
++                    g.drawLine(lrx, uly, lrx, lry);
++                    g.drawLine(lrx, lry, ulx, lry);
++                    g.drawLine(ulx, lry, ulx, uly);
++                }
++
++                // Specify X offset for next icon
++                ofs += fCurrentWindow->clientIcon()->large()->width() + ICON_SEP;
++            }
++
++            // Advance to next icon
++            fCurrentWindow = nextWindow(fCurrentWindow, true, true);
++        } while (fCurrentWindow != fFirstWindow);
++
++        // Display the currently selected window's name below icons
+         g.setFont(switchFont);
+         const char *str = fActiveWindow->client()->windowTitle();
+         if (str) {
+-            pos = ofs + (width() - ofs) / 2 - switchFont->textWidth(str) / 2;
+-            if (pos < ofs)
+-                pos = ofs;
+-            g.drawChars(str, 0, strlen(str),
+-                        pos,
+-                        height() / 2 + (switchFont->height()) / 2
+-                        - switchFont->descent());
++            int x = width() / 2 - switchFont->textWidth(str) / 2;
++            int y = ICON_SIZE + 13 + switchFont->ascent();
++            g.drawChars(str, 0, strlen(str), x, y);
+         }
+     }
+ }
+
+diff -u ./src/wmswitch.h.orig ./src/wmswitch.h
+--- ./src/wmswitch.h.orig	Mon Nov  8 13:45:52 1999
++++ ./src/wmswitch.h	Sat Jun 24 22:31:57 2000
+@@ -12,12 +12,14 @@
+ 
+     virtual void paint(Graphics &g, int x, int y, unsigned int width, unsigned int height);
+ 
++    int iconWidth();
++    void resize();
+     YFrameWindow *nextWindow(YFrameWindow *from, bool zdown, bool next);
+     void begin(bool zdown, int mods);
+ 
+     virtual void activatePopup();
+     virtual void deactivatePopup();
+-    
++
+     virtual bool handleKey(const XKeyEvent &key);
+     virtual void handleButton(const XButtonEvent &button);
+ 

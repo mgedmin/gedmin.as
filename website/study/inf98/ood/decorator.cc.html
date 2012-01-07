@@ -1,0 +1,256 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-13">
+  <title>decorator.cc</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<pre>
+<font color="#444444"><i>/** @mainpage Dekoratorius
+ *
+ * Pirmoji užduotis objektinių technologijų kursui.
+ *
+ * Autorius: Marius Gedminas (mgedmin@@delfi.lt)
+ *
+ * VU MIF, informatika, 1M kursas, 1 grupė.
+ *
+ * 2002 m. ruduo.
+ *
+ * @section problem Problema
+ *
+ * Projektuokime dokumentų tvarkymo sistemą.  Dokumentai gali būti įvairių
+ * rūšių (tekstas, paveiksliukai ir t.t.).  Dokumentus galime peržiūrinėti,
+ * spausdinti, redaguoti.
+ *
+ * Taip pat norime keisti ar papildyti kai kurių konkrečių dokumentų elgesį.
+ * Pavyzdžiui, uždrausti kai kurių dokumentų redagavimą, ar prikabinti prie
+ * dokumentų anotacijas.
+ *
+ * Jei kiekvienam variantui kursime po atskirą klasę, gausime kombinatorinį
+ * sprogimą -- %TextDocument, ReadOnlyTextDocument, AnnotatedTextDocument,
+ * AnnotatedReadOnlyTextDocument ir t.t.
+ *
+ * @section solution Sprendimas
+ *
+ * Pritaikysime Dekoratoriaus šabloną.  Kiekvieną dokumento tipą atitinka
+ * atskira klasė.  Visi dokumentai paveldi iš bendros astrakčios bazinės klasės
+ * ir realizuoja tą patį interfeisą, nusakantį bazinį dokumentų funkcionalumą.
+ *
+ * Papildomas savybes suteiks dekoratoriai.  Abstrakti dekoratoriaus klasė
+ * paveldi iš bazinės dokumentų klasės ir realizuoja bendrą visiems
+ * dekoratoriams funkcionalumą -- metodų delegavimą.
+ *
+ * Tradiciniame Dekoratoriaus šablono variante dokumentai nieko nežino apie
+ * dekoratorius, nežino net apie jų egzistavimą.  Tačiau tokiu atveju galime
+ * lengvai nuimti tik išorinį dekoratorių, jei žinome jo tipą.  Taip pat galime
+ * lengvai pasinaudoti tik išorinio dekoratoriaus (jei žinome jo tipą)
+ * pateikiamomis papildomomis funkcijomis, nes dekoratoriai deleguoja tik
+ * dokumentų interfeiso funkcijas.  Norėtųsi ko nors lankstesnio.
+ *
+ * Turėdami kokį nors objektą (nežinodami, ar jis dekoruotas, ar ne), mes
+ * norėtumėme sužinoti (gauti nuorodą) į tam tikros konkrečios klasės
+ * dekoratorių (kad galėtumėme pasinaudoti jo teikiamomis papildomomis
+ * funkcijomis).  Taip pat norėtumėme išmesti iš dekoratorių grandinės vieną
+ * ar visus nurodyto tipo dekoratorius.
+ *
+ * Kad pasiektumėme papildomai iškeltus tikslus turime kiek pakeisti tradicinį
+ * Dekoratoriaus šabloną ir pridėti kelias funkcijas į dokumentų bazinę klasę
+ * (negalime jų pridėti į dekoratorių bazinę klasę, nes norime ir nedekoruotus
+ * objektus traktuoti vienodai).
+ *
+ * @section implementation Realizacija
+ *
+ * @image html classdiagram.png &quot;Klasių diagrama&quot;
+ * @image latex classdiagram.eps &quot;Klasių diagrama&quot; width=12cm
+ *
+ * Klases galima sugrupuoti į tokias kategorijas:
+ * - @ref interfaces &quot;Interfeisai&quot; (@ref Document, @ref Decorator)
+ * - @ref documents  &quot;Konkretūs dokumentai&quot; (@ref TextDocument, @ref Image)
+ * - @ref decorators &quot;Konkretūs dekoratoriai&quot; (@ref ReadOnly, @ref Annotation)
+ *
+ * Pagrindinėje programoje pateiktas @ref example &quot;naudojimo pavyzdys&quot;.
+ */</i></font>
+
+<font color="0000ff"><strong>#include <font color="#008000">&quot;decorator.h&quot;</font></strong></font>
+
+<font color="0000ff"><strong>#include <font color="#008000">&lt;iostream&gt;</font></strong></font>
+
+<font color="#444444">// Document</font>
+
+<font color="#2040a0">Document</font><font color="4444FF">:</font><font color="4444FF">:</font>~<font color="#2040a0">Document</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font><font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444">// Decorator</font>
+
+<font color="#2040a0">Decorator</font><font color="4444FF">:</font><font color="4444FF">:</font>~<font color="#2040a0">Decorator</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <strong>delete</strong> <font color="#2040a0">next_</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444">// TextDocument</font>
+
+<strong>void</strong> <font color="#2040a0">TextDocument</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;tekstinio dokumento peržiūra<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<strong>void</strong> <font color="#2040a0">TextDocument</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;tekstinio dokumento spausdinimas<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<strong>void</strong> <font color="#2040a0">TextDocument</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;tekstinio dokumento redagavimas<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444">// Image</font>
+
+<strong>void</strong> <font color="#2040a0">Image</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;paveiksliuko peržiūra<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<strong>void</strong> <font color="#2040a0">Image</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;paveiksliuko spausdinimas<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<strong>void</strong> <font color="#2040a0">Image</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;paveiksliuko redagavimas<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444">// ReadOnly</font>
+
+<strong>void</strong> <font color="#2040a0">ReadOnly</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;negalima redaguoti šio dokumento!<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444">// Annotation</font>
+<strong>void</strong> <font color="#2040a0">Annotation</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">Decorator</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;  anotacija: &quot;</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">annotation</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<strong>void</strong> <font color="#2040a0">Annotation</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">Decorator</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;  anotacija: &quot;</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">annotation</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444"><i>/**
+ * @addtogroup example Pavyzdys
+ * @{
+ */</i></font>
+
+<font color="#444444"><i>/**
+ * Pagrindinė programa, iliustruojanti dekoratorių panaudojimą.  Ją įvykdžius
+ * turėtų pasirodyti šitoks tekstas:
+@verbatim
+
+  * Bazinis funkcionalumas
+  tekstinio dokumento peržiūra
+  tekstinio dokumento spausdinimas
+  tekstinio dokumento redagavimas
+  paveiksliuko peržiūra
+  paveiksliuko spausdinimas
+  paveiksliuko redagavimas
+
+  * Bazinis funkcionalumas su dekoratoriais
+  tekstinio dokumento peržiūra
+    anotacija: įdomus dokumentas
+  tekstinio dokumento spausdinimas
+    anotacija: įdomus dokumentas
+  negalima redaguoti šio dokumento!
+  paveiksliuko peržiūra
+    anotacija: gražus paveiksliukas
+    anotacija: o man nepatiko
+  paveiksliuko spausdinimas
+    anotacija: gražus paveiksliukas
+    anotacija: o man nepatiko
+  paveiksliuko redagavimas
+
+  * Papildomas funkcionalumas: pakeiskime anotaciją
+  tekstinio dokumento peržiūra
+    anotacija: o gal ir nelabai įdomus
+
+  * Pereikime per visus vieno tipo dekoratorius
+  radau anotaciją: o man nepatiko
+  radau anotaciją: gražus paveiksliukas
+
+  * Nuimkime ReadOnly dekoratorių
+  tekstinio dokumento redagavimas
+
+@endverbatim
+ */</i></font>
+<strong>int</strong> <font color="#2040a0">main</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#444444">// Sukuriame plikus objektus</font>
+    <font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">txt</font> <font color="4444FF">=</font> <strong>new</strong> <font color="#2040a0">TextDocument</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">img</font> <font color="4444FF">=</font> <strong>new</strong> <font color="#2040a0">Image</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Bazinis funkcionalumas</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;* Bazinis funkcionalumas<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">img</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">img</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">img</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Prikabiname dekoratorius</font>
+    <font color="#2040a0">txt</font> <font color="4444FF">=</font> <strong>new</strong> <font color="#2040a0">Annotation</font><font color="4444FF">(</font><font color="#2040a0">txt</font>, <font color="#008000">&quot;įdomus dokumentas&quot;</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font> <font color="4444FF">=</font> <strong>new</strong> <font color="#2040a0">ReadOnly</font><font color="4444FF">(</font><font color="#2040a0">txt</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#2040a0">img</font> <font color="4444FF">=</font> <strong>new</strong> <font color="#2040a0">Annotation</font><font color="4444FF">(</font><font color="#2040a0">img</font>, <font color="#008000">&quot;gražus paveiksliukas&quot;</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">img</font> <font color="4444FF">=</font> <strong>new</strong> <font color="#2040a0">Annotation</font><font color="4444FF">(</font><font color="#2040a0">img</font>, <font color="#008000">&quot;o man nepatiko&quot;</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Bazinis funkcionalumas su dekoratoriais</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;* Bazinis funkcionalumas su dekoratoriais<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">img</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">img</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">img</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Papildomas funkcionalumas</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;* Papildomas funkcionalumas: pakeiskime anotaciją<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">Annotation</font><font color="4444FF">*</font> <font color="#2040a0">a</font> <font color="4444FF">=</font> <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">decorator</font><font color="4444FF">&lt;</font><font color="#2040a0">Annotation</font><font color="4444FF">&gt;</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+	<font color="#2040a0">a</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">changeAnnotation</font><font color="4444FF">(</font><font color="#008000">&quot;o gal ir nelabai įdomus&quot;</font><font color="4444FF">)</font><font color="4444FF">;</font>
+	<font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Parodykime visas anotacijas</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;* Pereikime per visus vieno tipo dekoratorius<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+    <strong>for</strong> <font color="4444FF">(</font><font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">tmp</font> <font color="4444FF">=</font> <font color="#2040a0">img</font><font color="4444FF">;</font>
+         <font color="#2040a0">Annotation</font><font color="4444FF">*</font> <font color="#2040a0">d</font> <font color="4444FF">=</font> <font color="#2040a0">tmp</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">decorator</font><font color="4444FF">&lt;</font><font color="#2040a0">Annotation</font><font color="4444FF">&gt;</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+         <font color="#2040a0">tmp</font> <font color="4444FF">=</font> <font color="#2040a0">d</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">next</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">)</font>
+    <font color="4444FF"><strong>{</strong></font>
+	<font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;radau anotaciją: &quot;</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#2040a0">d</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">annotation</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Nuimkime dekoratorių</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">&quot;* Nuimkime ReadOnly dekoratorių<font color="#77dd77">\n</font>&quot;</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font> <font color="4444FF">=</font> <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">unwrap</font><font color="4444FF">&lt;</font><font color="#2040a0">ReadOnly</font><font color="4444FF">&gt;</font><font color="4444FF">(</font><strong>true</strong><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">txt</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <font color="#2040a0">cout</font> <font color="4444FF">&lt;</font><font color="4444FF">&lt;</font> <font color="#008000">'<font color="#77dd77">\n</font>'</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Panaikinkime objektus ir visus dekoratorius</font>
+    <strong>delete</strong> <font color="#2040a0">txt</font><font color="4444FF">;</font>
+    <strong>delete</strong> <font color="#2040a0">img</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444">/// @}</font>
+
+</pre>
+<hr>
+syntax highlighted by <a href="http://www.palfrader.org/code2html">Code2HTML</a>, v. 0.9.1
+</body>
+</html>

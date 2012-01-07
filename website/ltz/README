@@ -1,0 +1,43 @@
+This package contains updated Lithuanian time zone (Europe/Vilnius: from
+2003 Lithuania will observe summer time again).
+
+Files
+-----
+
+Europe/Vilnius      compiled time zone data
+lithuania           this contains all required data to compile the updated
+                    time zone
+
+
+Checking
+--------
+
+To check if you need this update, type
+
+  date --date 'jul 1 2003'
+
+If you get
+
+  Tue Jul  1 00:00:00 EEST 2003
+
+everything is fine and your libc is recent enough.  If you get
+
+  Tue Jul  1 00:00:00 EET 2003
+
+instead, you need to apply this.
+
+
+Installation
+------------
+
+Either overwrite your old Europe/Vilnius in /usr/share/zoneinfo or (better)
+use `zic' to do that:
+
+  # zic lithuania
+
+You can then use `tzconfig' or a similair program to set you local time
+zone to Europe/Vilnius.
+
+
+Marius Gedminas
+<mgedmin@delfi.lt>

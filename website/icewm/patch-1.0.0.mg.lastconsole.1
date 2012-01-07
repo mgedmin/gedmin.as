@@ -1,0 +1,150 @@
+This IceWM patch adds a new key command -- KeySysWorkspaceLast (bound to
+Ctrl+Alt+Down by default) which alternates between current and previously
+active workspaces.
+
+Marius Gedminas
+mgedmin@delfi.lt
+http://ice.dammit.lt/~mgedmin/icewm/
+
+diff -u ./doc/icewm.sgml.orig ./doc/icewm.sgml
+--- ./doc/icewm.sgml.orig	Sat Dec 25 18:45:42 1999
++++ ./doc/icewm.sgml	Mon Feb  7 00:16:09 2000
+@@ -183,8 +183,10 @@
+ <tag/Alt+Shift+Tab/ Switch between windows (bottom->top).
+ <tag/Ctrl+Alt+LeftArrow/ Swithc to the previous workspace (cycle).
+ <tag/Ctrl+Alt+RightArrow/ Switch to the next workspace (cycle).
++<tag/Ctrl+Alt+DownArrow/ Switch to the last workspace.
+ <tag/Ctrl+Alt+Shift+LeftArrow/ Move the focused window to the previous workspace and activate it.
+ <tag/Ctrl+Alt+Shift+RightArrow/ Move the focused window to the next workspace and activate it.
++<tag/Ctrl+Alt+Shift+DownArrow/ Move the focused window to the last workspace and activate it.
+ <tag/Ctrl+Alt+Delete/ displays the session dialog.
+ </descrip>
+ 
+
+diff -u ./src/bindkey.h.orig ./src/bindkey.h
+--- ./src/bindkey.h.orig	Sun Dec 19 18:35:35 1999
++++ ./src/bindkey.h	Sun Feb  6 23:57:15 2000
+@@ -32,8 +32,10 @@
+ #define defgKeyWinMenu                  ' ', kfAlt, "Alt+Space"
+ #define defgKeySysWorkspacePrev         XK_Left, kfAlt+kfCtrl, "Alt+Ctrl+Left"
+ #define defgKeySysWorkspaceNext         XK_Right, kfAlt+kfCtrl, "Alt+Ctrl+Right"
++#define defgKeySysWorkspaceLast         XK_Down, kfAlt+kfCtrl, "Alt+Ctrl+Down"
+ #define defgKeySysWorkspacePrevTakeWin  XK_Left, kfAlt+kfCtrl+kfShift, "Alt+Ctrl+Shift+Left"
+ #define defgKeySysWorkspaceNextTakeWin  XK_Right, kfAlt+kfCtrl+kfShift, "Alt+Ctrl+Shift+Right"
++#define defgKeySysWorkspaceLastTakeWin  XK_Down, kfAlt+kfCtrl+kfShift, "Alt+Ctrl+Shift+Down"
+ #define defgKeySysWorkspace1            '1', kfAlt+kfCtrl, "Alt+Ctrl+1"
+ #define defgKeySysWorkspace2            '2', kfAlt+kfCtrl, "Alt+Ctrl+2"
+ #define defgKeySysWorkspace3            '3', kfAlt+kfCtrl, "Alt+Ctrl+3"
+@@ -121,8 +123,10 @@
+ DEF_WMKEY(gKeySysAddressBar);
+ DEF_WMKEY(gKeySysWorkspacePrev);
+ DEF_WMKEY(gKeySysWorkspaceNext);
++DEF_WMKEY(gKeySysWorkspaceLast);
+ DEF_WMKEY(gKeySysWorkspacePrevTakeWin);
+ DEF_WMKEY(gKeySysWorkspaceNextTakeWin);
++DEF_WMKEY(gKeySysWorkspaceLastTakeWin);
+ DEF_WMKEY(gKeySysWorkspace1);
+ DEF_WMKEY(gKeySysWorkspace2);
+ DEF_WMKEY(gKeySysWorkspace3);
+
+diff -u ./src/default.h.orig ./src/default.h
+--- ./src/default.h.orig	Sat Dec 25 14:47:55 1999
++++ ./src/default.h	Sun Feb  6 23:57:40 2000
+@@ -588,8 +588,10 @@
+     OKV("KeySysAddressBar", gKeySysAddressBar, ""),
+     OKV("KeySysWorkspacePrev", gKeySysWorkspacePrev, ""),
+     OKV("KeySysWorkspaceNext", gKeySysWorkspaceNext, ""),
++    OKV("KeySysWorkspaceLast", gKeySysWorkspaceLast, ""),
+     OKV("KeySysWorkspacePrevTakeWin", gKeySysWorkspacePrevTakeWin, ""),
+     OKV("KeySysWorkspaceNextTakeWin", gKeySysWorkspaceNextTakeWin, ""),
++    OKV("KeySysWorkspaceLastTakeWin", gKeySysWorkspaceLastTakeWin, ""),
+     OKV("KeySysWorkspace1", gKeySysWorkspace1, ""),
+     OKV("KeySysWorkspace2", gKeySysWorkspace2, ""),
+     OKV("KeySysWorkspace3", gKeySysWorkspace3, ""),
+
+diff -u ./src/wmmgr.cc.orig ./src/wmmgr.cc
+--- ./src/wmmgr.cc.orig	Fri Dec 24 20:42:08 1999
++++ ./src/wmmgr.cc	Mon Feb  7 00:03:29 2000
+@@ -40,6 +40,7 @@
+     }
+     fColormapWindow = 0;
+     fActiveWorkspace = WinWorkspaceInvalid;
++    fLastWorkspace = WinWorkspaceInvalid;
+     fArrangeCount = 0;
+     fArrangeInfo = 0;
+     fMinX = 0;
+@@ -92,9 +93,11 @@
+ 
+     GRAB_WMKEY(gKeySysWorkspacePrev);
+     GRAB_WMKEY(gKeySysWorkspaceNext);
++    GRAB_WMKEY(gKeySysWorkspaceLast);
+ 
+     GRAB_WMKEY(gKeySysWorkspacePrevTakeWin);
+     GRAB_WMKEY(gKeySysWorkspaceNextTakeWin);
++    GRAB_WMKEY(gKeySysWorkspaceLastTakeWin);
+ 
+     GRAB_WMKEY(gKeySysWinMenu);
+     GRAB_WMKEY(gKeySysMenu);
+@@ -217,10 +220,15 @@
+         } else if (IS_WMKEY(k, vm, gKeySysWorkspaceNext)) {
+             XUngrabKeyboard(app->display(), CurrentTime);
+             switchToNextWorkspace(false);
++        } else if (IS_WMKEY(k, vm, gKeySysWorkspaceLast)) {
++            XUngrabKeyboard(app->display(), CurrentTime);
++            switchToLastWorkspace(false);
+         } else if (IS_WMKEY(k, vm, gKeySysWorkspacePrevTakeWin)) {
+             switchToPrevWorkspace(true);
+         } else if (IS_WMKEY(k, vm, gKeySysWorkspaceNextTakeWin)) {
+             switchToNextWorkspace(true);
++        } else if (IS_WMKEY(k, vm, gKeySysWorkspaceLastTakeWin)) {
++            switchToLastWorkspace(true);
+         } else if (IS_WMKEY(k, vm, gKeySysWorkspace1)) {
+             switchToWorkspace(0, false);
+         } else if (IS_WMKEY(k, vm, gKeySysWorkspace2)) {
+@@ -1515,6 +1523,7 @@
+             }
+         }
+ #endif
++        fLastWorkspace = fActiveWorkspace;
+         fActiveWorkspace = workspace;
+ #ifdef CONFIG_TASKBAR
+         if (taskBar && taskBar->workspacesPane() &&
+@@ -1839,6 +1848,10 @@
+     long nw = (activeWorkspace() + 1) % workspaceCount();
+ 
+     switchToWorkspace(nw, takeCurrent);
++}
++
++void YWindowManager::switchToLastWorkspace(bool takeCurrent) {
++    switchToWorkspace(lastWorkspace(), takeCurrent);
+ }
+ 
+ void YWindowManager::tilePlace(YFrameWindow *w, int tx, int ty, int tw, int th) {
+
+diff -u ./src/wmmgr.h.orig ./src/wmmgr.h
+--- ./src/wmmgr.h.orig	Fri Dec 24 20:31:04 1999
++++ ./src/wmmgr.h	Mon Feb  7 00:01:34 2000
+@@ -122,6 +122,7 @@
+ #endif
+ 
+     long activeWorkspace() const { return fActiveWorkspace; }
++    long lastWorkspace() const { return fLastWorkspace; }
+     void activateWorkspace(long workspace);
+     long workspaceCount() const { return ::workspaceCount; }
+     const char *workspaceName(long workspace) const { return ::workspaceNames[workspace]; }
+@@ -150,6 +151,7 @@
+     void switchToWorkspace(long nw, bool takeCurrent);
+     void switchToPrevWorkspace(bool takeCurrent);
+     void switchToNextWorkspace(bool takeCurrent);
++    void switchToLastWorkspace(bool takeCurrent);
+ 
+     void tilePlace(YFrameWindow *w, int tx, int ty, int tw, int th);
+     void tileWindows(YFrameWindow **w, int count, bool vertical);
+@@ -179,6 +181,7 @@
+     YFrameWindow *fTop[WinLayerCount];
+     YFrameWindow *fBottom[WinLayerCount];
+     long fActiveWorkspace;
++    long fLastWorkspace;
+     YFrameWindow *fColormapWindow;
+     int fMinX, fMinY, fMaxX, fMaxY;
+     EdgeSwitch *fLeftSwitch, *fRightSwitch;

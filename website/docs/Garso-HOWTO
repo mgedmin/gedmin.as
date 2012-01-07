@@ -1,0 +1,264 @@
+Kaip Linux'e sutvarkyti garso plokðtæ
+Versija 0.2
+2001-04-09
+
+Copyright (c) 1999,2001  Marius Gedminas  <mgedmin@delfi.lt>
+
+
+0. Áþanga
+
+Ðis dokumentas skirtas pradedantiems Linux'o vartotojams, kurie paprastai
+tingi skaityti egzistuojanèià (angliðkà) dokumentacijà ir uþverèia
+os_linux@osf.lt konferencijà klausimais.  Kà gi, ne visi anglø kalbà
+gerai moka -- negalima dël to jø kaltinti.
+
+Jei nenorite klausyti ilgø ir tuðèiø kalbø, eikite tiesiai prie treèio
+skyriaus.  Jei tai nepadës, teks gráþti prie antrojo.  Jei ir tai
+nepadës -- skaitykit Sound-HOWTO ir atsiøskit man pataisytà ðio dokumento
+versijà ;)
+
+
+1. Paprastas kelias Plug&Play garso kortoms Red Hat distribucijoje
+
+Mano garso korta -- Sound Blaster AWE32 PnP.  Paleidþiu sndconfig:
+
+  # sndconfig
+
+Spaudþiu [Ok].  Mano garso kortà atpaþásta.  Spaudþiu [Ok].  Sako, kad
+jau turiu /etc/isapnp.conf.  Gerai, spaudþiu [Ok].  Sako tà patá apie
+/etc/conf.modules.  Þinau, þinau, spaudþiu [Ok].  Siûlo garso testà.
+[Ok].  KLAIDA!: "resource conflict" bandant iðskirti 0x280 I/O portà
+mano tinklo plokðtei.  Konfliktuoja, aiðku, su ta paèia garso plokðte,
+kuri jau buvo inicializuota anksèiau.  [Ok].  Tæsiam rankiná nustatymà.
+SB AWE32 PnP, IO/IRQ/DMA/MPU IO.  [Ok].  Ta pati klaida.  [Ok].  Tas pats
+rankinis nustatymas.  [Cancel].  Apsieisiu be sndconfig'o.
+
+
+2. Tradicinis ir patikimas kelias
+
+
+2.1.  Reikiamø moduliø kompiliavimas
+
+Labai galimas daiktas, kad visi reikiami moduliai jau yra sukompiliuoti.
+Bet jei labai norite, galite susikompiliuodami branduolá (angl. `kernel')
+nurodydami norimus garso modulius.  Branduolio kompiliavimas neáeina á
+ðio dokumento temà. ;)
+
+Beje, galima ákompiliuoti garsà tiesiai á branduolá, apsieinant be moduliø.
+Taèiau taip prarandamas lankstumas.  Be to, jei jûsø garso plokðtë PnP,
+o BIOS'ai PnP nepalaiko, ðis bûdas sukels komplikacijø.
+
+Kitas variantas -- garso draiveriai ið ðalies, pvz. ALSA ar komercinis OSS.
+Èia að jokios patirties neturiu, tad galiu nebent nukreipti á atitinkamà
+dokumentacijà (pvz., Alsa-HOWTO).
+
+Þinoma, iðkyla vienas klausimas -- o kokiø moduliø reikia?  Èia vël galiu
+nebent pasiûlyti skaityti dokumentacijà -- /usr/src/linux/Documentation/sound/,
+on-line `make menuconfig' (ar `make xconfig') helpus ir panaðiai.
+(Alsa atveju tam skirtas 4-tas Alsa-HOWTO skyrius).
+
+
+2.2. Plug&Play kortos paruoðimas
+
+Jei jûsø BIOS'ai palaiko PnP, ðá þingsná galite praleisti.  Tiesiog
+uþsiraðykite kur nors visus parametrus (IO, IRQ, DMA, DMA16 ir pan.),
+kuriuos tikriausiai pamatysite kompiuterio pasikrovimo metu.
+
+Paleiskite pnpdump:
+
+  # pnpdump > /etc/isapnp.conf
+
+Dabar faile /etc/isapnp.conf rasite visø Plug&Play ISA kortø ir jø
+leistinø konfigûracijø sàraðà (komentaruose).
+
+Kiekvienà kortà sudaro keli árenginiai.  Pvz.:
+
+  [...]
+  # Card 1: (serial identifier 4a 00 01 fd 83 42 00 8c 0e)
+  # CTL0042 Serial No 130435 [checksum 4a]
+  # Version 1.0, Vendor version 1.0
+  # ANSI string -->Creative SB AWE32 PnP<--
+  [...]
+  (CONFIGURE CTL0042/130435 (LD 0
+  #     ANSI string -->Audio<--
+  [... skirtingos konfigûracijos, atskirtos tuðèiomis eilutëmis ...]
+  # (ACT Y)
+  ))
+  [...]
+  (CONFIGURE CTL0042/130435 (LD 1
+  #     Compatible device id PNP0600
+  #     ANSI string -->IDE<--
+  [... konfigûracijos ...]
+  # (ACT Y)
+  ))
+  [... ir t.t. ...]
+  # Card 2: (serial identifier e2 48 ec 2d 48 01 13 18 0e)
+  # CPX1301 Serial No 1223437640 [checksum e2]
+  # Version 1.0, Vendor version 0.1
+  # ANSI string -->Compex RL2000 PnP Series Ethernet Adapter#
+  [...]
+  (CONFIGURE CPX1301/1223437640 (LD 0
+  # (ACT Y)
+  ))
+  [...]
+
+Dabar belieka kiekvienos kortos kiekvienam árenginiui (LD turbût reiðkia
+`Logical Device') reikia pasirinkti vienà konfigûracijà ir jà ájungti --
+iðmesti `#' simboliukus reikiamose eilutëse.  Taip pat reikia atkomentuoti
+(ACT Y) eilutes.  Viskas.
+
+Nors nebûtinai.  Jei jûsø garso korta -- Sound Blaster AWE32/64, pnpdump
+gali praleisti pora reikalingø eiluèiø.  Susiraskite WaveTable árenginá
+ir pakeiskite eilutæ
+
+  (IO 0 (BASE 0x0620))
+
+á
+
+  (IO 0 (BASE 0x0620)) (IO 1 (BASE 0x0A20)) (IO 2 (BASE 0x0E20))
+
+
+Dabar galite patikrinti konfigûracijà:
+
+  # isapnp /etc/isapnp.conf
+
+Turëtumëte pamatyti kà nors panaðaus á
+
+  Board 1 has Identity 4a 00 01 fd 83 42 00 8c 0e:  CTL0042 Serial No 130435 [checksum 4a]
+  Board 2 has Identity e2 48 ec 2d 48 01 13 18 0e:  CPX1301 Serial No 1223437640 [checksum e2]
+  CTL0042/130435[0]{Audio               }: Ports 0x220 0x330; IRQ5 DMA1 DMA5 --- Enabled OK
+
+Na ir puiku.  Jei jûsø distribucija nëra pasenusi (turbût nëra, jei joje
+yra isapnptools), tai isapnp /etc/isapnp.conf bus automatiðkai iðkvieèiama
+pasikrovimo metu.
+
+Jei iðkilo problemø dël konfliktø (pvz., bandant antrà kartà
+sukonfigûruoti jau sukonfigûruotà plokðtæ), susiraskite /etc/isapnp.conf
+failo pradþioje eilutæ
+
+  (CONFLICT (IO FATAL)(IRQ FATAL)(DMA FATAL)(MEM FATAL))
+
+ir jà uþkomentuokite (t.y. áterpkite `#' simbolá pradþioje).
+
+
+2.3. Moduliø konfigûravimas
+
+Susiraskite failà /etc/conf.modules (arba /etc/modules.conf).  Jei nëra
+tokio -- sukurkite.  Tada áraðykite tokias (ar panaðias) eilutes
+
+  alias sound-slot-0 sb
+  alias sound-service-0-1 awe_wave
+  alias sound-service-0-2 awe_wave
+
+  options sb io=0x220 irq=5 dma=1 dma16=5 mpu_io=0x330
+  options opl3 io=0x388
+  post-install awe_wave /usr/bin/sfxload synthgm
+
+Tai, aiðku, skirta mano SB AWE32 garso kortai.  Jums teks áraðyti savo
+parametrus (io, irq, dma ir pan), gal bût nurodyti kitus moduliø
+pavadinimus vietoje `sb', `awe_wave' ir pan.
+
+Beje, galite vis dëlto pasinaudoti sndconfig'u.  Net jei jo garso testas
+ir nepraeis, jis áraðys reikiamas eilutes á conf.modules failà.  Taip pat
+turëtø sutvarkyti ir isapnp.conf (tik eilutæ dël konfliktø paliks).
+
+Trumpas paaiðkinimas apie tas sound-slot bei sound-service eilutes:
+  sound-slot-0 bus pakraunamas bandant kreiptis á /dev/audio, /dev/dsp,
+    /dev/midi00, /dev/sequencer, /dev/sndstat, /dev/audioctl
+  sound-slot-1 bus pakraunamas bandant kreiptis á /dev/audio1, /dev/dsp1,
+    /dev/midi01
+  sound-slot-2 bus pakraunamas bandant kreiptis á /dev/audio2, /dev/dsp2,
+    /dev/midi02
+  sound-slot-3 bus pakraunamas bandant kreiptis á /dev/audio3, /dev/dsp3,
+    /dev/midi03
+
+  sound-service-0-1 bus pakraunamas bandant kreiptis á /dev/sequencer
+  sound-service-0-2 bus pakraunamas bandant kreiptis á /dev/midi00
+  sound-service-0-3 bus pakraunamas bandant kreiptis á /dev/dsp, /dev/audio
+  sound-service-0-6 bus pakraunamas bandant kreiptis á /dev/sndstat
+  sound-service-0-7 bus pakraunamas bandant kreiptis á /dev/audioctl
+
+Ir panaðiai.
+
+
+2.4. Bandymas
+
+Ávykdykite ðias komandas
+
+  # modprobe sound
+  # modprobe midi
+
+Jei jokiø klaidos praneðimø nebuvo, valio!  Galite patikrinti:
+
+  # cat /proc/sound
+  OSS/Free:3.8s2++-971130
+  Load type: Driver loaded as a module
+  Kernel: Linux mg.home 2.2.9 #42 Thu Jun 3 22:23:16 CEST 1999 i686
+  Config options: 0
+
+  Installed drivers:
+
+  Card config:
+
+  Audio devices:
+  0: Sound Blaster 16 (4.13) (DUPLEX)
+
+  Synth devices:
+  0: AWE32-0.4.3 (RAM512k)
+  1: Yamaha OPL3
+
+  Midi devices:
+  0: Sound Blaster 16
+  1: AWE Midi Emu
+
+  Timers:
+  0: System clock
+
+  Mixers:
+  0: Sound Blaster
+
+Kaip matote, tuðèios `installed drivers' bei `card config' sekcijos visai
+nebaisios ir nieko blogo nereiðkia.  Laisvai apsieiti galima ir be `synth
+devices' bei `midi devices'.  Apskritai, svarbiausia yra `audio devices'.
+
+Na va, lyg ir viskas.
+
+
+3. O gal vis dëlto sndconfig?
+
+Paleidþiu sndconfig:
+
+  # sndconfig
+
+Spaudþiu [Ok].  Mano garso kortà atpaþásta.  Spaudþiu [Ok].  Sako, kad
+jau turiu /etc/isapnp.conf.  Gerai, spaudþiu [Ok].  Sako tà patá apie
+/etc/conf.modules.  Þinau, þinau, spaudþiu [Ok].  Siûlo garso testà.
+
+O dabar pereinu prie kitos virtualios konsolës, susirandu /etc/isapnp.conf
+ir iðmetu eilutæ `(CONFLICT ...'.  Áraðau trûkstamus AWE32 portus (þr.
+2-à dalá).  Gráþtu.
+
+[Ok].  Suveikë!  "Hello, my name is Linus Torvalds and I pronounce `Linux'
+as `Linux'".  [Yes].  Siûlo MIDI testà.  [Ok].  Gerai.  [Yes].  Viso gero.
+
+
+4. Jei niekas nepadeda
+
+Jei vis tiek nepavyko -- yra daug pilnesni apraðymai.  Ko gero, rasite juos
+/usr/src/HOWTO kataloge.  Paskaitykite
+
+  Sound-HOWTO
+  Soundblaster-AWE mini-HOWTO
+  Soundblaster-16 mini-HOWTO
+  Gravis-Ultra-Sound mini-HOWTO
+  SB+MIDI mini-HOWTO
+  Alsa-sound mini-HOWTO
+
+Sëkmës!
+
+
+5. Ateities planai
+
+Sutvarkyti ðá dokumentà (naudojant SGML Tools) ir pakeisti versijos numerá
+á "1.0".
+

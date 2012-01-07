@@ -1,0 +1,104 @@
+#!/usr/bin/python
+"""Haaack to convert exported Zope website hack to my new Blogofile hack"""
+
+import os, sys, optparse, shutil
+
+
+here = os.path.dirname(os.path.abspath(__file__))
+
+
+def read_file(filename):
+    with open(filename) as f:
+        return f.read()
+
+
+def parse_props(filename):
+    props = {}
+    with open(filename) as f:
+        for line in f:
+            line = line.rstrip('\n')
+            if line == '[properties]':
+                break
+        for line in f:
+            line = line.rstrip('\n')
+            if line.startswith('['):
+                break
+            if line.startswith('#'):
+                continue
+            if not line.strip():
+                continue
+            if ' = ' not in line:
+                print "%s: bad metadata line: %s" % (filename, line)
+                continue
+            key, value = line.split(' = ', 1)
+            if ':' not in key:
+                print "%s: bad metadata key: %s" % (filename, key)
+                continue
+            name, type = key.split(':')
+            value = value.decode('string-escape')
+            # TODO: saner type conversion
+
+            if type == 'boolean':
+                value = int(value)
+            elif type == 'int':
+                value = int(value)
+            elif type == 'string':
+                pass
+            elif type == 'ustring':
+                value = unicode(value, 'UTF-8')
+            else:
+                print "%s: unsupported type: %s" % (filename, type)
+                continue
+
+            props[name] = value
+    return props
+
+
+def write_file(filename, body):
+    if os.path.exists(filename):
+        sys.exit('Cowardly refusing to overwrite %s' % filename)
+    with open(filename, 'w') as f:
+        f.write(body)
+        if not body.endswith('\n'):
+            f.write('\n')
+
+
+def format_body(body, props):
+    return (
+        '<%%inherit file="_templates/site.mako" />\n' +
+        '<%%def name="title()">%s</%%def>\n' % props['title'] +
+        '<%%def name="short_title()">%s</%%def>\n' % props['short_title'] +
+        '\n' +
+        body)
+
+
+def main():
+    parser = optparse.OptionParser()
+    opts, args = parser.parse_args()
+    if len(args) == 2:
+        source, dest = args
+    elif len(args) == 1:
+        source = os.path.abspath(args[0])
+        prefix = os.path.join(here, 'zope-export') + os.path.sep
+        if not source.startswith(prefix):
+            parser.error('%s not a subdir of %s' % source, prefix)
+        subdir = source[len(prefix):]
+        dest = os.path.join(here, 'website', subdir)
+    if not os.path.isdir(dest):
+        os.makedirs(dest)
+    for language in 'lt', 'en':
+        body = read_file(os.path.join(source, language))
+        props = parse_props(os.path.join(source, '.z2meta', language))
+        write_file(os.path.join(dest, 'index-%s.html.mako' % language),
+                   format_body(body, props))
+    for filename in os.listdir(source):
+        if filename not in ('lt', 'en', '.z2meta') and not os.path.isdir(os.path.join(source, filename)):
+            print filename
+            shutil.copy(os.path.join(source, filename),
+                        os.path.join(dest, filename))
+
+
+
+if __name__ == '__main__':
+    main()
+

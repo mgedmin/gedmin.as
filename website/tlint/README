@@ -1,0 +1,56 @@
+README for tlint-0.1.2, the Text Linux Installation Tool 
+========================================================
+
+I just wanted to have something like glint for console mode.  So I wrote 
+tlint -- just a frontend to rpm.  
+
+This is the very second ALPHA release of tlint.
+
+Requirements:
+
+  rpm (Red Hat package manager) based system (such as Red Hat Linux
+    distribution)
+    
+  glibc2 (for getline and getdelim functions)
+  
+  newt library
+  
+  /bin/rpm itself to do all the work
+
+Installation:
+
+  Type `make' to compile it.  Then type `./tlint' to run it.  I would not
+  recommend copying to /usr/bin -- wait for a more complete release.
+  
+  A precompiled version is included (compiled on Red Hat 5.0 system with
+  glibc2).
+
+Cacheing:
+
+  It takes some time every time to scan available packages.  However you can
+  you can build a list for them for faster access:
+
+    getavail > available
+    
+  and run tlint with these parameters
+  
+    tlint -L available
+    
+  Voila -- no more slow scanning.  You could do the same with installed
+  packages (getlist and option -l), but it might be unpractical -- you
+  would have to manually update the list every time you install/remove 
+  a package (and not forget to do that!).
+  
+  BTW the only way to specify `available' packages from different directories
+  currently is to create a list file:
+  
+    getavail dir1 > available
+    getavail dir2 >> available
+    ...
+    
+You can hope to find the latest version here:
+  http://ice.dammit.lt/~mgedmin/
+
+Marius Gedminas <mgedmin@pub.osf.lt>, 1998-12-06
+
+Long live Open Source! (www.opensource.org)

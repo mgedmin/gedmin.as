@@ -1,0 +1,2140 @@
+\documentclass[a4paper,twoside]{article}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+\usepackage{theorem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[cpRIM]{inputenc}
+\usepackage[english,lithuani]{babel}
+
+% Alternative fonts:
+\usepackage{addltenc}
+%\usepackage[LT]{fontenc}
+
+% Preamble uses some TeX magic
+\makeatletter
+
+% Margins
+\addtolength{\hoffset}{-2cm}
+\addtolength{\textwidth}{4cm}
+\addtolength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+
+% Two-sided printing
+\ifthenelse{\boolean{@twoside}}        % Swap odd and even margin sizes
+{\newlength{\templen}
+ \setlength{\templen}{\oddsidemargin}
+ \setlength{\oddsidemargin}{\evensidemargin}
+ \setlength{\evensidemargin}{\templen}}
+{}
+
+% Page control
+\newcommand{\longpage}{\enlargethispage{\baselineskip}}
+\newcommand{\shortpage}{\enlargethispage{-\baselineskip}}
+
+% Macros
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+
+\newcommand{\Ind}{\mathbf{1}}   % FIXME: geriau bûtø \mathbb{1}, bet neveikia
+
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\dx}{\ud x}
+\newcommand{\dy}{\ud y}
+\newcommand{\dz}{\ud z}
+\newcommand{\dt}{\ud t}
+\newcommand{\du}{\ud u}
+\newcommand{\dv}{\ud v}
+\newcommand{\dr}{\ud r}
+\newcommand{\dl}{\ud l}
+\newcommand{\dphi}{\ud\phi}
+\newcommand{\dtheta}{\ud\theta}
+
+\newcommand{\Beta}{\mathrm{B}}
+
+\newcommand{\const}{\mathop{\operator@font const}\nolimits}
+\newcommand{\sgn}{\mathop{\operator@font sgn}\nolimits}
+\newcommand{\grad}{\mathop{\operator@font grad}\nolimits}
+\newcommand{\arccot}{\mathop{\operator@font arccot}\nolimits}
+\newcommand{\bigtimes}{\times}          % FIXME: too small
+
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\liminf}{\varliminf}
+\renewcommand{\limsup}{\varlimsup}
+
+\newcommand{\tada}{\ensuremath{\quad\Longrightarrow\quad}}
+\newcommand{\ttt}{\ensuremath{\quad\Longleftrightarrow\quad}}
+
+% Lithuanian standards
+
+% Maybe be consistent with Lithuanian traditions?
+%\renewcommand{\tan}{\mathop{\operator@font tg}\nolimits} 
+%\renewcommand{\arctan}{\mathop{\operator@font arctg}\nolimits} 
+%\renewcommand{\cot}{\mathop{\operator@font ctg}\nolimits} 
+%\renewcommand{\arccot}{\mathop{\operator@font arcctg}\nolimits} 
+
+\renewcommand{\labelenumii}{\theenumii)}
+
+% Swap part name and number
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+       \Large\bfseries \thepart~\MakeLowercase{\partname}
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+
+% Back to reality
+\makeatother
+
+% Environments
+
+\newcommand{\NL}{\mbox{}}    % To force a line break before \begin{enumerate}
+
+\newcommand{\Def}[1]{\textit{\textbf{#1}}}
+
+\theoremstyle{change}
+\theorembodyfont{\rmfamily}
+\newtheorem{ap}{apibrëþimas}[section]
+\newtheorem{tg}[ap]{teiginys}
+\newtheorem{tgg}[ap]{teiginiai}
+\newtheorem{tr}[ap]{teorema}
+\newtheorem{lm}[ap]{lema}
+\newtheorem{ps}[ap]{pastaba}
+\newtheorem{pss}[ap]{pastabos}
+\newtheorem{isv}[ap]{iðvada}
+\newtheorem{isvv}[ap]{iðvados}
+\newtheorem{pvz}[ap]{pavyzdys}
+\newtheorem{pvzz}[ap]{pavyzdþiai}
+
+\newenvironment{pseudo*}[1]%
+  {\par\normalfont\noindent\textbf{#1}}%
+  {}
+
+\newenvironment{ps*}%
+  {\begin{pseudo*}{Pastaba}}%
+  {\end{pseudo*}}
+\newenvironment{pss*}%
+  {\begin{pseudo*}{Pastabos}}%
+  {\end{pseudo*}}
+\newenvironment{pvz*}%
+  {\begin{pseudo*}{Pavyzdys}}%
+  {\end{pseudo*}}
+\newenvironment{pvzz*}%
+  {\begin{pseudo*}{Pavyzdþiai}}%
+  {\end{pseudo*}}
+
+\newenvironment{pseudoisv}[1]%
+  {\begin{pseudo*}{#1 iðvada}}%
+  {\end{pseudo*}}
+
+\newenvironment{pseudoir}[1]%
+  {\begin{pseudo*}{#1}$\vartriangleright$\quad\begin{em}\ignorespaces}%
+  {\end{em}\hspace{\stretch{1}}$\vartriangleleft$\end{pseudo*}}
+
+\newenvironment{ir}%
+  {\begin{pseudoir}{Árodymas\quad}}%
+  {\end{pseudoir}}
+\newenvironment{kir}%
+  {\begin{pseudoir}{,,Árodymas``\quad}}%
+  {\end{pseudoir}}
+\newenvironment{ir*}%
+  {\begin{pseudoir}{}}%
+  {\end{pseudoir}}
+
+% Layout
+
+\title{Matematinës analizës konspektai \\
+       \Large II~kursas, rudens semestras}
+\author{Marius Gedminas \\ pagal prof. V.~Mackevièiaus paskaitas \\
+        VU Matematikos ir Informatikos fakultetas}
+%\date{II kursas, rudens semestras (1999--2000~m.)}
+
+\pagestyle{fancyplain}
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\subsectionmark}[1]{}
+
+\markboth{Matematinës analizës konspektai}{}
+
+\lhead[\fancyplain{}{\thepage}]%
+      {\fancyplain{}{\rightmark}}
+\chead{}
+\rhead[\fancyplain{}{\leftmark}]%
+      {\fancyplain{}{\thepage}}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+% The document at last
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\part{Keliø kintamøjø funkcijø integravimas}
+\markboth{Keliø kintamøjø funkcijø integravimas}{}
+
+\section{Papildomos laiptiniø funkcijø savybës}				% 1
+
+\begin{ap}								% 1.1
+\Def{$k$-mate gardele} (\Def{$k$-maèiu gretasieniu/staèiakampiu}) vadinama 
+aibë $I \subset \R^k$, turinti pavidalà
+\[ I = I_1 \times I_2 \times \cdots \times I_k
+\]
+kur $I_i \subset R$ -- bet kokie intervalai (áskaitant ir vientaðká $[a, a] 
+= \{a\}$).
+
+$k$-matë gardelë $I$ vadinama \Def{uþdaràja}, kai visos jos ,,briaunos`` $I_i$
+yra uþdaros.  Analogiðkai apibrëþiama \Def{atviroji}, \Def{aprëþtoji} ir
+t.t. gardelës.
+
+Gardelës $I = \bigtimes_{n=1}^k I_n$ \Def{matu} vadinamas skaièius
+\[ m(I) := \prod_{n=1}^k |I_n|
+\]
+(ðiuo atveju laikome, kad $0 \cdot \infty := 0$).
+\end{ap}
+
+
+\begin{ap}\label{ap:1.2}						% 1.2
+Aibë $N \subset \R^k$ vadinama \Def{nulinio mato aibe} (þymime $m(N) = 0$),
+jei $\forall \eps > 0 \quad \exists$ $k$-maèiø gardeliø seka 
+$\{I_n: n \in \N\}$, su kuria
+\begin{enumerate}
+  \item $\displaystyle \bigcup_{n=1}^\infty I_n \supset N$ ir
+  \item $\displaystyle \sum_{n=1}^\infty m(I_n) < \eps$
+\end{enumerate}
+
+\noindent Visø tokiø aibiø klasæ þymësime $\mathcal{N}$.
+\end{ap}
+
+\begin{pss}\NL								% 1.3
+\begin{enumerate}
+  \item Nulinio mato aibës sàvoka priklauso nuo dimensijos $k$.  Pvz.,
+        tiesë $\not\in \mathcal{N}$, kai $k = 1$, bet $\in \mathcal{N}$, kai
+        $k > 1$.
+  \item \ref{ap:1.2} galima apsiriboti vien uþdaromis arba vien atviromis
+        gardelëmis; nuo to nulinio mato aibës sàvoka nepasikeis.  
+
+        \begin{ir*} Ið tiesø, $m(\overline{I_n}) = m(I_n)$, tad galima 
+        apsiriboti uþdaromis.  Ásitikinsime, kad galima apsiriboti ir vien
+        tik atviromis gardelëmis.  Remiantis apibrëþimu laisvai pasirinkime
+        $\eps > 0$.  $\exists$ gardeliø seka $\{I_n: n \in \N\}:$
+        $\bigcup_{n=1}^\infty I_n \supset N$ ir $\sum_{n=1}^\infty m(I_n)
+        < \eps/2$.  Kiekvienam $I_n$ galime rasti atvirà gardelæ
+        $\widetilde{I}_n \subset I_n$ ir $m(\widetilde{I}_n) = 2 m(I_n)$.
+        Tada $\bigcup_{n=1}^\infty \widetilde{I}_n \supset N$ ir 
+        $\sum_{n=1}^\infty m(\widetilde{I}_n) < \eps$.
+        \end{ir*}
+\end{enumerate}
+\end{pss}
+
+\shortpage
+\begin{tg}\label{tg:1.4}\NL						% 1.4
+\begin{enumerate}
+  \item $N \in \mathcal{N}$, $A \subset N$ \tada
+        $A \in \mathcal{N}$.
+  \item $N_i \in \mathcal{N}$, $i \in \N$ \tada
+        $\displaystyle \bigcup_{i=1}^\infty N_i \in \mathcal{N}$.
+        \label{tg:1.4.2}
+\end{enumerate}
+\end{tg}
+
+\begin{pvzz}\NL								% 1.5
+\begin{enumerate}
+  \item Vientaðkë aibë $\{a\}$ yra nulinio mato aibë. Remiantis \ref{tg:1.4}.%
+        \ref{tg:1.4.2}, bet kuri baigtinë arba skaiti aibë taip pat yra 
+        nulinio mato aibë.  Pvz., $Q \in \mathcal{N}$ ($k = 1$).
+  \item $k$-matës gardelës $\bigtimes_{n=1}^k [a_n, b_n]$ ,,kraðtas`` yra
+        nulinio mato aibë.
+        \begin{ir*}
+        Ið tikrøjø, jis sudarytas ið $2k$ nulinio mato gardeliø $\{a_1\} \times
+        [a_2, b_2] \times \cdots \times [a_k, b_k]$, $\{b_1\} \times
+        [a_2, b_2] \times \cdots \times [a_k, b_k]$, \ldots, $[a_1, b_1] \times
+        \cdots \times \{b_k\}$ (,,briaunø``).
+        \end{ir*}
+  \item Ásitikinsime, kad kiekviena glodi kreivë $\Gamma$ erdvëje $\R^k$ yra
+        nulinio mato aibë ($k \ge 2$).
+        \begin{ir*}
+        Tarkime, $\Gamma = \gamma([a,b])$ ir $\gamma \in C^1([a,b], \R^k)$.
+
+        Imkime bet koká intervalo $[a,b]$ skaidiná $a = t_0 < t_1 < \ldots
+        < t_r = b$ ir paþymëkime $\delta := \max |t_{i+1}-t_i|$, 
+        $M := \max_{t \in [a,b]} |\gamma'(t)|$.
+
+        Remiantis Lagranþo vidutinës reikðmës teorema,
+        $|\gamma(t)-\gamma(t_i)| \le M |t - t_i| \le M \delta$, kai 
+        $t \in [t_i, t_{i+1}]$.
+
+        Paþymëkime $I_i$ $k$-matæ gardelæ su centru taðke $\gamma(t_i)$ ir
+        $2M|t_{i+1}-t_i|$ ilgio kraðtinëmis.
+
+        Ávertinkime suminá gardeliø $I_i$ matà:
+        \begin{align*}
+        \sum_{i=0}^{r-1} m(I_i) &= \sum_{i=0}^{r-1} (2M|t_{i+1}-t_i|)^k
+        = (2M)^k \sum_{i=0}^{r-1} |t_{i+1}-t_i|^k
+        = (2M)^k \sum_{i=0}^{r-1} \underbrace{|t_{i+1}-t_i|^{k-1}}_{\le
+          \delta^{k-1}} |t_{i+1}-t_i| \\&
+        \le (2M)^k \delta^{k-1} \cdot \underbrace{\sum_{i=0}^{r-1}
+        |t_{i+1}-t_i|}_{= b-a} = \underbrace{(b-a)(2M)^k}_{=: C} \delta^{k-1}
+        = C\delta^{k-1} \qquad \text{($C$ nepriklauso nuo skaidinio)}
+        \end{align*}
+
+        Aiðku, kad $\bigcup_{i=0}^{r-1} I_i \supset \Gamma$.
+
+        L.p. $\eps > 0$ ir imkime bet koká $[a,b]$ skaidiná su tokiu $\delta$,
+        kad $C\delta^{k-1} < \eps$.  Pagal apibrëþimà $\Gamma \in \mathcal{N}$.
+        \end{ir*}
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}[sàvoka ,,beveik visur``]					% 1.6
+Sakoma, kad kokia nors aibës $A \subset \R^k$ taðkø savybë galioja \Def{beveik
+visur} (b.v.) aibëje $A$, jei ji galioja visuose aibës $A$ taðkuose, iðskyrus
+galbût nulinio mato aibæ.
+
+\begin{description}
+\item[Pvz.:]
+\begin{enumerate}
+  \item Funkcija $f: A \to \RR := [-\infty, \infty]$ yra baigtinë b.v., jei
+        $\{ x \in A : f(x) = \pm\infty \} \in \mathcal{N}$.
+  \item Funkcija $f: [a, b] \to \R$ yra b.v. tolydi, jei jos trûkio taðkø
+        aibë priklauso $\mathcal{N}$.  Pvz., $\forall f \in D[a, b]$ yra
+        b.v. tolydi, nes jos trûkio taðkø aibë visada baigtinë arba skaiti.
+  \item Funkcijø seka $f_n \to f$ b.v., jei $\{x : f_n(x) \not\to f(x)\} \in
+        \mathcal{N}$.
+  \item Sakoma, kad funkcija $f: A\setminus N \to \R$ yra apibrëþta b.v.
+        aibëje $A$, jei $N \in \mathcal{N}$.
+\end{enumerate}
+\end{description}
+\end{ap}
+
+\begin{ap}								% 1.7
+Funkcija $\phi: I \to \R$ ($I \subset \R^k$ -- $k$-matë gardelë) vadinama
+\Def{laiptine funkcija} jei $\exists$ baigtinë $k$-maèiø aprëþtø gardeliø
+sistema $\{ I_j : j = 1 \ldots m \}$, su kuria $\phi(x) = c_j$, $x \in I_j$,
+$j = 1 \ldots m$ ir $\phi(x) = 0$, kai $x \in I \setminus \bigcup_{j=1}^m
+I_j$.
+
+Tokios funkcijos \Def{integralu} gardelëje $I$ vadinamas skaièius
+\[
+  \int_I \phi := \sum_{j=1}^m c_j m(I_j)
+\]
+
+Kiti þymëjimai:
+\[
+\int_I \phi(x)\,\dx
+\qquad
+\int_I f(x_1, \ldots, x_k)\,\dx_1\dx_2\ldots\dx_k
+\]
+
+Jei $I = [a_1, b_1] \times \cdots \times [a_k, b_k]$, dar þymima
+\[
+  \int_{a_1}^{b_1} \cdots \int_{a_k}^{b_k} 
+    f(x_1, \ldots, x_k)\,\dx_1\dx_2\ldots\dx_k
+\]
+
+Dvimaèiu ir trimaèiu atveju dimensija $k$ parodoma integralo þenklø skaièiumi:
+\[
+  \iint_I f(x,y)\,\dx\dy
+  \qquad
+  \iiint_I f(x,y,z)\,\dx\dy\dz
+\]
+
+Visø laiptiniø funkcijø klasë gardelëje $I$ þymima $S(I)$.
+\end{ap}
+
+\begin{pss}\NL								% 1.8
+\begin{enumerate}
+  \item Integralo apibrëþimo korektiðkumas árodomas analogiðkai vienmaèiam
+        atvejui.
+  \item Laiptines funkcijas galima iðreikðti tiesinëmis gardeliø indikatoriø
+        kombinacijomis: $\phi = \sum_{j=1}^m c_k \Ind_{I_j}$
+        ir atvirkðèiai, visos tokio pavidalo funkcijos yra laiptinës.
+\end{enumerate}
+\end{pss}
+
+\begin{tg}[laiptiniø funkcijø integralø savybës]\NL			% 1.9
+\begin{enumerate}
+  \item (Tiesiðkumas)
+        Jei $f, g \in S(I)$, $\alpha, \beta \in \R$, tada
+        \[ \int_I (\alpha f + \beta g) = \alpha \int_I f + \beta \int_I g
+        \]
+  \item (Monotoniðkumas)
+        Jei $f, g \in S(I)$, $f \le g$, tai
+        \[ \int_I f \le \int_I g
+        \]
+        Atskiru atveju
+        \[ \left| \int_I f \right| \le \int_I |f|
+        \]
+\end{enumerate}
+\begin{ir}
+Analogiðka vienmaèiam atvejui.
+\end{ir}
+\end{tg}
+
+\begin{tr}[pirmoji pagrindinë lema]					% 1.10
+Tarkime, kad $\{\phi_n\} \subset S(\R^k)$ yra monotoniðkai maþëjanti
+neneigiamø laiptiniø funkcijø seka, konverguojanti b.v. á $0$, kai $n \to
+\infty$.  Tada
+\[ \int_{\R^k} \phi_n \to 0, \quad n \to \infty
+\]
+
+\noindent
+(Trumpai: jei $S(\R^k) \ni \phi_n \downarrow 0$ b.v.\footnote{monotoniðkumas
+ir neneigiamumas reikalingi visur, konvergavimo uþtenka ir beveik visur},
+tai $\int_{\R^k} \phi_n \downarrow 0$, $n \to \infty$)
+\end{tr}
+
+\begin{isv}								% 1.11
+Jei $S(\R^k) \ni \phi_n \uparrow \phi \in S(\R^k)$ (arba ,,$\downarrow$``) 
+b.v., tai
+\[ \int_{\R^k} \phi_n \uparrow \int_{\R^k} \phi
+   \qquad \text{(atitinkamai, ,,$\downarrow$``)}
+\]
+\end{isv}
+
+\begin{tr}[antroji pagrindinë lema]					% 1.12
+Jei $\{ \phi_n \} \subset S(\R^k)$ -- monotoniðkai didëjanti laiptiniø 
+funkcijø seka ir $A := \lim \uparrow \int_{\R^k} \phi_n < +\infty$, tai
+\[ \lim_{n\to\infty} \phi_n < +\infty \text{ b.v.}
+\]
+\noindent (t.y., $\{ x \in \R^k : \lim_{n\to\infty} \phi_n(x) = +\infty\} \in
+\mathcal{N}$).
+\end{tr}
+
+\begin{isv}								% 1.13
+Jei $\{ \phi_n \} \subset S(\R^k)$, $\phi_n \ge 0$, $n \in \N$ ir
+$\sum_{n=1}^\infty \int_{\R^k} \phi_n < +\infty$, tai
+\[ \sum_{n=1}^\infty \phi_n < +\infty \text{ b.v.}
+\]
+\end{isv}
+
+
+\section{Lebego integralas}						% 2
+
+Toliau visur $I \subset \R^k$ -- bet kokia $k$-matë gardelë.
+
+\begin{ap}								% 2.1
+Laiptiniø funkcijø seka $\{ \phi_n \} \subset S(I)$ vadinama
+\Def{fundamentalia} arba \Def{Koði} seka, jei
+\[ \forall \eps > 0 \quad \exists N \in \N : \quad
+   \int_I | \phi_n - \phi_m | < \eps
+   \text{, kai $n, m > N$}
+\]
+\begin{ps*}
+Norint atskirti tokias funkcijø Koði sekas nuo skaièiø Koði sekø kartais
+sakoma, kad tokia seka yra Koði seka $L^1$ arba vidurkine pasme.
+\end{ps*}
+\end{ap}
+
+\begin{ap}								% 2.2
+Funkcija $f: I \to \RR$ vadinama \Def{integruojama} (Lebego prasme), jei
+$\exists$ Koði seka $\{\phi_n\}\subset S(I)$, konverguojanti b.v. á $f$.
+Tokiu atveju jos \Def{Lebego integralu} gardelëje $I$ vadinamas skaièius
+\[ \int_I f := \lim_{n \to \infty} \int_I \phi_n
+\]
+\noindent Kiti integralo þymëjimai yra tokie patys kaip ir laiptiniø funkcijø.
+
+Visø integruojamø gardelëje $I$ funkcijø klasæ þymësime $L(I)$ arba $L^1(I)$.
+\end{ap}
+
+\begin{ps}								% 2.3
+Apibrëþime nurodyta riba visada egzistuoja.
+
+\begin{ir*}
+Ið tiesø, remiantis apibrëþimu, $\forall \eps > 0$ $\exists N \in \N :$
+\( \int_I |\phi_n - \phi_m| < \eps\), kai $n, m > N$, t.y.
+\( |\int_I \phi_n - \int_I \phi_m | \le \int_I |\phi_n - \phi_m| < \eps\),
+kai $n, m > N$.  Tai reiðkia, kad $\{ \int_I \phi_n \}$ yra skaièiø Koði seka
+ir todël konverguoja.
+\end{ir*}
+\end{ps}
+
+\begin{tg}[korektiðkumas]						% 2.4
+Integralo apibrëþimas yra korektiðkas, t.y. jame nurodyta riba
+$\lim_{n\to\infty} \int_I \phi_n$ nepriklauso nuo sekos $\{\phi_n\}$
+pasirinkimo.
+\end{tg}
+
+\begin{tg}[elementarios integralo savybës]\NL				% 2.5
+\begin{enumerate}
+  \item Tiesiðkumas: jei $f, g \in L(I)$, $\alpha, \beta \in \R$, tada
+        $\alpha f + \beta g \in L(I)$ ir
+        \[ \int_I (\alpha f + \beta g) = \alpha \int_I f + \beta \int_I g
+        \]
+  \item Jei $f, g \in L(I)$, tai $\max \{f, g\}, \min \{f, g\}, |f| \in L(I)$
+  \item Monotoniðkumas: jei $f, g \in L(I)$, $f \le g$ b.v. gardelëje $I$,
+        tada
+        \[ \int_I f \le \int_I g\]
+        \noindent Atskiru atveju
+        \[ \left| \int_I f \right| \le \int_I |f| \]
+  \item Jei $f \in L(I)$, $g = f$ b.v. gardelëje $I$, tada $g \in L(I)$ ir
+        \[ \int_I g = \int_I f \]
+\end{enumerate}
+\end{tg}
+
+\begin{tr}[Bepo Levi teorema]						% 2.6
+Jei $\{ f_n \} \subset L(I)$, $f_n \uparrow f$ ($f_n \downarrow f$) b.v.
+gardelëje $I$, $\lim_{n \to \infty} \uparrow \int_I f_n < +\infty$
+(atitinkamai $\lim_{n \to \infty} \downarrow \int_I f_n > -\infty$), tai $f
+\in L(I)$ ir
+\[ \int_I f = \lim_{n \to \infty} \int_I f_n
+\]
+\begin{ir}
+Be árodymo.
+\end{ir}
+\end{tr}
+
+\begin{isvv}\NL								% 2.7
+\begin{enumerate}
+  \item Jei $f_n \in L(I)$, $\sum_{n=1}^\infty \int_I |f_n| < +\infty$, tai
+        $\sum_{n=1}^\infty f_n$ konverguoja absoliuèiai b.v., jos suma
+        \[f := \sum_{n=1}^\infty f_n \in L(I)\qquad\text{ir}\qquad\int_I f = 
+        \sum_{n=1}^\infty \int_I f_n\]
+  \item Sakykime, $f \in L(I)$. Tada
+        \[ \int_I |f| = 0 \ttt f = 0 \text{ b.v. gardelëje $I$}.
+        \]
+\end{enumerate}
+\end{isvv}
+
+\begin{tr}[Fatu--Lebego\footnotemark{} teorema]\footnotetext{Fatoux--Lebegue}\NL
+									% 2.8
+\begin{enumerate}
+  \item[1a.] $\{ f_n \} \subset L(I)$, $f_n \le g \in L(I)$, $n \in \N$,
+            $\limsup_{n\to\infty} \int_I f_n > -\infty$    \tada
+            \[ \limsup_{n\to\infty} f_n \in L(I) \quad\textrm{ir}\quad
+            \int_I \limsup_{n\to\infty} f_n \ge \limsup_{n\to\infty} \int_I f_n
+            \]
+  \item[1b.] $\{ f_n \} \subset L(I)$, $f_n \ge g \in L(I)$, $n \in \N$,
+            $\liminf_{n\to\infty} \int_I f_n < +\infty$    \tada
+            \[ \liminf_{n\to\infty} f_n \in L(I) \quad\textrm{ir}\quad
+            \int_I \liminf_{n\to\infty} f_n \le \liminf_{n\to\infty} \int_I f_n
+            \]
+  \item[2.] (Lebego teorema apie maþoruotà konvergavimà)
+           $\{ f_n \} \subset L(I)$, $|f_n| \le g \in L(I)$, $f_n \to f$ b.v.
+           gardelëje $I$ \tada $f \in L(I)$ ir $\int_I f_n \to \int_I f$.
+\end{enumerate}
+\end{tr}
+
+\begin{tg}								% 2.9
+Jei $f: I \to \R$ yra aprëþta ir b.v. tolydi funkcija kompaktiðkoje gardelëje
+$I$, tai $f \in L(I)$. 
+
+\noindent
+Atskiru atveju, $C(I) \subset L(I)$ kompaktiðkoje ardelëje $I$; $D[a, b]
+\subset L[a, b]$.
+\end{tg}
+
+\begin{ps}								% 2.10
+Galima árodyti, kad funkcijos $f$ aprëþtumas ir b.v. tolydumas intervale $[a,
+b]$ yra bûtina ir pakankama sàlyga, kad $f \in R[a, b]$ (integruojama Rymano
+prasme). Taigi, $R[a, b] \subset L[a,b]$.
+\end{ps}
+
+\begin{ap}								% 2.11
+Sakoma, kad funkcija $f: \R^k \to \RR$ yra \Def{mati}, jei $\exists$ seka
+$\{ \phi_n \} \subset S(\R^k)$, su kuria $\phi_n \to f$ b.v.  Sakoma, kad
+funkcija $f: A \to \RR$ ($A \subset \R^k$) yra mati, jei jos tæsinys $\hat{f}
+: \R^k \to \R$, apibrëþiamas lygybe
+\[ \hat{f}(x) := \begin{cases} f(x), & \text{jei $x \in A$}, \\
+                               0,    & \text{jei $x \in \R^k \setminus A$}
+                 \end{cases}
+\]
+yra mati funkcija.  Visø tokiø funkcijø aibæ þymësime $M(A)$, be to
+susitarsime þymëti $M := M(\R^k)$.
+\end{ap}
+
+\medskip
+Visi tolimesni teiginiai bus formuluojami funkcijø klasei $M$.
+
+\begin{tg}\NL								% 2.12
+\begin{enumerate}
+  \item $L := L(\R^k) \subset M$.
+  \item $f, g \in M$, $|f| < +\infty$ b.v., $|g| < +\infty$ b.v.  Tada
+        $\alpha f + \beta g \in M$ ($\alpha, \beta \in \R$), $fg \in M$,
+        $\max \{f, g\} \in M$, $\min \{f, g\} \in M$, $|f| \in M$; jei be to
+        $g \ne 0$ b.v., tai $\frac{f}{g} \in M$.
+\end{enumerate}
+\begin{ps*}
+Tais atvejais, kai nurodytas veiksmas neapibrëþtas kokiame nors taðke (pvz.,
+$+\infty - +\infty$, $\frac{0}{0}$ ir t.t.), laikykime, kad rezultatas yra
+bet koks skaièius, pvz., nulis.  Toks funkcijos reikðmiø kaitaliojimas nulinio
+mato aibëje nekeièia nei funkcijos matumo, nei integruojamumo.
+\end{ps*}
+\end{tg}
+
+\shortpage
+\begin{tr}\NL								% 2.13
+\begin{enumerate}
+\item Tarkime, $f \in M$, $g \in L$, $|f| \le g$ b.v.  Tada $f \in L$.
+\item $M \ni f_n \to f$ b.v. \tada $f \in M$.
+\item Jei $f: \R^k \to \R$ yra b.v. tolydi, tai $f \in M$.
+\end{enumerate}
+\end{tr}
+
+\begin{ap}								% 2.14
+Jei $f \ge 0$ ir $f \in M \setminus L$, tai laikysime, kad
+\[ \int_{\R^k} f = +\infty \]
+
+Jei $f \in M$ ir bent viena ið funkcijø $f^+, f^- \in L$, tai susitarsime, kad
+\[ \int_{\R^k} f = \int_{\R^k} f^+ - \int_{\R^k} f^-
+\]
+
+\begin{ps*}
+Jei $f \in L$, tai pastaroji lygybë yra jau þinoma savybë, todël ðiame
+apibrëþime yra nauja tik tai, kad kai kuriom funkcijom apibrëþiami begalines
+reikðmes ágyjantys integralai.
+\end{ps*}
+
+Jei $\int_{\R^k} f$ yra apibrëþtas (baigtinis arba begalinis), tai funkcija
+$f$ vadinama \Def{kvaziintegruojama}.
+\end{ap}
+
+\begin{tg}\NL								% 2.15
+\begin{enumerate}
+  \item Jei $f, g$ -- kvaziintegruojamos funkcijos, $f \le g$, tai
+        \[ \int_{\R^k} f \le \int_{\R^k} g \]
+  \item Jei $0 \le f_n \uparrow f$ b.v., $f_n \in M$, tada
+        \[ \int_{\R^k} f_n \uparrow \int_{\R^k} f \]
+  \item[2$'$.] Jei $0 \le f_n$, $f_n \in M$, tada
+        \[ \int_{\R^k} \sum_{n=1}^\infty f_n =
+           \sum_{n=1}^\infty \int_{\R^k} f_n
+        \]
+\end{enumerate}
+\end{tg}
+
+\begin{ap}								% 2.16
+Sakoma, kad aibë $A \subset \R^k$ yra \Def{mati} (Lebego prasme), jei
+$\Ind_A \in M$. Tokios aibës \Def{matu} (Lebego matu) vadinamas skaièius
+$m(A) := \int_{\R^k} \Ind_A$.
+
+\begin{ps*}
+$k$-matës gardelës ir nulinio mato aibiø atveju ðis apibrëþimas nesiskiria nuo
+ankstesnio.
+\begin{ir*}
+Ið tikrøjø, jei $A$ -- $k$-matë gardelë, tai $\int_{\R^k} \Ind_A = 1 \cdot
+m(A) = m(A)$, o jei $A$ -- nulinio mato aibë, tai $\Ind_A = 0$ b.v., todël
+$\int_{\R^k} \Ind_A = 0$.
+\end{ir*}
+\end{ps*}
+\end{ap}
+
+\begin{tg}[maèiøjø aibiø ir matø savybës]\NL				% 2.17
+\begin{enumerate}
+  \item Jei $A$ ir $B$ -- maèiosios aibës, tai $A \cap B$, $A \cup B$, $A
+        \setminus B$, $A^\complement$ -- taip pat maèiosios aibës. Jei, be to,
+        $A \cap B = \emptyset$, tai $m(A \cup B) = m(A) + m(B)$ (adityvumas), 
+        o jei $A \subset B$, tai $m(A) \le m(B)$ (monotoniðkumas).
+  \item Jei $A_n$, $n \in \N$ -- maèiøjø aibiø seka, tai $\bigcup_{n=1}^\infty
+        A_n$ -- taip pat mati aibë.  Jei, be to, $A_i \cap A_j = \emptyset$,
+        kai $i \ne j$, tai $m(\bigcup_{n=1}^\infty A_n) = \sum_{n=1}^\infty
+        m(A_n)$ ($\sigma$-adityvumas).
+  \item Jei $A_n$ ($n \in \N$) -- monotoniðkai didëjanti (t.y. $A_n \subset
+        A_{n+1}$) maèiøjø aibiø seka, tai
+        \[ m\Big(\bigcup_{n=1}^\infty A_n\Big) = \lim_{n\to\infty} \uparrow 
+           m(A_n)
+        \]
+
+        Jei $A_n$ -- monotoniðkai maþëjanti maèiøjø aibiø seka ir $\exists
+        n_0 \in \N:$ $m(A_{n_0}) < +\infty$, tai
+        \[ m\Big(\bigcap_{n=1}^\infty A_n\Big) = \lim_{n\to\infty}
+           \downarrow m(A_n)
+        \]
+\end{enumerate}
+\begin{pss*}\NL
+\begin{enumerate}
+  \item Didëjanèios aibiø sekos atveju priimta raðyti $A_n \uparrow A :=
+        \bigcup_{n=1}^\infty A_n$, maþëjanèios -- $A_n \downarrow A :=
+        \bigcap_{n=1}^\infty A_n$.  Todël treèià savybæ galima uþraðyti taip:
+        $A_n \uparrow A$ \tada $m(A_n) \uparrow m(A)$; $A_n \downarrow A$ ir
+        $m(A_{n_0}) < +\infty$ \tada $m(A_n) \downarrow m(A)$.
+  \item Sàlyga $m(A_{n_0}) < +\infty$ su bent vienu $n_0$ -- esminë.
+        Pvz., \(A_n := [n, +\infty) \downarrow \emptyset\), bet
+        $m(A_n) = +\infty \not\downarrow m(\emptyset) = 0$.
+\end{enumerate}
+\end{pss*}
+\end{tg}
+
+\begin{tg}								% 2.18
+Visos atviros ir uþdaros aibës yra maèios.
+\end{tg}
+
+\begin{ap}								% 2.19
+Funkcijos $f: \R^k \to \RR$ \Def{integralu} maèiojoje aibëje $A$ vadinamas
+skaièius
+\[ \int_A f := \int_{\R^k} f \cdot \Ind_A
+\]
+(su sàlyga, kad $f \cdot \Ind_A \in M$). Jei $\int_A f \in \R$ (t.y. $\ne
+\pm\infty$), tai raðysime, kad $f \in L(A)$ ir sakysime, kad funkcija $f$ yra
+\Def{integruojama} (Lebego prasme) aibëje $A$.
+\end{ap}
+
+\begin{tg}\NL								% 2.20
+\begin{enumerate}
+  \item (Adityvumas) $f \in L(A_1) \cap L(A_2)$, $A_1 \cap A_2 = \emptyset$
+        \tada $f \in L(A_1 \cup A_2)$ ir
+        \[ \int_{A_1 \cup A_2} f = \int_{A_1} f + \int_{A_2} f
+        \]
+  \item[1$'$.] ($\sigma$-adityvumas)
+        Jei $f \in L(A)$, $A = \bigcup_{n=1}^\infty A_n$, $A_n \in M$, $n \in
+        \N$, $A_i \cap A_j = \emptyset$, kai $i \ne j$, tada
+        \[ \int_A f = \sum_{n=1}^\infty \int_{A_n} f
+        \]
+  \item Tarkime, kad $A_n \uparrow A$ ($A_n \in M$, $n \in \N$). Tada
+        $\int_{A_n} f \to \int_A f$, jei iðpildyta bent viena ið ðiø trijø
+        sàlygø:
+        \begin{enumerate}
+          \item $f \in L(A)$
+          \item $\displaystyle \lim_{n\to\infty} \int_{A_n} |f| < +\infty$
+          \item $M \ni f \ge 0$
+        \end{enumerate}
+\end{enumerate}
+\end{tg}
+
+
+\section[Fubinio ir kintamøjø keitimo teoremos]{Fubinio (integralo suvedimo á 
+kartotinius integralus) ir kintamøjø keitimo teoremos}
+
+\begin{tr}[Fubinio teorema]\label{tr:3.1}				% 3.1
+Jei \(f \in L(I_1 \times I_2)\), \(I_1, I_2 \subset \R\) -- intervalai, tai
+\[
+  \int_{I_1 \times I_2} f = \int_{I_1} \Big( \int_{I_2} f(x,y)\,\dy \Big)\,\dx
+                          = \int_{I_2} \Big( \int_{I_1} f(x,y)\,\dx \Big)\,\dy
+\]
+
+\begin{ps*}
+Pirmoji lygybë suprantama taip: integralas \(F_1(x) := \int_{I_2}
+f(x,y)\,\dy\) egzistuoja su b.v. $x \in I_1$.  Tuose taðkuose $x$, kuriuose
+$F_1(x)$ neapibrëþtas, susitarsime, laikyti, kad $F_1(x) := 0$.  Tuomet
+$\int_{I_1} F_1(x)\,\dx = \int_{I_1 \times I_2} f$.
+
+Analogiðkai galima komentuoti ir antràjà lygybæ.
+\end{ps*}
+\begin{kir}
+\begin{description}
+  \item[1 þingsnis:] $f = \Ind_{J_1 \times J_2}$, $J_1 \subset I_1$,
+                     $J_2 \subset I_2$ -- intervalai. Tuomet
+    \[
+    \int_{I_1 \times I_2} f = 1 \cdot m_2(J_1 \times J_2) = m(J_1)
+    \cdot m(J_2)
+    \]
+    ($m_2$ -- matas plokðtumoje, $m$ -- matas tiesëje).
+
+    \begin{align*}
+    \int_{I_1} \left( \int_{I_2} f(x,y)\,\dy\right)\,\dx &=
+    \int_{I_1} \left( \int_{I_2} \Ind_{J_1\times J_2}(x,y)\,\dy
+               \right)\,\dx
+    = \int_{I_1} \left( \int_{I_2} \Ind_{J_1}(x) \Ind_{J_2}(y)\,\dy
+                 \right)\,\dx \\&
+    = \int_{I_1} \left( \Ind_{J_1}(x) \int_{I_2} \Ind_{J_2}(y)\,\dy
+                 \right)\,\dx
+    = \int_{I_1} \Ind_{J_1}(x) \cdot 1 \cdot m(J_2) \,\dx \\&
+    = m(J_2) \cdot 1 \cdot m(J_1)
+    = m(J_1) \cdot m(J_2)
+    \end{align*}
+  \item[2 þingsnis:] $f \in S(I_1 \times I_2)$
+
+    $f$ galima iðreikðti suma
+    \[ f = \sum_{i=1}^m c_i \Ind_{J_i}
+      \qquad \text{$J_i$ -- staèiakampiai (dvimatës gardelës)}
+    \]
+
+    Remiantis pirmuoju þingsniu ir integralø tiesiðkumu gauname
+    \begin{align*}
+    \int_{I_1 \times I_2} f &= 
+    \int_{I_1 \times I_2} \sum_{i=1}^m c_i \Ind_{J_i} = % tiesiðkumas
+    \sum_{i=1}^m c_i \int_{I_1 \times I_2} \Ind_{J_i} =
+    \sum_{i=1}^m c_i \int_{I_1} \left( \int_{I_2} \Ind_{J_i}(x,y)\,\dy
+                                \right)\,\dx \\&=
+    \int_{I_1} \left( \int_{I_2} \sum_{i=1}^m c_i \Ind_{J_i}(x,y)\,\dy 
+               \right)\,\dx =
+    \int_{I_1} \left( \int_{I_2} f(x,y) \,\dy \right)\,\dx
+    \end{align*}
+  \item[3 þingsnis:] $f \in L(I_1 \times I_2)$.
+
+    Imkime laiptiniø funkcijø Koði sekà $S(I_1\times I_2) \ni f_n \to
+    f$ b.v.  Tada kiekvienam $n$ turime (remdamiesi antruoju þingsniu)
+    \[ \int_{I_1 \times I_2} f_n =
+       \int_{I_1} \left( \int_{I_2} f_n(x,y) \,\dy \right)\,\dx
+    \]
+    Perëje prie ribos, kai $n \to \infty$, gauname
+    \[ \int_{I_1 \times I_2} f =
+       \int_{I_1} \left( \int_{I_2} f(x,y) \,\dy \right)\,\dx
+    \]
+
+    Árodymo techninis sunkumas -- grieþtai pagrásti perëjima prie
+    ribos deðinëje lygybës pusëje.  Èia tai nebus padaryta, tad
+    árodymas nepilnas.
+\end{description}
+\enlargethispage*{10cm}
+\end{kir}
+\pagebreak
+\end{tr}
+
+\begin{pss}\NL								% 3.2
+\begin{enumerate}
+  \item Teorema bus teisinga ir tada, kai $I_1 \subset \R^k$, $I_2 \subset
+        \R^m$ -- gardelës ($k$-matë ir $m$-matë).
+  \item Tarkime, $D = \{ (x, y) \in \R^2 : a \le x \le b, y_1(x) \le y \le
+        y_2(x) \} \subset \R^2$, $y_1, y_2 \in M([a, b])$, $y_1 \le y_2$.
+
+        Jei $f \in L(D)$, tai
+        \begin{align*}
+        \int_D f &= \iint_{\R^2} f \Ind_D
+                  = \int_{-\infty}^{+\infty} \left(
+                    \int_{-\infty}^{+\infty} f(x,y) \Ind_D(x,y) \,\dy
+                                             \right)\,\dx
+              \\ &= \int_{-\infty}^{+\infty} \left(
+                    \int_{-\infty}^{+\infty} f(x,y) \Ind_{[a,b]}(x) 
+                                                    \Ind_{[y_1(x),y_2(x)]}(y)
+                                       \,\dy \right)\,\dx
+                  = \int_{-\infty}^{+\infty} \left( \Ind_{[a,b]}(x)
+                    \int_{y_1(x)}^{y_2(x)} f(x,y)\,\dy \right) \,\dx
+              \\ &= \int_a^b \Big( \int_{y_1(x)}^{y_2(x)} f(x,y)\,\dy
+                             \Big)\,\dx
+        \end{align*}
+
+        Analogiðkai, jei $V = \{ (x, y, z) \in \R^3: (x, y) \in D,
+        z_1(x, y) \le z \le z_2(x, y) \} \subset \R^3$ ir $f \in L(V)$, tai
+        \[ \int_V f = \iint_D \Big( \int_{z_1(x, y)}^{z_2(x, y)} f(x, y, z) 
+           \,\dz\Big)\,\dx\dy
+        \]
+\end{enumerate}
+\end{pss}
+
+\begin{tr}[Tonelio teorema]						% 3.3
+Jei $f \in M(I_1 \times I_2)$, $I_1, I_2$ -- intervalai, $f \ge 0$, tai
+\begin{equation}
+   \int_{I_1 \times I_2} f = \int_{I_1} \Big( \int_{I_2} f(x,y)\,\dy \Big)
+   \,\dx = \int_{I_2} \Big( \int_{I_1} f(x,y)\,\dx \Big) \,\dy
+   \tag*{$(\le +\infty)$}
+\end{equation}
+
+Èia galioja ta pati pastaba kaip ir Fubinio teoremai (\ref{tr:3.1}).  Ði
+teorema tinka visoms kvaziintegruojamoms funkcijoms.
+\end{tr}
+
+\begin{isv}								% 3.4
+Jei $f \in M(I_1 \times I_2)$ ir $\int_{I_1} \big( \int_{I_2} |f(x,y)|\,\dy
+\big)\,\dx < +\infty$, tai $f \in L(I_1 \times I_2)$ ir tuo paèiu funkcijai
+$f$ teisinga Fubinio teorema (\ref{tr:3.1}).
+\end{isv}
+
+\begin{pvzz}\NL								% 3.5
+\begin{enumerate}
+  \item Tarkime, $f \in L(I_1)$, $g \in L(I_2)$. Tada
+        \[ \int_{I_1 \times I_2} f \circledast g = \int_{I_1} f \cdot 
+           \int_{I_2} g
+        \]
+        ($f \circledast g (x,y) := f(x) \cdot g(y)$ -- \Def{tenzorinë
+        sandauga}).
+        \begin{ir*}
+        \[
+        \iint_{I_1 \times I_2} f(x)g(y)\,\dx\dy 
+         = \int_{I_1} \left( f(x) \int_{I_2} g(y)\,\dy \right)\,\dx
+         = \int_{I_1} f(x)\,\dx \cdot \int_{I_2} g(y) \,\dy
+        \]
+        \end{ir*}
+
+        Pvz:
+        \[
+        \iint_{\R^2} \frac{\dx\dy}{(1+x^2)(1+y^2)} 
+        = \left(\int_{-\infty}^{+\infty} \frac{\dx}{1+x^2}\right)^2 = \pi^2
+        \]
+  \item Tarkime, $\displaystyle f(x, y) := \frac{x^2 - y^2}{(x^2 + y^2)^2}$
+        \begin{align*}
+          \int_0^1 \dx \int_0^1 f(x,y)\,\dy &= \frac{\pi}{4} \\
+          \int_0^1 \dy \int_0^1 f(x,y)\,\dx &= -\frac{\pi}{4}
+        \end{align*}
+        Gauname skirtingus rezultatus, nes $f \not\in L([0,1]^2)$.
+\end{enumerate}
+\end{pvzz}
+
+\medskip
+Toliau $D$ ir $\widetilde{D}$ -- bet kokios atviros aibës erdvëje $\R^k$.
+
+\begin{ap}								% 3.6
+Diferencijuojamos funkcijos $f: D \to \R^k$ \Def{Jakobianu} taðke $x \in D$
+vadinamas skaièius
+\[
+  J_f(x) := \frac{D(f_1, f_2, \ldots, f_k)}{D(x_1, x_2, \ldots, x_k)} :=
+            \det f'(x) = \begin{vmatrix}
+              \frac{\partial{f_1}}{\partial{x_1}} &
+                \frac{\partial{f_1}}{\partial{x_2}} &
+                  \ldots &
+                    \frac{\partial{f_1}}{\partial{x_k}} \\
+              \frac{\partial{f_2}}{\partial{x_1}} &
+                \frac{\partial{f_2}}{\partial{x_2}} &
+                  \ldots &
+                    \frac{\partial{f_2}}{\partial{x_k}} \\
+              \vdots &
+                \vdots &
+                  \ddots &
+                    \vdots \\
+              \frac{\partial{f_k}}{\partial{x_1}} &
+                \frac{\partial{f_k}}{\partial{x_2}} &
+                  \ldots &
+                    \frac{\partial{f_k}}{\partial{x_k}} \end{vmatrix}
+\]
+\end{ap}
+
+\begin{tr}[kintamøjø keitimo teorema]					% 3.7
+Jei $g \in C^1(D, \widetilde{D})$ yra bijekcija, $\forall x \in D$ $J_g(x) 
+\ne 0$ ir $f \in L(\widetilde{D})$, tai
+\[ \int_{\widetilde{D}} f(y)\,\dy = \int_D f\big(g(x)\big) \, |J_g(x)| \,\dx
+\]
+arba
+\[ \int_{\widetilde{D}} f(y_1, \ldots, y_k)\,\dy_1\dots\dy_k = 
+   \int_D f\big(g_1(x_1, \ldots, x_k), \ldots, g_k(x_1, \ldots, x_k)\big) \, 
+   \left|\frac{D(g_1, \ldots, g_k)}{D(x_1, \ldots, x_k)}\right| 
+   \,\dx_1 \dots \dx_k
+\]
+(èia $g = (g_1, \ldots, g_k)$).
+
+\begin{ir}
+Be árodymo.
+\end{ir}
+\end{tr}
+
+\begin{pvzz}\NL								% 3.8
+\begin{enumerate}
+  \item (Polinis kintamøjø keitimas)
+
+        Imkime \(\widetilde{D} = \R^2 \ni (x, y) \longleftrightarrow (r, \phi)
+        \in D = [0; +\infty) \times [0; 2\pi]\)
+        \[ \begin{cases} x = r \cos \phi \\ y = r \sin \phi \end{cases}
+        \]
+
+        Kadangi nëra vienareikðmiðkumo, galime imti \(\widetilde{D}' :=
+        \widetilde{D} \setminus [0; +\infty) \times \{0\}\) ir \(D' := (0;
+        +\infty) \times (0; 2\pi)\). Integralas nuo to nepasikeis.
+
+        \[ \iint_{\R^2} f(x, y)\,\dx\dy = \int_0^{2\pi} \dphi
+           \int_0^{\infty} f(r\cos\phi, r\sin\phi) \, \left|\frac{D(x, y)}%
+           {D(r, \phi)}\right|\,\dr
+        \]
+
+        Jakobianas
+        \[ \frac{D(x, y)}{D(r, \phi)} =
+        \begin{vmatrix}
+             \frac{\partial{x}}{\partial{r}} &
+               \frac{\partial{x}}{\partial{\phi}} \\
+             \frac{\partial{y}}{\partial{r}} &
+               \frac{\partial{y}}{\partial{\phi}}
+           \end{vmatrix} =
+           \begin{vmatrix}
+             \cos\phi & -r\sin\phi \\
+             \sin\phi & -r\cos\phi \\
+           \end{vmatrix} =
+           r (\cos^2 \phi + \sin^2 \phi) = r
+        \]
+
+        Pvz.:
+        \[ \iint_{x^2+y^2 \le R^2} f(x, y) \,\dx\dy =
+           \int_0^{2\pi} \dphi \int_0^R f(r\cos\phi, r\sin\phi)\,r\,\dr
+        \]
+
+        Kitas pvz.:
+        \[ I = \iint_{\R^2} e^{-(x^2+y^2)}\,dx\dy
+             = \int_0^{2\pi} \dphi \int_0^{+\infty} e^{-r^2}\,
+               \underbrace{r\dr}_{= \frac{1}{2}\dr^2}
+             = 2\pi \cdot \left(-\frac{e^{-r^2}}{2}\right)\Bigg|_0^{+\infty}
+             = \pi
+        \]
+        Beje,
+        \[ I = \left(\int_{-\infty}^{+\infty} e^{-x^2}\,\dx\right)^2 = \pi
+           \tada
+           \int_{-\infty}^{+\infty} e^{-x^2}\,\dx = \sqrt{\pi}
+        \]
+  \item (Sferinës koordinatës)
+        \[ \begin{cases} x = r \sin \theta \cos \phi \\
+                         y = r \sin \theta \sin \phi \\
+                         z = r \cos \theta \end{cases}
+        \]
+        Jei $(x, y) \ne (0, 0)$, tai $(x, y, z)$ atitinka vienintëlis trejetas
+        $(r, \phi, \theta)$, kai $r \in (0; +\infty)$, \(\phi \in [0; 2\pi)\),
+        $\theta \in (0; \pi)$ (kartais imama \(\theta \in (-\frac{\pi}{2};
+        \frac{\pi}{2})\)).
+
+        Jakobianas
+        \[\begin{split}
+           \frac{D(x, y, z)}{D(r, \phi, \theta)} &=
+           \begin{vmatrix}
+             \frac{\partial{x}}{\partial{r}} &
+               \frac{\partial{x}}{\partial{\phi}} &
+                 \frac{\partial{x}}{\partial{\theta}} \\
+             \frac{\partial{y}}{\partial{r}} &
+               \frac{\partial{y}}{\partial{\phi}} &
+                 \frac{\partial{y}}{\partial{\theta}} \\
+             \frac{\partial{z}}{\partial{r}} &
+               \frac{\partial{z}}{\partial{\phi}} &
+                 \frac{\partial{z}}{\partial{\theta}}
+           \end{vmatrix} =
+           \begin{vmatrix}
+             \cos\phi\sin\theta & -r\sin\phi\sin\theta & r\cos\phi\cos\theta \\
+             \sin\phi\sin\theta &  r\cos\phi\sin\theta & r\sin\phi\cos\theta \\
+             \cos\theta & 0 & -r\sin\theta
+           \end{vmatrix} = \\ &=
+           \cos\theta \cdot (-r^2)\sin\theta\cos\theta (\sin^2\phi + \cos^2\phi)
+           - r\sin\theta \cdot r\sin^2\theta (\cos^2\phi + \sin^2\phi) = \\ &=
+           -r^2 \sin\theta (\cos^2\theta + \sin^2 \theta) =
+           -r^2 \sin\theta
+        \end{split}\]
+
+        Imkime, pvz., $B_R := \{ (x, y, z): x^2+y^2+z^2 < R^2 \}$.
+        Ðià sritá atitiks sritis \([0; R) \times [0; 2\pi) \times [0; \pi)\)
+        polinëse koordinatëse.
+
+        Norëdami uþtikrinti teoremos sàlygas imkime sritá $D := (0; R) \times 
+        (0; 2\pi) \times (0; \pi)$. Jà atitiks $B_R \supset \widetilde{D} =
+        \{(x, y, z): x^2+y^2+z^2 < R^2 \text{ ir } (y \ne 0 \text{ arba }
+        x < 0) \}$.
+        \begin{align*}
+        \iiint_{B_R} f(x,y,z)\,\dx\dy\dz &= \iiint_{\widetilde{D}} f(x,y,z)
+        \,\dx\dy\dz = \\ &=
+        \int_0^{2\pi} \dphi \int_0^\pi \dtheta \int_0^R f(r\cos\phi\sin\theta,
+        r\sin\phi\sin\theta, r\cos\theta) \, r^2\sin\theta\,\dr
+        \end{align*}
+
+        Imkime, pvz., $f(x, y, z) = (x^2+y^2+z^2)^\alpha$.
+        \begin{align*}
+        \iiint_{B_R} f &= \int_0^{2\pi}\dphi \int_0^\pi \dtheta \int_0^R
+        r^{2\alpha} \, r^2\sin\theta \, \dr =
+        2\pi \underbrace{\int_0^\pi \sin\theta \, \dtheta}_{=2} \cdot
+        \int_0^R r^{2\alpha+2} \,\dr = 4\pi\frac{R^{2\alpha+3}}{2\alpha+3}
+        \end{align*}
+  \item[2$'$.] (Cilindrinës koordinatës)
+
+        Kai $\widetilde{D} = \{ (x, y, z) : x^2 + y^2 < R^2, 0 \le z \le H\}$,
+        patogu naudotis cilindrinëmis koordinatëmis
+        \[ \begin{cases} x = r \cos \phi \\
+                         y = r \sin \phi \\
+                         z = z \end{cases}
+        \]
+
+        Jakobianas toks pats kaip ir polinio koordinaèiø keitinio:
+        \[ \frac{D(x, y, z)}{D(r, \phi, z)} = r
+        \]
+  \item Paskaièiuoti plotà figûros, apibrëþtos kreivëmis $y^2 = 2x$,
+        $y^2 = x$, $y = x^2$, $2y = x^2$.
+
+        \begin{eqnarray*}
+        \begin{cases} x \le y^2 \le 2x \\ y \le x^2 \le 2y \end{cases}
+        \ttt
+        \begin{cases} 1 \le \frac{y^2}{x} \le 2 \\ 
+                      1 \le \frac{x^2}{y} \le 2 \end{cases}
+        \end{eqnarray*}
+
+        Paþymëkime $u := \frac{y^2}{x}$, $v := \frac{x^2}{y}$
+        \begin{eqnarray*}
+        \begin{cases} x^3 = uv^2 \\ y^3 = u^2v \end{cases}
+        \ttt
+        \begin{cases} x = u^{1/3}v^{2/3} \\ y = u^{2/3}v^{1/3} \end{cases}
+        \end{eqnarray*}
+
+        \[ \frac{D(x, y)}{D(u, v)} =
+           \begin{vmatrix}
+             \frac{1}{3} u^{-2/3}v^{2/3} & \frac{2}{3} u^{1/3}v^{-1/3} \\
+             \frac{2}{3} u^{-1/3}v^{1/3} & \frac{1}{3} u^{2/3}v^{-2/3}
+           \end{vmatrix} = \frac{1}{9} - \frac{4}{9} = - \frac{1}{3}
+        \]
+
+        Plotas
+        \[ S(D) = \iint_D \dx\dy = \int_1^2 \int_1^2 \frac{1}{3} \,\du\dv
+                = \frac{1}{3}
+        \]
+\end{enumerate}
+\end{pvzz}
+
+
+\section{Daugialypiø integralø taikymas}				% 4
+
+\begin{pvzz}[plotø ir tûriø skaièiavimas]\NL				% 4.1
+\begin{enumerate}
+  \item Aibës (,,figûros``) $A \subset \R^2$ \Def{plotu} vadinamas jos Lebego
+        matas $m(A)$ (su sàlyga, kad $A$ -- mati aibë).
+
+        Imkime $A = \{(x, y) : a \le x \le b, y_1(x) \le y \le y_2(x) \}$,
+        $y_1 \le y_2$ -- maèios funkcijos (t.y., $A$ -- kreivinë trapecija).
+        \begin{align*}
+          m(A) &= \iint_A\dx\dy 
+                = \iint_{R^2} \Ind_A(x,y)\,\dx\du 
+                = \iint_{R^2} \Ind_{[a;b]}(x)\Ind_{[y_1(x);y_2(x)]}(y)\,\dx\dy
+            \\ &= \int_{-\infty}^{+\infty} \Big(\int_{-\infty}^{+\infty} 
+                       \Ind_{[a;b]}(x)\Ind_{[y_1(x);y_2(x)]}(y)\,\dy\Big)\,\dx
+            \\ &= \int_a^b \Big(\int_{y_1(x)}^{y_2(x)} \dy\Big)\,\dx
+                = \int_a^b \big(y_2(x)-y_1(x)\big)\,\dx
+        \end{align*}
+
+  \item Analogiðkai aibës (,,kûno``) $A \subset \R^3$ \Def{tûriu} vadinamas jo
+        Lebego matas $m(A)$.
+
+        Jei $A = \{(x,y,z): (x,y) \in D, z_1(x, y) \le z \le z_2(x, y) \}$,
+        $D \subset \R^2$ ($A$ -- kreivinis cilindras), tai
+        \[ m(A) = \iint_D \big(z_2(x,y) - z_1(x,y)\big)\,\dx\dy
+        \]
+        (su sàlyga, kad $D$ -- mati aibë ir $z_1 \le z_2$ -- maèios funkcijos
+        aibëje $D$).
+
+  \item Aibës $A \subset \R^3$ \Def{pjûviu} taðke $x \in \R$ vadinama aibë
+        $A_x := \{(y,z): (x,y,z) \in A\}$.
+
+        Tada tûris yra lygus
+        \begin{align*}
+        m(A) &= \iiint_{\R^3} \Ind_A(x,y,z)\,\dx\dy\dz
+              = \iiint_{\R^3} \Ind_{A_x}(y,z)\,\dx\dy\dz
+          \\ &= \int_{-\infty}^{+\infty} \Big( \iint_{\R^2} \Ind_{A_x} (y,z)
+                \,\dy\dz \Big)\,\dx
+              = \int_{-\infty}^{+\infty} S(A_x)\,\dx
+        \end{align*}
+        èia $S(A_x) = m_2(A_x)$ -- aibës $A_x$ plotas.
+\end{enumerate}
+\end{pvzz}
+
+\begin{pvz}[pavirðiaus ploto skaièiavimai]				% 4.2
+Imkime pavirðiø $\Phi = \{ (x,y,z) : (x,y)\in D, z = f(x,y) \}$,
+$f: D\to\R$ -- ,,gera`` funkcija.
+Kam lygus pavirðiaus $\Phi$ plotas?
+
+Padalinkime $D$ á daug maþø sriteliø:
+\[ D = \bigcup_{i=1}^m D_i \qquad D_i \cap D_j = \emptyset,\text{ kai $i\ne j$}
+\]
+
+Kiekvienà $D_i$ atitinka pavirðiaus dalis $\Phi_i = \{(x,y,z): (x,y) \in D_i,
+z = f(x,y) \}$.  Kiekvienam $\Phi_i$ imkime taðkà $(x_i, y_i, z_i) \in
+\Phi_i$.  Iðveskime per já lieèiamàjà plokðtumà ir paþymëkime
+$\widetilde{\Phi}_i$ tos plokðtumos dalá, esanèià virð srities $D_i$.
+
+Intuityviai aiðku, kad
+\[ S(\Phi_i) \approx S(\widetilde{\Phi}_i) = \frac{S(D_i)}{|\cos \alpha_i|}
+\]
+kur $\alpha_i$ -- kampas tarp $\widetilde{\Phi}_i$ ir plokðtumos $Oxy$.
+
+Iðveskime $\widetilde{\Phi}_i$ lygtá:
+\[ f(x,y) = f(x_i, y_i) + \frac{\partial{f}}{\partial{x}}(x_i,y_i)(x-x_i)
+                        + \frac{\partial{f}}{\partial{y}}(x_i,y_i)(y-y_i)
+                        + o(\sqrt{(x-x_i)^2+(y-y_i)^2})
+\]
+kai $x \to x_i$, $y \to y_i$.
+
+Atmetæ ,,maþà`` nará $o(\sqrt{(x-x_i)^2+(y-y_i)^2})$, gauname plokðtumà
+\[ z = \underbrace{f(x_i, y_i)}_{= z_i} + 
+        \frac{\partial{f}}{\partial{x}}(x_i,y_i)(x-x_i) +
+        \frac{\partial{f}}{\partial{y}}(x_i,y_i)(y-y_i)
+\]
+
+Ði plokðtuma ir vadinama \Def{pavirðiaus lieèiamàja plokðtuma} taðke $(x_i,
+y_i, z_i)$.
+
+Primename kampo tarp plokðtumø $ax+by+cz+d=0$ ir $\tilde{a}x+\tilde{b}y+
+\tilde{c}z+\tilde{d}=0$ formulæ:
+\[ \cos\alpha = \frac{|a\tilde{a}+b\tilde{b}+c\tilde{c}|}
+                {\sqrt{a^2+b^2+c^2}\sqrt{\tilde{a}^2+\tilde{b}^2+\tilde{c}^2}}
+\]
+
+
+\newcommand{\BjauriSaknis}[1][_i]
+           {\sqrt{1 + \left(\frac{\partial{f}}{\partial{x}}(x#1,y#1)\right)^2
+                    + \left(\frac{\partial{f}}{\partial{y}}(x#1,y#1)\right)^2}}
+
+Taigi, kampas $\alpha_i$ yra
+\[ \cos\alpha_i = \frac{1}{\BjauriSaknis}
+\]
+
+Ástatæ já á $S(\widetilde{\Phi}_i)$ iðraiðkà gauname
+\[ S(\widetilde{\Phi}_i) = S(D_i) \cdot \BjauriSaknis
+\]
+
+Tada
+\[
+S(\Phi) = \sum_i S(\Phi_i) \approx \sum_i S(\widetilde{\Phi}_i) 
+        = \sum_i \BjauriSaknis S(D_i)
+\]
+
+Paþymëkime
+\( \phi(x, y) := \BjauriSaknis \), $(x, y) \in D_i$,
+t.y.
+\[ \phi := \sum_i \BjauriSaknis \Ind_{D_i}
+\]
+
+Tuomet
+\begin{align*}
+S(\Phi) &\approx \sum_i \BjauriSaknis S(D_i) \\
+        &=        \sum_i \BjauriSaknis \iint_D \Ind_{D_i} \\
+        &= \iint_D \sum_i \BjauriSaknis \Ind_{D_i} \\
+        &= \iint_D \phi
+\end{align*}
+
+Funkcija $\phi$ priklauso nuo srities $D$ padalinimo á sriteles $D_i$ ir taðkø
+$(x_i, y_i) \in D_i$ pasirinkimo.  $\phi$ artëja prie $\psi$:
+\[ \psi(x,y) := \BjauriSaknis[]
+\]
+su sàlyga, kad $\frac{\partial f}{\partial x}$ ir $\frac{\partial f}{\partial
+y}$ -- tolydþios funkcijos.
+
+Taigi,
+\[ S(\Phi) = \iint_D \BjauriSaknis[]\,\dx\dy
+\]
+arba sutrumpintai
+\[ S(\Phi) = \iint_D \sqrt{1+(z'_x)^2+(z'_y)^2}\,\dx\dy
+\]
+
+Pvz., imkime $z := \sqrt{R^2-x^2-y^2}$, $(x,y) \in D := \{(x,y): x^2+y^2 \le
+R^2\}$
+\begin{align*}
+S_R &= 2 \iint_D \sqrt{1+\left(\frac{-2x}{2\sqrt{R^2-x^2-y^2}}\right)^2
+                    +\left(\frac{-2y}{2\sqrt{R^2-x^2-y^2}}\right)^2}\,\dx\dy \\
+    &= 2 \iint_D \sqrt{1 + \frac{x^2+y^2}{R^2-x^2-y^2}}\,\dx\dy 
+     = 2 \iint_D \sqrt{\frac{R^2}{R^2-x^2-y^2}}\,\dx\dy \\
+    &= 2R \iint_D \frac{\dx\dy}{\sqrt{R^2-x^2-y^2}} 
+     = 2R \int_0^{2\pi}\dphi \int_0^R \frac{r\,\dr}{\sqrt{R^2-r^2}} \\
+    &= 4\pi R \int_0^R \frac{r\,\dr}{\sqrt{R^2-r^2}}
+     = 4\pi R \Bigg(\Big(-\frac{1}{2}\Big)\Big(2\sqrt{R^2-r^2}\Big)\Bigg)
+              \Bigg|_0^R
+     = 4\pi R^2
+\end{align*}
+\end{pvz}
+
+\begin{pvz}[kûno masës skaièiavimas]					% 4.3
+Tarkime, kad ,,kûnas`` $A \subset \R^3$ kiekvienam savo taðke $(x,y,z)$ turi
+\Def{tanká} $\rho(x,y,z) \ge 0$ ir galima $A$ padalinti á atskirus gabalus, 
+kuriuose tankis $\rho$ yra pastovus:
+\[
+  \rho(x,y,z) = \rho_i \qquad x,y,z \in A_i
+                       \qquad A = \bigcup_i A_i
+                       \qquad A_i \cap A_j = \emptyset,\text{ kai $i \ne j$}
+\]
+
+Tada kûno $A$ \Def{masë} lygi
+\begin{align*}
+  M(A) &= \sum_i \rho_i \underbrace{V(A_i)}_{\text{tûris}}
+        = \sum_i \rho_i \iiint_{\R^3} \Ind_{A_i}
+        = \iiint_{\R^3} \left(\sum_i \rho_i \Ind_{A_i} \right)
+    \\ &= \iiint_A \rho(x,y,z)\,\dx\dy\dz
+\end{align*}
+
+Ðia lygybe apibrëðime \Def{masæ} bet kokiam kûnui:
+\[ M(A) = \iiint_A \rho(x,y,z)\,\dx\dy\dz
+   \qquad \rho  \ge 0 \text{ -- bet kokia mati funkcija}
+\]
+\end{pvz}
+
+\begin{pvz}[materialaus kûno statinis momentas ir masës centras]	% 4.4
+Materialaus taðko $a = (x,y,z)$ su mase $m$ \Def{statinis momentas} $Oxy$
+plokðtumos atþvilgiu -- tai skaièius $z \cdot m$ (atstumo iki plokðtumos ir
+masës sandauga).
+
+Jei turime keliø materialiø taðkø sistemà, tai jos statinis momentas
+apibrëþiamas kaip atskirtø taðkø statiniø momentø suma.
+
+Turime materialø kûnà $A \subset \R^3$, kurio tankis taðke $(x,y,z)$ yra
+$\rho(x,y,z) \ge 0$.
+
+Tarkime, kad $A = \bigcup_{i=1}^m A_i$, $A_i \cap A_j = \emptyset$, kai
+$i \ne j$, ir $\rho(x,y,z) = \rho_i$, kai $(x,y,z) \in A_i$.
+
+Tada kûno $A$ statinis momentas
+\[ M_{xy}(A) \approx \sum_{i=1}^m z_i \underbrace{\rho_i V(A_i)}_{= M(A_i)}
+\qquad\text{(èia $(x_i, y_i, z_i)$ -- bet koks taðkas ið $A_i$)}
+\]
+
+Tæsdami galime uþraðyti
+\begin{align*}
+M_{xy}(A) &\approx \sum_i z_i \rho_i \iiint_{\R^3} \Ind_{A_i}
+          = \iiint_{\R^3} \left( \sum_i \rho_i z_i \Ind_{A_i} \right)
+          \approx \iiint_{\R^3} z \underbrace{\sum_i \rho_i \Ind_{A_i}}_{= 
+                                                                       \rho}
+      \\ &= \iiint_A z \cdot \rho(x,y,z)\,\dx\dy\dz
+\end{align*}
+
+Natûralu ðià formulæ laikyti statinio momento apibrëþimu bet kokiam kûnui.
+Taip pat galime apibrëþti statinius momentus ir kitoms koordinaèiø
+plokðtumoms:
+\begin{align*}
+  M_{xy}(A) &= \iiint_A z \cdot \rho(x,y,z)\,\dx\dy\dz \\
+  M_{xz}(A) &= \iiint_A y \cdot \rho(x,y,z)\,\dx\dy\dz \\
+  M_{yz}(A) &= \iiint_A x \cdot \rho(x,y,z)\,\dx\dy\dz
+\end{align*}
+
+Kûno $A$ \Def{masës centru} vadinamas taðkas $(x_0, y_0, z_0)$, kuriame
+sukoncentravus visà kûno masæ, statiniai momentai nepasikeistø.%
+\footnote{Galima árodyti, kad jei statiniai momentai iðliks pastovûs
+$Oxy$, $Oxz$ ir $Oyz$ plokðtumø atþvilgiu, tai jie iðliks pastovûs ir visø kitø
+plokðtumø atþvilgiu.}
+
+Masës centro koordinatës yra tokios:
+\[
+  x_0 = \frac{M_{yz}(A)}{M(A)} \qquad
+  y_0 = \frac{M_{xz}(A)}{M(A)} \qquad
+  z_0 = \frac{M_{xy}(A)}{M(A)}
+\]
+\end{pvz}
+
+\begin{pvz}								% 4.5
+Apskaièiuosime pusrutulio su spinduliu $R$ ir tankiu $q = 1$ masës centrà.
+
+$B^+_R = \{ (x,y,z) : x^2+y^2+z^2 < R^2 \text{ ir } z > 0\}$
+
+\begin{align*}
+M_{xy}(B^+_R) &= \iiint_{B^+_R} z\,\dx\dy\dz
+               = \int_0^{2\pi}\dphi \int_0^{\pi/2}\dtheta \int_0^R r\cos\theta
+                 \cdot r^2\sin\theta \,\dr
+           \\ &= 2\pi \int_0^{\pi/2} \sin\theta
+                      \underbrace{\cos\theta\,\dtheta}_{= \ud\sin\theta}
+                 \cdot \int_0^R r^3\,\dr 
+               = 2\pi \cdot \frac{1}{2} \cdot \frac{R^4}{4}
+               = \frac{\pi R^4}{4}
+\end{align*}
+\[ M(B^+_R) = \frac{1}{2} M(B_R) = \frac{2\pi R^3}{3}
+\]
+\[ z_0 = \frac{\pi R^4}{4}\cdot\frac{3}{2\pi R^3} = \frac{3R}{8}
+\]
+
+Taigi, $B^+_R$ masës centras yra taðke $(0, 0, \frac{3R}{8})$.
+\end{pvz}
+
+% I dalies pabaiga.
+
+% FIXME: maybe force odd page?
+\part{IPP, kreiviniai bei Oilerio integralai}
+\markboth{IPP, kreiviniai bei Oilerio integralai}{}
+
+\section{Integralai, priklausantys nuo parametro}
+
+Daþnai tenka nagrinëti tokio pavidalo funkcijas:
+\[ J(x) := \int_Y f(x, y) \,\dy.
+\]
+Jos vadinamos integralais, priklausanèiais nuo parametro (sutrumpintai IPP).
+
+Toliau laikysime, kad $X \subset \R^k$, $Y \subset \R^n$ -- maèios aibës, $f:
+X \times Y \to \R$ tokia, kad $\forall x \in X \quad f(x, \cdot) \in L(Y)$
+(èia ir kitur, $f(x, \cdot)$ þymi funkcijà $g_x(y) : Y \to \R$, $\forall y \in
+Y \quad g_x(y) := f(x, y)$).
+
+\begin{ap}								% 5.1
+Sakysime, kad IPP $J(x) := \int_Y f(x,y)\,\dy$ yra \Def{normaliai
+integruojamas} aibëje $A \subset X$ (arba ,,$x \in A$ atþvilgiu``, arba
+,,pagal $x \in A$``), jei $\exists g \in L(Y):$
+\[ |f(x,y)| \le g(y), \qquad y \in Y, \quad x \in A
+\]
+(kartais dar sakoma ,,integralas normaliai konverguoja``).
+\end{ap}
+
+\begin{tg}								% 5.2
+Tarkime, kad funkcija $f: X \times Y \to \R$ tenkina ðias sàlygas:
+\begin{enumerate}
+\item $\forall y \in Y \quad \exists f_0(y) := \lim_{x \to x^0} f(x,y)$.
+\item $\exists$ pradurtoji taðko $x^0$ aplinka $\dot{U}$ tokia, kad IPP $J$
+yra normaliai integruojamas aibëje $\dot{U} \cap X$ (t.y. $\exists g \in L(Y)
+\quad |f(x,y)| \le g(y) \quad y \in Y, \quad x \in \dot{U} \cap X$).
+\end{enumerate}
+Tada $\exists J_0 := \lim_{x \to x^0} J(x) := \int_Y f_0(y) \,\dy$
+(t.y. \[\lim_{x \to x^0} \int_Y f(x,y)\,\dy = \int_Y \lim_{x\to x^0}
+f(x,y)\,\dy ).\]
+Atskiru atveju, kai vietoje pirmos sàlygos iðplildyta tokia:
+\begin{enumerate}
+\item[1$'$.] $\forall y \in Y$ funkcija $f(\cdot, y)$ yra tolydi taðke
+             $x^0$ (t.y. $f_0(y) = f(x^0,y)$),
+\end{enumerate}
+$J$ yra tolydus taðke $x^0$.
+\end{tg}
+
+\begin{pvzz}\NL								% 5.3
+\begin{enumerate}
+\item Funkcijos \(f \in L[0; +\infty)\) \Def{Laplaso transformacija} vadinama
+      funkcija \[ F(p) := \int_0^{+\infty} e^{-px}f(x)\,\dx, \qquad p \ge 0 \]
+
+      Du faktai:
+      \begin{enumerate}
+        \item pointegralinë funkcija $h(p, x) = e^{-px} f(x)$ yra tolydi $p$
+              atþvilgiu;
+        \item $|h(p,x)| \le |f(x)|$, $p \ge 0$, $x \ge 0$.
+      \end{enumerate}
+
+      Kadangi \(|f| \in L[0; +\infty)\), tai IPP $F(p)$ normaliai
+      integruojamas visame intervale \([0; +\infty)\).  Remdamiesi praeita
+      teorema gauname, kad Laplaso transformacija visada yra toldydi funkcija.
+\item Tarkime, $f \in L(\R)$.  Kompleksinë funkcija \[\hat{f}(t) :=
+      \int_{-\infty}^{+\infty} e^{itx} f(x) \,\dx, \qquad t \in \R,\] vadinama
+      funkcijos $f$ \Def{Furje transformacija}.
+
+      (Primename, kad \(e^{ix} := \cos x + i \sin x\); \(\int(f(x) + i
+      g(x))\,\dx := \int f(x)\,\dx + i \int g(x)\,\dx\), \(f, g: \R \to \R\))
+
+      Faktai:
+      \begin{enumerate}
+        \item IPP tolydus $t$ atþvilgiu;
+        \item $|e^{itx} f(x)| = |f(x)|$.
+      \end{enumerate}
+
+      Taigi Furje transformacija visada yra tolydi.
+\item Tarkime, kad $f \in C(X \times Y)$ ir $X, Y$ -- kompaktai.  Tada
+      IPP $J(x) := \int_Y f(x,y) \,\dy$, $x \in X$ -- tolydi funkcija.
+\item $F(x) := \int_0^{+\infty} \underbrace{xe^{-xy}}_{=: f(x,y)}\,\dy$, $x
+      \ge 0$, $f(x,y)$ tolydi pagal $x$.
+
+      \begin{align*}
+      F(0) &= 0 \\
+      F(x) &= -e^{-xy} \Big|_{y=0}^{+\infty} = 1 \quad x \ge 0
+      \end{align*}
+
+      Taigi, $F(x) \not\in C$ (nëra tolydus taðke $x = 0$).
+\end{enumerate}
+\end{pvzz}
+
+\begin{tr}								% 5.4
+Tarkime, kad funkcija $f: X \times Y \to \R$ tenkina ðias sàlygas:
+\begin{enumerate}
+\item $\forall y \in Y \quad \exists \frac{\partial f(x^0,y)}{\partial x_i}$
+      (pagal kaþkokià vienà koordinatæ $x_i$).
+\item $\exists$ taðko $x^0$ aplinka $U$, kurioje funkcijø sistema
+      $\{ \frac{\partial f(x,y)}{\partial x_i}, x \in U \}$ yra normaliai
+      integruojama (t.y. $\exists g \in L(Y):$
+      \[ \left|\frac{\partial f(x,y)}{\partial x_i}\right| \le g(y), \qquad
+      y \in Y, \quad x \in U \text{\/)}.\]
+\end{enumerate}
+Tada \[\exists \frac{\partial J(x^0)}{\partial x_i} = \frac{\partial}{\partial
+x_i} \Big(\int_Y f(x^0, y)\,\dy \Big) = \int_Y \frac{\partial
+f(x^0,y)}{\partial x_i} \,\dy.\]
+\end{tr}
+
+\begin{pvzz}\NL								% 5.5
+\begin{enumerate}
+\item $\displaystyle J(a) := \int_0^\infty \frac{\dx}{a+x^2} =
+\frac{\pi}{2\sqrt{a}}$, $a > 0$.
+
+Diferencijuodami gausime kairëje pusëje aukðtesnius laipsnius: $\int_0^\infty
+\frac{\dx}{(a+x^2)^n}$.  Taip skaièiuoti paprasèiau, nei taikyti anksèiau þinomà
+rekurentinæ formulæ.
+
+Formaliai diferencijuokime $a$ atþvilgiu:
+\[ J'(a) = - \int_0^\infty \frac{\dx}{(a+x^2)^2} = \frac{\pi}{2} \cdot
+\left(-\frac{1}{2}\right) a^{-3/2} = - \frac{\pi}{2 \cdot 2} \cdot
+\frac{1}{a^{3/2}}, \qquad a > 0.
+\]
+
+Kad ásitikintume diferencijavimo po integralo þenklu teisëtumu, turime
+patikrinti, ar gautasis integralas normaliai konverguoja $\forall$ taðko $a_0
+> 0$ aplinkoje (pakankamai maþoje).
+
+Tæsdami diferencijavimà matome, kad
+\[ \int_0^\infty \frac{\dx}{(a+x^2)^{n+1}} = \frac{(2n-1)!! \pi}{2\cdot (2n)!!
+a^{n+1/2}}.
+\]
+
+(Primename, kad $n!! := \begin{cases} n \cdot (n-2)!! & n > 2 \\ n & n \le 2
+\end{cases}$.)
+
+Diferencijavimo teisëtumu ásitikiname lygiai taip pat.
+
+\item $\displaystyle \int_0^1 x^{a-1}\,\dx = \frac{1}{a}$, $a > 0$.
+
+Diferencijuojame pagal $a$:
+\[ \int_0^1 x^{a-1} \ln x \,\dx = - \frac{1}{a^2}, \qquad a > 0.
+\]
+
+Teisëtumu ásitikaniname panaðiai.
+
+Tæsdami toliau gauname, kad
+\[ \int_0^1 x^{a-1} \ln^n x \,\dx = (-1)^n \frac{n!}{a^{n+1}}, \qquad a > 0.
+\]
+
+% "geras uþdavinukas egzaminui" -- V. Mackevièius
+
+\item $\displaystyle J(x) = \int_{a(x)}^{b(x)} f(x,y)\,\dy$, $J'(x) = ?$
+
+Atlikime kintamøjø keitimà: $y = a(x)(1-z) + b(x)z$, $z \in [0,1]$.
+
+\begin{align*}
+J(x) &= \int_0^1 \underbrace{f\big(x, (1-z)a(x) + zb(x)\big) \cdot
+\big(b(x)-a(x)\big)}_{=: \tilde{f}(x,z)} \,\dz
+      = \int_0^1 \tilde{f}(x,z)\,\dz
+\end{align*}
+
+Jei $a(x)$, $b(x)$ yra ,,geros`` (tiksliau, tolydþiai diferencijuojamos)
+funkcijos, tai
+\begin{align*}
+J'(x) &= \int_0^1 \frac{\partial \tilde{f}(x,z)}{\partial x} \,\dz
+       = \dots % FIXME
+       = \int_{a(x)}^{b(x)} \frac{\partial f(x,y)}{\partial x}\,\dy +
+         f\big(x, b(x)\big) b'(x) - f\big(x, a(x)\big) a'(x).
+\end{align*}
+
+\item $\displaystyle F(p) = \int_0^{+\infty} e^{-px} x f(x) \,\dx$, $p \ge 0$,
+\(l \in L[0; +\infty)\) (Laplaso transformacija).  Kada egzistuoja $F'(p)$?
+
+Formaliai diferencijuokime:
+\[ F'(p) = -\int_0^{+\infty} e^{-px} x f(x) \,\dx, \qquad p \ge 0.
+\]
+
+Aiðku, kad
+\[ |-e^{-px} x f(x) | \le x |f(x)|, \qquad x \ge 0, \quad p \ge 0.
+\]
+
+Reikia, kad funkcija $g(x) := x | f(x) |$ bûtø integruojama, t.y.
+$\int_0^{+\infty} x|f(x)| \,\dx < +\infty$.
+
+Apjungdami ðià sàlyga su \(f \in L[0; +\infty)\) gauname bendrà sàlygà:
+\[ \int_0^{+\infty} (1+x)|f(x)|\,\dx < +\infty.
+\]
+
+Analogiðkai ásitikiname, kad $F^{(k)}(p)$ egzistuoja tada ir tik tada, kai
+\[ \int_0^{+\infty} (1+x^k)|f(x)|\,\dx < +\infty.
+\]
+
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}[netiesioginiai IPP]						% 5.6
+Tarkime, \(f \in C(I \times [a,b))\), $I \subset \R$ -- intervalas.  Tada
+\[ J(x) = \int_a^b f(x,y)\,\dy := \lim_{c\uparrow b} \int_a^c f(x,y)\,\dy.
+\]
+
+\Def{Netiesioginio integralo} $J$ tolydumui pakanka ðios sàlygos:
+\[ |f(x,y)| \le g(y) \text{ kiekvieno taðko $x^0 \in I$ aplinkoje}, g \in
+L[a,b).
+\]
+
+Ði sàlyga reikalauja, kad $\int_a^b |f(x,y)| \,\dy < +\infty$, vadinasi
+reliatyviai konverguojantiems integralams su parametru reikia kaþko kito.
+\end{ap}
+
+\begin{ap}								% 5.7
+Sakysime, kad netiesioginis IPP (NIPP)
+\[ J(x) = \int_a^b f(x,y)\,\dy := \lim_{c\uparrow b} \int_a^c f(x,y)\,\dy,
+\qquad x \in I,
+\]
+konverguoja \Def{tolygiai} pagal $x \in I$, jei
+\[ \sup_{x \in I} \Big| \int_c^b f(x,y) \,\dy \Big| \to 0, \quad c \uparrow b.
+\]
+\end{ap}
+
+\begin{tg}								% 5.8
+\label{5.8}
+Jei \(f \in C(I\times[a,b))\), $I \subset \R$ -- bet koks intervalas, o NIPP
+$J(x) = \int_a^b f(x,y) \,\dy$ konverguoja tolygiai taðko $x^0 \in I$
+aplinkoje, tai $J$ tolydus taðke $x^0$.
+\end{tg}
+
+\begin{tg}[NIPP tolygaus konvergavimo Abelio-Dirichle poþymis]		% 5.9
+Tarkime, kad \(f \in C(I \times [a,b))\), ir \(g \in C^1[a,b)\) tenkina ðias
+sàlygas:
+\begin{enumerate}
+\item $F(x, t) := \int_a^t f(x,y)\,\dy$, \(t \in [a,b)\) -- tolygiai aprëþta
+      funkcija ($|F(x,t)| \le M < \infty$, $x \in I$, \(t \in [a,b)\)).
+\item $g(x) \downarrow 0$, kai $x \uparrow b$
+\end{enumerate}
+Tada NIPP $J(x) := \int_a^b f(x,y) \cdot g(y)\,\dy$, $x \in I$, konverguoja
+tolygiai ir $|J(x)| \le Mg(a)$, $x \in I$ ($J$ tolydus remiantis \ref{5.8}
+teiginiu).
+\end{tg}
+
+\begin{pvz}[!]								% 5.10
+\[ J(x) = \int_0^{+\infty} e^{-xy} \frac{\sin y}{y}\,\dy, \qquad x \ge 0.
+\]
+
+Paþymëkime $f(x,y) := e^{-xy}\sin y$, $g(y) := \frac{1}{y}$. Jei $J_1(x) :=
+\int_1^{+\infty} f(x,y)g(y)\,\dy$ konverguos tolygiai, tai tolygiai konverguos
+ir $J(x) = \int_0^1 f(x,y)g(y) \,\dy + J_1(x)$ (nes $|f(x,y)g(y)| \le M$, kai
+$x \in [0,1]$).
+
+\begin{align*}
+|F(x,t)| &= \Big|\int_1^t f(x,y)\,\dy\Big|
+          = \Big|\int_1^t e^{-xy}\sin y \,\dy\Big|
+          = \left|\frac{e^{-xy}(x \sin y - \cos y)}{1+x^2} \Big|_{y=1}^t \right|
+       \\&= \left|\frac{e^{-xt}(x \sin t - \cos t)}{1+x^2} -
+                  \frac{e^{-x} (x \sin 1 - \cos 1)}{1+x^2} \right|
+          \le \frac{x|\sin t| + |\cos t|}{1+x^2} + \frac{x \sin 1 + \cos
+              1}{1+x^2}
+       \\&\le \frac{2(1+x)}{1+x^2} \le 4, \qquad x \ge 0, \quad t \ge 1.
+\end{align*}
+
+$g(y) \downarrow 0$, kai $y \to \infty$.  Pritaikæ Abelio-Dirichle poþymá
+gauname, kad $J_1(x)$ -- tolydi funkcija, tad tolydus ir $J(x)$, $x \ge 0$.
+
+Atskiru atveju, kai $x = 0$, gauname, kad
+\[ J(0) = \int_0^{+\infty} \frac{\sin y}{y}\,\dy
+        = \lim_{x \downarrow 0} J(x) 
+        = \lim_{x \downarrow 0} \int_0^{+\infty} e^{-xy} \frac{\sin
+          y}{y}\,\dy.
+\]
+
+Diferencijuokime $J(x)$, $x > 0$:
+\[ J'(x) = \int_0^{+\infty} -e^{-xy}\sin y \,\dy.
+\]
+
+Diferencijavimas yra teisëtas, nes $|e^{-xy}\,\sin y| \le x^{-xy} \le
+e^{-\frac{x_0}{2}y}$, $y \ge 0$, $x \in U_{\frac{x_0}{2}}(x_0) =
+(\frac{x_0}{2}, \frac{3x_0}{2})$.
+
+Tai rodo, kad pointegrinë funkcija yra normaliai integruojama kiekvieno taðko
+$x_0 > 0$ aplinkoje, kadangi deðinëje esanti funkcija integruojama.
+
+Apskaièiuokime $J'(x)$:
+\[ J'(x) = -\frac{e^{-xy}(x \sin y - \cos y)}{1+x^2} \bigg|_{y=0}^{+\infty}
+         = - \frac{1}{1+x^2}, \qquad x > 0.
+\]
+
+Ið èia
+\[ J(x) = - \int \frac{1}{1+x^2} \,\dx = -\arctan x + C.
+\]
+
+Pereikime prie ribos, kai $x \uparrow +\infty$:
+\[ 0 = -\frac{\pi}{2} + C.
+\]
+
+Taigi, $C = \frac{\pi}{2}$ ir $J(x) = \frac{\pi}{2} - \arctan x$.
+Perëjæ prie ribos, kai $x \downarrow 0$, gauname
+\[ \int_0^{+\infty} \frac{\sin y}{y} \,\dy = \frac{\pi}{2}.
+\]
+
+Paëmæ $y = ax$ turime
+\[ \int_0^{+\infty} \frac{\sin ax}{x} \,\dx = \frac{\pi}{2} \sgn a, \qquad a
+\in \R.
+\]
+\end{pvz}
+
+
+\section{Oilerio integralai}
+
+\begin{ap}								% 6.1
+\Def{Gama funkcija} arba \Def{antro tipo Oilerio integralu} vadinama funkcija
+\[ \Gamma(x) := \int_0^{+\infty} e^{-t} t^{x-1} \,\dt, \qquad x > 0.
+\]
+\end{ap}
+
+\begin{tg}								% 6.2
+Funkcija $\Gamma$ pasiþymi ðiomis savybëmis:
+\begin{enumerate}
+\item $\Gamma \in C^\infty(0, +\infty)$.
+\item $\forall x > 0 \quad \Gamma(x+1) = x \Gamma(x)$.
+\item $\forall n \in \N \quad \Gamma(n+1) = n!$ ir
+      $\Gamma(n+\frac{1}{2}) = \frac{(2n-1)!!}{2^n} \sqrt{\pi}$.
+\item $\displaystyle \lim_{x \downarrow 0} \Gamma(x) = \lim_{x \to +\infty}
+      \Gamma(x) = +\infty$.
+\item $\Gamma$ iðkila þemyn ir turi minimumà intervalo $(1;2)$ taðke $x_{min}
+      \approx 1.4616$ ($\Gamma(x_{min}) \approx 0.8856$).
+\end{enumerate}
+\end{tg}
+
+\begin{ap}								% 6.3
+\Def{Pirmo tipo Oilerio IPP} arba \Def{Beta funkcija} apibrëþiama lygybe
+\[ \Beta(x, y) := \int_0^1 t^{x-1}(1-t)^{y-1} \,\dt, \qquad x > 0, \quad y > 0.
+\]
+\end{ap}
+
+\shortpage
+\begin{tgg}\NL								% 6.4
+\begin{enumerate}
+\item $\displaystyle \Beta(x, y) = \int_0^\infty \frac{t^{x-1}}{(1+t)^{x+y}}
+      \,\dt, \qquad x > 0, \quad y > 0$.
+\item $\Beta(x, y) = \Beta(y, x)$, $x > 0$, $y > 0$.
+\item $\displaystyle \Beta(x+1, y) = \frac{x}{x+y} \Beta(x, y)$; \\
+      $\displaystyle \Beta(x, y+1) = \frac{y}{x+y} \Beta(x, y)$.
+\end{enumerate}
+\end{tgg}
+
+\begin{tr}\NL								% 6.5
+\begin{enumerate}
+\item $\displaystyle \Beta(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}$,
+      $x > 0$, $y > 0$.
+\item $\displaystyle \Gamma(x)\Gamma(1-x) = \frac{\pi}{\sin \pi x}$,
+      $0 < x < 1$.
+\end{enumerate}
+\begin{ir}
+Be árodymo.
+\end{ir}
+\end{tr}
+
+\begin{pvzz}\NL								% 6.6
+\begin{enumerate}
+\item $\displaystyle \int_0^1 \sqrt{x-x^2}\,\dx = \frac{\pi}{8}$.
+\item $\displaystyle \int_0^{+\infty} \frac{\sqrt[4]{x}}{(1+x)^2}\,\dx =
+      \frac{\pi\sqrt{2}}{4}$.
+\item $\displaystyle \int_0^{\pi/2} \sin^{p-1} x \cos^{q-1} x\,\dx =
+      \frac{1}{2} \Beta(p/2, q/2)$.
+\item $\displaystyle \int_0^{+\infty} x^m e^{-x^n}\,\dx = \frac{1}{n}
+      \Gamma\left(\frac{m+1}{n}\right)$.
+\end{enumerate}
+\end{pvzz}
+
+
+\section{Kreiviniai integralai}
+
+\begin{ap}[su prisiminimu]						% 7.1
+\label{7.1}
+\Def{Kreive} erdvëje $\R^k$ vadinama bet kokia funkcija $\gamma \in C([a,b],
+\R^k)$.  Kreivë $\gamma$ vadinama \Def{glodþia}, jei ji yra tolydþiai
+diferencijuojama ir $\gamma'(t) \ne 0$ (kai kada pastaroji sàlyga á apibrëþimà
+neátraukiama).  Kreivë $\gamma$ vadinama \Def{gabalais} (\Def{dalimis})
+\Def{glodþia}, jei $\gamma'(t)$ egzistuoja ir yra aprëþta iðskyrus galbût
+baigtiná\footnote{Galima bûtø kalbëti apie skaièià aibæ, bet taikymuose tai
+retai pasitaiko.} skaièiø taðkø.
+
+Funkcija $\tau : [a,b] \to [\alpha, \beta]$ vadinama \Def{diffeomorfizmu}, jei
+ji yra tolydþiai diferencijuojama bijekcija, kurios atvirkðtinë $\tau^{-1}$
+taip pat yra tolydþiai diferencijuojama.
+
+\shortpage
+Sakoma, kad kreivës $\gamma_1$ ir $\gamma_2$ yra \Def{ekvivalenèios}, jei
+egzistuoja grieþtai didëjantis diffeomorfizmas $\tau$ toks, kad $\gamma_1 =
+\gamma_2 \circ \tau$ (t.y. $\gamma_1(t) = \gamma_2(\tau(t))$ su visais $t$).
+Tokiu atveju raðoma $\gamma_1 \sim \gamma_2$ ir sakoma, kad kreivë $\gamma_1$
+yra \Def{gaunama} ið kreivës $\gamma_2$ parametro keitimu $\tau$.
+
+Glodþios kreivës $\gamma : [a,b] \to \R^k$ \Def{liestine} taðke $t_0 \in
+[a,b]$ vadinama tiesë
+\[ x(t) = \gamma(t_0) + \gamma'(t_0) (t-t_0), \qquad t \in \R.
+\]
+
+Vektorius $\gamma'(t_0)$ yra \Def{lieèiamasis vektorius} kreivei $\gamma$
+taðke $t_0$ (geometriðkai -- taðke $\gamma(t_0)$).
+
+Vektorius $T(t_0) := \frac{\gamma'(t_0)}{|\gamma'(t_0)|}$ vadinamas kreivës
+$\gamma$ \Def{vienetiniu lieèiamuoju vektoriumi}.
+\end{ap}
+
+\begin{tg}[kreiviø ekvivalentumo savybës]\NL				% 7.2
+\begin{enumerate}
+\item \label{7.2.1} $\gamma \sim \gamma$.
+\item \label{7.2.2} $\gamma_1 \sim \gamma_2$ \tada $\gamma_2 \sim \gamma_1$.
+\item \label{7.2.3} $\gamma_1 \sim \gamma_2$ ir $\gamma_2 \sim \gamma_3$ \tada
+      $\gamma_1 \sim \gamma_3$.
+\item Vienetinis lieèiamasis vektorius nesikeièia keièiant parametrà.
+\end{enumerate}
+\begin{ps*} \ref{7.2.1}--\ref{7.2.3} savybës leidþia visas kreives erdvëje
+$\R^k$ suskirstyti á nesikertanèias klases.  Kiekvienà tokià klasæ galima
+interpretuoti kaip vienà geometrinæ kreivæ su pasirinkta ,,apëjimo kryptimi``.
+\end{ps*}
+\end{tg}
+
+\begin{ap}								% 7.3
+\Def{Orientuota} kreive (erdvëje $\R^k$) vadinama bet kokia klasë ekvivalenèiø
+kreiviø erdvëje $\R^k$.
+
+Kreivë $\overline{\gamma}(t) := \gamma(a+b-t)$, $t \in [a,b]$, vadinama
+kreive, gauta ið kreivës $\gamma : [a, b] \to \R^k$ \Def{orientacijos}
+(,,apëjimo krypties``) pakeitimu.
+\end{ap}
+
+\begin{pss}\NL								% 7.4
+\begin{enumerate}
+\item Kreive erdvëje $\R^k$ \Def{geometrine prasme} vadainama aibë $\Gamma \in
+      \R^k$, kuriai egzistuoja kreivë (\ref{7.1} apibrëþimo prasme) $\gamma :
+      [a, b] \to \R^k$, su kuria vaizdas $\gamma([a,b]) = \Gamma$.  Tokiu
+      atveju funkcija $\gamma$ vadinama kreivës $\Gamma$ parametrizacija.
+
+      $\Gamma$ vadinama \Def{glodþia} (\Def{gabalais glodþia}), jei tokia yra
+      $\gamma$.
+
+\item Orientuota kreivë kartais vadinama tiesiog ,,kreive``, o kreivë pagal
+      mûsø supratimà vadinama ,,keliu``.
+
+\item Jei $\gamma$ -- glodi kreivë ($\gamma \in C^1([a,b], \R^k)$), kreivës
+      $\gamma$ ilgis yra
+      \[ l(\gamma) = \int_a^b |\gamma'(t)|\,\dt,
+      \]
+      be to, $l(\gamma_1) = l(\gamma_2)$, jei $\gamma_1 \sim \gamma_2$ arba
+      $\gamma_1 \sim \overline{\gamma_2}$.
+
+      Geometrinës kreivës ilgis $l(\Gamma) := l(\gamma)$, kur $\gamma$ -- bet
+      kokia kreivës $\Gamma$ parametrizacija.
+
+\item Vietoje kreiviø $\gamma : [a, b] \to \R^k$ galime nagrinëti ir kreives
+      \(\gamma : [0, +\infty) \to \R\) arba $\gamma : (-\infty, +\infty) \to
+      \R^k$ (su tam tikru atsargumu).
+\end{enumerate}
+\end{pss}
+
+\begin{ap}								% 7.5
+Tarkime, $\gamma : [\alpha, \beta] \to D \subset \R^k$ -- glodi kreivë, $f: D
+\to \R$.  Funkcijos $f$ \Def{pirmo tipo kreiviniu integralu} kreive $\gamma$
+vadinamas skaièius
+\[ \int_\gamma f \,\dl := \int_\alpha^\beta f\big(\gamma(t)\big)\,\dl(t)
+   = \int_\alpha^\beta f\big(\gamma(t)\big)|\gamma'(t)|\,\dl
+\]
+(su sàlyga, kad deðinëje esantis integralas egzistuoja).
+\end{ap}
+
+\begin{tgg}[pirmo tipo kreiviniø integralø savybës]\NL			% 7.6
+\begin{enumerate}
+\item Jei $\gamma_1 \sim \gamma_2$ arba $\gamma_1 \sim \overline{\gamma_2}$,
+tai \[ \int_{\gamma_1} f\,\dl = \int_{\gamma_2} f\,\dl \]
+(ði savybë leidþia apibrëþti pirmo tipo kreiviná integralà geometrinei kreivei
+$\Gamma$:
+\[ \int_\Gamma f\,\dl := \int_{\gamma} f\,\dl,
+\text{ kur $\gamma$ -- bet kokia $\Gamma$ parametrizacija).}
+\]
+\item (Tiesiðkumas)
+\[ \int_\gamma (a f + b g)\,\dl = a \int_\gamma f\,\dl + b \int_\gamma g\,\dl
+\]
+(jei egzistuoja deðinëje esantys integralai).
+\item (Adityvumas)
+Jei $\gamma = \gamma_1 \cup \gamma_2$, tai
+\[ \int_\gamma f\,\dl = \int_{\gamma_1} f\,\dl + \int_{\gamma_2} f\,\dl.
+\]
+\item
+\[ \Big|\int_\gamma f\,\dl \Big| \le \int_\gamma |f|\,\dl.
+\]
+\end{enumerate}
+\begin{ps*}
+$\int_\gamma f\,\dl$ galima interpretuoti kaip kreivës $\Gamma$ masæ, kai
+jos tankis taðke $x \in \Gamma$ yra lygus $f(x)$.
+\end{ps*}
+\end{tgg}
+
+\begin{pvz}								% 7.7
+$\Gamma = \{(x,y): \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\}$, $f = f(x,y)$,
+$(x,y) \in \Gamma$.
+
+Parametrizacija:
+\[ \begin{cases} x = a\cos t \\ y = b\sin t \end{cases} \qquad 
+   t \in [0, 2\pi].
+\]
+
+Tada
+\[ \int_\Gamma f\,\dl = \int_0^{2\pi} f(a\cos t, b\sin t) \underbrace{\sqrt{
+   a^2 \sin^2 t + b^2 \cos^2 t}}_{= |\gamma'(t)| = c\sqrt{1 - k \sin^2t} }.
+\]
+
+\( E(k) := \int \sqrt{1 - k \sin^2 t} \) -- \Def{elipsinis integralas}.
+Bjaurus daiktas.
+\end{pvz}
+
+\begin{ap}								% 7.8
+Tarkime, $\gamma: [\alpha, \beta] \to D \subset \R^k$ -- glodi kreivë, $f : D
+\to \R^k$.  Funkcijos $f$ \Def{antro tipo kreiviniu integralu} kreive $\gamma$
+vadinamas skaièius 
+\begin{align*}
+   \int_\gamma \langle f, \dx \rangle = &
+   \int_\gamma f_1 \dx_1 + f_2 \dx_1 + \dots + f_k \dx_k := \\ &
+   \int_\alpha^\beta \Big(f_1\big(\gamma(t)\big)\gamma'_1(t) +
+                          f_2\big(\gamma(t)\big)\gamma'_2(t) + \dots +
+                          f_k\big(\gamma(t)\big)\gamma'_k(t) \Big)\,\dt =
+   \int_\alpha^\beta \langle f\big(\gamma(t)\big), \gamma'(t) \rangle \,\dt
+\end{align*}
+(su sàlyga, kad deðinëje esantis integralas egzistuoja).
+\end{ap}
+
+\begin{pss}[ir komentarai]\NL						% 7.9
+\begin{enumerate}
+\item Kai $k=2$ áprasta þymëti $f = (P, Q)$, $x = (x, y)$:
+\[ \int_\gamma P(x,y)\,\dx + Q(x,y)\,\dy. \]
+
+Kai $k = 3$, þymima $f = (P, Q, R)$, $x = (x, y, z)$:
+\[ \int_\gamma P(x,y,z)\,\dx + Q(x,y,z)\,\dy + R(x,y,z)\,\dz. \]
+
+\item $\int_\gamma \langle f, \dx \rangle$ galima interpretuoti kaip darbà,
+      kurá atlieka ,,jëgø laukas`` f, ,,stumiantis`` dalelæ kreive $\gamma$.
+
+\item Pirmo ir antro tipo kreivinius integralus sieja ði lygybë:
+\[ \int_\gamma \langle f, \dx \rangle = \int_\gamma \langle f, T \rangle\,\dl.
+\]
+\begin{ir*}
+Ið tikrøjø,
+\begin{align*}
+\int_\gamma \langle f, T \rangle \,\dx = \int_\alpha^\beta \Big\langle f\big(
+\gamma(t) \big), \frac{\gamma'(t)}{|\gamma'(t)|} \Big\rangle |\gamma'(t)|\,\dt
+= \int_\alpha^\beta \big\langle f\big( \gamma(t) \big), \gamma'(t)
+\big\rangle\,\dt = \int_\gamma \langle f, \dx \rangle
+\end{align*}
+\end{ir*}
+\end{enumerate}
+\end{pss}
+
+\begin{tgg}\NL								% 7.10
+\begin{enumerate}
+\item
+\begin{align*}
+\gamma_1 \sim \gamma_2 &\tada \int_{\gamma_1} \langle f, \dx \rangle =
+                              \int_{\gamma_2} \langle f, \dx \rangle; \\
+\gamma_1 \sim \overline{\gamma_2} &\tada \int_{\gamma_1} \langle f, \dx \rangle
+                                      = -\int_{\gamma_2} \langle f, \dx \rangle.
+\end{align*}
+
+Ðios savybës leidþia aibrëþti antro tipo kreiviná integralà geometrine kreive
+$\Gamma \subset \R^k$ su pasirinkta ,,apëjimo`` kryptimi:
+\[ \int_\Gamma \langle f, \dx \rangle := \int_\gamma \langle f, \dx \rangle,
+\]
+kur $\gamma$ -- $\Gamma$ parametrizacija su ,,atitinkamai`` pasirinkta
+kryptimi.  Pakeitus ,,apëjimo kryptá`` prieðinga, integralo reikðmë keis
+þenklà.
+
+\item (Tiesiðkumas)
+\[ \int_\gamma \langle af+bg, \dx \rangle = a \int_\gamma \langle f, \dx
+   \rangle + b \int_\gamma \langle g, \dx \rangle.
+\]
+
+\item (Adityvumas)
+Jei $\gamma = \gamma_1 \cup \gamma_2$, tai
+\[ \int_\gamma \langle f, \dx \rangle = \int_{\gamma_1} \langle f, \dx
+   \rangle + \int_{\gamma_2} \langle f, \dx \rangle.
+\]
+
+\item
+\[ \Big| \int_\gamma \langle f, \dx \rangle \Big| \le \int_\gamma |f|\,\dl.
+\]
+
+\end{enumerate}
+\end{tgg}
+
+\begin{pvz}								% 7.11
+$\Gamma = \{(x,y): \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\}$, $f(x,y) =
+\big(P(x,y), Q(x,y)\big)$, $(x,y) \in D \supset \Gamma$.
+
+Parametrizacija:
+\[ \begin{cases} x = \gamma_1(t) = a\cos t \\ y = \gamma_2(t) = b\sin t 
+   \end{cases} \qquad t \in [0, 2\pi].
+\]
+
+\[ \int_\Gamma P(x,y)\,\dx + Q(x,y)\,\dy =
+   \int_0^{2\pi} \big(
+     P(a\cos t, b\cos t) \cdot \underbrace{(-a\sin t)}_{= \gamma_1'(t)} +
+     Q(a\cos t, b\cos t) \cdot \underbrace{( b\cos t)}_{= \gamma_2'(t)} +
+                  \big)\,\dt.
+\]
+\end{pvz}
+
+\begin{ap}								% 7.12
+Aibë $D \subset \R^k$ vadinama \Def{lankiðkai jungia}, jei $\forall x, y \in
+D$ egzistuoja gabalais glodi kreivë $\gamma : [\alpha, \beta] \to D$ su galais
+$\gamma(\alpha) = x$, $\gamma(\beta) = y$.
+
+\Def{Sritimi} erdvëje $\R^k$ vadinsime bet kokià atviràjà lankiðkai jungià
+aibæ $D \subset \R^k$.
+
+Toliau visur $D \subset \R^k$ -- sritis.
+
+Funkcijos $f : D \to \R$ \Def{gradientu} vadinama funkcija $\grad f : D \to
+\R^k$:
+\[ \grad f(x) := \left( \frac{\partial f}{\partial x_1}, \dots,
+                        \frac{\partial f}{\partial x_k} \right),
+              \qquad x \in D
+\]
+(kitas þymëjimas: $\grad f(x) = f'(x)$, jei vartojamas ne eilutinis, o
+stulpelinis vektorius).
+
+Funkcija $f: D \to \R^k$ vadinama \Def{potencialo lauku}, jei egzistuoja
+funkcija $U: D \to \R$, su kuria $\grad U = f$ srityje $D$.  Tokiu atveju $U$
+vadinama ,,jëgø lauko`` $f$ \Def{potencialu}.
+\end{ap}
+
+\begin{tr}[kreiviniai integralai ir integravimo kreivë]			% 7.13
+Tarkime, kad $f \in C(D, \R^k)$.  Tada ðie trys teiginiai yra ekvivalentûs:
+\begin{enumerate}
+\item $f$ -- potencialo laukas.
+\item $\forall x^0, x^1 \in D$ kreivinis integralas $\int_\gamma \langle f,
+      \dx \rangle$ ágyja tà paèià reikðmæ su visomis gabalais glodþiomis
+      kreivëmis $\gamma : [\alpha, \beta] \to D$ su galais $\gamma(\alpha)
+      = x^0$, $\gamma(\beta) = x^1$.
+\item $\int_\gamma \langle f, \dx \rangle = 0$ su visomis uþdaromis gabalais
+      glodþiomis kreivëmis $\gamma : [\alpha, \beta] \to D$ ($\gamma(\alpha) =
+      \gamma(\beta)$).
+\end{enumerate}
+\end{tr}
+
+\begin{tr}[bûtina ir pakankama sàlyga, kad funkcija bûtø potencialo laukas]
+\label{7.14}								% 7.14
+Tarkime, $f \in C^1(D, \R^k)$.
+\begin{enumerate}
+\item Jei $f$ -- potencialo laukas, tai
+\begin{equation*}
+   \frac{\partial f_i}{\partial x_j} =
+   \frac{\partial f_j}{\partial x_i},
+   \qquad i, j = 1 \dots k, \text{ srityje $D$.}
+   \tag*{($*$)}\label{eq:7.14.1}
+\end{equation*}
+\item Jei $D$ -- atviroji gardelë, ir joje patenkintos \ref{eq:7.14.1}
+lygybës, tai $f$ -- potencialo laukas ir funkcija $U(x)$ yra jos potencialas:
+\begin{align*}
+  U(x) = U(x^0) &+ \int_{x^0_1}^{x_1} f_1(y, x^0_2, x^0_3, \dots, x^0_k)\,\dy \\
+                &+ \int_{x^0_2}^{x_2} f_2(x_1, y, x^0_3, \dots, x^0_k)\,\dy \\
+                &+ \ldots \\
+                &+ \int_{x^0_k}^{x_k} f_k(x_1, \dots, x_{k-1}, y)\,\dy,
+\qquad x \in D
+\end{align*}
+(taðkas $x^0 \in D$ ir $U(x^0)$ reikðmë pasirenkami laisvai).
+\end{enumerate}
+\end{tr}
+
+\begin{pss}\NL								% 7.15
+\begin{enumerate}
+\item Kai $k = 2$, $f = (P, Q)$, tada \ref{eq:7.14.1} atrodo taip:
+\[ \frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}.
+\]
+
+Kai $k = 3$, $f = (P, Q, R)$, tada \ref{eq:7.14.1} atrodo taip:
+\[ \frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}, \qquad
+   \frac{\partial P}{\partial z} = \frac{\partial R}{\partial x}, \qquad
+   \frac{\partial Q}{\partial z} = \frac{\partial R}{\partial y}.
+\]
+
+\item \ref{7.14} treorema yra teisinga ir bendresnëms sritims nei gardelës.
+Galima árodyti, kad ji galioja vadinamosioms \Def{vienajungëms sritims}
+(sritims ,,be skyliø``; ,,beveik grieþtas`` apibrëþimas bûtø toks: vienajungë
+sritis -- tokia, kurios kraðtas yra lankiðkai jungi aibë).
+
+\item Jei $f$ -- potencialo laukas, tai turi prasmæ integralas
+\[ \int_A^B \langle f, \dx \rangle = U(B) - U(A),
+   \qquad A, B \in D, \quad \grad U = f
+\]
+(Niutono-Leibnico formulë daugiamaèiu atveju).
+
+\item Jei $\grad U = f$, tai $\ud U = f_1(x)\,\dx_1 + \dots + f_k(x)\,\dx_k$
+-- \Def{pilnasis diferencialas}.  \ref{7.14} teorema nusako sàlygà, kada
+$f_1(x)\,\dx_1 + \dots + f_k(x)\,\dx_k$ yra pilnasis diferencialas.
+
+\end{enumerate}
+\end{pss}
+
+\shortpage
+\begin{pvzz}\NL								% 7.16
+\begin{enumerate}
+\item $\displaystyle \oint_{\frac{x^2}{a^2}+\frac{y^2}{b^2}=1}
+(x^2+y^2)(x\,\dx+y\,\dy) = 0$ ($\oint$ reiðkia, kad integruojama uþdara kreive
+prieð laikrodþio rodyklæ).  Galima tai suþinoti neskaièiuojant integralo,
+uþtenka patikrinti \ref{7.14} sàlygas:
+\[ \frac{\partial P}{\partial y} = 2xy = \frac{\partial Q}{\partial x}
+\]
+($P(x,y) = x(x^2+y^2)$, $Q(x,y) = y(x^2+y^2)$).
+
+\item $\displaystyle I = \oint_{x^2+y^2=1} \frac{x\,\dy - y\,\dx}{x^2+y^2}$,
+$(x,y) \ne (0,0)$.
+
+Parametrizacija:
+\[ \begin{cases} x = \cos \phi \\ y = \sin \phi \end{cases} \qquad \phi \in
+   [0, 2\pi).
+\]
+
+\[ I = \int_0^{2\pi} \frac{\cos^2 \phi + \sin^2 \phi}{\cos^2 \phi + \sin^2
+   \phi}\,\ud\phi = 2\pi \ne 0.
+\]
+
+Uþtenka vieno ,,blogo`` taðko $(0, 0)$, kad funkcija nebûtø potencialo lauku,
+nors $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$.
+
+\item 
+$\displaystyle J = \int_{(1,1)}^{(2,2)} (4x^3y^3-3y^2+5)\,\dx +
+                                        (3x^4y^2-6xy-4)\,\dy$.
+
+Reikia patikrinti, ar $P\,\dx + Q\,\dy$ yra pilnas diferencialas.
+
+$\frac{\partial P}{\partial y} = 12x^3y^2 - 6y = \frac{\partial Q}{\partial
+x}$.  Yra.  Vadinasi $P\,\dx + Q\,\dy = \ud U$.
+
+\begin{align*}
+U(x,y) &= \underbrace{U(0,0)}_{= 0 \text{ (laisvas pasirinkimas)}} +
+          \int_0^x P(u, 0)\,\du +
+          \int_0^y Q(x, u)\,\du
+        = \int_0^x 5\,\du +
+          \int_0^y (3x^4u^2 - 6xu - 4)\,\du
+     \\&= 5x + x^4y^3 - 3xy^2 - 4y.
+\end{align*}
+
+Patikrinimas: $\frac{\partial U}{\partial x} = P$, $\frac{\partial U}{\partial
+y} = Q$.
+
+Vadinasi $J = U(2,2) - U(1,1)$.
+
+Antras bûdas: $\frac{\partial U}{\partial x} = P$, tada $U(x,y) = \int
+P(x,y)\,\dx = \int (4x^3y^3-3y^2+5)\,\dx = x^4y^3-3y^2x+5x+C(y)$,  kur $C(y)$
+-- konstanta, priklausanti nuo $y$.
+
+$\frac{\partial U}{\partial y} = Q$ \tada $3x^4y^2-6yx+C'(y)= 3x^4y^2-6xy-4$
+\tada $C'(y) = -4$ \tada $C(y) = \int (-4)\,\dy = -4y + C$.
+
+Taigi, $U(x,y) = x^4y^3-3y^2x+5x - 4y+C$, o $J = U(2,2)-U(1,1)$.
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 7.17
+\Def{Horizontaliàja kreivine trapecija} vadinsime aibæ $D \subset \R^2$,
+kurios pavidalas toks:
+\[ D = \{(x,y): a \le x \le b, y_1(x) \le y \le y_2(x)\}, \qquad
+   y_1\le y_2 \text{-- tolydþiai diferencijuojamos funkcijos.}
+\]
+
+\Def{Vertikaliàja kreivine trapecija} vadinsime aibæ $D \subset \R^2$, kurios
+pavidalas toks:
+\[ D = \{(x,y): a \le y \le b, x_1(x) \le x \le x_2(x)\}, \qquad
+   x_1\le x_2 \text{-- tolydþiai diferencijuojamos funkcijos.}
+\]
+
+Aibæ $D \subset \R^2$ susitarsime vadinti \Def{,,gera``}, jei
+\begin{enumerate}
+\item jà galima padalinti baigtiniu skaièiumi horizontaliø ir vertikaliø
+tiesiø tiek á horizontalias, tiek á vertikalias kreivines trapecijas
+\item jà riboja viena gabalais glodi kreivë $\Gamma = \partial D$ ($\partial
+D$ -- aibës $D$ kraðtas).  Laikysime, kad ji apeinama teigiama kryptimi --
+prieð laikrodþio rodyklæ.
+\end{enumerate}
+\end{ap}
+
+\begin{tr}[Gryno formulë]						% 7.18
+Jei $P, Q: D \to \R$ -- tolydþiai diferencijuojamos funkcijos ,,geroje``
+aibëje $D$, tai
+\[
+   \int_{\partial D} P\,\dx + Q\,\dy = \iint_D \left(\frac{\partial
+   Q}{\partial x}-\frac{\partial P}{\partial y}\right)\,\dx\dy.
+\]
+\end{tr}
+
+\begin{pvzz}\NL								% 7.19
+\begin{enumerate}
+\item Parinkæ funkcijas $P$ ir $Q$ taip, kad
+\[ \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \equiv 1,
+\]
+Gryno formulës deðinëje pusëje gauname srities plotà $S(D)$.
+
+Tokiø funkcijø pavyzdþiai:
+\begin{enumerate}
+\item $P = -y$, $Q = 0$;
+\item $P = 0$, $Q = x$;
+\item $P = -\frac{y}{2}$, $Q = \frac{x}{2}$.
+\end{enumerate}
+
+Ið èia
+\[ S(D) = -\int_{\partial D} y\,\dx =
+           \int_{\partial D} x\,\dy =
+          \frac{1}{2} \int_{\partial D} x\,\dy - y\,\dx.
+\]
+
+\item Elipsës plotas: $D = \{ (x,y) : \frac{x^2}{a^2} + \frac{x^2}{b^2} \le 1
+\}$.
+
+$\partial D$ parametrizacija:
+\[ \begin{cases} x = a \cos t\\ y = b \sin t \end{cases}
+   \qquad t \in [0, 2\pi).
+\]
+
+\begin{align*}
+S(D) &= - \int_0^{2\pi} b\sin t a(-\sin t)\,\dt = ab\int_0^{2\pi} \sin^2
+t\,\dt = ab\int_0^{2\pi} \frac{1-\cos 2t}{2}\,\dt = ab\pi.
+\end{align*}
+
+\end{enumerate}
+\end{pvzz}
+
+\end{document}
+
