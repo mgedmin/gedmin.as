@@ -7,6 +7,10 @@
 <h2>News</h2>
 <dl class="news">
 
+<dt>2012-01-08</dt>
+<dd>Converted website from Zope 2 to Blogofile.
+</dd>
+
 <dt>2010-03-07</dt>
 <dd>New front page design.
 </dd>

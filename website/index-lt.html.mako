@@ -7,6 +7,10 @@
 <h2>Naujienos</h2>
 <dl class="news">
 
+<dt>2012-01-08</dt>
+<dd>Perėjau nuo Zope 2 prie Blogofile.
+</dd>
+
 <dt>2010-03-07</dt>
 <dd>Nauja priekinio puslapio išvaizda.
 </dd>
