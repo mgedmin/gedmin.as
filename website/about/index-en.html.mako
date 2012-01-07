@@ -1,5 +1,6 @@
 <%inherit file="_templates/site.mako" />
-<%def name="title()">Apie mane</%def>
+<%def name="title()">About me</%def>
+<%def name="short_title()">About</%def>
 
 <p><strong>Name:</strong> Marius Gedminas
 <br /><strong>Date of birth:</strong> 29 Jan 1980

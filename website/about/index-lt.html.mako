@@ -1,5 +1,6 @@
 <%inherit file="_templates/site.mako" />
-<%def name="title()">About me</%def>
+<%def name="title()">Apie mane</%def>
+<%def name="short_title()">Apie</%def>
 
 <p><strong>Vardas:</strong> Marius Gedminas
 <br /><strong>Gimimo data:</strong> 1980 sausio 29 d.

@@ -1,5 +1,6 @@
 <%inherit file="_templates/site.mako" />
 <%def name="title()">Marius Gedminas home</%def>
+<%def name="short_title()">Home</%def>
 
 <div class="news toolbox shadow">
 <div class="inner">

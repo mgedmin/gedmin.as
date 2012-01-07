@@ -1,5 +1,6 @@
 <%inherit file="_templates/site.mako" />
 <%def name="title()">Mariaus namai</%def>
+<%def name="short_title()">Namai</%def>
 
 <div class="news toolbox shadow">
 <div class="inner">

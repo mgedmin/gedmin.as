@@ -1,4 +1,6 @@
 - .htaccess rewrite rules for old news/about redirect
 - magic language negotiation
 - navbar
-- modification time from filesystem, not from wall clock
+- site map
+- port all content
++ modification time from filesystem, not from wall clock
