@@ -17,6 +17,9 @@ import logging
 from mako.template import Template
 
 
+log = logging.getLogger('blogofile.config')
+
+
 def expose(name=None):
     """Expose a function to Mako templates."""
     def wrapper(fn):
@@ -79,13 +82,13 @@ def get_cur_lang():
 
 
 def post_build():
-    log = logging.getLogger('blogofile._config')
     output_dir = bf.writer.output_dir
     for dirpath, dirnames, filenames in os.walk(output_dir):
         filename = os.path.join(dirpath, 'index.html')
         if not os.path.exists(filename):
             log.info('Creating symlink %s' % filename)
             os.symlink('index-%s.html' % site.default_lang, filename)
+    check_site_map_completeness()
 
 
 #
@@ -196,6 +199,105 @@ def get_trail_for(filename, lang):
 @expose()
 def get_trail():
     return get_trail_for(bf.template_context.template_name, get_cur_lang())
+
+
+class SiteMapNode(object):
+
+    def __init__(self, indent, name):
+        self.indent = indent
+        self.name = name
+        self.children = []
+        self.parent = None
+
+    def getPath(self, lang):
+        bits = []
+        node = self
+        while node is not None:
+            bits.append(node.name.strip('/'))
+            node = node.parent
+        bits.reverse()
+        bits.append('index-%s.html' % lang)
+        return bf.util.path_join(bits)
+
+    def getFilename(self, lang):
+        return self.getPath(lang) + '.mako'
+
+    def getTitle(self, lang):
+        filename = self.getFilename(lang)
+        try:
+            title, short_title = get_template_info(filename)
+        except IOError:
+            log.error('Site map: %s does not exist' % filename)
+            return '(missing template %s)' % filename
+        return title
+
+    @property
+    def url(self):
+        return self.getPath(get_cur_lang())
+
+    @property
+    def filename(self):
+        return self.getFilename(get_cur_lang())
+
+    @property
+    def title(self):
+        return self.getTitle(get_cur_lang())
+
+    def traverse(self):
+        yield self
+        for child in self.children:
+            if child is not None:
+                for node in child.traverse():
+                    yield node
+
+
+def parse_site_map(site_map):
+    root = cur = None
+    for line in site_map.splitlines():
+        name = line.strip()
+        if not name:
+            if (cur and cur.parent and cur.parent.children
+                and cur.parent.children[-1] is not None):
+                cur.parent.children.append(None)
+            continue
+        indent = len(line) - len(line.lstrip()) # haack
+        node = SiteMapNode(indent, name)
+        if cur is None:
+            root = cur = node
+        else:
+            while indent <= cur.indent:
+                cur = cur.parent
+            node.parent = cur
+            cur.children.append(node)
+        cur = node
+    return root
+
+
+@expose()
+def get_site_map_root():
+    if 'site_map_root' not in bf.template_context:
+        bf.template_context.site_map_root = parse_site_map(site.map)
+    return bf.template_context.site_map_root
+
+
+def check_site_map_completeness():
+    root = get_site_map_root()
+    languages = [code for code, title in site.languages]
+    in_site_map = set(n.getFilename(lang)
+                        for n in root.traverse()
+                        for lang in languages)
+    existing = set()
+    for dirpath, dirnames, filenames in os.walk('.'):
+        for lang in languages:
+            filename = 'index-%s.html.mako' % lang
+            if filename in filenames:
+                existing.add(os.path.join(dirpath, filename)[2:])
+    not_in_site_map = existing - in_site_map
+    for name in sorted(not_in_site_map):
+        log.warning("Site-map doesn't include %s" % name)
+    missing = in_site_map - existing
+    for name in sorted(missing):
+        log.warning("Site-map refers to a non-existing %s" % name)
 
 
 #
