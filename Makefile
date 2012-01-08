@@ -10,6 +10,11 @@ vbuild: env/bin/blogofile
 run: build
 	env/bin/blogofile -s website serve
 
+.PHONY: push
+push: build
+	git push
+	ssh fridge 'cd src/gedmin.as && git pull && make build'
+
 env/bin/blogofile: env/bin/pip
 	env/bin/pip install blogofile
 
