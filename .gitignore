@@ -2,3 +2,4 @@ env
 .*.swp
 website/_site/
 zope-export/
+distribute-*.tar.gz
