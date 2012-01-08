@@ -4,4 +4,4 @@
 
 <p><em>This page is only available in Lithuanian</em></p>
 
-<tal:block replace="structure here/lt" />
+${get_body('lt')}

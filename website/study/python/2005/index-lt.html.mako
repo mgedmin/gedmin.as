@@ -4,7 +4,8 @@
 
 <h2>Programavimo kalba Python</h2>
 
-<div tal:condition="python:0" style="border: 1px dotted red; padding: 1ex; float: right; width: 20em;">
+% if False:
+<div style="border: 1px dotted red; padding: 1ex; float: right; width: 20em;">
 <!--
   Atnaujinta informacija išryškinta <span class="new">raudonai</span>.
   <br /><br />
@@ -17,6 +18,7 @@
     9-oje kompiuterių klasėje.
     Reikalavimai tie patys kaip ir semestro metu.</span>
 </div>
+% endif
 
 <h3>2005 m. ruduo</h3>
 

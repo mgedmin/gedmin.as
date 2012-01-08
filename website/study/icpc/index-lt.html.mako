@@ -9,7 +9,8 @@ Svarbios nuorodos: <!--<a href="#practice">užsiėmimai</a>,-->
 
 <h2>ACM studentų programavimo varžybos</h2>
 
-<div tal:condition="python:0" style="padding: 1ex; border: 1px dotted red; margin-right: 20em; margin-bottom: 1ex; ">
+% if False:
+<div style="padding: 1ex; border: 1px dotted red; margin-right: 20em; margin-bottom: 1ex; ">
 
      <strong>2006-11-08 seminaro nebus (sergu)</strong>
 
@@ -33,10 +34,11 @@ Svarbios nuorodos: <!--<a href="#practice">užsiėmimai</a>,-->
        2006-09-06
      </div>
 -->
-   </div>
+</div>
+% endif
 
 <div style="float:right; padding-left: 3em; padding-bottom: 1em; font-size: small; text-align: center; color: #888">
-  <img src="about/mugshot2.jpg" alt="Mano nuotrauka" />
+  <img src="${bf.config.site.url}/about/mugshot2.jpg" alt="Mano nuotrauka" />
   <br />Taip atrodo dėstytojas
   <br /><span style="font-size: xx-small">(tik kostiumo nesitikėkite)</span>
 </div>
@@ -63,8 +65,8 @@ testui uždedamas kelių sekundžių veikimo laiko limitas.</p>
 
 <p>Nuo 2003 m. pavasario semestro doc. V. Tumasonis organizuoja
 algoritmavimo seminarą, per kurį tikimės geriau pasiruošti artėjančiam
-konkursui.  2006 m. rudenį seminaras vyksta trečiadienais 16-18 val. VU
-kompiuterių laboratorijoje, 10, 11 klasėse.  Jį vedu aš. </p>
+konkursui.  2006 m. rudenį seminaras vyko trečiadienais 16-18 val. VU
+kompiuterių laboratorijoje, 10, 11 klasėse.  Jį vedžiau aš. </p>
 
 <p>Treniruočių esmė -- užduočių sprendimas.  Esu sukūręs <a class="good" href="seminaras">automatizuotą testavimo sistemą</a>, kurioje galite
 užsiregistruoti, pasirinkti užduotį, gauti jos sąlygą, nusiųsti savo sprendimą

@@ -6,7 +6,7 @@
 
 <h2>Programavimo kalba Python</h2>
 
-<div tal:condition="python:1" style="border: 1px dotted red; padding: 1ex; float: right; width: 20em; margin: 0 0 1ex 2ex">
+<div style="border: 1px dotted red; padding: 1ex; float: right; width: 20em; margin: 0 0 1ex 2ex">
   Atnaujinta informacija išryškinta <span class="new">raudonai</span>.
 </div>
 
@@ -36,8 +36,7 @@ ir testuko.
 
 <!--
 
-<div tal:condition="python:1"
-    style="border: 1px dotted red; padding: 1ex; margin-right: 27em">
+<div style="border: 1px dotted red; padding: 1ex; margin-right: 27em">
 <span class="new">
   Kam trūksta įskaitai programėlių, ir kas yra jas atsiuntę man laiku (iki
   gruodžio 22 d. vakaro), galite užsukti pas mane į darbą (nuo pietų iki

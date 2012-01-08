@@ -7,6 +7,3 @@
 <p>Testavimo sistema dabar perkelta į VU MIF serverį:
 <a href="http://mif.vu.lt/icpc/">http://mif.vu.lt/icpc/</a>.
 </p>
-
-<tal:nop define="redirect nocall:request/response/redirect;
-                 dummy python:redirect('http://mif.vu.lt/icpc/')" />
