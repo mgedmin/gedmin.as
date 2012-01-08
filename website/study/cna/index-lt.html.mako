@@ -62,7 +62,7 @@ ${caller.body()}
 <table class="simple">
 <tr><th>Nr</th><th>Studentas</th><th>Užduotis</th><th>1</th><th>2</th><th>3</th></tr>
 % for n, row in enumerate(data):
-<tr class="${['even', 'odd'][n % 2]}">
+<tr class="${['odd', 'even'][n % 2]}">
   <td class="right">${n + 1}</td>
   <td style="width: 10em">${row.name}</td>
 %     if row.task:
@@ -91,7 +91,7 @@ ${caller.body()}
 <table class="simple">
 <tr><th>Nr</th><th>Užduotis</th></tr>
 % for n, row in enumerate(tasks):
-<tr class="${['even', 'odd'][n % 2]} ${row.class_}">
+<tr class="${['odd', 'even'][n % 2]} ${row.class_}">
   <td class="right">${row.task}</td>
   <td style="width: 25em;" title=${row.title}</td>${row.shorttitle}</td>
 </tr>
@@ -118,6 +118,6 @@ Pratybos vyko penktadieniais 14 val, 308 ir 309 kompiuterių klasėse
 Baltupiuose.
 </%self:grupe>
 
-<%self:grupe gr="5" title="Kiti">
+<%self:grupe gr="N" title="Kiti">
 Atsirado keli žmonės, kurie kartojo kursą ir norėjo pas mane atsiskaitinėti.
 </%self:grupe>

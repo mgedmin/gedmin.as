@@ -122,6 +122,9 @@ site.map = '''
               * 2004a/
               * 2004b/
           * cna/
+              * advice/
+              * results/
+              * 2005/
           * inf/
           * inf98/
                 ate/
@@ -393,7 +396,7 @@ def cna_parse_students(gr, pogr=None):
     csv_file = os.path.join(os.path.dirname(cur_template),
                             'data%sgr.csv' % gr)
     result = []
-    for cells in csv.reader(open(csv_file)):
+    for cells in list(csv.reader(open(csv_file)))[1:]:
         # 0: eil nr, 1: stud paz, 2: vardas, 3: username, 4: uzduotis, 5: pogrupis, 6: 1uzd, 7: data, 8: pastabos, 9: 2uzd, 10:, 11:, 12: 3uzd, ...
         cells = [s.strip() for s in cells]
         while len(cells) <= 12:
