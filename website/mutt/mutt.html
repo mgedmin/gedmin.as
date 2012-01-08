@@ -1,154 +1,154 @@
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=windows-1257" />
-  <title>Pašto programa Mutt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>PaÅ¡to programa Mutt</title>
   <meta name="Author" content="Marius Gedminas" />
   <link rev=made href="mailto:marius@gedmin.as" />
 </head>
 <body>
 
-<h1>Pašto programa Mutt</h1>
+<h1>PaÅ¡to programa Mutt</h1>
 
 <img src="mutt_button.png" alt="Mutt" width="88" height="31" />
 
-<h2>Įžanga</h2>
+<h2>Ä®Å¾anga</h2>
 
 <p>
-Mutt -- pati geriausia iš mano matytų pašto programų.  Tiesa, mūsų skoniai gali
-skirtis.  Mutt yra skirta ne tik Linux'ui, bet ir visai Unix operacinių sistemų
-šeimai ir tęsia geriausias Unix tradicijas.  Viena iš šių tradicijų --
-„programa turi daryti <em>vieną</em> darbą ir daryti jį <em>gerai</em>“.  Mutt
-darbas -- ne siųsti ir gauti paštą, bet pateikti jį vartotojui.  Pilnavertę
-Unix pašto sistemą sudaro kelios nepriklausomos programos:
+Mutt -- pati geriausia iÅ¡ mano matytÅ³ paÅ¡to programÅ³.  Tiesa, mÅ«sÅ³ skoniai gali
+skirtis.  Mutt yra skirta ne tik Linux'ui, bet ir visai Unix operaciniÅ³ sistemÅ³
+Å¡eimai ir tÄ™sia geriausias Unix tradicijas.  Viena iÅ¡ Å¡iÅ³ tradicijÅ³ --
+ā€˛programa turi daryti <em>vienÄ…</em> darbÄ… ir daryti jÄÆ <em>gerai</em>ā€.  Mutt
+darbas -- ne siÅ³sti ir gauti paÅ¡tÄ…, bet pateikti jÄÆ vartotojui.  PilnavertÄ™
+Unix paÅ¡to sistemÄ… sudaro kelios nepriklausomos programos:
 <ul>
-  <li> MTA (<em>Mail Transfer Agent</em>) -- rūpinasi laiškų transportavimu
-       iš vienos sistemos į kitą.  Pvz.: <tt>sendmail</tt>, <tt>qmail</tt>, 
+  <li> MTA (<em>Mail Transfer Agent</em>) -- rÅ«pinasi laiÅ¡kÅ³ transportavimu
+       iÅ¡ vienos sistemos ÄÆ kitÄ….  Pvz.: <tt>sendmail</tt>, <tt>qmail</tt>, 
        <tt>exim</tt>, <tt>postfix</tt>.
-  <li> MDA (<em>Mail Delivery Agent</em>) -- rūpinasi laiškų patalpinimu
-       vietinių vartotojų pašto dėžutėse.  Pvz.: <tt>procmail</tt>,
+  <li> MDA (<em>Mail Delivery Agent</em>) -- rÅ«pinasi laiÅ¡kÅ³ patalpinimu
+       vietiniÅ³ vartotojÅ³ paÅ¡to dÄ—Å¾utÄ—se.  Pvz.: <tt>procmail</tt>,
        <tt>mail.local</tt>, <tt>/bin/mail</tt>.
-  <li> MUA (<em>Mail User Agent</em>) -- pateikia paštą vartotojui.  Pvz.:
+  <li> MUA (<em>Mail User Agent</em>) -- pateikia paÅ¡tÄ… vartotojui.  Pvz.:
        <tt>Mutt</tt>, <tt>pine</tt>, <tt>elm</tt>.
 </ul>
-Tiesa, Mutt taip pat turi POP3 bei IMAP protokolų palaikymą, tad ji užgriebia
-šiek tiek daugiau nei įprastas MUA funkcijas.  Ką gi, šie protokolai (ypač
-IMAP) nelabai įsipaišo į tradicinę sistemą.  IMAP atveju Mutt leidžia su
-nutolusia pašto dėžute elgtis taip kaip su lokaliais aplankais
-(<em>folders</em>), tačiau POP3 atveju atskiros programos (pvz.,
-<tt>fetchmail</tt>) naudojimas suteiktų daugiau galimybių ir patogumo.
+Tiesa, Mutt taip pat turi POP3 bei IMAP protokolÅ³ palaikymÄ…, tad ji uÅ¾griebia
+Å¡iek tiek daugiau nei ÄÆprastas MUA funkcijas.  KÄ… gi, Å¡ie protokolai (ypaÄ¨
+IMAP) nelabai ÄÆsipaiÅ¡o ÄÆ tradicinÄ™ sistemÄ….  IMAP atveju Mutt leidÅ¾ia su
+nutolusia paÅ¡to dÄ—Å¾ute elgtis taip kaip su lokaliais aplankais
+(<em>folders</em>), taÄ¨iau POP3 atveju atskiros programos (pvz.,
+<tt>fetchmail</tt>) naudojimas suteiktÅ³ daugiau galimybiÅ³ ir patogumo.
 </p>
 
 <h2>Kuo Mutt ypatinga</h2>
 
 <p>
-Mutt dirba tekstiniame režime, tad ji yra universalesnė (pvz., galima paštą
-skaityti prisitelnetinus prie kito kompiuterio) ir patogesnė (čia jau kaip kam
-:-). Štai kaip ji atrodo:
+Mutt dirba tekstiniame reÅ¾ime, tad ji yra universalesnÄ— (pvz., galima paÅ¡tÄ…
+skaityti prisitelnetinus prie kito kompiuterio) ir patogesnÄ— (Ä¨ia jau kaip kam
+:-). Å tai kaip ji atrodo:
 </p>
   <p><img src="mutt-index.png" alt="Mutt index" width=740 height=417><br>
   <b>1 pav.</b>
-  Mutt laiškų sąrašas.  Gražų foną bei trimačius mygtukus viršuje pateikia
-  <tt>Eterm</tt> terminalo programa X Window sistemai, rėmelius bei lango
-  mygtukus -- IceWM langų menedžeris <!-- „vadybininkas“ kažkaip neskamba :)
+  Mutt laiÅ¡kÅ³ sÄ…raÅ¡as.  GraÅ¾Å³ fonÄ… bei trimaÄ¨ius mygtukus virÅ¡uje pateikia
+  <tt>Eterm</tt> terminalo programa X Window sistemai, rÄ—melius bei lango
+  mygtukus -- IceWM langÅ³ menedÅ¾eris <!-- ā€˛vadybininkasā€ kaÅ¾kaip neskamba :)
   --> (<em>window manager</em>).
   </p>
 
 <p>
-Iš karto galime pastebėti kelis privalumus:
+IÅ¡ karto galime pastebÄ—ti kelis privalumus:
 <ul>
-  <li> Laiškų grupavimas pagal diskusijas (<em>threading</em>).  Nepaprastai
-       patogi savybė, egzistuojanti kiekvienoje Usenet naujienų peržiūros
-       programoje, tačiau retokai pasitaikanti pašto programose.
-  <li> Laiškų išskyrimas spalvomis -- pas mane tamsiai žalia spalva rodomi
-       mano, o viesiai žalia -- man skirti laiškai.  Raudonai rodomi laiškų
-       dublikatai (paveiksle jų nėra), kuriuos atpažįsta <tt>procmail</tt>
-       pagal pasikartojančią Message-Id: antraštę (<em>header</em>).  Žinoma,
-       visa tai galima susikonfigūruoti pagal savo poreikius.
+  <li> LaiÅ¡kÅ³ grupavimas pagal diskusijas (<em>threading</em>).  Nepaprastai
+       patogi savybÄ—, egzistuojanti kiekvienoje Usenet naujienÅ³ perÅ¾iÅ«ros
+       programoje, taÄ¨iau retokai pasitaikanti paÅ¡to programose.
+  <li> LaiÅ¡kÅ³ iÅ¡skyrimas spalvomis -- pas mane tamsiai Å¾alia spalva rodomi
+       mano, o viesiai Å¾alia -- man skirti laiÅ¡kai.  Raudonai rodomi laiÅ¡kÅ³
+       dublikatai (paveiksle jÅ³ nÄ—ra), kuriuos atpaÅ¾ÄÆsta <tt>procmail</tt>
+       pagal pasikartojanÄ¨iÄ… Message-Id: antraÅ¡tÄ™ (<em>header</em>).  Å½inoma,
+       visa tai galima susikonfigÅ«ruoti pagal savo poreikius.
 </ul>
-Paveiksle nesimato kitų privalumų:
+Paveiksle nesimato kitÅ³ privalumÅ³:
 <ul>
-  <li> Didžiulis konfigūravimo lankstumas.  Spalvos, klavišai, automatinis
-       antraščių pakeitimas (pvz. galima nurodyti vieną From: adresą siunčiant
-       asmeninius laiškus ir visai kitą siunčiant laiškus į konferencijas) ir
+  <li> DidÅ¾iulis konfigÅ«ravimo lankstumas.  Spalvos, klaviÅ¡ai, automatinis
+       antraÅ¡Ä¨iÅ³ pakeitimas (pvz. galima nurodyti vienÄ… From: adresÄ… siunÄ¨iant
+       asmeninius laiÅ¡kus ir visai kitÄ… siunÄ¨iant laiÅ¡kus ÄÆ konferencijas) ir
        t.t.
-  <li> Aktyvus pašto standartų palaikymas (pvz., automatinis perkodavimas iš
-       svetimos kodavimo lentelės į vietinę rodant laiškus; MIME; PGP).
-  <li> Pašto konferencijų (<em>mailing lists</em>) palaikymas, pvz. atskiri
-       klavišai "atsakyti asmeniškai" ir "atsakyti viešai".
-  <li> Galimybė rodyti ne visus laiškus, o tik atitinkančius tam tikrą
-       kriterijų (pvz. asmeniškus ar pasiųstus į konkrečią vieną konferenciją).
+  <li> Aktyvus paÅ¡to standartÅ³ palaikymas (pvz., automatinis perkodavimas iÅ¡
+       svetimos kodavimo lentelÄ—s ÄÆ vietinÄ™ rodant laiÅ¡kus; MIME; PGP).
+  <li> PaÅ¡to konferencijÅ³ (<em>mailing lists</em>) palaikymas, pvz. atskiri
+       klaviÅ¡ai "atsakyti asmeniÅ¡kai" ir "atsakyti vieÅ¡ai".
+  <li> GalimybÄ— rodyti ne visus laiÅ¡kus, o tik atitinkanÄ¨ius tam tikrÄ…
+       kriterijÅ³ (pvz. asmeniÅ¡kus ar pasiÅ³stus ÄÆ konkreÄ¨iÄ… vienÄ… konferencijÄ…).
 </ul>
-Štai dar vienas paveikslėlis, rodantis Mutt laiško peržiūros režime:
+Å tai dar vienas paveikslÄ—lis, rodantis Mutt laiÅ¡ko perÅ¾iÅ«ros reÅ¾ime:
 </p>
   <p><img src="mutt-pager.png" alt="Mutt pager"width=740 height=417><br>
   <b>2 pav.</b>
-  Mutt laiško peržiūra.  Dėl rėmelių bei fono žr. paaiškinimą prie ankstesnio
-  pav.  Vienas dalykas, kurio čia nesimato -- skirtingo lygio citatos rodomos
-  skirtingomis spalvomis, o www/el. pašto adresai tekste išryškinami.  Visa tai,
-  žinoma, galima konfigūruoti.
+  Mutt laiÅ¡ko perÅ¾iÅ«ra.  DÄ—l rÄ—meliÅ³ bei fono Å¾r. paaiÅ¡kinimÄ… prie ankstesnio
+  pav.  Vienas dalykas, kurio Ä¨ia nesimato -- skirtingo lygio citatos rodomos
+  skirtingomis spalvomis, o www/el. paÅ¡to adresai tekste iÅ¡ryÅ¡kinami.  Visa tai,
+  Å¾inoma, galima konfigÅ«ruoti.
   </p>
 
-<h2>Mutt ir lietuvių kalba</h2>
+<h2>Mutt ir lietuviÅ³ kalba</h2>
 
 <p>
-Vienas iš malonių Mutt bruožų -- puikus el. pašto standartų palaikymas.  Todėl
-su lietuvių kalba parašytais laiškais problemų nebūna.  Beveik. :)  Problemų
-gali iškilti, jei laiško siuntėjas pažeidžia standartus, pvz., pasiųsdamas
-lietuvišką laišką, parašyta naudojantis ISO-8859-13 lentele, bet antraštėje
-užrašydamas neteisingą kodavimo lentelę (paprastai ISO-8859-1).
+Vienas iÅ¡ maloniÅ³ Mutt bruoÅ¾Å³ -- puikus el. paÅ¡to standartÅ³ palaikymas.  TodÄ—l
+su lietuviÅ³ kalba paraÅ¡ytais laiÅ¡kais problemÅ³ nebÅ«na.  Beveik. :)  ProblemÅ³
+gali iÅ¡kilti, jei laiÅ¡ko siuntÄ—jas paÅ¾eidÅ¾ia standartus, pvz., pasiÅ³sdamas
+lietuviÅ¡kÄ… laiÅ¡kÄ…, paraÅ¡yta naudojantis ISO-8859-13 lentele, bet antraÅ¡tÄ—je
+uÅ¾raÅ¡ydamas neteisingÄ… kodavimo lentelÄ™ (paprastai ISO-8859-1).
 </p>
 
 <p>
-Visais kitais atvejais Mutt nėra lygių.  Tereikia pasiekti, kad pati sistema
-žinotų ISO-8859-13 lentelę (šiais laikais visos Linux distribucijos turi ją
-aprašantį failą /usr/share/i18n/charmaps/ kataloge), užkrauti šią lentelę
-atitinkantį šriftą (tai priklauso nuo konkrečios situacijos -- ar tai bus Linux
-konsolė, ar xterm langas, ar Microsoft Telnet programa) ir apie tai pranešti
+Visais kitais atvejais Mutt nÄ—ra lygiÅ³.  Tereikia pasiekti, kad pati sistema
+Å¾inotÅ³ ISO-8859-13 lentelÄ™ (Å¡iais laikais visos Linux distribucijos turi jÄ…
+apraÅ¡antÄÆ failÄ… /usr/share/i18n/charmaps/ kataloge), uÅ¾krauti Å¡iÄ… lentelÄ™
+atitinkantÄÆ Å¡riftÄ… (tai priklauso nuo konkreÄ¨ios situacijos -- ar tai bus Linux
+konsolÄ—, ar xterm langas, ar Microsoft Telnet programa) ir apie tai praneÅ¡ti
 Mutt'ui komanda
 </p>
 <blockquote><pre>
 :set charset=iso-8859-13
 </pre></blockquote>
 <p>
-Patogiausia, žinoma, šią komandą įrašyti į <tt>.muttrc</tt> konfigūracinį
-failą.  Tokiu atveju dvitaškio eilutės pradžioje nereikia.
+Patogiausia, Å¾inoma, Å¡iÄ… komandÄ… ÄÆraÅ¡yti ÄÆ <tt>.muttrc</tt> konfigÅ«racinÄÆ
+failÄ….  Tokiu atveju dvitaÅ¡kio eilutÄ—s pradÅ¾ioje nereikia.
 </p>
 
 <p>
-Mutt 1.1 ir naujesnės versijos turi dar vieną kintamąjį --
-<tt>send_charset</tt>, kuris nurodo, į kokią lentelę reikia perkoduoti
-išsiunčiamus laiškus (tuo atveju, kai visi simboliai laiške patenka į 7 bitų
-ASCII lentelę, pastaroji ir bus nurodoma, nes ji yra universaliausia ir
-plačiausiai palaikoma).  Nuo Mutt 1.3 versijos galima kaip
-<tt>send_charset</tt> reikšmę nurodyti kelias koduotes, atskirtas dvitaškiais.
-Tuomet Mutt pasirinks pirmąją, kuria galima atvaizduoti visus jūsų laiške
-naudojamus simbolius.  Pavyzdžiui, nurodžius
+Mutt 1.1 ir naujesnÄ—s versijos turi dar vienÄ… kintamÄ…jÄÆ --
+<tt>send_charset</tt>, kuris nurodo, ÄÆ kokiÄ… lentelÄ™ reikia perkoduoti
+iÅ¡siunÄ¨iamus laiÅ¡kus (tuo atveju, kai visi simboliai laiÅ¡ke patenka ÄÆ 7 bitÅ³
+ASCII lentelÄ™, pastaroji ir bus nurodoma, nes ji yra universaliausia ir
+plaÄ¨iausiai palaikoma).  Nuo Mutt 1.3 versijos galima kaip
+<tt>send_charset</tt> reikÅ¡mÄ™ nurodyti kelias koduotes, atskirtas dvitaÅ¡kiais.
+Tuomet Mutt pasirinks pirmÄ…jÄ…, kuria galima atvaizduoti visus jÅ«sÅ³ laiÅ¡ke
+naudojamus simbolius.  PavyzdÅ¾iui, nurodÅ¾ius
 </p>
 <blockquote><pre>
 :set send_charset="us-ascii:iso-8859-1:iso-8859-13:utf-8"
 </pre></blockquote>
 <p>
-laiškai be lietuviškų raidžių keliaus us-ascii arba iso-8859-1 koduote.
+laiÅ¡kai be lietuviÅ¡kÅ³ raidÅ¾iÅ³ keliaus us-ascii arba iso-8859-1 koduote.
 </p>
 
 <p>
-<strong>Pastaba dėl versijų</strong>: Mutt versiją sudaro trys skaičiai <tt>x.y.z.</tt>
-Versijos, kurių vidurinis skaitmuo nelyginis, yra „eksperimentinės“, skirtos
-tik labai drąsiems, norintiems naujausių galimybių bei nebijantiems galimų
-problemų vartotojams.
+<strong>Pastaba dÄ—l versijÅ³</strong>: Mutt versijÄ… sudaro trys skaiÄ¨iai <tt>x.y.z.</tt>
+Versijos, kuriÅ³ vidurinis skaitmuo nelyginis, yra ā€˛eksperimentinÄ—sā€, skirtos
+tik labai drÄ…siems, norintiems naujausiÅ³ galimybiÅ³ bei nebijantiems galimÅ³
+problemÅ³ vartotojams.
 </p>
 
 <p>
-Jei jums iškils problemų su „Windows-1257“ lentele parašytais laiškais,
-pabandykite į savo <tt>.muttrc</tt> failą įrašyti štai tokią eilutę:
+Jei jums iÅ¡kils problemÅ³ su ā€˛Windows-1257ā€ lentele paraÅ¡ytais laiÅ¡kais,
+pabandykite ÄÆ savo <tt>.muttrc</tt> failÄ… ÄÆraÅ¡yti Å¡tai tokiÄ… eilutÄ™:
 </p>
 <blockquote><pre>
 charset-hook windows-1257 cp1257
 </pre></blockquote>
 
 <p>
-Beje, Mutt nuo 1.3.13 versijos gali šnekėtis su jumis ne tik angliškai, bet ir
-lietuviškai (arba kitomis kalbomis).  Tereikia nustatyti shell kintamąjį $LANG,
+Beje, Mutt nuo 1.3.13 versijos gali Å¡nekÄ—tis su jumis ne tik angliÅ¡kai, bet ir
+lietuviÅ¡kai (arba kitomis kalbomis).  Tereikia nustatyti shell kintamÄ…jÄÆ $LANG,
 pvz.:
 </p>
 <blockquote><pre>
@@ -156,36 +156,36 @@ pvz.:
 </pre></blockquote>
 
 <p>
-Pastaba: dažnai žmonės prieštarauja lietuviškų raidžių vartojimui laiškuose,
-dėl to, kad jie skaito paštą prisijungę per telnetą prie, tarkime, universiteto
-serverio.  Aš padariau tokį eksperimentą: iš Windows 98 kompiuterio su
+Pastaba: daÅ¾nai Å¾monÄ—s prieÅ¡tarauja lietuviÅ¡kÅ³ raidÅ¾iÅ³ vartojimui laiÅ¡kuose,
+dÄ—l to, kad jie skaito paÅ¡tÄ… prisijungÄ™ per telnetÄ… prie, tarkime, universiteto
+serverio.  AÅ¡ padariau tokÄÆ eksperimentÄ…: iÅ¡ Windows 98 kompiuterio su
 standartine Microsoft Telnet programa prisijungiau prie savo Linux
-sistemos ir pasileidęs Mutt'ą pabandžiau sau išsiųsti laišką su lietuviškomis
-raidėmis.  Rezultatą matote antrame paveiksle viršuje.  Tiesa, minėtame Windows
-98 kompiuteryje buvo įdiegtas LitWin98 paketas (iš <a
+sistemos ir pasileidÄ™s Mutt'Ä… pabandÅ¾iau sau iÅ¡siÅ³sti laiÅ¡kÄ… su lietuviÅ¡komis
+raidÄ—mis.  RezultatÄ… matote antrame paveiksle virÅ¡uje.  Tiesa, minÄ—tame Windows
+98 kompiuteryje buvo ÄÆdiegtas LitWin98 paketas (iÅ¡ <a
 href="http://www.kada.lt/litwin/">www.kada.lt/litwin/</a>), tad gal tik su juo
-Telnet programa sugeba parodyti lietuviškas raides?  Nors mano nuomone
-šis paketas turėtų būti instaliuotas <em>kiekviename</em> kompiuteryje -- jis
-yra nemokamas bei leidžia naudotis visų mėgstamu „Baltic“ (raidės vietoje
-skaičių) ir mano mėgstamu „Programmers“ (miręs klavišas + lotyniškos raidės)
-klaviatūros išdėstymais.  Ačiū autoriams!
+Telnet programa sugeba parodyti lietuviÅ¡kas raides?  Nors mano nuomone
+Å¡is paketas turÄ—tÅ³ bÅ«ti instaliuotas <em>kiekviename</em> kompiuteryje -- jis
+yra nemokamas bei leidÅ¾ia naudotis visÅ³ mÄ—gstamu ā€˛Balticā€ (raidÄ—s vietoje
+skaiÄ¨iÅ³) ir mano mÄ—gstamu ā€˛Programmersā€ (mirÄ™s klaviÅ¡as + lotyniÅ¡kos raidÄ—s)
+klaviatÅ«ros iÅ¡dÄ—stymais.  AÄ¨iÅ« autoriams!
 </p>
 
 <h2>Nuorodos</h2>
 <ul>
-  <li> Mutt namų puslapis: <a href="http://www.mutt.org/">www.mutt.org</a>
+  <li> Mutt namÅ³ puslapis: <a href="http://www.mutt.org/">www.mutt.org</a>
   <li> Mano <a href="muttrc.html">.muttrc</a> failas
   <li> Mano <a href="procmailrc.html">.procmailrc</a> failas
-  <li> <a href="http://www.liks.lt/elpaliet.htm">Lietuviškų rašmenų vartojimas
-       elektroninio pašto laiškuose</a>
+  <li> <a href="http://www.liks.lt/elpaliet.htm">LietuviÅ¡kÅ³ raÅ¡menÅ³ vartojimas
+       elektroninio paÅ¡to laiÅ¡kuose</a>
 </ul>
 
-Komentarus dėl šio puslapio siųskite man: <a
+Komentarus dÄ—l Å¡io puslapio siÅ³skite man: <a
 href="mailto:marius@gedmin.as">marius@gedmin.as</a>
 
 <p>
 Marius Gedminas <br>
 2000 vasario 17 d. <br>
-atnaujinta 2001 gegužės 17-18 d.
+atnaujinta 2001 geguÅ¾Ä—s 17-18 d. bei 2012 sausio 8 d.
 </body>
 </html>
