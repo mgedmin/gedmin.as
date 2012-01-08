@@ -81,6 +81,15 @@ def get_cur_lang():
     return code
 
 
+@expose()
+def get_body(lang):
+    cur_template = bf.template_context.template_name
+    new_template = os.path.join(os.path.dirname(cur_template),
+                                'index-%s.html.mako' % lang)
+    template = get_template(new_template)
+    return template.get_def('body').render().decode('UTF-8')
+
+
 def post_build():
     output_dir = bf.writer.output_dir
     for dirpath, dirnames, filenames in os.walk(output_dir):
@@ -219,18 +228,21 @@ class SiteMapNode(object):
         self.parent = None
         self.marked = marked
 
-    def getPath(self, lang):
+    def getPath(self, *extra_bits):
         bits = []
         node = self
         while node is not None:
             bits.append(node.name.strip('/'))
             node = node.parent
         bits.reverse()
-        bits.append('index-%s.html' % lang)
+        bits.extend(extra_bits)
         return bf.util.path_join(bits)
 
+    def getURL(self, lang):
+        return self.getPath('index-%s.html' % lang)
+
     def getFilename(self, lang):
-        return self.getPath(lang) + '.mako'
+        return self.getPath('index-%s.html.mako' % lang)
 
     def getTitle(self, lang):
         filename = self.getFilename(lang)
@@ -251,8 +263,12 @@ class SiteMapNode(object):
         return short_title
 
     @property
+    def subpath(self):
+        return '/' + self.getPath()
+
+    @property
     def url(self):
-        return self.getPath(get_cur_lang())
+        return self.getURL(get_cur_lang())
 
     @property
     def filename(self):
@@ -342,7 +358,7 @@ def get_subpages():
     result = []
     for child in node.children:
         if child and child.marked:
-            subpath = child.url
+            subpath = child.subpath
             short_title = child.short_title
             title = child.title
             result.append((subpath, short_title, title))
