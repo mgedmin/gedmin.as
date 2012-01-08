@@ -206,6 +206,8 @@ def get_template_info(filename):
         template = get_template(filename)
         title = template.get_def('title').render().decode('UTF-8')
         short_title = template.get_def('short_title').render().decode('UTF-8')
+        if not short_title:
+            short_title = title
         cache[filename] = (title, short_title)
     return cache[filename]
 
@@ -387,7 +389,7 @@ def get_mtime_str():
 
 
 #
-# Ad-hoc CSV parsing
+# Ad-hoc CSV parsing/logic for Computer Network practice
 #
 
 
@@ -578,3 +580,130 @@ def cna_results(gr=None, pogr=None, deadlines=(), source='../data${gr}gr.csv',
             studnr=cells[1].strip().decode('UTF-8'),
         ))
     return result
+
+
+#
+# Ad-hoc CSV parsing/logic for Python practice
+#
+
+
+def py_tasks(source='tasks.txt', strict=False):
+    cur_template = bf.template_context.template_name
+    data_file = os.path.join(os.path.dirname(cur_template), source)
+
+    errors = []
+
+    people = {}
+    for line in open(data_file).read().splitlines():
+        line = line.decode('UTF-8')
+        if line.startswith('#'):
+            continue
+        if ':' not in line:
+            continue
+        name, what = line.split(':', 1)
+        name = fullinfo = name.strip()
+        if '(' in name:
+            name = name.split('(', 1)[0].strip()
+        persondata = people.setdefault(name, Cache(
+            name=name, fullinfo=fullinfo))
+        what = what.strip()
+        if '[' not in what:
+            if strict:
+                errors.append('no "[" in line %s' % line)
+            continue
+        description, status = what.split('[', 1)
+        description = description.strip()
+        taskandstatus = status[:-1].strip()
+        taskid = 'unknown'
+        status = taskandstatus
+        for tid in ['1', '2', '3', 'projektukas', 'testukas']:
+            if taskandstatus.startswith(tid):
+                taskid = tid
+                status = taskandstatus[len(tid):]
+                break
+        if strict and taskid in persondata:
+            errors.append('duplicate entry: %s' % line)
+        persondata[taskid] = Cache(
+            taskid=taskid,
+            description=what.split('[')[0].strip(),
+            full=what,
+            chosen=True,
+            status=status,
+            done='+' in status)
+
+    if errors:
+        raise Exception('\n'.join(errors))
+    return people
+
+
+@expose()
+def py_students(source='tasks.txt'):
+    results = []
+    for name, info in py_tasks(source).items():
+        for tid in ['1', '2', '3', 'projektukas', 'testukas', 'iskaita']:
+            info.setdefault(tid, Cache(
+                taskid=tid,
+                description=None,
+                full=None,
+                chosen=False,
+                status=None,
+                done=False,
+                should_choose=False,
+            ))
+        any_of_the_three_chosen = False
+        all_done = True
+        for tid in ['1', '2', '3']:
+            any_of_the_three_chosen = any_of_the_three_chosen or info[tid]['chosen']
+            info[tid]['should_choose'] = not info['projektukas']['chosen']
+            all_done = all_done and info[tid]['done']
+        all_done = all_done or info['projektukas']['done']
+        info['all_done'] = all_done
+        info['projektukas']['should_choose'] = not any_of_the_three_chosen
+        info['iskaita']['done'] = info['testukas']['done'] and all_done
+        info['uzd'] = [info[taskid] for taskid in ['1', '2', '3', 'projektukas', 'testukas', 'iskaita']]
+        name, surname = (name.split() + ['???', '???'])[:2]
+        results.append((surname, name, info))
+    results.sort()
+    return [row[-1] for row in results]
+
+
+@expose()
+def py_students_by_group(source='../tasks.txt'):
+    groups = {}
+    for row in py_students(source):
+        try:
+            group = row['fullinfo'].split('(', 1)[1].split(')')[0]
+            group = group.replace('informatika', u'kompiuterių mokslas')
+        except IndexError:
+            group = '???'
+        groups.setdefault(group, []).append(row)
+
+    results = groups.items()
+    results.sort()
+    return [
+        Cache(
+            title=title,
+            students=students,
+            count=len(students),
+            count_done=sum([1 for s in students if s['iskaita']['done']]),
+        ) for title, students in results
+    ]
+
+
+@expose()
+def py_student_totals(source='tasks.txt'):
+    n_students = 0
+    n_all_done = 0
+    n_passed = 0
+    for row in py_students(source):
+        n_students += 1
+        if row['all_done']:
+            n_all_done += 1
+        if row['iskaita']['done']:
+            n_passed += 1
+
+    return Cache(
+        students=n_students,
+        done_all=n_all_done,
+        passed=n_passed)
+
