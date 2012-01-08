@@ -1,17 +1,17 @@
-Ğiame pakete rasite naujà Lietuvos laiko juostos aprağà (Nuo 2003 m. Lietuva
-vël turi vasaros laikà).
+Å iame pakete rasite naujÄ… Lietuvos laiko juostos apraÅ¡Ä… (Nuo 2003 m. Lietuva
+vÄ—l turi vasaros laikÄ…).
 
 Failai
 ------
 
 Europe/Vilnius      sukompiliuoti laiko juostos duomenys
-lithuania           laiko juostos aprağas
+lithuania           laiko juostos apraÅ¡as
 
 
 Patikrinimas
 ------------
 
-Paleiskite ğià komandà:
+Paleiskite Å¡iÄ… komandÄ…:
 
   date --date 'jul 1 2003'
 
@@ -19,23 +19,23 @@ Jei gausite
 
   Tue Jul  1 00:00:00 EEST 2003
 
-tai reiğkia, kad jûsø libc versija yra pakankamai ğvieşia.  Bet jei gausite
+tai reiÅ¡kia, kad jÅ«sÅ³ libc versija yra pakankamai Å¡vieÅ¾ia.  Bet jei gausite
 
   Tue Jul  1 00:00:00 EET 2003
 
-tuomet jums reikalingas ğis paketas.
+tuomet jums reikalingas Å¡is paketas.
 
 
 Instaliacija
 ------------
 
-Pakeiskite senà Europe/Vilnius failà nauju (rasite já /usr/share/zoneinfo
+Pakeiskite senÄ… Europe/Vilnius failÄ… nauju (rasite jÄ¯ /usr/share/zoneinfo
 kataloge) arba, geriau, paleiskite `zic':
 
   # zic lithuania
 
-Dabar galite iğkviesti `tzconfig' arba analogiğkà programà ir pasikeisti savo
-laiko juostà á Europe/Vilnius.
+Dabar galite iÅ¡kviesti `tzconfig' arba analogiÅ¡kÄ… programÄ… ir pasikeisti savo
+laiko juostÄ… Ä¯ Europe/Vilnius.
 
 
 Marius Gedminas
