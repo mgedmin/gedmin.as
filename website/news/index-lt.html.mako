@@ -58,7 +58,7 @@ patentus Europoje.</a></dd>
 
 <dt>2003-02-12</dt>
 <dd>Automatinis puslapio kalbos parinkimas (pagal RFC 2616).  Trumpesnis
-    adresas: <a href="http://mg.b4net.lt/">http://mg.b4net.lt/</a></dd>
+    adresas: <del><a href="http://mg.b4net.lt/">http://mg.b4net.lt/</a></del></dd>
 
 <dt>2003-02-05</dt>
 <dd>Puslapis, skirtas mano vedamam <a href="../study/icpc/index-lt.html">VU
@@ -77,7 +77,7 @@ patentus Europoje.</a></dd>
 <dd>Įmečiau savo <a href="../disasm/index-lt.html">disasemblerį</a>.</dd>
 
 <dt>2002-10-09</dt>
-<dd>Naujas adresas: <a href="http://www.b4net.lt/~mgedmin/">http://www.b4net.lt/~mgedmin/</a></dd>
+<dd>Naujas adresas: <del><a href="http://www.b4net.lt/~mgedmin/">http://www.b4net.lt/~mgedmin/</a></del></dd>
 
 <dt>2002-05-03</dt>
 <dd><a href="../debian/index-lt.html">Debian puslapis</a>.</dd>
@@ -110,9 +110,10 @@ vadovėlis programavimo kalbų kursui.
 <dd>
 Grįžau namo ir galų gale atnaujinau puslapį (ištaisiau visus pasenusius pašto
 bei web adresus).  Po truputį bandau pereiti prie XHTML'o.  Pradėjau
-uploadinimui naudoti <tt>rsync</tt>ą.  Beje, <em>mgedmin@puni.osf.lt</em>
-nebenaudoju, perėjau prie <em>mgedmin@delfi.lt</em> (o 2003 m. pabaigoje
-perėjau prie <em>mgedmin@b4net.lt</em>; 2008 m. prie <em>marius@gedmin.as</em>).
+uploadinimui naudoti <tt>rsync</tt>ą.  Beje, <em><del>mgedmin@puni.osf.lt</del></em>
+nebenaudoju, perėjau prie <em><del>mgedmin@delfi.lt</del></em> (o 2003 m. pabaigoje
+perėjau prie <em><del>mgedmin@b4net.lt</del></em>; 2008 m. prie
+<em>marius@gedmin.as</em>).
 </dd>
 <dd>
 O mano studijų Danijoje dienoraštį galite rasti <a href="../diary.html">čia</a>.
@@ -124,8 +125,8 @@ Galų gale radau laiko kažką čia pakeisti:
 <ul>
 <li> Studijuoju Danijoje, tad negaliu prieiti prie namuose paliktos smarkiai
      automatizuotos šio puslapio atnaujinimo sistemos (CVS'o ir t.t.) </li>
-<li> Netekau <em>mgedmin@takas.lt</em> pašto adreso ir dabar naudoju
-     <em>mgedmin@puni.osf.lt</em> bei <em>marius.gedminas@uosis.mif.vu.lt</em>
+<li> Netekau <em><del>mgedmin@takas.lt</del></em> pašto adreso ir dabar naudoju
+     <em><del>mgedmin@puni.osf.lt</del></em> bei <em><del>marius.gedminas@uosis.mif.vu.lt</del></em>
      Deja, likusioje puslapio dalyje dar nepakeičiau visų pašto adresų... </li>
 <li> Galų gale užbaigiau lietuviškos klaviatūros tvarkyklės <a href="../lit/index-lt.html">LitN versiją 1.07</a>.  Dabar tvarkyklė atitinka
      Lietuvos standartą LST 1582:2000. </li>

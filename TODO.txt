@@ -3,7 +3,8 @@
 - magic language negotiation?
 + navbaro subfolderiai
 + /sitemap
-- /study/inf98/*.html (DTML failaiaaaaaa!)
-- port all remaining content (esp. study)
++ /study/inf98/*.html (DTML failaiaaaaaa!)
++ port all remaining content (esp. study)
 + modification time from filesystem, not from wall clock (not necessarily good idea)
-- crawl and nuke ancient websites/emails (grep for b4net.lt, ice.dammit.lt, delfi.lt)
+- crawl and nuke ancient websites/emails (grep for b4net.lt, ice.dammit.lt,
+  delfi.lt, puni.osf.lt)

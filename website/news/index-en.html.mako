@@ -65,7 +65,7 @@ Europe.</a></dd>
 
 <dt>2003-02-12</dt>
 <dd>Automatic language negotiation (RFC 2616).  Alternative URL:
-    <a href="http://mg.b4net.lt/">http://mg.b4net.lt/</a>.</dd>
+    <del><a href="http://mg.b4net.lt/">http://mg.b4net.lt/</a></del>.</dd>
 
 <dt>2003-02-05</dt>
 <dd>Page for <a href="../study/icpc/index-en.html">ACM ICPC training seminar</a>
@@ -82,7 +82,7 @@ Europe.</a></dd>
 <dd>Added my <a href="../disasm/index-en.html">disassembler</a>.</dd>
 
 <dt>2002-10-09</dt>
-<dd>New address: <a href="http://www.b4net.lt/~mgedmin/">http://www.b4net.lt/~mgedmin/</a></dd>
+<dd>New address: <del><a href="http://www.b4net.lt/~mgedmin/">http://www.b4net.lt/~mgedmin/</a></del></dd>
 
 <dt>2002-05-03</dt>
 <dd><a href="../debian/index-en.html">Debian page</a>.</dd>
@@ -115,8 +115,10 @@ anything interesting there unless you can read Lithuanian.
 <dd>
 I'm back home so I finally updated this site (fixed all obsolete e-mail and web
 addresses).  I'm starting to move towards XHTML.  Now I use <tt>rsync</tt> for
-uploading.  BTW I no longer use <em>mgedmin@puni.osf.lt</em>, now I use
-<em>mgedmin@delfi.lt</em> (2003 update: now I use <em>mgedmin@b4net.lt</em>; 2008 update: ans now I use <em>marius@gedmin.as</em>).
+uploading.  BTW I no longer use <em><del>mgedmin@puni.osf.lt</del></em>, now I use
+<em><del>mgedmin@delfi.lt</del></em> (2003 update: now I use
+<em><del>mgedmin@b4net.lt</del></em>; 2008 update: and now I use
+<em>marius@gedmin.as</em>).
 </dd>
 <dd>
 You can find the diary of my study period <a href="../diary.html">here</a>
@@ -130,8 +132,8 @@ At last I've found some time to modify this page:
 <li> Presently I'm studying in Denmark, so I have no access to my home PC
      with a largely automated web page updating system (including local CVS,
      etc.). </li>
-<li> I can no longer use <em>mgedmin@takas.lt</em> email address, so I switched
-     to <em>mgedmin@puni.osf.lt</em> and <em>marius.gedminas@uosis.mif.vu.lt</em>.
+<li> I can no longer use <em><del>mgedmin@takas.lt</del></em> email address, so I switched
+     to <em><del>mgedmin@puni.osf.lt</del></em> and <em><del>marius.gedminas@uosis.mif.vu.lt</del></em>.
      Unfortunatelly, I haven't had the time to modify all email addresses
      everywhere on these web pages... </li>
 <li> Finally I've finished Lithuanian keyboard driver <a href="../lit/index-lt.html">LitN version 1.07</a>.  It now corresponds to
