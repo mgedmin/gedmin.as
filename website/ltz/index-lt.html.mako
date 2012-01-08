@@ -15,5 +15,5 @@ tai turi būti +0200, o vasarą +0300).  Tuomet instaliuokite šį paketą.
 <li><a href="ltz2003.tar.gz">ltz2003.tar.gz (3K)</a></li>
 <li><a href="../debs/ltz2003_0.1.0-1_i386.deb">Debian paketas (3K)</a></li>
 <li><a href="README">README (angliškai)</a></li>
-<li><a href="README.Lit" charset="windows-1257">README (lietuviškai)</a></li>
+<li><a href="README.Lit">README (lietuviškai)</a></li>
 </ul>

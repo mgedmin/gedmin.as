@@ -16,5 +16,5 @@ need this package.
 <li><a href="ltz2003.tar.gz">ltz2003.tar.gz (3K)</a></li>
 <li><a href="../debs/ltz2003_0.1.0-1_i386.deb">Debian package (3K)</a></li>
 <li><a href="README">README (in English)</a></li>
-<li><a href="README.Lit" charset="windows-1257">README (in Lithuanian)</a></li>
+<li><a href="README.Lit">README (in Lithuanian)</a></li>
 </ul>
