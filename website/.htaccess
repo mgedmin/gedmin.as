@@ -1,3 +1,4 @@
+AddDefaultCharset UTF-8
 RewriteEngine on
 # Note: no leading / in rewrite rules if you put them in .htaccess!
 RewriteRule ^(news|about)-(en|lt)\.html$ /$1/index-$2.html [R,L]
