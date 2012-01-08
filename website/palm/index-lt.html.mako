@@ -236,5 +236,5 @@ SSHą).</p>
 </ul>
 
 <!--
-<p>Norėčiau išgirsti atsiliepimų.  Mano emailas: mgedmin&#64;b4net.lt</p>
+<p>Norėčiau išgirsti atsiliepimų.  Mano emailas: <del>mgedmin&#64;b4net.lt</del> marius@gedmin.as</p>
   -->

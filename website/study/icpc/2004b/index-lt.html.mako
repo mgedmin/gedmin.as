@@ -25,7 +25,7 @@ varžybos.  Devyni geriausiai pasirodę dalyviai važiuos į ketvirtfinalį.
 Atrankinių varžybų pradžia bus 15:00 (o ne 17:00, kaip kad įprastų užsiėmimų),
 trukmė -- 5 valandos (tiek, kiek trunka ir pačios varžybos).  Rinktis prie 10,
 11 kompiuterių klasių.  Jau iš karto pradedu atrankos dalyvių registraciją.
-Taigi, norintys dalyvauti parašykite man <a href="mailto:mgedmin@b4net.lt?subject=ICPC atranka">emailą</a>.
+Taigi, norintys dalyvauti parašykite man <a href="mailto:marius@gedmin.as?subject=ICPC atranka">emailą</a>.
 
 Kiekvienas atrankos dalyvis gaus uždavinių sąlygų komplektą ir kompiuterį.
 Bus naudojama ta pati testavimo sistema, kaip ir per pratybas, su vienu

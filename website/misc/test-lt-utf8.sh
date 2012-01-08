@@ -1,6 +1,6 @@
 #!/bin/sh
 # Lietuvių kalbos palaikymo testai Linuxui.  Versija 0.1.2
-# Copyright (c) 2002 Marius Gedminas <mgedmin@delfi.lt>
+# Copyright (c) 2002 Marius Gedminas <marius@gedmin.as>
 # Šis skriptas GPLintas.
 
 # UTF-8 versija

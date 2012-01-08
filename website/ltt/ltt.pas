@@ -1,6 +1,6 @@
 program LTT;
 { Lithuanian Text Tool version 0.9.0  (2001-04-19) }
-{ Copyright (c) 1999-2001 Marius Gedminas <mgedmin@delfi.lt> }
+{ Copyright (c) 1999-2001 Marius Gedminas <marius@gedmin.as> }
 
 {   This program is free software; you can redistribute it and/or modify }
 {   it under the terms of the GNU General Public License as published by }
@@ -509,7 +509,7 @@ begin
   if (FName = '') or (FName = '-?') or (FName = '/?') then
     begin
       WriteLn('Lithuanian Text Tool version ', Version);
-      WriteLn('Copyright (c) 1999-2001 Marius Gedminas <mgedmin@delfi.lt>');
+      WriteLn('Copyright (c) 1999-2001 Marius Gedminas <marius@gedmin.as>');
       WriteLn('This is Free Software.  See the GNU General Public Licence for details.');
       WriteLn;
       WriteLn('Try to autodetect charset:');

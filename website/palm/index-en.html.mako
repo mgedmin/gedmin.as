@@ -237,4 +237,4 @@ via SSH).</p>
     software directly from the web.</li>
 </ul>
 
-<p>Feedback: mgedmin&#64;b4net.lt</p>
+<p>Feedback: <del>mgedmin&#64;b4net.lt</del> marius@gedmin.as</p>

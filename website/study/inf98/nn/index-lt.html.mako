@@ -6,7 +6,7 @@
 <!-- not uploaded ATM
 <p>Nuotraukos</p>
 <ul>
-<li> <a href="http://mg.b4net.lt/tmp/photos/dnt/">Egzamino nuotraukos</a> </li>
+<li> <a href="http://gedmin.as/tmp/photos/dnt/">Egzamino nuotraukos</a> </li>
 </ul>
 -->
 <p>Konspektai</p>

@@ -14,7 +14,7 @@ This patch addresses both issues:
 
 -- 
 Marius Gedminas
-<mgedmin@delfi.lt>
+<marius@gedmin.as>
 
 Here is the patch (against stock 2.2.14):
 
@@ -27,7 +27,7 @@ diff -u linux/fs/isofs/inode.c.orig linux/fs/isofs/inode.c
   *	1998  Eric Lammerts - ISO 9660 Level 3
 + *     1999  Marius Gedminas - `noexec' and `lowercase' mount flags
 + *
-+ *  1999-06-14   Hack by Marius Gedminas <mgedmin@delfi.lt>:
++ *  1999-06-14   Hack by Marius Gedminas <marius@gedmin.as>:
 + *  If `noexec' was given to mount, remove execute permissions from files.
 + *  New mount flag `lowercase' converts all-uppercase Joliet file names to 
 + *  lower case.
@@ -108,7 +108,7 @@ diff -u linux/fs/isofs/joliet.c.orig linux/fs/isofs/joliet.c
   *
   *  Joliet: Microsoft's Unicode extensions to iso9660
 + *
-+ *  1999-06-14   Hack by Marius Gedminas <mgedmin@delfi.lt>:
++ *  1999-06-14   Hack by Marius Gedminas <marius@gedmin.as>:
 + *  New mount flag `lowercase' converts all-uppercase Joliet file names to 
 + *  lower case.
   */
@@ -135,7 +135,7 @@ diff -u linux/fs/isofs/joliet.c.orig linux/fs/isofs/joliet.c
 +	}
 +	
 +	/*
-+	 * Hack by Marius Gedminas <mgedmin@delfi.lt>:
++	 * Hack by Marius Gedminas <marius@gedmin.as>:
 +	 * Convert all-uppercase file names to lowercase
 +	 */
 +	if (lowercase) {

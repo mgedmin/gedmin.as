@@ -61,6 +61,6 @@ pakvietė).</dd>
 
 <div style="padding:1ex; border: 1px solid red">
 Kadangi paskaitose dažniausiai niekas nepasirodo, nematau prasmės ten vienas
-sėdėti.  Jei kas planuoja ateiti, praneškite man (<a href="mailto:mgedmin@b4net.lt">emailu</a> ar mobiliu).
+sėdėti.  Jei kas planuoja ateiti, praneškite man (<a href="mailto:marius@gedmin.as">emailu</a> ar mobiliu).
 </div>
 

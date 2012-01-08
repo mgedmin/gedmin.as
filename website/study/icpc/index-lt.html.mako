@@ -23,7 +23,7 @@ Svarbios nuorodos: <!--<a href="#practice">užsiėmimai</a>,-->
   <br />
 
   Norintys dalyvauti registruokitės paštu: <a
-    href="mailto:mgedmin@b4net.lt?Subject=[icpc]+Atranka">mgedmin@b4net.lt</a>.
+    href="mailto:marius@gedmin.as?Subject=[icpc]+Atranka">marius@gedmin.as</a>.
      <div style="text-align: right">
        2006-10-18
      </div>

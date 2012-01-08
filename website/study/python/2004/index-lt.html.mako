@@ -23,13 +23,13 @@ teoriją, buvo išimtis.)</p>
 <p>Visa svarbi informacija turėtų būti surašyta šiame puslapyje</p>
 
 <blockquote>
-  <p><a class="good" href="http://mg.b4net.lt/python">http://mg.b4net.lt/python</a></p>
+  <p><a class="good" href="http://gedmin.as/python">http://gedmin.as/python</a></p>
 </blockquote>
 
 <h3 id="practice">Atsiskaitymai</h3>
 
 <p>Per pratybas reikės atsiskaityti tris mažas programėles (arba
-vieną didelę).  Galite siųsti man (mgedmin@b4net.lt) savo sugalvotas užduočių
+vieną didelę).  Galite siųsti man (marius@gedmin.as) savo sugalvotas užduočių
 sąlygas -- aš jas gal kiek pakoreguosiu ir galėsite daryti tai, kas jums
 įdomu.</p>
 
@@ -43,7 +43,7 @@ tekstinį failą (ar kelis failus).  Pavyzdžiui, programa galėtų skaičiuoti
 raidžių dažnumus, išrinkti dažniausiai pasitaikančius žodžius, palyginti du
 failus pažodžiui (kaip GNU wdiff), atlikti kokius skaičiavimus su duomenimis,
 perskaitytais iš CSV formato failų.  Tikslią sąlygą reikia susigalvoti ir
-pasiųsti man <a href="mailto:mgedmin@b4net.lt">paštu</a>.</p>
+pasiųsti man <a href="mailto:marius@gedmin.as">paštu</a>.</p>
 
 <!-- Manau, kad programa turėtų būti 50-100 eilučių dydžio -->
 
@@ -54,7 +54,7 @@ eilutėje nurodytus žodžius ir išspausdinti sąrašą nuorodų iš pirmų dvi
 puslapių.  Arba programa galėtų pasižiūrėti, koks Vilniuje yra oras iš
 weather.com duomenų.  Arba surasti, kas ir kada paskutinis pasiuntė laišką į
 mailing listą pagal webe esančius archyvus.  Tikslią sąlygą reikia susigalvoti
-ir pasiųsti man <a href="mailto:mgedmin@b4net.lt">paštu</a>.  Norėčiau, kad
+ir pasiųsti man <a href="mailto:marius@gedmin.as">paštu</a>.  Norėčiau, kad
 programa būtų objektinė, t.y. kad joje būtų aprašyta pora klasių.</p>
 
 <p><strong>Trečioji užduotis</strong>.  Visų reikalavimų dar nesugalvojau (tai

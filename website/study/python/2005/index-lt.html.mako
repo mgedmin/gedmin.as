@@ -35,7 +35,7 @@ pratybas priiminėdavau atsiskaitymus.</p>
 <p>Visa svarbi informacija turėtų būti surašyta šiame puslapyje</p>
 
 <blockquote>
-  <p><a class="good" href="http://mg.b4net.lt/python">http://mg.b4net.lt/python</a></p>
+  <p><a class="good" href="http://gedmin.as/python">http://gedmin.as/python</a></p>
 </blockquote>
 
 <h3 id="practice">Atsiskaitymai</h3>
@@ -43,7 +43,7 @@ pratybas priiminėdavau atsiskaitymus.</p>
 <p>Per pratybas reikės atsiskaityti tris mažas programėles (arba
 vieną didelę).  Sąlygas reikia susigalvoti patiems -- aš tik pateiksiu bendrus
 reikalavimus, tematiką, bei sąlygų pavyzdžius.  Prieš pradėdami jas daryti,
-sąlygą parodykite man (el. paštu -- mgedmin@b4net.lt -- arba per pratybas
+sąlygą parodykite man (el. paštu -- marius@gedmin.as -- arba per pratybas
 asmeniškai), kad aš ją patvirtinčiau.  Visos sąlygos turi būti pakankamai
 skirtingos (kad du žmonės nedarytų tos pačios užduoties).  Jei sąlygą nusiuntėte
 man pašu, o aš per pakankamai greitą laiką (porą dienų) neatsiliepiau, galite

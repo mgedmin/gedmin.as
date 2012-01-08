@@ -14,7 +14,7 @@ tai būtų failas lokaliame diske:</p>
 <blockquote class="example"><pre>
 <span class="keyword">import</span> <span class="name">urllib</span>
 
-<span class="keyword">for</span> <span class="name">line</span> <span class="keyword">in</span> <span class="name">urllib</span>.<span class="name">urlopen</span>(<span class="string">'http://mg.b4net.lt/python'</span>):
+<span class="keyword">for</span> <span class="name">line</span> <span class="keyword">in</span> <span class="name">urllib</span>.<span class="name">urlopen</span>(<span class="string">'http://gedmin.as/python'</span>):
     <span class="keyword">print</span> <span class="name">line</span>
 </pre></blockquote>
 
@@ -51,7 +51,7 @@ sgmllib:</p>
         <span class="keyword">print</span> <span class="name">dict</span>(<span class="name">attrs</span>)[<span class="string">'src'</span>]
 
 <span class="name">parser</span> = <span class="name">MyParser</span>()
-<span class="name">parser</span>.<span class="name">feed</span>(<span class="name">urllib</span>.<span class="name">urlopen</span>(<span class="string">'http://mg.b4net.lt/python'</span>).<span class="name">read</span>())
+<span class="name">parser</span>.<span class="name">feed</span>(<span class="name">urllib</span>.<span class="name">urlopen</span>(<span class="string">'http://gedmin.as/python'</span>).<span class="name">read</span>())
 <span class="name">parser</span>.<span class="name">close</span>()
 </pre></blockquote>
 

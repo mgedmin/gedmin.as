@@ -1,6 +1,6 @@
 Disasm 1.0.0
 ============
-Copyright (c) 1999 Marius Gedminas <mgedmin@delfi.lt>
+Copyright (c) 1999 Marius Gedminas <marius@gedmin.as>
 This program is Free Software.  See file COPYING for details.
 
 It is a small disassembler for Intel 8086 and 8088 processors.  It can only
@@ -45,7 +45,7 @@ The Pascal version is also distributed (although it is now obsolete and
 contains a couple of bugs fixed in the assembler version).
 
 
-The author: Marius Gedminas <mgedmin@delfi.lt>.
+The author: Marius Gedminas <marius@gedmin.as>.
 
 References:
 * VIM -- Vi IMproved (version 5.4) by Bram Moolenaar et al.

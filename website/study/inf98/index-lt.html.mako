@@ -113,4 +113,4 @@
 <li><a href="spring2003.html">2003 m. pavasaris</a></li>
 </ul>
 
-<p>Šiuo puslapiu rūpinasi Marius Gedminas (mgedmin at b4net.lt)</p>
+<p>Šiuo puslapiu rūpinasi Marius Gedminas (marius@gedmin.as)</p>
