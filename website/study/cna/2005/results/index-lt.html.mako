@@ -10,13 +10,19 @@ antrasis skaičius visada yra minusas už pavėlavimą arba pliusas už atsiskai
 anksčiau.</p>
 
 <%def name="grupe(gr, title=None)">
-<h3 style="clear:both" id="gr${gr}">${title or ('%s grupė' % gr)}</h3>
+<%
+    if not title:
+        title = u'%s grupė' % gr
+    deadlines = ['2005-04-08', '2005-04-30', '2005-05-20']
+    data = cna_results(gr, deadlines=deadlines)
+%>
+<h3 style="clear:both" id="gr${gr}">${title}</h3>
 
 <div style="float: left; padding-bottom: 1em">
 <table class="simple">
   <tr><th>Nr</th><th>Studentas</th><th>Užduotis</th><th colspan="2">1</th><th colspan="2">2</th><th colspan="2">3</th><th>Iš viso</th></tr>
-% for n, row in enumerate(here.list(gr=gr)):
-<tr class="${['even', 'odd'][n % 2]}">
+% for n, row in enumerate(data):
+<tr class="${['odd', 'even'][n % 2]}">
   <td class="right">${n + 1}</td>
   <td style="width: 10em">${row.name}</td>
 %     if row.task and row.taskhint:
@@ -37,14 +43,14 @@ anksčiau.</p>
 %     endfor
   <td class="right">${row.total}</td>
 </tr>
-<tr class="${['even', 'odd'][n % 2]}">
+<tr class="${['odd', 'even'][n % 2]}">
   <td style="color:gray; font-size: small" class="right" colspan="3">${row.taskhint}</td>
 %     for uzd in row.uzd:
   <td colspan="2"
       style="color: ${uzd.uncertainity and 'red' or 'gray'}; font-size: small">
       ${uzd.comments}
   </td>
-%         endif
+%     endfor
   <td></td>
 </tr>
 % endfor

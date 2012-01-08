@@ -14,6 +14,7 @@ import os
 import csv
 import time
 import logging
+import datetime
 
 from mako.template import Template
 from blogofile.cache import Cache
@@ -391,10 +392,10 @@ def get_mtime_str():
 
 
 @expose()
-def cna_parse_students(gr, pogr=None):
+def cna_parse_students(gr, pogr=None, source='data${gr}gr.csv'):
     cur_template = bf.template_context.template_name
     csv_file = os.path.join(os.path.dirname(cur_template),
-                            'data%sgr.csv' % gr)
+                            source.replace('${gr}', gr))
     result = []
     for cells in list(csv.reader(open(csv_file)))[1:]:
         # 0: eil nr, 1: stud paz, 2: vardas, 3: username, 4: uzduotis, 5: pogrupis, 6: 1uzd, 7: data, 8: pastabos, 9: 2uzd, 10:, 11:, 12: 3uzd, ...
@@ -415,7 +416,7 @@ def cna_parse_students(gr, pogr=None):
 
 
 @expose()
-def cna_tasks(gr=None, pogr=None):
+def cna_tasks(gr=None, pogr=None, source='taskdata'):
     taken = {}
     exacttaken = {}
     if gr:
@@ -426,7 +427,7 @@ def cna_tasks(gr=None, pogr=None):
             taken[task] = taken.get(task, 0) + 1
 
     cur_template = bf.template_context.template_name
-    task_file = os.path.join(os.path.dirname(cur_template), 'taskdata')
+    task_file = os.path.join(os.path.dirname(cur_template), source)
     data = open(task_file).read()
 
     rows = data.strip().splitlines()[1:]
@@ -448,5 +449,102 @@ def cna_tasks(gr=None, pogr=None):
             title=title.decode('UTF-8'),
             shorttitle=shorttitle.decode('UTF-8'),
             class_=cls,
+        ))
+    return result
+
+
+@expose()
+def cna_results(gr=None, pogr=None, deadlines=(), source='../data${gr}gr.csv'):
+    taskmap = {}
+    for row in cna_tasks(source='../taskdata'):
+        taskmap[row['task']] = row['shorttitle']
+
+    def parse_score(score):
+        """Pvz., '1.5+0.2-0.3' => [1.5, 0.2, -0.3]"""
+        score = score.replace(' ', '')
+        score = score.replace('+', ' +')
+        score = score.replace('-', ' -')
+        return map(float, score.split())
+
+    def week_of(date):
+        return datetime.datetime.strptime(date, '%Y-%m-%d').isocalendar()[1]
+
+    def penalty(date, deadline):
+        w_of_d = week_of(date)
+        assert w_of_d != 12
+        if w_of_d < 12:
+            w_of_d += 1
+        diff = week_of(deadline) - w_of_d
+        if diff > 3:
+            diff = 3
+        return diff * 0.1
+
+    cur_template = bf.template_context.template_name
+    csv_file = os.path.join(os.path.dirname(cur_template),
+                            source.replace('${gr}', gr))
+    result = []
+    for cells in list(csv.reader(open(csv_file)))[1:]:
+        # 0: eil nr, 1: stud paz, 2: vardas, 3: username, 4: uzduotis, 5: pogrupis, 6: 1uzd, 7: data, 8: pastabos, 9: 2uzd, 10:, 11:, 12: 3uzd, ...
+        cells = [s.strip() for s in cells]
+        while len(cells) <= 15:
+            cells.append('')
+        if pogr and str(pogr) != cells[5]:
+            continue
+        uzd = []
+        total = 0
+        left = {1.5: 2, 1: 1}
+        for n in range(3):
+            score = cells[6+3*n].strip()
+            parts = parse_score(score)
+            total += sum(parts)
+            date = cells[7+3*n].strip()
+            comments = cells[8+3*n].strip()
+            plus = score and '+' or ''
+            uncertainity = False
+
+            if date and not date.startswith('2005-0'):
+                uncertainity = True
+                comments = "data!!!\n" + comments
+            if date and parts:
+                pen = penalty(date, deadlines[n])
+                if pen == 0:
+                    parts.insert(1, 0.0)
+                elif len(parts) > 1:
+                    if abs(parts[1] - pen) > 0.001:
+                        uncertainity = True
+                        if pen < 0:
+                            comments = "(vėlavo %s)!!!\n" % pen + comments
+                        else:
+                            comments = "(skubėjo %s)!!!\n" % pen + comments
+
+            if parts:
+                if left.get(parts[0], 0) < 1:
+                    comments = "!!!\n" + comments
+                else:
+                    left[parts[0]] = left[parts[0]] - 1
+
+            if 'nežinau už ką' in comments:
+                uncertainity = True
+
+            score = ''.join(['%+.1f' % x for x in parts])
+            if score.startswith('+'): score = score[1:]
+            score = score.replace('-', u'−') # hyphen -> U+2212 MINUS SIGN
+            uzd.append(Cache(
+                plus=plus,
+                date=date,
+                score=score,
+                comments=comments.decode('UTF-8'),
+                uncertainity=uncertainity,
+            ))
+
+        task = cells[4].strip().decode('UTF-8')
+        taskhint = taskmap.get(task, "")
+        result.append(Cache(
+            name=cells[2].strip().decode('UTF-8'),
+            taskhint=taskhint,
+            task=task,
+            uzd=uzd,
+            total=total,
+            studnr=cells[1].strip().decode('UTF-8'),
         ))
     return result
