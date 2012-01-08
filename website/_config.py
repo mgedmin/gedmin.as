@@ -237,9 +237,18 @@ class SiteMapNode(object):
         try:
             title, short_title = get_template_info(filename)
         except IOError:
-            log.error('Site map: %s does not exist' % filename)
+            log.error('%s does not exist' % filename)
             return '(missing template %s)' % filename
         return title
+
+    def getShortTitle(self, lang):
+        filename = self.getFilename(lang)
+        try:
+            title, short_title = get_template_info(filename)
+        except IOError:
+            log.error('%s does not exist' % filename)
+            return '(missing template %s)' % filename
+        return short_title
 
     @property
     def url(self):
@@ -253,12 +262,26 @@ class SiteMapNode(object):
     def title(self):
         return self.getTitle(get_cur_lang())
 
+    @property
+    def short_title(self):
+        return self.getShortTitle(get_cur_lang())
+
     def traverse(self):
         yield self
         for child in self.children:
             if child is not None:
                 for node in child.traverse():
                     yield node
+
+    def find(self, path):
+        if path.startswith('./'):
+            path = path[2:]
+        if '/' not in path:
+            return self
+        head, tail = path.split('/', 1)
+        for child in self.children:
+            if child and child.name.strip('/') == head:
+                return child.find(tail)
 
 
 def parse_site_map(site_map):
@@ -308,6 +331,22 @@ def check_site_map_completeness():
     missing = in_site_map - existing
     for name in sorted(missing):
         log.warning("Site-map refers to a non-existing %s" % name)
+
+
+@expose()
+def get_subpages():
+    root = get_site_map_root()
+    node = root.find(bf.template_context.template_name)
+    if not node:
+        return []
+    result = []
+    for child in node.children:
+        if child and child.marked:
+            subpath = child.url
+            short_title = child.short_title
+            title = child.title
+            result.append((subpath, short_title, title))
+    return result
 
 
 #

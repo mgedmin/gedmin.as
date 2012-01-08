@@ -39,10 +39,7 @@
 </span>
 <%
     trail = get_trail()
-    subfolders = [
-##      ('/study/python', 'Python', 'Python programming language'),
-##      ('/study/icpc', 'ICPC', 'ACM ICPC'),
-    ]
+    subpages = get_subpages()
 %>
 % for n, (path, short_title, title) in enumerate(trail):
 %     if n:
@@ -55,7 +52,7 @@
      title="${title}">${short_title}</a>
 %     endif
 % endfor
-% for n, (path, short_title, title) in enumerate(subfolders):
+% for n, (path, short_title, title) in enumerate(subpages):
 %     if n:
   ::
 %     else:
