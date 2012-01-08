@@ -11,10 +11,12 @@
 ######################################################################
 
 import os
+import csv
 import time
 import logging
 
 from mako.template import Template
+from blogofile.cache import Cache
 
 
 log = logging.getLogger('blogofile.config')
@@ -87,7 +89,8 @@ def get_body(lang):
     new_template = os.path.join(os.path.dirname(cur_template),
                                 'index-%s.html.mako' % lang)
     template = get_template(new_template)
-    return template.get_def('body').render().decode('UTF-8')
+    return template.get_def('body').render(bf=bf,
+                    **bf.config.site.template_vars).decode('UTF-8')
 
 
 def post_build():
@@ -377,3 +380,70 @@ def get_mtime_str():
     except OSError:
         mtime = time.time()
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(mtime))
+
+
+#
+# Ad-hoc CSV parsing
+#
+
+
+@expose()
+def cna_parse_students(gr, pogr=None):
+    cur_template = bf.template_context.template_name
+    csv_file = os.path.join(os.path.dirname(cur_template),
+                            'data%sgr.csv' % gr)
+    result = []
+    for cells in csv.reader(open(csv_file)):
+        # 0: eil nr, 1: stud paz, 2: vardas, 3: username, 4: uzduotis, 5: pogrupis, 6: 1uzd, 7: data, 8: pastabos, 9: 2uzd, 10:, 11:, 12: 3uzd, ...
+        cells = [s.strip() for s in cells]
+        while len(cells) <= 12:
+            cells.append('')
+        if pogr and str(pogr) != cells[5]:
+            continue
+        uzd1 = cells[6] and '+' or ''
+        uzd2 = cells[9] and '+' or ''
+        uzd3 = cells[12] and '+' or ''
+        result.append(Cache(
+            name=cells[2].strip().decode('UTF-8'),
+            task=cells[4].strip().decode('UTF-8'),
+            uzd=[uzd1, uzd2, uzd3],
+        ))
+    return result
+
+
+@expose()
+def cna_tasks(gr=None, pogr=None):
+    taken = {}
+    exacttaken = {}
+    if gr:
+        for row in cna_parse_students(gr=gr, pogr=pogr):
+            task = row['task']
+            exacttaken[task] = exacttaken.get(task, 0) + 1
+            if task: task = task.split()[0]
+            taken[task] = taken.get(task, 0) + 1
+
+    cur_template = bf.template_context.template_name
+    task_file = os.path.join(os.path.dirname(cur_template), 'taskdata')
+    data = open(task_file).read()
+
+    rows = data.strip().splitlines()[1:]
+    result = []
+    for row in rows:
+        cells = row.split(None, 1)
+        task = cells[0]
+        title = cells[1]
+        shorttitle = title
+        if len(shorttitle) > 30:
+            shorttitle = ' '.join(title.split()[:5]) + "..."
+        en = exacttaken.get(task, 0)
+        n = taken.get(task, 0)
+        if en > 1: cls = 'conflict'
+        elif n: cls = 'taken'
+        else: cls = ''
+        result.append(Cache(
+            task=task.decode('UTF-8'),
+            title=title.decode('UTF-8'),
+            shorttitle=shorttitle.decode('UTF-8'),
+            class_=cls,
+        ))
+    return result

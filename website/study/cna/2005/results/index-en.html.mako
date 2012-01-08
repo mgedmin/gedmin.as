@@ -7,4 +7,4 @@
 <p>This page is interesting only to Vilnius University students, therefore
 it is only available in Lithuanian.</p>
 
-<tal:span replace="structure here/lt" />
+${get_body('lt')}

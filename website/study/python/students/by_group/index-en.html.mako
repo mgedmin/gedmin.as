@@ -5,4 +5,4 @@
 <h2></h2>
 <p>This page is only available in Lithuanian.</p>
 
-<tal:span replace="structure here/lt" />
+${get_body('lt')}
