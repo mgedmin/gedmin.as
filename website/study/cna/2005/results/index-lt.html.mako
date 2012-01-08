@@ -14,7 +14,8 @@ anksčiau.</p>
     if not title:
         title = u'%s grupė' % gr
     deadlines = ['2005-04-08', '2005-04-30', '2005-05-20']
-    data = cna_results(gr, deadlines=deadlines)
+    holiday_week = 12
+    data = cna_results(gr, deadlines=deadlines, holiday_week=holiday_week)
 %>
 <h3 style="clear:both" id="gr${gr}">${title}</h3>
 

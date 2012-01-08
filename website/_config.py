@@ -454,7 +454,11 @@ def cna_tasks(gr=None, pogr=None, source='taskdata'):
 
 
 @expose()
-def cna_results(gr=None, pogr=None, deadlines=(), source='../data${gr}gr.csv'):
+def cna_results(gr=None, pogr=None, deadlines=(), source='../data${gr}gr.csv',
+                holiday_week=None, date_prefix_sanity_check='2005-0'):
+    for deadline in deadlines:
+        assert deadline.startswith(date_prefix_sanity_check)
+
     taskmap = {}
     for row in cna_tasks(source='../taskdata'):
         taskmap[row['task']] = row['shorttitle']
@@ -467,13 +471,15 @@ def cna_results(gr=None, pogr=None, deadlines=(), source='../data${gr}gr.csv'):
         return map(float, score.split())
 
     def week_of(date):
-        return datetime.datetime.strptime(date, '%Y-%m-%d').isocalendar()[1]
+        week = datetime.datetime.strptime(date, '%Y-%m-%d').isocalendar()[1]
+        if holiday_week is not None:
+            assert week != holiday_week
+            if week < holiday_week:
+                week += 1
+        return week
 
     def penalty(date, deadline):
         w_of_d = week_of(date)
-        assert w_of_d != 12
-        if w_of_d < 12:
-            w_of_d += 1
         diff = week_of(deadline) - w_of_d
         if diff > 3:
             diff = 3
@@ -491,25 +497,48 @@ def cna_results(gr=None, pogr=None, deadlines=(), source='../data${gr}gr.csv'):
         if pogr and str(pogr) != cells[5]:
             continue
         uzd = []
-        total = 0
+        total = total_no_delay = 0
         left = {1.5: 2, 1: 1}
+        kurios = {}
         for n in range(3):
             score = cells[6+3*n].strip()
             parts = parse_score(score)
             total += sum(parts)
+            total_no_delay += sum(parts)
+            if len(parts) > 1 and parts[1] < 0:
+                total_no_delay -= parts[1]
             date = cells[7+3*n].strip()
             comments = cells[8+3*n].strip()
             plus = score and '+' or ''
             uncertainity = False
 
-            if date and not date.startswith('2005-0'):
+            if ('C++/Java' in comments or 'C/Java' in comments
+                or 'Java/C++' in comments or 'C++ su Java' in comments):
+                if 'C++/Java' in kurios:
+                    comments = "kartojasi!!!\n" + comments
+                else:
+                    kurios['C++/Java'] = 1
+            elif 'C' in comments:
+                if 'C' in kurios:
+                    comments = "kartojasi!!!\n" + comments
+                else:
+                    kurios['C'] = 1
+            elif 'Java' in comments:
+                if 'Java' in kurios:
+                    comments = "kartojasi!!!\n" + comments
+                else:
+                    kurios['Java'] = 1
+
+            if date and not date.startswith(date_prefix_sanity_check):
                 uncertainity = True
                 comments = "data!!!\n" + comments
             if date and parts:
                 pen = penalty(date, deadlines[n])
                 if pen == 0:
                     parts.insert(1, 0.0)
-                elif len(parts) > 1:
+                elif parts:
+                    if len(parts) < 2:
+                        parts.append(0.0)
                     if abs(parts[1] - pen) > 0.001:
                         uncertainity = True
                         if pen < 0:
@@ -545,6 +574,7 @@ def cna_results(gr=None, pogr=None, deadlines=(), source='../data${gr}gr.csv'):
             task=task,
             uzd=uzd,
             total=total,
+            total_no_delay=total_no_delay,
             studnr=cells[1].strip().decode('UTF-8'),
         ))
     return result
