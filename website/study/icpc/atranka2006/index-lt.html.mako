@@ -1,6 +1,6 @@
 <%inherit file="_templates/site.mako" />
 <%def name="title()">VU MIF 2006 m. atrankinis turas</%def>
-<%def name="short_title()">atranka</%def>
+<%def name="short_title()">atranka2006</%def>
 
 <h2>VU MIF 2006 m. atrankinis turas</h2>
 

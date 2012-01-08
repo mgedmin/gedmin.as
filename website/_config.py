@@ -147,6 +147,8 @@ site.map = '''
               * 2005/
           * inf/
           * inf98/
+                autumn2002/
+                spring2003/
                 ate/
                 disma/
                 disma2/

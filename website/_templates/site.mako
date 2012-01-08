@@ -14,6 +14,7 @@
   <link rel="openid2.local_id" href="http://mgedmin.myopenid.com/" />
   <meta http-equiv="X-XRDS-Location"
         content="http://www.myopenid.com/xrds?username=mgedmin.myopenid.com" />
+  ${self.extra_head()}
 </head>
 <body>
 
@@ -89,3 +90,4 @@ ${_('Last updated:')} ${get_mtime_str()}
 <%def name="title()"></%def>
 <%def name="subtitle()"></%def>
 <%def name="stylesheet()">${bf.config.site.url}/style.css</%def>
+<%def name="extra_head()"></%def>
