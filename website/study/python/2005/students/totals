@@ -1,0 +1,18 @@
+## Script (Python) "totals"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+n_students = 0
+n_passed = 0
+for row in container.list():
+    n_students += 1
+    if row['iskaita']['done']:
+        n_passed += 1
+
+return {'students': n_students,
+        'passed': n_passed}

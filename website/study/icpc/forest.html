@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <TITLE>IPSC 2003 Problem E - Enchanted Forest</TITLE>
+</HEAD>
+<body>
+
+<h1>IPSC 2003 Problem E - Enchanted Forest</h1>
+
+<p>
+Surely you've heard about the Enchanted Forest. Haven't you?
+At least from the fairy tales? Although nobody
+exactly knows where it lies, there are many tales proving its existence.
+For example people say that nobody who once enters the forest ever 
+finds his way back.
+Anyhow, it is known that the forest is a perfect rectangle. 
+If we divide it into unit squares, exactly one tree grows in each of the squares.
+And if you find the time to listen to the oldest people in the villages, 
+they will tell you many even more curious things about the forest. 
+</p>
+
+<p>But how did it all begin?
+The forest was originally called just the Forest.
+Far and away there were no other forests,
+so as you can see the name was in place. But on one day... It was a nice and sunny spring day,
+all inhabitants of the forest were happy. But then a roar of the bear announced that the 
+great forest council is about to happen. All the animals left their work immediately and
+hurried to the council. The hedgehog Henry
+was the slowest one. Birds were singing impatiently, flies were flitting
+here and there (and back again), the venison was giving off some strange noises,
+the old fox was cunningly watching everything around her and the big black <strike>beer</strike>
+bear got hungry once again and started to feed on the strawberries. Nobody knew
+what was going on. Nobody but Olivia, the wise owl.</p>
+
+<p>
+- <i>My dearest friends! I'm sure everyone agrees that our forest is not very pleasing
+to the eye of a visitor. There are too many kinds of trees in our forest. To be more
+exact, two kinds. Elms and pines. We should get rid of one of them. Which one do you
+suggest?</i><br>
+- <i>Who cares...</i> mumbled the big black bear and ate another strawberry. Most of the 
+other animals were confused and didn't get the point yet.<br>
+- <i>OK, but now my second question follows. How will we get rid of them?</i> continued Olivia.</p>
+
+<p>
+In that very moment a wizard appeared in a flash of light. (So far he was hidden behind a tree.)
+His name was Genzibabel. In fact, this whole business with the trees was his idea -- he wanted to
+practice a new spell he just learned. He started to speak to the animals:
+</p>
+
+<p>
+- <i>I can change all the trees in your forest to one kind. 
+I am able to cast a so-called Floodfill-Altertree spell. The only thing I have to do is to choose one of
+the trees. Then I'll cast the spell. In that very moment the spell is applied
+recursively on each of neighbor trees of the same kind and the current tree
+changes to the other kind (e.g. an elm turns to a pine and a pine turns to an elm). 
+This way I can change the kind of a whole connected area consisting of one
+kind of trees with a single spell. 
+However casting this spell is very exhausting. Therefore I'd like to cast it only as few times 
+as necessary.</i>
+</p>
+
+<p>
+Remember that we can imagine the forest as a rectangle consisting of trees. 
+Two trees are neighbors if and only if their unit squares share a common side.
+Your task will be the same as the magician and the animals had to solve.
+You have to find the minimal number of times the spell has to be cast to change
+all the trees in the forest to one kind. Also you have to find one way how to 
+change the whole forest using that many spells. 
+</p>
+
+<h3>Input file specification</h3>
+
+<p>
+On the first line of the
+input file there is a positive integer <b>B</b> -- the number of test cases. 
+<b>B</b> blocks of data
+follow. Each block begins with two positive integers <b>R, C</b> -- the width and length
+of the rectangle. A matrix with <b>R</b> rows and <b>C</b> columns follows,
+describing the forest. Both rows and columns are numbered starting with 1.
+Value <b>1</b> in the <b>i</b>-th
+row and <b>j</b>-th column represents an elm, value <b>0</b> represents a pine. 
+Each row of the matrix is on one line of the input file, between its elements there are
+no whitespaces.</p>
+
+<h3>Output file specification</h3>
+
+<p>For each block in the input
+file, output one line containing the minimum number <b>T</b> of trees that have to be enchanted. 
+Then output <b>T</b> lines describing one possible solution. If there are more possible solutions,
+you may describe any of them. For each enchanted tree output one line with its position, first the
+row, then the column. Note that the order in which you enchant the trees <i>does</i> matter.
+Output the trees precisely in the order in which they have to be enchanted.
+</p>
+
+<h3>Example</h3>
+
+<b>Input file</b>
+<pre>
+2
+1 10
+1011001101
+9 9
+001111100
+010000010
+100101001
+100101001
+100000001
+101000101
+100111001
+010000010
+001111100
+</pre>
+
+<b>Output file</b>
+<pre>
+3
+1 2
+1 9
+1 5
+2
+2 3
+3 1
+</pre>
+
+<h3>... and something more ...</h3>
+
+<p>It wasn't the only strange thing that ever happened.
+Many other curious things have happened since then. The black bear
+changed his taste and started to feed on unsuspecting tourists. 
+Next year there was a war between 
+squirrels and woodpeckers. But that's already a different story... </p>
+
+</BODY>
+</HTML>

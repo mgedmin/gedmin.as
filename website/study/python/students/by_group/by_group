@@ -1,0 +1,24 @@
+## Script (Python) "by_group"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+groups = {}
+for row in container.list():
+    try:
+        group = row['fullinfo'].split('(', 1)[1].split(')')[0]
+        group = group.replace('informatika', 'kompiuterių mokslas')
+    except IndexError:
+        group = '???'
+    groups.setdefault(group, []).append(row)
+
+results = groups.items()
+results.sort()
+return [{'title': title, 'students': students,
+         'count': len(students),
+         'count_done': sum([1 for s in students if s['iskaita']['done']])}
+        for title, students in results]

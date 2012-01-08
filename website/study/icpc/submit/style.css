@@ -1,0 +1,44 @@
+@import url("/style.css");
+
+form div {
+  clear: both;
+  margin-bottom: 0.5ex;
+}
+
+
+form label {
+  display: block;
+  float: left;
+  width: 7em;
+  font-weight: bold;
+}
+
+form label.wide {
+  width: auto;
+}
+
+form label.radio, form label.checkbox {
+  display: block;
+  float: none;
+  width: auto;
+  font-weight: normal;
+  margin-top: 0.5ex;
+  margin-bottom: 0.5ex;
+  margin-right: 1em;
+}
+
+form label.radio {
+  margin-left: 7em;
+}
+
+form textarea {
+  display: block;
+  clear: both;
+}
+
+div.errors {
+  border: 1px solid red;
+  color: red;
+  padding: 0.5ex;
+  margin-bottom: 1ex;
+}

@@ -1,0 +1,27 @@
+## Script (Python) "editTasks"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=new_row, old_row=None, old_row_expected=True
+##title=
+##
+data = container['tasks.txt'].data
+if old_row is None:
+    if not data.endswith('\n'):
+        data += '\n'
+    data += new_row + '\n'
+else:
+    lines = data.splitlines()
+    for n in range(len(lines)):
+        if lines[n] == old_row:
+            lines[n] = new_row.rstrip('\n')
+            break
+    else:
+        if old_row_expected:
+            lines.append('# XXX: not found: %s' % old_row)
+        lines.append(new_row)
+    data = '\n'.join(lines) + '\n'
+
+container['tasks.txt'].manage_edit('', 'text/plain', filedata=data)

@@ -1,0 +1,118 @@
+## Script (Python) "enter_result_update"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+request = container.REQUEST
+result = {}
+statusmsgs = []
+student = request.get('student')
+fullinfo = None
+
+if 'NEW' in request.form:
+    student = request.form['n_vardas']
+
+if 'SELECT_BY_TASK_1' in request.form:
+    student = request.form['bytask1']
+if 'SELECT_BY_TASK_2' in request.form:
+    student = request.form['bytask2']
+if 'SELECT_BY_TASK_3' in request.form:
+    student = request.form['bytask3']
+if 'SELECT_BY_TASK_projektukas' in request.form:
+    student = request.form['bytaskprojektukas']
+
+def updateinfo(student):
+    students = container.list()
+    fullinfo = None
+    if student:
+        for row in students:
+            if row['name'] == student:
+                for taskid in ['1', '2', '3', 'projektukas', 'testukas', 'iskaita']:
+                    result[taskid] = row[taskid]
+                fullinfo = row['fullinfo']
+                break
+        else:
+            statusmsgs.append('Neradau studento: %s' % student)
+            student = ''
+    return students, student, fullinfo
+
+students, student, fullinfo = updateinfo(student)
+
+if 'NEW' in request.form:
+    n_vardas = request.form['n_vardas'].strip()
+    n_kursas = request.form['n_kursas']
+    n_grupe = request.form['n_grupe']
+    n_kryptis = request.form['n_kryptis']
+    if student:
+        statusmsgs.append('Studentas %s jau yra' % student)
+    elif not n_vardas:
+        statusmsgs.append('Neišgirdau, koks vardas?')
+    else:
+        statusmsgs = []
+        new_row = '%s (%sk %sgr %s):' % (n_vardas, n_kursas, n_grupe, n_kryptis)
+        student = n_vardas
+        container.editTasks(new_row=new_row)
+        statusmsgs.append('Naujas studentas: %s' % new_row)
+        students, student, fullinfo = updateinfo(student)
+
+need_update = False
+if fullinfo and 'COPY_TASK_1_TO_3' in request.form:
+    request.form['CHOOSE_TASK'] = 'Yep'
+    request.form['uzd3'] = result['1']['description']
+if fullinfo and 'COPY_TASK_2_TO_3' in request.form:
+    request.form['CHOOSE_TASK'] = 'Yep'
+    request.form['uzd3'] = result['2']['description']
+if fullinfo and 'CHOOSE_TASK' in request.form:
+    for taskid in ['1', '2', '3', 'projektukas']:
+        uzd = request.form.get('uzd' + taskid)
+        if uzd:
+            old_row = '%s:' % (fullinfo)
+            new_row = '%s: %s [%s]' % (fullinfo, uzd, taskid)
+            container.editTasks(new_row=new_row, old_row=old_row, old_row_expected=False)
+            statusmsgs.append('Nauja užduotis: %s' % new_row)
+            need_update = True
+
+if fullinfo:
+    for taskid in ['1', '2', '3', 'projektukas']:
+        if ('ACCEPT_TASK_%s_COLLEAGUE' % taskid) in request.form:
+            request.form['ACCEPT_TASK_%s' % taskid] = 'Yep'
+            comment = request.form.get('comment' + taskid)
+            if comment:
+                comment += '; pas kolegą'
+            else:
+                comment = 'pas kolegą'
+            request.form['comment' + taskid] = comment
+        if ('ACCEPT_TASK_%s' % taskid) in request.form:
+            comment = request.form.get('comment' + taskid)
+            done = taskid + '+'
+            if comment:
+                done += '; ' + comment
+            uzd = result[taskid]['description']
+            old_row = '%s: %s [%s]' % (fullinfo, uzd, taskid)
+            new_row = '%s: %s [%s]' % (fullinfo, uzd, done)
+            container.editTasks(old_row=old_row, new_row=new_row)
+            statusmsgs.append('Atsiskaitė: %s' % new_row)
+            need_update = True
+    if 'ACCEPT_TEST' in request.form:
+        score = request.form.get('test_score')
+        new_row = '%s: [testukas: %s+]' % (fullinfo, score)
+        container.editTasks(old_row=None, new_row=new_row)
+        statusmsgs.append('Atsiskaitė: %s' % new_row)
+        need_update = True
+
+
+if need_update:
+    students, student, fullinfo = updateinfo(student)
+
+students = [(s['name'], s) for s in students]
+students.sort()
+students = [s for key, s in students]
+result['statusmsg'] = ''.join(['<p class="status">%s</p>' % msg for msg in statusmsgs])
+result['students'] = students
+result['student'] = student
+result['fullinfo'] = fullinfo
+return result

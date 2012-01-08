@@ -1,0 +1,46 @@
+## Script (Python) "choose_task_update"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+request = container.REQUEST
+if 'SUBMIT' not in request and 'FORCE_SUBMIT' not in request:
+    return None
+gr = request['gr']
+student = request['student']
+task = request['task']
+task_extra = request['task_extra']
+if task_extra:
+    full_task = '%s (%s)' % (task, task_extra)
+else:
+    full_task = task
+msg = '%s iš %s grupės nori %s' % (student, gr, full_task)
+color = 'red'
+for tsk in container.tasks(gr):
+    if tsk['task'] == task:
+        if tsk['class']:
+            if 'FORCE_SUBMIT' in request:
+                msg += ', nors užduotis jau užimta'
+            else:
+                msg += ', bet ši užduotis jau užimta'
+                continue
+        else:
+            msg += ', ir užduotis neužimta'
+        fn = 'data%sgr.csv' % gr
+        csvdata = container.parseCSV(fn)
+        for row in csvdata:
+            if row[2] == student:
+                row[4] = full_task
+                msg += ', duomenys pakeisti'
+                color = 'green'
+            while row and not row[-1]:
+                del row[-1]
+        data = '\n'.join([','.join(row) for row in csvdata])
+        container[fn].manage_edit('', 'text/x-comma-separated', filedata=data)
+
+msg = '<p style="color: %s">%s</p>' % (color, msg.decode('UTF-8'))
+return msg

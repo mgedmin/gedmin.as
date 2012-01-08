@@ -1,0 +1,12 @@
+## Script (Python) "listProblems"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+problems = filter(None, [l.strip() for l in container.problems.data.splitlines()])
+problems.sort()
+return problems

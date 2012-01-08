@@ -1,0 +1,99 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="groups python:['3', '4', '5', 'N']">
+  <head>
+    <title>Užduoties pasirinkimas</title>
+    <style type="text/css">
+      div.row label { display: block; float: left; width: 6em; }
+      div.row { clear: left; margin-bottom: 1ex; margin-left: 1em; }
+      div.tasks { float: right; padding-left: 5em; width: 45%; }
+      div.tasks table { font-size: small; }
+    </style>
+    <script type="text/javascript">
+      last_selection = '<tal:x replace="python: request.get('student', '').decode('UTF-8')"/>';
+      students = new Object();
+      <tal:block repeat="gr groups">
+      students['<tal:x replace="gr"/>'] = new Array(
+        <tal:block repeat="student python:here.list(gr)"
+                   replace="python: '\'%s\',' % student['name'].decode('UTF-8')" />
+        ''
+      );
+      </tal:block>
+      function fill_students() {
+        var gr_select = document.getElementById('gr');
+        var student_select = document.getElementById('student');
+        var gr = gr_select.options[gr_select.selectedIndex].value;
+        student_select.options.length = 0;
+        for (var i = 0;
+             i <tal:x replace="structure string:&lt;"/> students[gr].length-1;
+             i++) {
+          student_select.options[i] = new Option(students[gr][i]);
+          if (students[gr][i] == last_selection) {
+            student_select.selectedIndex = i;
+          }
+        }
+      }
+    </script>
+  </head>
+  <body onload="fill_students()">
+
+<div class="tasks">
+<table class="simple">
+<tr><th>Nr</th><th>Užduotis</th></tr>
+<tr tal:repeat="row here/tasks"
+    tal:attributes="class python:['even', 'odd'][repeat['row'].even()]
+                            + ' ' + row['class']">
+  <td class="right" tal:content="row/task">nr</td>
+  <td style="width: 30em;" tal:content="python: row['shorttitle'].decode('UTF-8')"
+      tal:attributes="title python: row['title'].decode('UTF-8')">Pavadinimas</td>
+</tr>
+</table>
+<p>Neužmirškite, kad galima susigalvoti savo užduotį!
+Užduotis tokias kaip 1,
+2 ar 23 gali rinktis ir keli studentai, jei darys pakankamai skirtingus
+variantus.</p>
+</div>
+
+
+    <h1>Užduoties pasirinkimas</h1>
+
+    <p tal:define="global statusmsg here/choose_task_update"
+       tal:replace="structure statusmsg" />
+
+    <form action="" method="post">
+    <div class="row">
+      <label for="gr" accesskey="g"><u>G</u>rupė</label>
+      <select size="1" name="gr" id="gr" onchange="fill_students()">
+        <option tal:repeat="gr groups"
+                tal:attributes="selected python: gr == request.get('gr') and 'selected' or None;
+                                value gr"
+                tal:content="gr" />
+      </select>
+    </div>
+    <div class="row">
+      <label for="student" accesskey="s"><u>S</u>tudentas</label>
+      <select size="1" name="student" id="student">
+      </select>
+    </div>
+    <div class="row">
+      <label for="užduotis" accesskey="u"><u>U</u>žduotis</label>
+      <select size="1" name="task" id="task">
+        <option tal:repeat="task here/tasks"
+                tal:attributes="selected python: task['task'] == request.get('task') and 'selected' or None"
+                tal:content="task/task" />
+      </select>
+
+      (<input type="text" name="task_extra" tal:attributes="value python: request.get('task_extra', '').decode('UTF-8')" />)
+    </div>
+    <div class="row">
+      <input type="submit" name="SUBMIT" value="Rinktis" accesskey="r" />
+      <input tal:condition="python: 'red' in (statusmsg or '')"
+             type="submit" name="FORCE_SUBMIT" value="Rinktis nepaisant konfliktų" />
+    </div>
+    </form>
+
+    <p><a href="http://mg.b4net.lt/study/cna">Pratybų puslapis</a>.</p>
+    <p><a href="https://mg.b4net.lt/study/cna/enter_result">Rezultatų įvedimas</a>.</p>
+    <p><a href="https://mg.b4net.lt/study/cna/editCSV?fn=dataNgr.csv">N gr. CSV keitimas</a>.</p>
+
+  </body>
+</html>

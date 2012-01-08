@@ -1,0 +1,14 @@
+## Script (Python) "final.csv"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+for gr in ['3', '4', '5', 'N']:
+    for item in context.list(gr):
+        row = [item['name'], item['studnr'], '%.1f' % item['total_no_delay']]
+        print ",".join(row)
+return printed

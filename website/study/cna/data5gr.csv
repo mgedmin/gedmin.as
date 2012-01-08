@@ -1,0 +1,30 @@
+Eilės nr.,Stud. paž. nr.,Vardas ir pavardė,Naudotojo vardas,Užduotis,Pogrupis,1uzd,data,pastabos,2uzd,data,pastabos,3uzd,data,pastabos
+1.,0411168,Andžej Aleksandrovič,anal3318,15,,1.5-0.6-0.1,2006-05-26,C++; tradicinė recv klaida; 
+2.,0411171,Agnė Andriūnaitė,agan4528,23 (sek ir sunaiking),,1.5,2006-04-07,C++,1.5+0.1+0.1,2006-04-21,Java; multiklientiškumas,1+0.3,2006-04-28,C++/Java; 
+3.,0411184,Rasa Balčiūnaitė,raba4530,2 (videonuoma),,1.5-0.5+0.1,2006-05-19,Java; multiklientiškumas; ,1.5-0.5,2006-06-02,C++; 
+4.,0411190,Audrius Bareišis,auba4531,6,,1.5+0.1,2006-04-03,C++; multiklientiškumas,1.5+0.2+0.1,2006-04-07,Java; multiklientiškumas,1+0.3,2006-04-07,C++/Java
+5.,0411191,Valdemar Bartoševič,vaba4532,,,1.5-0.6+0.1,2006-05-26,Java; multiklientiškumas; 
+6.,0411180,Ignas Bačius,igba4529,17,,1.5-0.3+0.1+0.4,2006-05-05,Java; multiklientiškumas; grazus GUI,1-0.2,2006-05-12,C++/Java; ,1.5-0.1+0.1+0.4,2006-05-26,C++; multiklientiškumas; GUI su Qt
+7.,0311156,Konstantin Bielko,kobi3371
+8.,0411199,Andrius Bistrickis,anbi4533,16,,1.5,2006-04-07,C++,1.5+0.2+0.1,2006-04-07,Java; multiklientiškumas,1+0.3,2006-04-28,C++/Java; 
+9.,0411201,Egidijus Bobina,egbo4534,4,,1.5+0.1,2006-04-07,Java; multiklientiškumas,1.5-0.2-0.1,2006-05-12,C++; tradicinė recv klaida; ,1+0.1,2006-05-12,C++/Java; 
+10.,0311162,Mindaugas Busila,mibu3391,7,,1.5+0.1,2006-04-07,Java; multiklientiškumas,1.5+0.2,2006-04-07,C++; pasitiki recv,1+0.0,2006-05-19,C++/Java; 
+11.,0411209,Guoda Cesiulytė,guce4535,11 (sostinių spėjimas),,1.5-0.4+0.1-0.1,2006-05-12,Java; multiklientiškumas; kodas netvarkingas,1.5-0.5,2006-05-31,C++; ,1-0.2,2006-06-02,C++/Java; 
+12.,0411220,Modestas Dobrovolskis,modo4537,23 (pokalbis),,1.5-0.7+0.1+0.1,2006-05-31,Java; multiklientiškumas; įdomi  originali idėja (pokalbis su kompiuteriu),1-0.5,2006-06-02,C++/Java; 
+13.,0411221,Irma Dobrovolskytė,irdo4538,2 (lombardas),,1.5-0.4+0.1,2006-05-12,Java; multiklientiškumas; ,1-0.5,2006-05-29,C++/Java; 
+14.,0411230,Aleita Ganatovskaja,alga4539,1 (tvarkaraštis),,1.5-0.1,2006-04-03,C++; tradicinė recv klaida,1.0+0.1,2006-04-19,C++/Java,1.5+0.3+0.1,2006-04-19,Java; multiklientiškumas
+15.,0411244,Gintarė Gumbytė,gigu4541,23 (loterija),,1.5-0.6,2006-05-24,Java; ,1.5-0.5,2006-05-31,C++; 
+16.,0411250,Giedrius Jankauskas,gija4988,12,,1.5-0.1,2006-04-07,C++; tradicinė recv klaida,1.5+0.1+0.1,2006-04-21,Java; multiklientiškumas,1+0.3,2006-04-28,C++/Java; 
+17.,0311218,Darius Jonauskas,dajo3518
+18.,0411266,Stasys Jurkšaitis,stju4472,11 (viktorinos),,1.5-0.4,2006-05-12,Java; ,1.5-0.3+0.1-0.1,2006-05-19,C++; multiklientiškumas; tradicinė recv klaida; ,1-0.2,2006-06-02,C++/Java; 
+19.,0411272,Artur Karaznevič,arka4473,21,,1.5+0.1,2006-04-07,C; multiklientiškumas,1.5+0.2,2006-04-07,Java,1+0.3-0.1,2006-04-07,C/Java; tradicinė recv klaida
+20.,0311241,Dmitrij Kovrigin,dmko3591
+21.,0411304,Kazimieras Lukauskas,kalu4423,2 (kasos aparatas),,1.5-0.1+0.1,2006-04-21,Java; multiklientiškumas,1+0.1-0.1,2006-04-21,C/Java; tradicinė recv klaida,1.5+0.0-0.1,2006-05-19,C++; tradicinė recv klaida; 
+22.,0411310,Laurynas Mališauskas,lama4477,22
+23.,0411311,Milana Marfinaitė,mima4630,19,,1.5-0.3,2006-05-05,Java; ,1-0.2,2006-05-12,C++/Java; ,1.5+0.0,2006-05-19,C++; 
+24.,0311270,Valentinas Marčenkovas,vama3693,23 (remote whiteboard),,1.5-0.7+0.1+0.4,2006-06-02,Java; multiklientiškumas; gui
+25.,0411320,Audrius Miknevičius,aumi4478,11 (matematiniai uždavinukai)
+26.,0411340,Linas Patapavičius,lipa4480,20,,1.5+0.1,2006-04-07,Java; multiklientiškumas,1.5+0.1,2006-04-21,C++,1+0.3,2006-04-28,C++/Java; 
+27.,0411350,Domas Petkevičius,dope4583,14,,1.5-0.2+0.1,2006-04-28,Java; multiklientiškumas; ,1.5-0.2,2006-05-12,C++; ,1+0.1,2006-05-12,C++/Java; 
+28.,0411215,Alina Čuiko,alcu4536,5,,1.5,2006-04-07,C,1.5+0.0+0.1,2006-04-28,Java; multiklientiškumas; ,1+0.1,2006-05-12,C++/Java
+29.,0110937,Vilius Šumskas,visu1964,8,,1.5-0.1+0.1,2006-04-07,C++; tradicinė recv klaida; multiklientiškumas,1.5+0.0+0.1+0.4,2006-04-28,Java; multiklientiškumas; originalus gražus kodas; multiklientiškums be Threadų,1+0.1,2006-05-12,C++/Java; 

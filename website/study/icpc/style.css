@@ -1,0 +1,9 @@
+@import url("/style.css");
+
+div.example {
+  margin: 2ex 2ex;
+}
+
+pre.example strong {
+  color: green;
+}

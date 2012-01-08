@@ -1,0 +1,144 @@
+<html tal:define="dummy python:request.response.setHeader('Content-Type', 'text/html;; charset=UTF-8')">
+  <head>
+    <title>Atsiskaitymai</title>
+    <style type="text/css">
+      div.row label.label { display: block; float: left; width: 6em; }
+      div.row { clear: left; margin-bottom: 1ex; margin-left: 1em; }
+      div.subrow { clear: left; margin-bottom: 1ex; margin-left: 2em; }
+      div.tasks { float: right; padding-left: 5em; width: 45%; }
+      div.tasks table { font-size: small; }
+      p.status { margin: 1ex; border: 1px solid green; background: #efe; padding: 0.5ex; }
+    </style>
+  </head>
+  <body>
+    
+    <h1>Atsiskaitymai</h1>
+
+    <p tal:define="global data here/enter_result_update"
+       tal:replace="structure data/statusmsg" />
+
+    <form action="" method="post">
+
+    <div class="row">
+      <label class="label" for="student" accesskey="s"><u>S</u>tudentas</label>
+      <select size="1" name="student" id="student" tal:define="student data/student">
+        <option tal:repeat="row data/students"
+                tal:attributes="value row/name;
+                                selected python:row['name'] == student"
+                tal:content="row/fullinfo">Vardas Pavardė (...)</option>
+      </select>
+      <input type="submit" name="SELECT" value="Rinktis" accesskey="r" />
+    </div>
+
+    <div class="row">
+      <label for="n_vardas">Vardas ir pavardė</label>
+      <input type="text" name="n_vardas" id="n_vardas" />
+      <br />
+      <label for="n_kursas">Kursas</label>
+      <select size="1" name="n_kursas" id="n_kursas">
+        <option>?</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>1M</option>
+      </select>
+      <label for="n_grupe">Grupė</label>
+      <select size="1" name="n_grupe" id="n_grupe">
+        <option>?</option>
+        <option tal:repeat="gr python:range(1, 12)" tal:content="gr">1</option>
+      </select>
+      <label for="n_kryptis">Studijų kryptis</label>
+      <select size="1" name="n_kryptis">
+        <option>?</option>
+        <option>informatika</option>
+        <option>kompiuterių mokslas</option>
+        <option>programų sistemos</option>
+        <option>matematika ir matematikos taikymai</option>
+        <option>statistika</option>
+      </select>
+      <input type="submit" name="NEW" value="Naujas" accesskey="n" />
+    </div>
+
+    <tal:defs tal:define="n string:1">
+    <div class="row" metal:define-macro="bytask">
+      <label tal:attributes="for string:bytask$n">Pagal <span tal:replace="n" /> užd. sąlygą</label>
+      <select size="1"
+              tal:attributes="name string:bytask$n; id string:bytask$n"
+              tal:define="student data/student">
+        <option tal:repeat="task python:here.taken(n)"
+                tal:attributes="value task/student;
+                                selected python:task['student'] == student"
+                                tal:content="string:${task/task} - ${task/student}${task/done_suffix}">užduotis</option>
+      </select>
+      <input type="submit" value="Rinktis"
+             tal:attributes="name string:SELECT_BY_TASK_$n" />
+    </div>
+    </tal:defs>
+
+    <tal:defs tal:define="n string:2">
+    <div class="row" metal:use-macro="template/macros/bytask" />
+    </tal:defs>
+
+    <tal:defs tal:define="n string:3">
+    <div class="row" metal:use-macro="template/macros/bytask" />
+    </tal:defs>
+
+    <tal:defs tal:define="n string:projektukas">
+    <div class="row" metal:use-macro="template/macros/bytask" />
+    </tal:defs>
+
+<tal:if condition="data/student">
+   <h2 tal:content="data/fullinfo"></h2>
+   <tal:for repeat="n python: ['1', '2', '3', 'projektukas']">
+   <div class="row" tal:condition="python: data[n]['should_choose'] or data[n]['description']">
+      <tal:if condition="python: n == 'projektukas'">Projektukas:</tal:if>
+      <tal:if condition="python: n != 'projektukas'">
+      <span tal:replace="n"/> užduotis:
+      </tal:if>
+        <span tal:replace="data/?n/description" />
+          <span tal:replace="data/?n/status"></span>
+          <!--          <span tal:condition="data/?n/done">+</span> -->
+      <tal:if tal:condition="not:data/?n/chosen">
+        <input type="text" tal:attributes="name string:uzd$n" />
+        <input type="submit" name="CHOOSE_TASK" value="Parinkti" accesskey="p" />
+        <input tal:condition="python: n == '3'"
+               type="submit" name="COPY_TASK_1_TO_3" value="Ta pati kaip 1" />
+        <input tal:condition="python: n == '3'"
+               type="submit" name="COPY_TASK_2_TO_3" value="Ta pati kaip 2" />
+      </tal:if>
+      <tal:if tal:condition="data/?n/chosen">
+        <tal:if tal:condition="not:data/?n/done">
+          <input type="submit" tal:attributes="name string:ACCEPT_TASK_$n" value="Užskaityti" accesskey="u" />
+          <input type="submit" tal:attributes="name string:ACCEPT_TASK_${n}_COLLEAGUE" value="Užskaityti (pas kolegą)" />
+          <label tal:attributes="for string:comment$n">Pastabos</label>
+          <input type="text" tal:attributes="name string:comment$n; id string:comment$n" />
+        </tal:if>
+      </tal:if>
+    </div>
+    </tal:for>
+    <div class="row">
+      <label for="test_score" accesskey="t"><u>T</u>estukas:</label>
+      <span tal:condition="data/testukas/done"
+            tal:content="python: data['testukas']['status'].lstrip(': ')">+</span>
+    <tal:if condition="not:data/testukas/done">
+      <select size="1" name="test_score" id="test_score">
+        <option></option>
+        <option tal:repeat="n python:range(5, 11)" tal:content="n">1</option>
+      </select>
+      <input type="submit" tal:attributes="name string:ACCEPT_TEST" value="Užskaityti" />
+    </tal:if>
+    </div>
+    <div class="row">
+      Įskaita: <span tal:condition="data/iskaita/done">+</span>
+    </div>
+</tal:if>
+
+    </form>
+
+    <p><a href="http://gedmin.as/study/python">Pratybų puslapis</a>.</p>
+    <p><a href="http://gedmin.as/study/python/students">Studentų sąrašas</a>.</p>
+    <p><a href="https://gedmin.as/study/python/students/tasks.txt/manage_main">Edit tasks.txt</a>.</p>
+    <p><a href="https://gedmin.as/study/python/students/externalEdit_/tasks.txt">External Edit tasks.txt</a>.</p>
+
+  </body>
+</html>

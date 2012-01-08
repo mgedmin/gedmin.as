@@ -1,0 +1,22 @@
+## Script (Python) "listStudents"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+# Example code:
+
+students = []
+for line in container.students.data.splitlines():
+    line = line.strip()
+    if not line: continue
+    login, email, firstname, lastname = line.split()
+    students.append((lastname, firstname, login, 
+                     {'login': login,
+                      'name': '%s %s' % (firstname, lastname),
+                      'email': email}))
+students.sort()
+return [row[-1] for row in students]

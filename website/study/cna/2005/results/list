@@ -1,0 +1,101 @@
+## Script (Python) "list"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=gr, pogr=None
+##title=
+##
+deadlines = ['2005-04-08', '2005-04-30', '2005-05-20']
+
+taskmap = {}
+for row in container.tasks():
+    taskmap[row['task']] = row['shorttitle']
+
+def parse_score(score):
+    """Pvz., '1.5+0.2-0.3' => [1.5, 0.2, -0.3]"""
+    score = score.replace(' ', '')
+    score = score.replace('+', ' +')
+    score = score.replace('-', ' -')
+    return map(float, score.split())
+
+def sum(l):
+    s = 0
+    for x in l:
+        s += x
+    return s
+
+def week_of(date):
+    return DateTime(date).week()
+
+def penalty(date, deadline):
+    w_of_d = week_of(date)
+    assert w_of_d != 12
+    if w_of_d < 12:
+        w_of_d += 1
+    diff = week_of(deadline) - w_of_d
+    if diff > 3:
+        diff = 3
+    return diff * 0.1
+
+rows = container.parseCSV('data%sgr.csv' % gr)[1:]
+result = []
+for cells in rows:
+    # 0: eil nr, 1: stud paz, 2: vardas, 3: username, 4: uzduotis, 5: pogrupis, 6: 1uzd, 7: data, 8: pastabos, 9: 2uzd, 10:, 11:, 12: 3uzd, ...
+    cells = [s.strip() for s in cells]
+    while len(cells) <= 15:
+        cells.append('')
+    if pogr and str(pogr) != cells[5]:
+        continue
+    uzd = []
+    total = 0
+    left = {1.5: 2, 1: 1}
+    for n in range(3):
+        score = cells[6+3*n].strip()
+        parts = parse_score(score)
+        total += sum(parts)
+        date = cells[7+3*n].strip()
+        comments = cells[8+3*n].strip()
+        plus = score and '+' or ''
+        uncertainity = False
+
+        if date and not date.startswith('2005-0'):
+            uncertainity = True
+            comments = "data!!!\n" + comments
+        if date and parts:
+            pen = penalty(date, deadlines[n])
+            if pen == 0:
+                parts.insert(1, 0.0)
+            elif len(parts) > 1:
+                if abs(parts[1] - pen) > 0.001:
+                    uncertainity = True
+                    if pen < 0:
+                        comments = "(vėlavo %s)!!!\n" % pen + comments
+                    else:
+                        comments = "(skubėjo %s)!!!\n" % pen + comments
+
+        if parts:
+            if left.get(parts[0], 0) < 1:
+                comments = "!!!\n" + comments
+            else:
+                left[parts[0]] = left[parts[0]] - 1
+
+        if 'nežinau už ką' in comments:
+            uncertainity = True
+
+        score = ''.join(['%+.1f' % x for x in parts])
+        if score.startswith('+'): score = score[1:]
+        score = score.replace('-', '−') # hyphen -> U+2212 MINUS SIGN
+        uzd.append({'plus': plus,
+                    'date': date,
+                    'score': score,
+                    'comments': comments,
+                    'uncertainity': uncertainity})
+
+    task = cells[4].strip()
+    taskhint = taskmap.get(task, "")
+    result.append({'name': cells[2].strip(), 'taskhint': taskhint,
+                   'task': task, 'uzd': uzd, 'total': total,
+                   'studnr': cells[1].strip()})
+return result

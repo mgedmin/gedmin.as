@@ -1,0 +1,18 @@
+Eilės nr.,Stud. paž. nr.,Vardas ir pavardė,Kursas grupė,Užduotis,Pogrupis,1uzd,data,pastabos,2uzd,data,pastabos,3uzd,data,pastabos
+1.,0311237,Justinas Koreiva,3k 2gr,16,,1.5-0.7,2006-06-02,C++; 
+2.,0311436,Anžej Monkevič,3k 7gr,20,,1.5+0.1+0.1,2006-03-27,C++; multiklientiškumas,1.5-0.4+0.1,2006-05-22,Java; multiklientiškumas; ,1-0.2,2006-05-29,C++/Java; 
+3.,(neradau),Daumantas Jankauskas,3k 7gr,9 (valiutų keitimas)
+4.,0311367,Tomas Stamulis,3k 5gr (matinf),5,,1.5-0.4+0.1,2006-05-10,C++; multiklientiškumas; ,1.5-0.2+0.1,2006-05-10,Java; multiklientiškumas; ,1+0.1,2006-05-10,C++/Java; 
+5.,(neradau),Auksė Paškonytė,(laisvoji klausytoja),19
+6.,0311176,Edita Davolytė,3k 6gr,11 (atspėk ar suma lyginė?), ,1.5-0.5+0.1,2006-05-17,C++; multiklientiškumas; ,1.5-0.3+0.1,2006-05-17,Java; multiklientiškumas; ,1+0.0,2006-05-17,C++/Java; 
+7.,0212228,Edmundas Backierius,3k 6gr mat inf,8
+8.,0311386,Linas Šėvelis,3k 6gr,2 (e-parduotuvė),,1.5-0.4+0.1-0.1,2006-05-10,C++; multiklientiškumas; tradicinė recv klaida; ,1.5-0.2+0.1,2006-05-10,Java; multiklientiškumas; ,1+0.1,2006-05-12,C++/Java; 
+9.,0110872,Martynas Danys,4k 1gr,6,,1.5+0.1-0.1,2006-04-07,Java; multiklientiškumas; tragiškas kodo išdėstymas,1.5-0.2,2006-05-12,C++; ,1+0.1,2006-05-12,C++/Java; 
+10.,0212420,Marius Rupšys,4k 4gr,,,1.5-0.7,2006-05-31,C++; ,1.5-0.5,2006-05-31,Java; ,1-0.2,2006-05-31,C++/Java; 
+11.,0311195,Mindaugas Gestautas,3k 7gr,14,,1.5-0.7+0.1,2006-06-02,Java; multiklientiškumas; ,1.5-0.5-0.1,2006-06-02,C++; tradicinė recv klaida; 
+12.,0212234,Tomas Barbaraušas,3k 8gr,10,,1.5-0.5+0.1,2006-05-15,Java; multiklientiškumas; ,1.5-0.3+0.1-0.1,2006-05-15,C++; multiklientiškumas; tradicinė recv klaida; ,1+0.0,2006-05-15,C++/Java; 
+13.,0212255,Aras Čeika,4k 3gr,8,,1.5-0.4+0.1-0.1,2006-05-10,C++; multiklientiškumas; tradicinė recv klaida; ,1.5-0.2+0.1-0.1,2006-05-10,Java; multiklientiškumas; recv pasitiki,1+0.1,2006-05-10,C++/Java; 
+14.,0212498,Tadas Zdanavičius,3k 6gr,10 (testas),,1.5-0.4+0.1,2006-05-12,C++; multiklientiškumas; ,1.5-0.2+0.1,2006-05-12,Java; multiklientiškumas; ,1+0.1,2006-05-12,C++/Java; 
+15.,0311361,Romas Sitavičius,3k 6gr,4,,1.5-0.5+0.1,2006-05-15,Java; multiklientiškumas; ,1.5-0.3+0.1-0.1,2006-05-15,C++; multiklientiškumas; tradicinė recv klaida; ,1+0.0,2006-05-15,C++/Java; 
+16.,0212346,Antanas Matakanskas,3k 8gr,14,,1.5-0.7+0.1,2006-06-02,Java; multiklientiškumas; ,1-0.5,2006-06-02,C++/Java; ,1.5-0.2,2006-06-02,C++; 
+17.,0110731,Andrej Konygin,3k 5gr,23 (atspėk skaičių),,1.5-0.7+0.1-0.1,2006-05-29,C++; multiklientiškumas; tradicinė recv klaida; ,1.5-0.5+0.1,2006-05-31,Java; multiklientiškumas; ,1-0.2,2006-05-31,C++/Java; 

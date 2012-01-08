@@ -1,0 +1,31 @@
+## Script (Python) "verify"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+studentai = "212378	212470	213238	213241	213326	213332	213338	213356	311128	311133	311151	311157	311166	311172	311179	311187	311188	311193	311206	311233	311246	311258	311282	311290	311300	311301	311308	311330	311336	311346	311348	311357	311371	311383	311385	311389	311391	311403	311425".split()
+rezultatai = "4	1.7	5.6	0	4.3	4.2	0	5.1	5.2	1.9	5.2	4	4.4	2.8	4.8	4.2	2.4	3.5	3.7	1.3	2.7	3.7	5.4	3.7	2.9	3.9	4.8	3.4	1	4.6	3.6	4	5.6	3.9	2.7	3.1	4.1	4.2	1.9".split()
+
+assert len(studentai) == len(rezultatai)
+
+studmap = {}
+for s, r in zip(studentai, rezultatai):
+    studmap['0' + s] = r # XXX hack
+
+kiek = 0
+for gr in [3, 4, 5]:
+    for row in container.list(gr):
+        s = row['studnr']
+        t = str(row['total'])
+        if s in studmap:
+            kiek += 1
+        if studmap.get(s, t) != t:
+            print '%s gavo %s, o ne %s (%s, %s gr)' % (s, t, studmap[s], row['name'], gr)
+
+print "Viskas: patikrinau %s studentų (iš %s)" % (kiek, len(studmap))
+
+return printed

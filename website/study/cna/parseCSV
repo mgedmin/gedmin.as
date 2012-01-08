@@ -1,0 +1,27 @@
+## Script (Python) "parseCSV"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=fn, extracell=True
+##title=
+##
+data = container[fn].data
+ncols = 0
+results = []
+for row in data.splitlines():
+    cells = []
+    for cell in row.split(","):
+        if cell.startswith('"') and cell.endswith('"'):
+            cell = cell[1:-1]
+        cells.append(cell)
+    if len(cells) > ncols:
+        ncols = len(cells)
+    else:
+        while len(cells) < ncols:
+            cells.append('')
+    if extracell:
+        cells.append('')
+    results.append(cells)
+return results

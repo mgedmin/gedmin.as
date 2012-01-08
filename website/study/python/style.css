@@ -1,0 +1,26 @@
+@import url("/style.css");
+
+.taken {
+  font-style: italic;
+}
+.taken:after {
+  font-size: small;
+  color: red;
+  content: " [šiemet jau pasirinkta]";
+}
+
+.new {
+  color: red;
+}
+
+.bad {
+  color: red;
+  text-decoration: line-through;
+}
+
+td.group {
+    background: #114411;
+    color: white;
+    padding: 2px;
+    text-align: center;
+}

@@ -1,0 +1,22 @@
+## Script (Python) "whatsHappeningNow"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=
+##
+now = DateTime()
+if not DateTime('2006-02-06') <= now <= DateTime('2006-06-02'):
+    return None
+dow = now.dow()
+hour = now.hour()
+if dow == 1 and 16 <= hour < 18:   # Mon 16:00-18:00 3 gr
+    return 3
+elif dow == 1 and 18 <= hour < 20: # Mon 18:00-20:00 4 gr
+    return 4
+elif dow == 5 and 14 <= hour < 16: # Fri 14:00-16:00 5 gr
+    return 5
+else:
+    return None
