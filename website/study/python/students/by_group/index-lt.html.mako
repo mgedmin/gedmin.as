@@ -1,4 +1,5 @@
 <%inherit file="_templates/site.mako" />
+<%def name="stylesheet()">${bf.config.site.url}/study/python/style.css</%def>
 <%def name="title()">Studentai pagal grupes</%def>
 <%def name="short_title()"></%def>
 
