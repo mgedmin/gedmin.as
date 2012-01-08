@@ -11,7 +11,7 @@ tad kai man atsibodo į jį atsakinėti, parašiau tokį ne tai HOWTO, ne tai FA
 </p>
 
 <ul>
-<li><a href="Garso-HOWTO" charset="windows-1257">Garso-HOWTO 0.2 (lietuviškai)</a></li>
+<li><a href="Garso-HOWTO">Garso-HOWTO 0.2 (lietuviškai)</a></li>
 </ul>
 
 <h3>Nuorodos</h3>

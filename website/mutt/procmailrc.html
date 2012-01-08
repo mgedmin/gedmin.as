@@ -1,63 +1,63 @@
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=windows-1257">
-  <title>Mano Procmail konfigūracija</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Mano Procmail konfigÅ«racija</title>
   <meta name="Author" content="Marius Gedminas">
   <link rev=made href="mailto:marius@gedmin.as">
 </head>
 <body bgcolor="#FFFFFF" text="#000000">
 <pre>
-<font color="#0000ff"># Kurdamas šį failiuką smarkiai rėmiausi Rejo Zenger procmailrc:</font>
+<font color="#0000ff"># Kurdamas Å¡ÄÆ failiukÄ… smarkiai rÄ—miausi Rejo Zenger procmailrc:</font>
 <font color="#0000ff"># <a href="http://www.mediaport.org/~sister/personal/procmailrc">http://www.mediaport.org/~sister/personal/procmailrc</a>.</font>
 
-<font color="#0000ff"># $MAILDIR -- kalalogas, kuriame yra visi mano pašto aplankai</font>
+<font color="#0000ff"># $MAILDIR -- kalalogas, kuriame yra visi mano paÅ¡to aplankai</font>
 <font color="#008b8b">MAILDIR</font> = <font color="#008b8b">$HOME</font>/Mail
-<font color="#0000ff"># $DEFAULT -- kur dėti laišką, jei nebus kitų nurodymų</font>
+<font color="#0000ff"># $DEFAULT -- kur dÄ—ti laiÅ¡kÄ…, jei nebus kitÅ³ nurodymÅ³</font>
 <font color="#008b8b">DEFAULT</font> = <font color="#008b8b">$MAILDIR</font>/inbox
-<font color="#0000ff"># (Pas mane tai symlinkas į /var/spool/mail/mg).</font>
+<font color="#0000ff"># (Pas mane tai symlinkas ÄÆ /var/spool/mail/mg).</font>
 
-<font color="#0000ff"># Paranoja: kursim atsargines kiekvieno laiško kopijas.  Kiekvienos dienos</font>
-<font color="#0000ff"># laiškai bus atskirame faile.</font>
+<font color="#0000ff"># Paranoja: kursim atsargines kiekvieno laiÅ¡ko kopijas.  Kiekvienos dienos</font>
+<font color="#0000ff"># laiÅ¡kai bus atskirame faile.</font>
 <font color="#008b8b">DAY</font> = `date +%Y-%m-%d`
 <font color="#008b8b">BACKUP</font> = <font color="#008b8b">$MAILDIR</font>/backup/<font color="#008b8b">$DAY</font>
 
-<font color="#0000ff"># Kad galėtų atpažinti laiškų dublikatus, formail'as turi kažkur įsiminti</font>
-<font color="#0000ff"># matytų Message-ID sąrašą.  Čia nurodoma jo vieta ir maksimalus dydis.</font>
+<font color="#0000ff"># Kad galÄ—tÅ³ atpaÅ¾inti laiÅ¡kÅ³ dublikatus, formail'as turi kaÅ¾kur ÄÆsiminti</font>
+<font color="#0000ff"># matytÅ³ Message-ID sÄ…raÅ¡Ä….  Äia nurodoma jo vieta ir maksimalus dydis.</font>
 <font color="#008b8b">CACHE_SIZE</font> = 8192
 <font color="#008b8b">CACHE_FILE</font> = <font color="#008b8b">$HOME</font>/tmp/msgid.cache
 
 
-<font color="#0000ff"># Visų pirma -- atsarginės kiekvieno laiško kopijos.  Pastaba: tai smarkiai</font>
-<font color="#0000ff"># mažina laisvą vietą diske.</font>
+<font color="#0000ff"># VisÅ³ pirma -- atsarginÄ—s kiekvieno laiÅ¡ko kopijos.  Pastaba: tai smarkiai</font>
+<font color="#0000ff"># maÅ¾ina laisvÄ… vietÄ… diske.</font>
 <b><font color="#a52a2a">:0c:</font></b>
 <font color="#008b8b">$BACKUP</font>
 
-<font color="#0000ff"># Atpažinsime pasikartojančius laiškus pagal Message-ID lauką.</font>
+<font color="#0000ff"># AtpaÅ¾insime pasikartojanÄ¨ius laiÅ¡kus pagal Message-ID laukÄ….</font>
 <b><font color="#a52a2a">:0Whc:msgid.lock</font></b>
 <font color="#008b8b">| formail -D $CACHE_SIZE $CACHE_FILE</font>
 
-<font color="#0000ff"># Jei atpažinome -- pridėkime X-Note lauką</font>
+<font color="#0000ff"># Jei atpaÅ¾inome -- pridÄ—kime X-Note laukÄ…</font>
 <b><font color="#a52a2a">:0afhw</font></b>
 <font color="#008b8b">| formail -A &quot;X-Note: Message-ID seen before recently.&quot;</font>
 
-<font color="#0000ff"># Sugrosime muzikėlę atėjus asmeniniam laiškui</font>
+<font color="#0000ff"># Sugrosime muzikÄ—lÄ™ atÄ—jus asmeniniam laiÅ¡kui</font>
 <b><font color="#a52a2a">:0hwic</font></b>
 <font color="#008b8b">| cat > /dev/null; /usr/bin/play $HOME/wavs/message.wav 2>/dev/null; true</font>
 
-<font color="#0000ff"># Jei jūs mėtytumėte įeinančius laiškus į skirtingas pašto dėžutes, čia</font>
-<font color="#0000ff"># reiktų prirašyti keletą štai šitokių taisyklių:</font>
+<font color="#0000ff"># Jei jÅ«s mÄ—tytumÄ—te ÄÆeinanÄ¨ius laiÅ¡kus ÄÆ skirtingas paÅ¡to dÄ—Å¾utes, Ä¨ia</font>
+<font color="#0000ff"># reiktÅ³ priraÅ¡yti keletÄ… Å¡tai Å¡itokiÅ³ taisykliÅ³:</font>
 <font color="#0000ff">#</font>
 <font color="#0000ff"># :0:</font>
 <font color="#0000ff"># * ^TO_pasto@konferencijos.adresas</font>
 <font color="#0000ff"># pasto-dezutes-vardas</font>
 <font color="#0000ff">#</font>
 
-<font color="#0000ff"># Kas liko, keliauja į pagrindinę pašto dėžutę.</font>
+<font color="#0000ff"># Kas liko, keliauja ÄÆ pagrindinÄ™ paÅ¡to dÄ—Å¾utÄ™.</font>
 <b><font color="#a52a2a">:0:</font></b>
 <font color="#008b8b">$DEFAULT</font>
 </pre>
 <hr>
-<a href="mutt.html">Atgal į mano Mutt puslapį</a>
+<a href="mutt.html">Atgal ÄÆ mano Mutt puslapÄÆ</a>
 <p>
 <a href="mailto:marius@gedmin.as">Marius Gedminas</a><br>
 2000 vasario 17 d.

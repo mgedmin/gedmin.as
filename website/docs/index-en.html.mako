@@ -9,7 +9,7 @@ installation under Linux.  This was once a FAQ in <a href="http://www.konferenci
 </p>
 
 <ul>
-<li><a href="Garso-HOWTO" charset="windows-1257">Garso-HOWTO 0.2 (in Lithuanian)</a></li>
+<li><a href="Garso-HOWTO">Garso-HOWTO 0.2 (in Lithuanian)</a></li>
 </ul>
 
 <h3>Links</h3>
