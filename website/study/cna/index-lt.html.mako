@@ -97,8 +97,7 @@ ${caller.body()}
 </tr>
 % endfor
 </table>
-<p>Neužmirškite, kad galima susigalvoti savo užduotį!
-Užduotis tokias kaip 1,
+<p>Neužmirškite, kad galima susigalvoti savo užduotį!  Užduotis tokias kaip 1,
 2 ar 23 gali rinktis ir keli studentai, jei darys pakankamai skirtingus
 variantus.</p>
 </div>
