@@ -23,7 +23,7 @@ for Linux console.</p>
 
 <p>Download</p>
 <ul>
-<li><a href="README.lt" charset="windows-1257">README (in Lithuanian)</a> </li>
+<li><a href="README.lt">README (in Lithuanian)</a> </li>
 <li><a href="README.fonts">README.fonts (in English)</a> </li>
 <li><a href="README.keymaps">README.keymaps (in English)</a> </li>
 <li><a href="lit-con-0.99.7-1.noarch.rpm">lit-con-0.99.7-1.noarch.rpm (68K)</a> </li>

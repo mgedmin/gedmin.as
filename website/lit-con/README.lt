@@ -3,188 +3,188 @@ Lituanian Console v0.99.7
 Marius Gedminas <marius@gedmin.as>
 http://gedmin.as/lit-con/
 
-Tai yra Linux'o konsolës lituanizacijos paketo uşuomazga.  Èia rasite
-lietuviğkà (bei rusiğkà) ğriftus bei lietuviğkus klaviatûros iğdëstymus.
+Tai yra Linux'o konsolÄ—s lituanizacijos paketo uÅ¾uomazga.  ÄŒia rasite
+lietuviÅ¡kÄ… (bei rusiÅ¡kÄ…) Å¡riftus bei lietuviÅ¡kus klaviatÅ«ros iÅ¡dÄ—stymus.
 
-README.lt	lietuviğkas aprağymas (Latin-7)
-consolefonts/	ğriftai
-consoletrans/	kodø lentelës
-keytables/	klaviatûros iğdëstymai
-scripts/	pora (gal bût) naudingø, bet nebûtinø skriptø
-utilities/	ávairios programëlës, padëjusios man sukurti ğá paketà
+README.lt	lietuviÅ¡kas apraÅ¡ymas
+consolefonts/	Å¡riftai
+consoletrans/	kodÅ³ lentelÄ—s
+keytables/	klaviatÅ«ros iÅ¡dÄ—stymai
+scripts/	pora (gal bÅ«t) naudingÅ³, bet nebÅ«tinÅ³ skriptÅ³
+utilities/	Ä¯vairios programÄ—lÄ—s, padÄ—jusios man sukurti Å¡Ä¯ paketÄ…
 
 
-Ğriftai
+Å riftai
 =======
 
-Palaikomos kodø lentelës:
-  Lietuviğkos:
+Palaikomos kodÅ³ lentelÄ—s:
+  LietuviÅ¡kos:
     * Latin-7/ISO-8859-13/ISO-IR-179 -- tarptautinis bei Lietuvos standartas
     * Latin-4/ISO-8859-4/ISO-IR-110 -- senesnis tarptautinis standartas
     * Latin-6/ISO-8859-10/ISO-IR-157 -- senesnis tarptautinis standartas
-    * Baltic-RIM/cp1257 -- Windows naudojama lietuviğka lentelë
-    * cp775 -- DOS naudojama lietuviğka lentelë, oficialus standartas
-    * cp773 -- DOS naudojama lietuviğka lentelë
-    * cp771/KBL -- DOS naudojama lietuviğka/rusiğka lentelë
+    * Baltic-RIM/cp1257 -- Windows naudojama lietuviÅ¡ka lentelÄ—
+    * cp775 -- DOS naudojama lietuviÅ¡ka lentelÄ—, oficialus standartas
+    * cp773 -- DOS naudojama lietuviÅ¡ka lentelÄ—
+    * cp771/KBL -- DOS naudojama lietuviÅ¡ka/rusiÅ¡ka lentelÄ—
 
-  Rusiğkos:
-    * cp771/KBL -- DOS naudojama lietuviğka/rusiğka lentelë, rus. raidşiø
-      iğdëstymas atitinka cp866 (dar vadinamà alternatyviu)
-    * koi8-r -- Internet naudojama rusiğka lentelë
-    * cp1251 -- Windows naudojama rusiğka lentelë
+  RusiÅ¡kos:
+    * cp771/KBL -- DOS naudojama lietuviÅ¡ka/rusiÅ¡ka lentelÄ—, rus. raidÅ¾iÅ³
+      iÅ¡dÄ—stymas atitinka cp866 (dar vadinamÄ… alternatyviu)
+    * koi8-r -- Internet naudojama rusiÅ¡ka lentelÄ—
+    * cp1251 -- Windows naudojama rusiÅ¡ka lentelÄ—
 
   Kitos:
-    * Latin-1/ISO-8859-1/ISO-IR-100/cp819 -- daşniausiai naudojamas
+    * Latin-1/ISO-8859-1/ISO-IR-100/cp819 -- daÅ¾niausiai naudojamas
       tarptautinis standartas
-    * Latin-9/Latin-0/ISO-8859-15 -- naujesnë Latin-1 versija, pagarsëjusi
-      tuo, kad turi Euro valiutos şenklà
-    * cp437/IBM Extended ASCII -- DOS naudojama lentelë
+    * Latin-9/Latin-0/ISO-8859-15 -- naujesnÄ— Latin-1 versija, pagarsÄ—jusi
+      tuo, kad turi Euro valiutos Å¾enklÄ…
+    * cp437/IBM Extended ASCII -- DOS naudojama lentelÄ—
 
-Nepalaikomos lietuviğkos lentelës:
-  * cp772 -- neturiu iğdëstymo; lietuviğkø raidşiø padëtys atitinka cp775
-  * cp774 -- neturiu iğdëstymo; lietuviğkø raidşiø padëtys atitinka cp775
+Nepalaikomos lietuviÅ¡kos lentelÄ—s:
+  * cp772 -- neturiu iÅ¡dÄ—stymo; lietuviÅ¡kÅ³ raidÅ¾iÅ³ padÄ—tys atitinka cp775
+  * cp774 -- neturiu iÅ¡dÄ—stymo; lietuviÅ¡kÅ³ raidÅ¾iÅ³ padÄ—tys atitinka cp775
 
-Savaime suprantama, neámanoma visø ğiø lenteliø pilnai realizuoti vienu
-256 simboliø ğriftu.  Kai kurie reèiau vartojami simboliai nebus rodomi;
-kiti bus pakeisti panağiais á juos iğ iğvaizduos.  Lietuviğkos ir
-angliğkos (o taip pat ir rusiğkos raidës) ir dauguma skyrybos şenklø bus
-rodomi teisingai, kitø Europos ğaliø raidës gali bûti pakeistos jas
-atitinkanèiomis angliğkomis.
+Savaime suprantama, neÄ¯manoma visÅ³ Å¡iÅ³ lenteliÅ³ pilnai realizuoti vienu
+256 simboliÅ³ Å¡riftu.  Kai kurie reÄiau vartojami simboliai nebus rodomi;
+kiti bus pakeisti panaÅ¡iais Ä¯ juos iÅ¡ iÅ¡vaizduos.  LietuviÅ¡kos ir
+angliÅ¡kos (o taip pat ir rusiÅ¡kos raidÄ—s) ir dauguma skyrybos Å¾enklÅ³ bus
+rodomi teisingai, kitÅ³ Europos Å¡aliÅ³ raidÄ—s gali bÅ«ti pakeistos jas
+atitinkanÄiomis angliÅ¡komis.
 
-Norint vartoti èia pateiktus ğriftus, reikalingas console-tools paketas.
-Ğrifto uşkrovimas:
+Norint vartoti Äia pateiktus Å¡riftus, reikalingas console-tools paketas.
+Å rifto uÅ¾krovimas:
 
-  consolechars -f mg-8x16.psf -m <lentelë>
+  consolechars -f mg-8x16.psf -m <lentelÄ—>
 
-kur <lentelë> = lat7/lat4/lat6/cp1257/cp775/cp773/lat1/lat9/cp437
+kur <lentelÄ—> = lat7/lat4/lat6/cp1257/cp775/cp773/lat1/lat9/cp437
 
-Rusiğko ğrifto uşkrovimas:
+RusiÅ¡ko Å¡rifto uÅ¾krovimas:
 
-  consolechars -f mg-8x16.psf -m <lentelë>
+  consolechars -f mg-8x16.psf -m <lentelÄ—>
 
-kur <lentelë> = cp771/koi8-r/cp1251
+kur <lentelÄ—> = cp771/koi8-r/cp1251
 
-Paprasèiau yra naudoti pakete pateiktus skriptus, kurie kartu ájungs ir
-lietuviğkà klaviatûrà.
+PaprasÄiau yra naudoti pakete pateiktus skriptus, kurie kartu Ä¯jungs ir
+lietuviÅ¡kÄ… klaviatÅ«rÄ….
 
 
-Klaviatûra
+KlaviatÅ«ra
 ==========
 
-Klaviatûros iğdëstymai:
+KlaviatÅ«ros iÅ¡dÄ—stymai:
   * p - "Programmers"
   * b - "Baltic"
   * a - "AltGr"
   * s - "Sticky"
-  * z - "AŞERTY"
+  * z - "AÅ½ERTY"
 
 Vartojimo instrukcija:
 
-  loadkeys mglt<iğdëstymas>-<lentelë>.map
+  loadkeys mglt<iÅ¡dÄ—stymas>-<lentelÄ—>.map
 
-kur <lentelë> reiğkia tà patá, kà ir anksèiau.
-o <iğdëstymas> - raidë `p', `b', `a' arba `s'.
+kur <lentelÄ—> reiÅ¡kia tÄ… patÄ¯, kÄ… ir anksÄiau.
+o <iÅ¡dÄ—stymas> - raidÄ— `p', `b', `a' arba `s'.
 
 "Programmers"
 -------------
-Klaviatûros reşimas perjungiamas Alt+Shift klaviğais. Lietuviğkos
-klaivatûros reşime lietuviğkos raidës ávedamos naudojant `mirusá
-klaviğà' [`~]:
+KlaviatÅ«ros reÅ¾imas perjungiamas Alt+Shift klaviÅ¡ais. LietuviÅ¡kos
+klaivatÅ«ros reÅ¾ime lietuviÅ¡kos raidÄ—s Ä¯vedamos naudojant `mirusÄ¯
+klaviÅ¡Ä…' [`~]:
   `1 `2 `3 `4 `5 `6 `7 `8 `=
 arba
   `a `c `e `w `i `s `u `q `z
 
-Simbolá ` galite ávesti spausdami ` ir tarpo klaviğà, analogiğkai
-ávedamas simbolis ~.
+SimbolÄ¯ ` galite Ä¯vesti spausdami ` ir tarpo klaviÅ¡Ä…, analogiÅ¡kai
+Ä¯vedamas simbolis ~.
 
-Jei pas jus Win95 klaviatûra, reşimà galite perjungti spausdami LWin
-klaviğà vietoje Alt-Shift arba laikinai perjungti laikydami nuspaustà
-RWin klaviğà.
+Jei pas jus Win95 klaviatÅ«ra, reÅ¾imÄ… galite perjungti spausdami LWin
+klaviÅ¡Ä… vietoje Alt-Shift arba laikinai perjungti laikydami nuspaustÄ…
+RWin klaviÅ¡Ä….
 
-Dëmesio: bûkite atsargûs perjunginëdami klaviatûros reşimà su Alt-Shift:
+DÄ—mesio: bÅ«kite atsargÅ«s perjunginÄ—dami klaviatÅ«ros reÅ¾imÄ… su Alt-Shift:
 pirma paspauskite ir laikykite Alt, tada paspauskite ir atleiskite
-Shift, ir tik tada atleiskite Alt! Jei atleisite Alt prieğ atleisdami
-Shift, gali `ástrigti' Shift klaviğas. Şr. komentarus mgltp-*.map
+Shift, ir tik tada atleiskite Alt! Jei atleisite Alt prieÅ¡ atleisdami
+Shift, gali `Ä¯strigti' Shift klaviÅ¡as. Å½r. komentarus mgltp-*.map
 failuose.
 
-Lietuviğkø raidşiø ávedimas naudojant mirusá klaviğà ir skaièius
-ignoruoja CapsLock reşimà.
+LietuviÅ¡kÅ³ raidÅ¾iÅ³ Ä¯vedimas naudojant mirusÄ¯ klaviÅ¡Ä… ir skaiÄius
+ignoruoja CapsLock reÅ¾imÄ….
 
 "Baltic"
 --------
-Klaviatûros reşimas perjungiamas Alt+Shift klaviğais. Lietuviğkos
-klaivatûros reşime lietuviğkos raidës ávedamos naudojant skaièius:
+KlaviatÅ«ros reÅ¾imas perjungiamas Alt+Shift klaviÅ¡ais. LietuviÅ¡kos
+klaivatÅ«ros reÅ¾ime lietuviÅ¡kos raidÄ—s Ä¯vedamos naudojant skaiÄius:
   1 2 3 4 5 6 7 8 =
 
-Jei pas jus Win95 klaviatûra, reşimà galite laikinai perjungti laikydami
-nuspaustà LWin arba RWin klaviğà.
+Jei pas jus Win95 klaviatÅ«ra, reÅ¾imÄ… galite laikinai perjungti laikydami
+nuspaustÄ… LWin arba RWin klaviÅ¡Ä….
 
-Dëmesio: bûkite atsargûs perjunginëdami klaviatûros reşimà su Alt-Shift.
-Şr. aukğèiau apie tai.
+DÄ—mesio: bÅ«kite atsargÅ«s perjunginÄ—dami klaviatÅ«ros reÅ¾imÄ… su Alt-Shift.
+Å½r. aukÅ¡Äiau apie tai.
 
 "AltGr"
 --------
-Klaviatûros reşimas perjungiamas laikant nuspaustà LWin arba RWin klaviğà
-(jie atlieka AltGr vaidmená). Lietuviğkos
-klaivatûros reşime lietuviğkos raidës ávedamos naudojant skaièius arba
+KlaviatÅ«ros reÅ¾imas perjungiamas laikant nuspaustÄ… LWin arba RWin klaviÅ¡Ä…
+(jie atlieka AltGr vaidmenÄ¯). LietuviÅ¡kos
+klaivatÅ«ros reÅ¾ime lietuviÅ¡kos raidÄ—s Ä¯vedamos naudojant skaiÄius arba
 raides:
   1 2 3 4 5 6 7 8 =
   a c e w i s u q z
 
-Jei pas nëra Win95 klaviatûros, teks pasiredaguoti mglta-*.map failus
-ir nurodyti, kad değinys Alt klaviğas bûtø laikomas AltGr'u.
+Jei pas nÄ—ra Win95 klaviatÅ«ros, teks pasiredaguoti mglta-*.map failus
+ir nurodyti, kad deÅ¡inys Alt klaviÅ¡as bÅ«tÅ³ laikomas AltGr'u.
 
 "Sticky"
 --------
-Primena "AltGr", tik klaviatûros reşimà galima laikinai (vienam klaviğo
+Primena "AltGr", tik klaviatÅ«ros reÅ¾imÄ… galima laikinai (vienam klaviÅ¡o
 paspaudimui) perjungti nuspaudus [`~], taigi jis primena ir "Programmers"
-iğdëstymà.
+iÅ¡dÄ—stymÄ….
 
-Skirtumas: jei spausite [`~] [Shift]+raidë, nesuveiks, teks pirma nuspausti
-Shift ir laikyti já spaudşiant [`~] ir raidæ.
+Skirtumas: jei spausite [`~] [Shift]+raidÄ—, nesuveiks, teks pirma nuspausti
+Shift ir laikyti jÄ¯ spaudÅ¾iant [`~] ir raidÄ™.
 
-Jei pas nëra Win95 klaviatûros, teks pasiredaguoti mglts-*.map failus
-ir nurodyti, kad değinys Alt klaviğas bûtø laikomas AltGr'u (t.y. iğmesti
-komentaro pradşios simbolá vienoje eilutëje).
+Jei pas nÄ—ra Win95 klaviatÅ«ros, teks pasiredaguoti mglts-*.map failus
+ir nurodyti, kad deÅ¡inys Alt klaviÅ¡as bÅ«tÅ³ laikomas AltGr'u (t.y. iÅ¡mesti
+komentaro pradÅ¾ios simbolÄ¯ vienoje eilutÄ—je).
 
-"AŞERTY"
+"AÅ½ERTY"
 --------
-Lietuviğka AŞERTY klaviatûra (senoviğka):
+LietuviÅ¡ka AÅ½ERTY klaviatÅ«ra (senoviÅ¡ka):
 
   ` ! " / ; : , . ? ( ) _ + \
-   à ş e r t y u i o p á ¥
-    a s d f g h j k l ø ë
-     z û c v b n m è ğ æ
+   Ä… Å¾ e r t y u i o p Ä¯ â€
+    a s d f g h j k l Å³ Ä—
+     z Å« c v b n m Ä Å¡ Ä™
 
   ~ 1 2 3 4 5 6 7 8 9 0 - = |
-   À Ş E R T Y U I O P Á ´
-    A S D F G H J K L Ø Ë
-     Z Û C V B N M È Ğ Æ
+   Ä„ Å½ E R T Y U I O P Ä® â€œ
+    A S D F G H J K L Å² Ä–
+     Z Åª C V B N M ÄŒ Å  Ä˜
 
-Nesu tikras, ar ğis iğdëstymas yra teisingas, nes pats niekada AŞERTY
+Nesu tikras, ar Å¡is iÅ¡dÄ—stymas yra teisingas, nes pats niekada AÅ½ERTY
 nenaudojau (ir nenaudosiu).
 
 
-Ádiegimas
+Ä®diegimas
 =========
 
-Red Hat ir kitoms RPM naudojanèioms distribucijoms
+Red Hat ir kitoms RPM naudojanÄioms distribucijoms
 --------------------------------------------------
 
-Paprasèiausia atsisiøsti ir ádiegti lit-con-0.99.7-1.noarch.rpm paketà.
-Po to galite árağyti á /etc/sysconfig/keyboard failà eilutæ
+PaprasÄiausia atsisiÅ³sti ir Ä¯diegti lit-con-0.99.7-1.noarch.rpm paketÄ….
+Po to galite Ä¯raÅ¡yti Ä¯ /etc/sysconfig/keyboard failÄ… eilutÄ™
 
 KEYTABLE=mgltp-lat7
 
-(arba kurá nors kità jums patinkantá variantà).  Jei pas jus Red Hat 6.0
-ar naujesnë, árağykite á /etc/sysconfig/i18n failà (jei jo nëra --
+(arba kurÄ¯ nors kitÄ… jums patinkantÄ¯ variantÄ…).  Jei pas jus Red Hat 6.0
+ar naujesnÄ—, Ä¯raÅ¡ykite Ä¯ /etc/sysconfig/i18n failÄ… (jei jo nÄ—ra --
 sukurkite) eilutes
 
 SYSFONT=mg-8x16
 SYSFONTACM=lat7
 
-(vël galite rinktis kità variantà).  Senesnëse Red Hat versijose turbût
-teks pasiredaguoti /etc/rc.d/rc.local ir ten ádëti eilutæ
+(vÄ—l galite rinktis kitÄ… variantÄ…).  SenesnÄ—se Red Hat versijose turbÅ«t
+teks pasiredaguoti /etc/rc.d/rc.local ir ten Ä¯dÄ—ti eilutÄ™
 
 consolechars -f mg-8x16 -m lat7
 
@@ -192,72 +192,72 @@ consolechars -f mg-8x16 -m lat7
 Kitoms distribucijoms
 ---------------------
 
-Iğpakuokite lit-con-0.99.7.tar.gz failà á kurá nors katalogà (tarkime,
-/opt arba /usr/local/src).  Áeikite á katalogà lit-con-0.99.7 ir
+IÅ¡pakuokite lit-con-0.99.7.tar.gz failÄ… Ä¯ kurÄ¯ nors katalogÄ… (tarkime,
+/opt arba /usr/local/src).  Ä®eikite Ä¯ katalogÄ… lit-con-0.99.7 ir
 surinkite
 
   make install
 
-Galite uşkrauti ğriftà ir klaviatûros iğdëstymà iğ inicializacijos
-failø (Slackware distribucijoje tai /etc/rc.d/rc.font ir rc.keymap).
-Kaip tai daryti şr. pavyzdiniuose skriptuose.
+Galite uÅ¾krauti Å¡riftÄ… ir klaviatÅ«ros iÅ¡dÄ—stymÄ… iÅ¡ inicializacijos
+failÅ³ (Slackware distribucijoje tai /etc/rc.d/rc.font ir rc.keymap).
+Kaip tai daryti Å¾r. pavyzdiniuose skriptuose.
 
 
-Rankinë instaliacija
+RankinÄ— instaliacija
 --------------------
 
-Prisiloginkite kaip `root' ir nukopijuokite failus iğ consolefonts/
-pakatalogio á /usr/lib/kbd/consolefonts/, iğ consoletrans/ á
-/usr/lib/kbd/consoletrans/, iğ keytables/ á /usr/lib/kbd/keytables/, o
-iğ scripts/ (jei norite) á /usr/bin/ (arba, jei naudojate RedHat
-distribucijà, á ~/bin/).
+Prisiloginkite kaip `root' ir nukopijuokite failus iÅ¡ consolefonts/
+pakatalogio Ä¯ /usr/lib/kbd/consolefonts/, iÅ¡ consoletrans/ Ä¯
+/usr/lib/kbd/consoletrans/, iÅ¡ keytables/ Ä¯ /usr/lib/kbd/keytables/, o
+iÅ¡ scripts/ (jei norite) Ä¯ /usr/bin/ (arba, jei naudojate RedHat
+distribucijÄ…, Ä¯ ~/bin/).
 
-Galite uşkrauti ğriftà ir klaviatûros iğdëstymà iğ inicializacijos
-failø (Slackware distribucijoje tai /etc/rc.d/rc.font ir rc.keymap).
-Kaip tai daryti şr. pavyzdiniuose skriptuose.
+Galite uÅ¾krauti Å¡riftÄ… ir klaviatÅ«ros iÅ¡dÄ—stymÄ… iÅ¡ inicializacijos
+failÅ³ (Slackware distribucijoje tai /etc/rc.d/rc.font ir rc.keymap).
+Kaip tai daryti Å¾r. pavyzdiniuose skriptuose.
 
 
 Skriptai
 ========
 
-Kad nereikëtø atmintinai ásiminti vartojimo komandø, èia pateikti
-skriptai visoms lentelëms.  Geriausia juos nusikopijuoti á ~/bin arba
+Kad nereikÄ—tÅ³ atmintinai Ä¯siminti vartojimo komandÅ³, Äia pateikti
+skriptai visoms lentelÄ—ms.  Geriausia juos nusikopijuoti Ä¯ ~/bin arba
 /usr/local/bin.
 
 
-Trûkûmai
+TrÅ«kÅ«mai
 ========
 
-Skriptuose yra árağytas klaviatûros iğdëstymas; nepatogu já keisti
-visuose skriptuose iğ eilës (nebent vartotojas pats susiprastø pakeisti
+Skriptuose yra Ä¯raÅ¡ytas klaviatÅ«ros iÅ¡dÄ—stymas; nepatogu jÄ¯ keisti
+visuose skriptuose iÅ¡ eilÄ—s (nebent vartotojas pats susiprastÅ³ pakeisti
 scripts/template*.in ir paleisti `make').
 
-Nëra klaviatûros iğdëstymø rusiğkoms lentelëms.  Be to, nëra kaip ávesti
-ávairiø kitø rodomø simboliø.
+NÄ—ra klaviatÅ«ros iÅ¡dÄ—stymÅ³ rusiÅ¡koms lentelÄ—ms.  Be to, nÄ—ra kaip Ä¯vesti
+Ä¯vairiÅ³ kitÅ³ rodomÅ³ simboliÅ³.
 
 Nepalaikomas senesnis kbd paketas.
 
-Ğriftai nëra pilni.
+Å riftai nÄ—ra pilni.
 
 
 Kitos programos
 ===============
 
-Jei pas jus Red Hat arba Mandrake distribucija, á /etc/sysconfig/i18n, o
-jei kita -- kur nors á /etc/profile ar pan. árağykite
+Jei pas jus Red Hat arba Mandrake distribucija, Ä¯ /etc/sysconfig/i18n, o
+jei kita -- kur nors Ä¯ /etc/profile ar pan. Ä¯raÅ¡ykite
 
   LC_CTYPE=lt_LT
 
 bash
 ----
-Ádëkite ğias eilutes á ~/.inputrc failà:
+Ä®dÄ—kite Å¡ias eilutes Ä¯ ~/.inputrc failÄ…:
   set meta-flag on
   set convert-meta off
   set output-met on
 
 less
 ----
-Ádëkite tokià eilutæ á /etc/profile:
+Ä®dÄ—kite tokiÄ… eilutÄ™ Ä¯ /etc/profile:
   export LESSCHARSET="dos"
 
 mc (Midnight Commander)
@@ -268,32 +268,32 @@ bits input.
 TeX ir LaTeX
 ------------
 Pasidairykite http://www.vtex.lt/tex/ puslapyje. Ten, tiesa, sunku
-susigaudyti ir susitvarkyti, ypaè dël to, kad viskas skirta DOS'ui, o
-ne Linux'ui, bet man tai pavyko. Aprağymà turëtumëte rasti Alberto
+susigaudyti ir susitvarkyti, ypaÄ dÄ—l to, kad viskas skirta DOS'ui, o
+ne Linux'ui, bet man tai pavyko. ApraÅ¡ymÄ… turÄ—tumÄ—te rasti Alberto
 Agejevo Lietuviskai-HOWTO: http://ieva.maf.vu.lt/~alga/
 
 
-Pasiûlymai/pageidavimai/pataisymai
+PasiÅ«lymai/pageidavimai/pataisymai
 ==================================
 
-Siøskite juos man: <marius@gedmin.as>.
-Lauksiu atsiliepimø!
+SiÅ³skite juos man: <marius@gedmin.as>.
+Lauksiu atsiliepimÅ³!
 
 
 Kiti
 ====
-Kiek şinau, Rièardas Èepas pirmasis paruoğë lituanizacijos paketà:
+Kiek Å¾inau, RiÄardas ÄŒepas pirmasis paruoÅ¡Ä— lituanizacijos paketÄ…:
 http://www.angelfire.com/me/rch/ll.html
 Paketas skirtas Latin-4 ir UTF-8 kodavimams, apima daugiau nei vien
-konsolës klaviarûrà bei ğrifus (dar ten rasite X Window System lituanizacijà
-bei patch'à Netscape Navigator'iui).
+konsolÄ—s klaviarÅ«rÄ… bei Å¡rifus (dar ten rasite X Window System lituanizacijÄ…
+bei patch'Ä… Netscape Navigator'iui).
 
-Girdëjau, kad kaşkà panağaus galima rasti
+GirdÄ—jau, kad kaÅ¾kÄ… panaÅ¡aus galima rasti
 ftp://ftp.vdu.lt/pub/Linux/lt/linux-lith.tgz
 
-Kaşkoká daiktà x-litwin pavadinimu galima rasti
+KaÅ¾kokÄ¯ daiktÄ… x-litwin pavadinimu galima rasti
 http://www.linux.lt/
-Deja, source'ø ten nëra.
+Deja, source'Å³ ten nÄ—ra.
 
 Alberto Agejevo lituanizacijos HOWTO:
 http://ieva.maf.vu.lt/~alga/

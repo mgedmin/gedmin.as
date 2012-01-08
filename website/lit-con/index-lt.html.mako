@@ -23,9 +23,9 @@ Linux konsolei.</p>
 
 <p> Atsisiųsti</p>
 <ul>
-<li><a href="README.lt" charset="windows-1257">README (lietuviškai)</a> </li>
+<li><a href="README.lt">README (lietuviškai)</a> </li>
 <li><a href="README.fonts">README.fonts (angliškai)</a> </li>
-<li><a href="README.keymaps">README.fonts (angliškai)</a> </li>
+<li><a href="README.keymaps">README.keymaps (angliškai)</a> </li>
 <li><a href="lit-con-0.99.7-1.noarch.rpm">lit-con-0.99.7-1.noarch.rpm (68K)</a> </li>
 <li><a href="lit-con-0.99.7-1.src.rpm">lit-con-0.99.7-1.src.rpm (40K)</a> </li>
 <li><a href="lit-con-0.99.7.tar.gz">lit-con-0.99.7.tar.gz (36K)</a> </li>
