@@ -85,6 +85,13 @@ def get_cur_lang():
 
 
 @expose()
+def include(filename, charset='UTF-8'):
+    cur_template = bf.template_context.template_name
+    filename = os.path.join(os.path.dirname(cur_template), filename)
+    return open(filename).read().decode(charset)
+
+
+@expose()
 def get_body(lang):
     cur_template = bf.template_context.template_name
     new_template = os.path.join(os.path.dirname(cur_template),
@@ -101,7 +108,6 @@ def post_build():
         if not os.path.exists(filename):
             log.info('Creating symlink %s' % filename)
             os.symlink('index-%s.html' % site.default_lang, filename)
-    check_site_map_completeness()
 
 
 #
@@ -113,18 +119,31 @@ site.map = '''
         about/
         study/
           * python/
-                slides/
-                2004/
-                2005/
+              * slides/
+              * 2005/
+                  * slides/
+              * 2004/
+                  * lecture1
+                  * lecture2
+                  * lecture3
+                  * lecture4
+                  * lecture5
+                  * lecture6
+                  * lecture7
+                  * lecture8
+                  * lecture9
           * icpc/
-                submit/
               * 2003a/
               * 2003b/
               * 2004a/
               * 2004b/
+              * atranka2005/
+              * atranka2006/
+              * algorithms/
+              * analysis/
+              * dynamic-programming/
           * cna/
               * advice/
-              * results/
               * 2005/
           * inf/
           * inf98/
@@ -175,6 +194,16 @@ site.excluded_from_site_map = [
     'av',
     'books',
     'tmp',
+    # hidden pages
+    'study/python/students',
+    'study/python/students/by_group',
+    'study/python/2005/students',
+    'study/icpc/seminaras',
+    'study/icpc/submit',
+    # no index-{lt,en}.html, we use a real index.html there
+    'study/icpc/atranka2005/nuotraukos',
+    'study/cna/results',
+    'study/cna/2005/results',
 ]
 
 
@@ -336,6 +365,10 @@ def get_site_map_root():
     if 'site_map_root' not in bf.template_context:
         bf.template_context.site_map_root = parse_site_map(site.map)
     return bf.template_context.site_map_root
+
+
+def pre_build():
+    check_site_map_completeness()
 
 
 def check_site_map_completeness():
