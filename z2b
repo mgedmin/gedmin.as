@@ -39,7 +39,10 @@ def parse_props(filename):
             # TODO: saner type conversion
 
             if type == 'boolean':
-                value = int(value)
+                if value in ('True', 'False'):
+                    value = (value == 'True')
+                else:
+                    value = int(value)
             elif type == 'int':
                 value = int(value)
             elif type == 'string':
