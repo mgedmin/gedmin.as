@@ -1,0 +1,21 @@
+We have a useful function for evaluating functions at a series of points.
+It takes four arguments: the function to evaluate, and the range of x values
+(min, max, step):
+
+    >>> from testdemo import points
+
+    >>> def show(points):
+    ...     for (x, y) in points:
+    ...         if y is None:
+    ...             print '(%.2f, None)' % x
+    ...         else:
+    ...             print '(%.2f, %.2f)' % (x, y)
+
+    >>> show(points('x', 0, 10, 2))   # doctest: +REPORT_NDIFF
+    (0.00, 0.00)
+    (2.00, 2.00)
+    (4.00, 4.00)
+    (6.00, 6.00)
+    (8.00, 8.00)
+    (10.00, 10.00)
+

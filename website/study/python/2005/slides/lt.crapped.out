@@ -1,0 +1,72 @@
+<h2>Skaidrės</h2>
+
+<p>Kol kas čia guli tik <a href="http://member.wide.ad.jp/wg/mgp/">MagicPoint</a> pradiniai failai.</p>
+
+<p>Paveiksliukai, naudojami bendrai</p>
+<ul>
+  <li tal:repeat="name python:['vu-logo.png', 'logo.gif']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>1 paskaita (įžanga)</h3>
+
+<ul>
+  <li tal:repeat="name python:['intro.mgp']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>2 paskaita</h3>
+
+<ul>
+  <li tal:repeat="name python:['lecture1.mgp']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>3 paskaita</h3>
+
+<ul>
+  <li tal:repeat="name python:['lecture2.mgp']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>4 paskaita</h3>
+
+<ul>
+  <li tal:repeat="name python:['lecture3.mgp']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>5 paskaita</h3>
+
+<ul>
+  <li tal:repeat="name python:['lecture4.mgp']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>6 paskaita (standartinė biblioteka)</h3>
+
+<ul>
+  <li tal:repeat="name python:['lecture5.mgp', 'l5filter.py']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>7 paskaita (protokolai, iteratoriai, generatoriai)</h3>
+
+<ul>
+  <li tal:repeat="name python:['lecture6.mgp', 'dont.png', 'rubber_duck_quacks.png']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<h3>8 paskaita (2005-10-25: gijos ir procesai)</h3>
+
+<ul>
+  <li tal:repeat="name python:['lecture7.mgp', 'concurrency-ddj.gif']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
+
+<p>Kodo pavyzdžiai</p>
+
+<ul>
+  <li tal:repeat="name python:['pavyzdys.py', 'kitas.py', 'processdemo.py', 'callerdemo.py', 'forkdemo.py', 'subprocessdemo.py']">
+    <a tal:attributes="href name" tal:content="name" /></li>
+</ul>
