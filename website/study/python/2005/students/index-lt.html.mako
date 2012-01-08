@@ -20,22 +20,26 @@ pasirašiau.</p>
 
 <table class="simple">
   <tr><th class="student">Studentas</th><th>1</th><th>2</th><th>3</th><th class="proj" title="Projektukas">P</th><th class="test">Testukas</th><th class="final">Įskaita</th></tr>
-<tr tal:repeat="row here/list" tal:attributes="class python:['even', 'odd'][repeat['row'].even()]">
-  <td tal:content="row/name">Vardas Pavardė</td>
-  <tal:loop repeat="uzd python:[row[taskid] for taskid in ['1', '2', '3', 'projektukas', 'testukas', 'iskaita']]">
-  <td style="color:green" class="center" tal:condition="uzd/done" tal:attributes="title uzd/description">+</td>
-  <tal:if_not_done condition="not:uzd/done">
-  <td style="color:gray" class="center" tal:condition="uzd/chosen" tal:attributes="title uzd/description">-</td>
-  <tal:if_not_chosen condition="not:uzd/chosen">
-  <td style="color:red" class="center" tal:condition="uzd/should_choose">&#183;</td>
-  <td style="color:red" class="center" tal:condition="not:uzd/should_choose"></td>
-  </tal:if_not_chosen>
-  </tal:if_not_done>
-  </tal:loop>
+% for n, row in enumerate(py_students()):
+<tr class="${['odd', 'even'][n % 2]}">
+  <td title="${row.fullinfo}">${row.name}</td>
+%     for uzd in row.uzd:
+%         if uzd.done:
+  <td style="color:green" class="center" title="uzd/description">+</td>
+%         elif uzd.chosen:
+  <td style="color:gray" class="center" title="uzd/description">-</td>
+%         elif uzd.should_choose:
+  <td style="color:red" class="center">&#183;</td>
+%         else:
+  <td style="color:red" class="center"></td>
+%         endif
+%     endfor
 </tr>
+% endfor
 </table>
 
-<p tal:define="total here/totals">
-  Studentų: <span tal:replace="total/students" /> <br />
-  Viską atsiskaitė: <span tal:replace="total/passed" />
+<% total = py_student_totals() %>
+<p>
+  Studentų: ${total.students} <br />
+  Viską atsiskaitė: ${total.passed}
 </p>
