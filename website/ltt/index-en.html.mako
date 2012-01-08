@@ -71,7 +71,7 @@ Probability   Charset                                      Seen characters
 <blockquote class="example"><pre class="small">
 <strong>$ ltt</strong>
 Lithuanian Text Tool version 0.9.0
-Copyright (c) 1999-2001 Marius Gedminas &lt;mgedmin@b4net.lt&gt;
+Copyright (c) 1999-2001 Marius Gedminas &lt;<del title="New email: marius@gedmin.as">mgedmin@b4net.lt</del>&gt;
 This is Free Software.  See the GNU General Public Licence for details.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 Try to autodetect charset:
