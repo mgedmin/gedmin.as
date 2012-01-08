@@ -1,0 +1,55 @@
+<html tal:define="fn request/fn">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title tal:content="template/title">The title</title>
+  <link rel="stylesheet" type="text/css" href="http://mg.b4net.lt/style.css" />
+  <style type="text/css">
+    table input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      margin: 0;
+      padding: 1px;
+    }
+    table tr {
+      margin: 0;
+      padding: 0;
+    }
+    table.simple td {
+      margin: 0;
+      padding: 0;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+
+  <h2><span tal:replace="here/title_or_id">content title or id</span>
+      <span tal:condition="template/title"
+            tal:replace="template/title">optional template id</span></h2>
+
+  <form action="" method="POST"
+        tal:define="status python:here.editCSVupdate(fn)">
+
+  <input type="hidden" name="fn" tal:attributes="value fn" />
+
+  <p tal:content="status">Status msg</p>
+
+  <table class="simple" style="width: 150%">
+    <tr tal:repeat="row python:here.parseCSV(fn)"
+        tal:attributes="class python:['even', 'odd'][repeat['row'].even()]">
+      <td tal:repeat="cell row">
+        <input type="text"
+               tal:attributes="name string:c${repeat/row/index}.${repeat/cell/index};
+                               value cell" />
+      </td>
+    </tr>
+  </table>
+
+  <div style="margin-top: 1em">
+    <input type="submit" name="SAVE" accesskey="S" value="Save" />
+  </div>
+</form>
+
+</body>
+</html>

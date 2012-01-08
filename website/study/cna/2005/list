@@ -1,0 +1,23 @@
+## Script (Python) "list"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=gr, pogr=None
+##title=
+##
+rows = container.parseCSV('data%sgr.csv' % gr)[1:]
+result = []
+for cells in rows:
+    # 0: eil nr, 1: stud paz, 2: vardas, 3: username, 4: uzduotis, 5: pogrupis, 6: 1uzd, 7: data, 8: pastabos, 9: 2uzd, 10:, 11:, 12: 3uzd, ...
+    cells = [s.strip() for s in cells]
+    while len(cells) <= 12:
+        cells.append('')
+    if pogr and str(pogr) != cells[5]:
+        continue
+    uzd1 = cells[6] and '+' or ''
+    uzd2 = cells[9] and '+' or ''
+    uzd3 = cells[12] and '+' or ''
+    result.append({'name': cells[2].strip(), 'task': cells[4].strip(), 'uzd1': uzd1, 'uzd2': uzd2, 'uzd3': uzd3})
+return result

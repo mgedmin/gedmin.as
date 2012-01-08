@@ -1,0 +1,26 @@
+Eilės nr.,Stud. paž. nr.,Vardas ir pavardė,Naudotojo vardas,Užduotis,Pogrupis,1uzd,data,pastabos,2uzd,data,pastabos,3uzd,data,pastabos
+1.,0311126 ,Pavel Afanasjev,paaf3314,11 (pirmas variantas),1, 
+2.,0311130 ,Sergej Andrejev,sean3322,10,1,1.5+0.3-0.2,2005-02-17,be diagramų,1.5-0.3+0.1+0.7,2005-05-19,multiklientiškumas; sirgo nuo balandžio 14 iki gegužės 5 d parodė pažymas (pridėjau +0.7 nes tikiu kad būtų 2 ir 3 atsiskaitęs anksčiau kaip ir 1),1,2005-05-19
+3.,0212225 ,Saulius Andriulaitis,saan2755, ,1, 
+4.,0311156 ,Konstantin Bielko,kobi3371, ,1, 
+5.,0311175 ,Alvys Davidavičius,alda3409,14,1,1.5-0.5,2005-05-12,Java,1.5-0.2+0.1,2005-05-12,C++ multiklientiškumas,1+0.1,2005-05-12
+6.,0311187 ,Mindaugas Dvaronaitis,midv3430,8,1,1.5-0.2+0.2,2005-04-21,atsiskaitymą priėmė kolega; "už gerą darbą",1.5,2005-04-28,Java,1+0.3-0.1,2005-04-28,kreivai veikia
+7.,0311200 ,Saulius Grigaitis,sagr3466,4,1,1.5+0.3 ,2005-03-03,,1.5+0.3,2005-03-17,atsiskaitymą priėmė kolega magistrantas,1+0.3,2005-03-31,atsiskaitymą priėmė kolega magistrantas
+8.,0311208 ,Rytis Guntulis,rygu3480,11 (antras variantas),1,1.5+0.1 ,2005-03-31,atsiskaitymą priėmė kolega magistrantas; Java,1.5-0.3+0.1,2005-05-19,C++; multiklientiškumas; graži programa; tradicinė recv klaida,1,2005-05-19,C/Java
+9.,0311218 ,Darius Jonauskas,dajo3518,19,1,1.5-0.7,2005-05-26,atsiskaitymą priėmė kolega,1.5-0.4-0.2,2005-05-26,atsiskaitymą priėmė kolega; -0.2 už nežinojimą,1-0.1-0.1,2005-05-26,atsiskaitymą priėmė kolega; -0.1 už nežinojimą
+10.,0311230 ,Marius Kiselis,maki3568,6,1,1.5,2005-04-07,atsiskaitymą priėmė kolega,1.5,2005-04-28,Java,1+0.3,2005-04-28
+11.,0311260 ,Dainius Linga,dali3652,(chat),1,1.5-0.1+0.2,2005-04-14,atsiskaitymą priėmė kolega; "už gerą darbą",1.5,2005-04-28,atsiskaitymą priėmė kolega,1+0.3,2005-04-28,atsiskaitymą priėmė kolega
+12.,0311270 ,Valentinas Marčenkovas,vama3693,7,1,1.5-0.8+0.1,2005-06-02,programa solidi
+13.,0311279 ,Vytautas Mereckis,vyme3710,(vėžliukai),1,1.5-0.5,2005-04-07,atsiskaitymą priėmė kolega; neįgyvendino visų reikalavimų; trūkumai diagramoje,1.5-0.1,2005-04-28,atsiskaitymą priėmė kolega; -0.1 už trūkumus diagramoje,1+0.3,2005-04-28,atsiskaitymą priėmė kolega
+14.,0311297 ,Aleksandr Naumčik,alna3754,3 (stomatologo kabinetas),2,1.5-0.3-0.1,2005-04-28,atsiskaitymą priėmė kolega magistrantas; nesugebėjo paaiškinti kai kurių vietų,1.5,2005-04-28,Java,1-0.2,2005-05-19,atsiskaitymą priėmė kolega; nesugebėjo paaiškinti kai kurių vietų
+15.,0311311 ,Tomas Paulavičius,topa3780,(gėrimų automatas),2,1.5-0.1,2005-04-07,atsiskaitymą priėmė kolega; nesugebėjo paaiškinti sprendimo,1.5+0.2,2005-04-14,atsiskaitymą priėmė kolega,1+0.3-0.2,2005-04-28,atsiskaitymą priėmė kolega magistrantas; nesugebėjo paaiškinti kai kurių vietų
+16.,0311327 ,Pavel Ponomariov,papo3814,15,2,1.5+0.1,2005-03-31,protokolas arch-dependent,1.5+0.1,2005-04-21,Java,1+0.3,2005-04-28
+17.,0311337 ,Arnas Ragauskas,arra3834,(kasos aparatas) ,2, 
+18.,0311356 ,Šarūnas Saulis,sasa3876,1,2,1.5-0.2+0.1-0.1,2005-04-21,multiklientiškumas; pasitiki send/recv,1.5-0.2,2005-05-12,Java,1+0.1,2005-05-12,C/Java
+19.,0311367 ,Tomas Stamulis,tost3906,20 ,2,1.5-0.5-0.2,2005-05-12,atsiskaitymą priėmė kolega; nesugebėjo paaiškinti kai kurių vietų,1.5-0.2,2005-05-12
+20.,0311403 ,Zigmas Urbaitis,ziur3959,(žaidimas su skaičiais),2,1.5-0.1+0.1,2005-04-14,atsiskaitymą priėmė kolega: multiklientiškumas,1.5+0.1,2005-04-21,atsiskaitymą priėmė kolega,1+0.3-0.2,2005-04-28,atsiskaitymą priėmė kolega; C/Java; nesugebėjo paaiškinti kai kurių vietų
+21.,0311420 ,Audrius Viskanta,auvi4010,5 ,2,1.5-0.1-0.1,2005-04-14,atsiskaitymą priėmė kolega: nelabai mokėjo paaiškinti,1.5,2005-04-28,Java,1+0.3-0.1,2005-04-28,kreivokai truputį veikia
+22.,0311424 ,Ieva Zareckaitė,ieza4028,9,2,1.5+0.1 ,2005-03-31,,1.5+0.3,2005-04-07,atsiskaitymą priėmė kolega,1+0.3,2005-04-28
+23.,0311165 ,Mindaugas Čapas,mica4040,21,2,1.5-0.3-0.1,2005-04-28,C; tradicinė klaida su read() gražinamu baitų skaičiumi,1.5-0.2,2005-05-12,atsiskaitymą priėmė kolega,1,2005-05-19
+24.,0311384 ,Pavel Šepeliov,pase4070,2,2, 
+25.,0311392 ,Rasa Šličytė,rasl4085,12,2,1.5-0.7-0.1,2005-05-26,C; tradicinė recv klaida
