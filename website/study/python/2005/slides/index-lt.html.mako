@@ -2,97 +2,90 @@
 <%def name="title()">Skaidrės</%def>
 <%def name="short_title()">slides</%def>
 
+<%def name="list(items)">
+% for name in items:
+  <li><a href="${name}">${name}</a></li>
+% endfor
+</%def>
+
 <h2>Skaidrės</h2>
 
 <h3>1 paskaita (2005-09-06: įžanga)</h3>
 
 <ul>
-  <li tal:repeat="name python:['intro.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['intro.pdf'])}
 </ul>
 
 <h3>2 paskaita (2005-09-13: sintaksė)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture1.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture1.pdf'])}
 </ul>
 
 <h3>3 paskaita (2005-09-20: duomenų tipai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture2.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture2.pdf'])}
 </ul>
 
 <h3>4 paskaita (2005-09-27: automatizuotas testavimas)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture3.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture3.pdf'])}
 </ul>
 
 <h3>5 paskaita (2005-10-04: dokumentaciniai testai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture4.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture4.pdf'])}
 </ul>
 
 <h3>6 paskaita (2005-10-11: standartinė biblioteka)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture5.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture5.pdf'])}
 </ul>
 
 <h3>7 paskaita (2005-10-18: protokolai, iteratoriai, generatoriai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture6.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture6.pdf'])}
 </ul>
 
 <h3>8 paskaita (2005-10-25: gijos ir procesai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture7.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture7.pdf'])}
 </ul>
 
 <p>Kodo pavyzdžiai</p>
 
 <ul>
-  <li tal:repeat="name python:['pavyzdys.py', 'kitas.py', 'processdemo.py', 'callerdemo.py', 'forkdemo.py', 'subprocessdemo.py']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['pavyzdys.py', 'kitas.py', 'processdemo.py', 'callerdemo.py', 'forkdemo.py', 'subprocessdemo.py'])}
 </ul>
 
 <h3>9 paskaita (2005-11-08: debuginimas ir optimizavimas)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture8.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture8.pdf'])}
 </ul>
 
 <p>Kodo pavyzdžiai</p>
 
 <ul>
-  <li tal:repeat="name python:['labirintas.py', 'mandel.py']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['labirintas.py', 'mandel.py'])}
 </ul>
 
 <h3>10 paskaita (2005-11-15: dekoratoriai ir metaklasės)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture9.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture9.pdf'])}
 </ul>
 
 <h3>11 paskaita (2005-11-22: kurso apžvalga)</h3>
 
 <ul>
-  <li tal:repeat="name python:['summary.pdf']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['summary.pdf'])}
 </ul>
 
 
@@ -103,99 +96,85 @@ programa, skirta X Window System aplinkai.</p>
 
 <p>Paveiksliukai, naudojami bendrai</p>
 <ul>
-  <li tal:repeat="name python:['vu-logo.png', 'logo.gif']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['vu-logo.png', 'logo.gif'])}
 </ul>
 
 <h3>1 paskaita (2005-09-06: įžanga)</h3>
 
 <ul>
-  <li tal:repeat="name python:['intro.mgp']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['intro.mgp'])}
 </ul>
 
 <h3>2 paskaita (2005-09-13: sintaksė)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture1.mgp', 'l5filter.py']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture1.mgp', 'l5filter.py'])}
 </ul>
 
 <h3>3 paskaita (2005-09-20: duomenų tipai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture2.mgp']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture2.mgp'])}
 </ul>
 
 <h3>4 paskaita (2005-09-27: automatizuotas testavimas)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture3.mgp']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture3.mgp'])}
 </ul>
 
 <h3>5 paskaita (2005-10-04: dokumentaciniai testai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture4.mgp']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture4.mgp'])}
 </ul>
 
 <h3>6 paskaita (2005-10-11: standartinė biblioteka)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture5.mgp', 'l5filter.py']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture5.mgp', 'l5filter.py'])}
 </ul>
 
 <h3>7 paskaita (2005-10-18: protokolai, iteratoriai, generatoriai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture6.mgp', 'dont.png', 'rubber_duck_quacks.png']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture6.mgp', 'dont.png', 'rubber_duck_quacks.png'])}
 </ul>
 
 <h3>8 paskaita (2005-10-25: gijos ir procesai)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture7.mgp', 'concurrency-ddj.gif']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture7.mgp', 'concurrency-ddj.gif'])}
 </ul>
 
 <p>Kodo pavyzdžiai</p>
 
 <ul>
-  <li tal:repeat="name python:['pavyzdys.py', 'kitas.py', 'processdemo.py', 'callerdemo.py', 'forkdemo.py', 'subprocessdemo.py']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['pavyzdys.py', 'kitas.py', 'processdemo.py', 'callerdemo.py', 'forkdemo.py', 'subprocessdemo.py'])}
 </ul>
 
 <h3>9 paskaita (2005-11-08: debuginimas ir optimizavimas)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture8.mgp']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture8.mgp'])}
 </ul>
 
 <p>Kodo pavyzdžiai</p>
 
 <ul>
-  <li tal:repeat="name python:['labirintas.py', 'mandel.py']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['labirintas.py', 'mandel.py'])}
 </ul>
 
 <h3>10 paskaita (2005-11-15: dekoratoriai ir metaklasės)</h3>
 
 <ul>
-  <li tal:repeat="name python:['lecture9.mgp']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['lecture9.mgp'])}
 </ul>
 
 <h3>11 paskaita (2005-11-22: kurso apžvalga)</h3>
 
 <ul>
-  <li tal:repeat="name python:['summary.mgp']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['summary.mgp'])}
 </ul>
 
 <h3>12 paskaita (2005-11-29: PyGtk ir DB API demo)</h3>
@@ -203,8 +182,7 @@ programa, skirta X Window System aplinkai.</p>
 <p>Kodo pavyzdžiai</p>
 
 <ul>
-  <li tal:repeat="name python:['demo.py', 'gtk-sql-demo.glade']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['demo.py', 'gtk-sql-demo.glade'])}
 </ul>
 
 <h3>13 paskaita (2005-12-06: PyGame ir Twisted demo)</h3>
@@ -212,8 +190,7 @@ programa, skirta X Window System aplinkai.</p>
 <p>Kodo pavyzdžiai</p>
 
 <ul>
-  <li tal:repeat="name python:['tree.png', 'gui.py', 'server.py', 'client.py']">
-    <a tal:attributes="href name" tal:content="name" /></li>
+  ${self.list(['tree.png', 'gui.py', 'server.py', 'client.py'])}
 </ul>
 
 
