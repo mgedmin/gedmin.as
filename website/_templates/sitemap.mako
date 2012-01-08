@@ -10,7 +10,7 @@ ${next.body()}
 <%def name="node(node)">
 % if node:
 <li>
-  <a class="good" href="${node.url}">${node.title}</a>
+  <a class="good" href="${bf.config.site.url}/${node.url}">${node.title}</a>
 %     if node.children:
   <ul>
 %         for child in node.children:

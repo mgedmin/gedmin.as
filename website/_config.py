@@ -99,15 +99,19 @@ site.map = '''
     /
         about/
         study/
-            python/
+          * python/
+                slides/
                 2004/
-            icpc/
+                2005/
+          * icpc/
                 submit/
-                2003a/
-                2003b/
-                2004a/
-                2004b/
-            inf98/
+              * 2003a/
+              * 2003b/
+              * 2004a/
+              * 2004b/
+          * cna/
+          * inf/
+          * inf98/
                 ate/
                 disma/
                 disma2/
@@ -118,7 +122,6 @@ site.map = '''
                 physics/
                 pkpm/
                 itvv/
-            cna/
         denmark/
 
         palm/
@@ -151,6 +154,12 @@ site.map = '''
 
         sitemap/
 '''
+site.excluded_from_site_map = [
+    # incomplete pages not exposed to the public; don't warn
+    'av',
+    'books',
+    'tmp',
+]
 
 
 
@@ -203,11 +212,12 @@ def get_trail():
 
 class SiteMapNode(object):
 
-    def __init__(self, indent, name):
+    def __init__(self, indent, name, marked=False):
         self.indent = indent
         self.name = name
         self.children = []
         self.parent = None
+        self.marked = marked
 
     def getPath(self, lang):
         bits = []
@@ -254,14 +264,14 @@ class SiteMapNode(object):
 def parse_site_map(site_map):
     root = cur = None
     for line in site_map.splitlines():
-        name = line.strip()
+        name = line.strip('* ')
         if not name:
             if (cur and cur.parent and cur.parent.children
                 and cur.parent.children[-1] is not None):
                 cur.parent.children.append(None)
             continue
-        indent = len(line) - len(line.lstrip()) # haack
-        node = SiteMapNode(indent, name)
+        indent = len(line) - len(line.lstrip('* ')) # haack
+        node = SiteMapNode(indent, name, marked=('*' in line))
         if cur is None:
             root = cur = node
         else:
@@ -290,7 +300,7 @@ def check_site_map_completeness():
     for dirpath, dirnames, filenames in os.walk('.'):
         for lang in languages:
             filename = 'index-%s.html.mako' % lang
-            if filename in filenames:
+            if filename in filenames and dirpath[2:] not in site.excluded_from_site_map:
                 existing.add(os.path.join(dirpath, filename)[2:])
     not_in_site_map = existing - in_site_map
     for name in sorted(not_in_site_map):
