@@ -379,13 +379,15 @@ def get_subpages():
 #
 
 @expose()
-def get_mtime_str():
+def get_mtime_str(format='%Y-%m-%d', source=None):
     filename = bf.template_context.template_name
+    if source:
+        filename = os.path.join(os.path.dirname(filename), source)
     try:
         mtime = os.stat(filename).st_mtime
     except OSError:
         mtime = time.time()
-    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(mtime))
+    return time.strftime(format, time.localtime(mtime))
 
 
 #
@@ -701,9 +703,27 @@ def py_student_totals(source='tasks.txt'):
             n_all_done += 1
         if row['iskaita']['done']:
             n_passed += 1
-
     return Cache(
         students=n_students,
         done_all=n_all_done,
         passed=n_passed)
+
+
+@expose()
+def py_taken(taskid, source='tasks.txt'):
+    tasks = []
+    for persondata in py_tasks(source).values():
+        task = persondata.get(taskid, {}).get('description')
+        done = persondata.get(taskid, {}).get('done')
+        if task:
+            tasks.append((task, persondata['name'], done))
+    tasks.sort()
+    return [
+        Cache(
+            task=task,
+            student=name,
+            done=done,
+            done_suffix=(done and ' [+]' or ''),
+        ) for task, name, done in tasks
+    ]
 

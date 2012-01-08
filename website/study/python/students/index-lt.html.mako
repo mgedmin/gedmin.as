@@ -6,10 +6,13 @@
 
 <h2>Atsiskaitymai</h2>
 
-<p>Paskutinis atnaujinimas: <span tal:replace="python: here['tasks.txt'].bobobase_modification_time().strftime('%Y-%m-%d')">2005-01-23</span>.</p>
+##<p>Paskutinis atnaujinimas: ${get_mtime_str('%Y-%m-%d', 'tasks.txt')}.</p>
+<p>Paskutinis atnaujinimas: 2007-03-02.</p>
 
-<p tal:condition="nothing">Visiems, kurie turi pliusiuką įskaitos stulpelyje, žiniaraščiuose
+% if False:
+<p>Visiems, kurie turi pliusiuką įskaitos stulpelyje, žiniaraščiuose
 pasirašiau.</p>
+% endif
 
 <div style="float: right; margin: 0 em; 2em;">
   <h4>Paaiškinimas</h4>
@@ -22,45 +25,57 @@ pasirašiau.</p>
 
 <table class="simple">
   <tr><th class="student">Studentas</th><th>1</th><th>2</th><th>3</th><th class="proj" title="Projektukas">P</th><th class="test">Testukas</th><th class="final">Įskaita</th></tr>
-<tr tal:repeat="row here/list" tal:attributes="class python:['even', 'odd'][repeat['row'].even()]">
-  <td tal:content="row/name" tal:attributes="title row/fullinfo">Vardas Pavardė</td>
-  <tal:loop repeat="uzd python:[row[taskid] for taskid in ['1', '2', '3', 'projektukas', 'testukas', 'iskaita']]">
-  <td style="color:green" class="center" tal:condition="uzd/done" tal:attributes="title uzd/description">+</td>
-  <tal:if_not_done condition="not:uzd/done">
-  <td style="color:gray" class="center" tal:condition="uzd/chosen" tal:attributes="title uzd/description">-</td>
-  <tal:if_not_chosen condition="not:uzd/chosen">
-  <td style="color:red" class="center" tal:condition="uzd/should_choose">&#183;</td>
-  <td style="color:red" class="center" tal:condition="not:uzd/should_choose"></td>
-  </tal:if_not_chosen>
-  </tal:if_not_done>
-  </tal:loop>
+% for n, row in enumerate(py_students()):
+<tr class="${['odd', 'even'][n % 2]}">
+  <td title="${row.fullinfo}">${row.name}</td>
+%     for uzd in row.uzd:
+%         if uzd.done:
+  <td style="color:green" class="center" title="uzd/description">+</td>
+%         elif uzd.chosen:
+  <td style="color:gray" class="center" title="uzd/description">-</td>
+%         elif uzd.should_choose:
+  <td style="color:red" class="center">&#183;</td>
+%         else:
+  <td style="color:red" class="center"></td>
+%         endif
+%     endfor
 </tr>
+% endfor
 </table>
 
-<p tal:define="total here/totals">
-  Studentų: <span tal:replace="total/students" /> <br />
-  Visas užduotis atsiskaitė: <span tal:replace="total/done_all" /> <br />
-  Viską atsiskaitė (užduotis ir testuką): <span tal:replace="total/passed" />
+<% total = py_student_totals() %>
+<p>
+  Studentų: ${total.students} <br />
+  Visas užduotis atsiskaitė: ${total.done_all} <br />
+  Viską atsiskaitė (užduotis ir testuką): ${total.passed}
 </p>
 
 <h2 id="taken">Pasirinktos sąlygos</h2>
 
 <h3 id="taken1">1 užduotis</h3>
 <ul>
-  <li tal:repeat="task python:here.taken('1')" tal:attributes="title task/student" tal:content="task/task"></li>
+% for task in py_taken('1'):
+  <li title="${task.student}">${task.task}</li>
+% endfor
 </ul>
 
 <h3 id="taken2">2 užduotis</h3>
 <ul>
-  <li tal:repeat="task python:here.taken('2')" tal:attributes="title task/student" tal:content="task/task"></li>
+% for task in py_taken('2'):
+  <li title="${task.student}">${task.task}</li>
+% endfor
 </ul>
 
 <h3 id="taken3">3 užduotis</h3>
 <ul>
-  <li tal:repeat="task python:here.taken('3')" tal:attributes="title task/student" tal:content="task/task"></li>
+% for task in py_taken('3'):
+  <li title="${task.student}">${task.task}</li>
+% endfor
 </ul>
 
 <h3 id="takenP">Projektukas</h3>
 <ul>
-  <li tal:repeat="task python:here.taken('projektukas')" tal:attributes="title task/student" tal:content="task/task"></li>
+% for task in py_taken('projektukas'):
+  <li title="${task.student}">${task.task}</li>
+% endfor
 </ul>
