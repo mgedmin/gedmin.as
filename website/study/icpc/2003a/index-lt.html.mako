@@ -15,21 +15,21 @@ vedžiau aš. </p>
 <dl class="news">
 
 <dt>2003-02-05</dt> <dd>Pirmasis seminaras — trumpa įžangėlė.  Sprendėme
-užduotį <a href="Pages.pdf">Book Pages</a>.  Taip pat buvo padalinta dar pora
+užduotį <a href="../Pages.pdf">Book Pages</a>.  Taip pat buvo padalinta dar pora
 uždavinukų apšilimui: <a href="http://csc.smsu.edu/~rcjudge/potw/prob5.html">Fun with Numbers</a>, <a href="http://csc.smsu.edu/~rcjudge/potw/prob10.html">Text Justification</a>.
 </dd>
 
 <dt>2003-02-07</dt> <dd>Lankomumas nuostabus — du studentai (neskaitant manęs).
 Kadangi pirmąją užduotį išsprendėme visi trys, jos nenagrinėjome, o pradėjome
-spręsti naują — <a href="b-bracket.pdf">Brackets sequence</a>.  </dd>
+spręsti naują — <a href="../b-bracket.pdf">Brackets sequence</a>.  </dd>
 
 <dt>2003-02-12</dt> <dd>Klausytojų antplūdis.  Pakartojome apšilimą: visi
 sprendžia užduotis ir niekas jų netikrina.  Manau, sprendimo būdus paaiškinsiu
 kitą paskaitą, jei kam reikės paaiškinimo.  Nauji uždaviniai tiems, kas jau
-išsprendė Book Pages: <a href="problemSet_warmup.pdf">Fake tickets, Square
+išsprendė Book Pages: <a href="../problemSet_warmup.pdf">Fake tickets, Square
 Lottery bei Uncle Tom's Inherited Land</a>. </dd>
 
-<dt>2003-02-14</dt> <dd>Problema <a href="b-bracket.pdf">Brackets
+<dt>2003-02-14</dt> <dd>Problema <a href="../b-bracket.pdf">Brackets
 sequence</a> (vėl).  Šį kartą pašnekėjau apie dinaminį programavimą (16
 skyrius knygoje) bei jo pritaikymą sprendžiant Brackets.  Dinaminis
 programavimas — naudingas metodas tam tikrai optimizacijos uždavinių
@@ -50,14 +50,14 @@ artėja laikas pakalbėti apie grafus.  Beje, uždavinukas <a href="http://csc.s
 dinaminio programavimo pritaikymą, siūlau pasižiūrėti.  </dd>
 
 <dt>2003-02-28</dt> <dd>Giedrius paruošė paprastą uždavinuką iš grafų:
-<a href="indians.html">Indėnai</a>.  Pašnekėjau apie grafus bei išdėsčiau
+<a href="../indians.html">Indėnai</a>.  Pašnekėjau apie grafus bei išdėsčiau
 paiešką į plotį (Breadth-First Search) -- paprasčiausią algoritmą trumpiausiems
 keliams rasti.
 </dd>
 
 <dt>2003-03-05</dt> <dd>Nieko naujo: testavimai, sprendimai.</dd>
 
-<dt>2003-03-07</dt> <dd>Uždavinukas <a href="a-teams.htm">Team them up</a> —
+<dt>2003-03-07</dt> <dd>Uždavinukas <a href="../a-teams.htm">Team them up</a> —
 vienas iš sunkesnių.</dd>
 
 <dt>2003-03-12</dt> <dd>Išsprendžiau Team them up!  Dabar galėsiu sprendimą
@@ -65,15 +65,15 @@ paaiškinti.</dd>
 
 <dt>2003-03-14</dt> <dd>Lauksiu studentų iniciatyvos.</dd>
 
-<dt>2003-03-19</dt> <dd>Naujas uždavinukas -- <a href="Gossips.pdf">Gossip</a>.</dd>
+<dt>2003-03-19</dt> <dd>Naujas uždavinukas -- <a href="../Gossips.pdf">Gossip</a>.</dd>
 
-<dt>2003-03-21</dt> <dd>Naujas uždavinukas -- <a href="flip.html">Flip Game</a>.</dd>
+<dt>2003-03-21</dt> <dd>Naujas uždavinukas -- <a href="../flip.html">Flip Game</a>.</dd>
 
 <dt>2003-03-25</dt> <dd>Nieko įdomaus.</dd>
 
 <dt>2003-03-27</dt> <dd>Studentai nepasirodė.</dd>
 
-<dt>2003-04-02</dt> <dd>Uždavinukas <a href="d-wall.htm">Wall</a> (<a href="d-wall.pdf">PDF</a>).</dd>
+<dt>2003-04-02</dt> <dd>Uždavinukas <a href="../d-wall.htm">Wall</a> (<a href="../d-wall.pdf">PDF</a>).</dd>
 
 <dt>2003-04-04</dt> <dd>Paskaitos nebus.</dd>
 
@@ -101,6 +101,6 @@ paaiškinti.</dd>
 
 <dt>2003-05-16</dt> <dd>Nieko įdomaus.</dd>
 
-<dt>2003-05-21</dt> <dd>Naujas uždavinukas: <a href="forest.html">Forest</a></dd>
+<dt>2003-05-21</dt> <dd>Naujas uždavinukas: <a href="../forest.html">Forest</a></dd>
 
 </dl>

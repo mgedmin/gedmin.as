@@ -16,8 +16,8 @@ Seminaro trukmė — pusantros valandos.  Jį vedžiau aš. </p>
 
 <dt>2003-09-11</dt> <dd>Pirmasis seminaras (17 val., 11, 12 klasėse).
 Tiems, kurie čia pirmą kartą, siūlyčiau pasižiūrėti į lengvesnius uždavinukus
-apšilimui, pvz., <a href="Pages.pdf">Book Pages</a>.  Senbuviams siūlyčiau
-pabaigti spręsti <a href="forest.html">Forest</a>.
+apšilimui, pvz., <a href="../Pages.pdf">Book Pages</a>.  Senbuviams siūlyčiau
+pabaigti spręsti <a href="../forest.html">Forest</a>.
 </dd>
 
 <dt>2003-09-12</dt> <dd>Antrasis seminaras.  Lankomumas daug geresnis nei
@@ -31,7 +31,7 @@ Pora pastabų:
        failai yra "forest.in" ir "forest.out").  Į ekraną rašyti ar skaityti
        iš klaviatūros per tikras varžybas griežtai draudžiama.
   </li>
-  <li> Išsprendusiems Book Pages siūlyčiau pasižiūrėti <a href="d-wall.htm">Wall</a>.
+  <li> Išsprendusiems Book Pages siūlyčiau pasižiūrėti <a href="../d-wall.htm">Wall</a>.
   </li>
 </ul>
 </dd>
@@ -39,11 +39,11 @@ Pora pastabų:
 
 <dt>2003-09-17</dt> <dd>Oho, kiek žmonių.  Ir tai nepaisant mano 15 minučių
 pavėlavimo.
-Pašnekėjau apie <a href="analysis/index-lt.html">algoritmų analizę</a>.
+Pašnekėjau apie <a href="../analysis/index-lt.html">algoritmų analizę</a>.
 </dd>
 
-<dt>2003-09-18</dt> <dd>Pašnekėjau apie <a href="dynamic-programming/index-lt.html">dinaminį programavimą</a>, naujokams
-daviau spręsti <a href="b-bracket.pdf">Brackets sequence</a>.
+<dt>2003-09-18</dt> <dd>Pašnekėjau apie <a href="../dynamic-programming/index-lt.html">dinaminį programavimą</a>, naujokams
+daviau spręsti <a href="../b-bracket.pdf">Brackets sequence</a>.
 </dd>
 
 <dt>2003-09-24</dt> <dd>Sirgau.</dd>
@@ -89,7 +89,7 @@ treniruotė</a>.</dd>
 studentas. ;)</dd>
 
 <dt>2003-11-13</dt> <dd>Paskaita buvo (ir studentai irgi).
-Galų gale padariau <a class="good" href="seminaras">automatizuotą testavimo
+Galų gale padariau <a class="good" href="../seminaras">automatizuotą testavimo
 sistemą</a> seminaro uždaviniams!</dd>
 
 <dt>2003-11-14</dt> <dd>Aš prastai jaučiuosi, turbūt paskaitoje nebūsiu.</dd>
@@ -110,7 +110,7 @@ reikia vargti, kol jį realizuoji...  <br /> Beje yra ir pilni testai!  <a class
 <dt>2003-11-24..28</dt> <dd>Varžybų pusfinalis Sankt Peterburge.</dd>
 
 <dt>2003-11-28</dt> <dd>Jei kas labai norės ir skimbtels man/atsiųs
-SMSą/emailą, ateisiu į pratybas.  <a href="../../about">Telefoną/emailą rasite čia</a> (niekas neskambino, tad
+SMSą/emailą, ateisiu į pratybas.  <a href="../../../about">Telefoną/emailą rasite čia</a> (niekas neskambino, tad
 neatėjau)</dd>
 
 <dt>2003-12-04, 2003-12-05, 2003-12-11, 2003-12-12</dt> <dd>Nieko labai

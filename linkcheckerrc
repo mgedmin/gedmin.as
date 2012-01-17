@@ -1,0 +1,24 @@
+[checking]
+anchors = 1
+
+[filtering]
+ignore =
+  # don't check outside links yet
+  ^mailto:
+  ^http
+
+  # 403 forbidden because there's no referrer
+  http://validator.w3.org/check/referer
+
+  # /style.css if a perfectly cromulent URL
+  ^file:///style.css
+
+  # I know about these
+  /tmp/photos/$
+  /\.tile\.png$
+  /training[1-5]/?$
+  /atranka2004/?$
+  /seminaras/submit$
+  /seminaras/problems/m$
+  associatANN\.avi$
+

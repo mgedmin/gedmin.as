@@ -53,7 +53,7 @@ t.y. kvadratu.
 <a name="dynamic-programming"><h3>Dinaminis programavimas</h3></a>
 
 <p>Tai - ne algoritmas, o greičiau užduočių sprendimo strategija.  Ji aprašyta
-<a href="dynamic-programming">atskirame puslapyje</a>.</p>
+<a href="../dynamic-programming">atskirame puslapyje</a>.</p>
 
 <a name="dfs"><h3>Paieška į gylį (Depth First Search)</h3></a>
 

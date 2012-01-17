@@ -1,3 +1,4 @@
+- linkchecker/linklint/htcheck/w3c-linkchecker/webcheck/
 - TEST .htaccess rewrite rules for old news/about redirect
 - filter to highlight external links?
 - magic language negotiation?

@@ -88,7 +88,7 @@ Europe.</a></dd>
 <dd><a href="../debian/index-en.html">Debian page</a>.</dd>
 
 <dt>2002-04-03</dt>
-<dd><a href="../about/mg-pgp-key.txt">My public PGP key</a>.</dd>
+<dd><a href="../mg-pgp-key.txt">My public PGP key</a>.</dd>
 
 <dt>2001-12-02</dt>
 <dd><a href="../fonts/index-en.html">Lithuanian fonts for xdosemu</a>.</dd>
