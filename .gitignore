@@ -4,3 +4,5 @@ website/_site/
 zope-export/
 distribute-*.tar.gz
 linkchecker-out.html
+bin
+tags
