@@ -116,6 +116,9 @@ def post_build():
 site.map = '''
     /
         about/
+
+        pyconlt2012/
+
         study/
           * python/
               * slides/

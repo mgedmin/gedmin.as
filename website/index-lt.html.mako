@@ -7,6 +7,10 @@
 <h2>Naujienos</h2>
 <dl class="news">
 
+<dt>2012-04-28</dt>
+<dd><a href="pyconlt2012/index-lt.html">PyCon-LT 2012</a>
+</dd>
+
 <dt>2012-01-08</dt>
 <dd>Perėjau nuo Zope 2 prie Blogofile.
 </dd>

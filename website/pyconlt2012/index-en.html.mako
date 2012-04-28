@@ -4,8 +4,9 @@
 
 <h2>Python Packaging - a talk for PyCon-LT 2012</h2>
 
-<p><a href="http://pycon.akl.lt/">PyCon-LT 2012</a> is happening in Vilnius in
-2012.  I'm giving a talk about Python Packaging.</p>
+<p><a href="http://pycon.akl.lt/">PyCon-LT 2012</a> happened in Vilnius in
+2012.  I gave a talk about Python Packaging (PyPI, use of virtualenv, writing a
+setup.py).</p>
 
 <ul>
   <li><a href="pyconlt2012-python-paketai.pdf">Slides</a> (in Lithuanian)</li>
