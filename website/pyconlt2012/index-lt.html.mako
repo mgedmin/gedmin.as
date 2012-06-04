@@ -10,4 +10,5 @@ naudojimą, setup.py kūrimą).</p>
 
 <ul>
   <li><a href="pyconlt2012-python-paketai.pdf">Skaidrės</a></li>
+  <li><a href="http://www.youtube.com/watch?v=6ST85Q2zW54">Video</a></li>
 </ul>

@@ -10,4 +10,5 @@ setup.py).</p>
 
 <ul>
   <li><a href="pyconlt2012-python-paketai.pdf">Slides</a> (in Lithuanian)</li>
+  <li><a href="http://www.youtube.com/watch?v=6ST85Q2zW54">Video</a> (in Lithuanian)</li>
 </ul>
