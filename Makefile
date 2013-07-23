@@ -16,7 +16,7 @@ push: build
 	ssh fridge 'cd src/gedmin.as && git pull && make build'
 
 bin/blogofile: bin/pip
-	bin/pip install blogofile
+	bin/pip install blogofile==0.7.1
 	touch -c $@
 
 bin/pip:
