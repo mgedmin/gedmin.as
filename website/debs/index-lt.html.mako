@@ -11,9 +11,12 @@ deb     http://gedmin.as debs/
 deb-src http://gedmin.as debs/
 </pre></blockquote>
 
+<p>Bet geriau to nedarykite.  Aš jų nebeprižiūriu; aš dabar naudoju
+<a href="https://launchpad.net/~mgedmin/+archive/ppa/">Launchpad'o PPA</a>.</p>
+
 <h2>Paketai</h2>
 
-<dl class="package" id="apt-checkupdates">
+<dl class="obsolete package" id="apt-checkupdates">
 <dt>apt-checkupdates (0.6)
 <a class="good" href="apt-checkupdates_0.6_all.deb">[deb]</a>
 <a class="good" href="apt-checkupdates_0.6.dsc">[dsc]</a>
@@ -23,7 +26,8 @@ deb-src http://gedmin.as debs/
   Automatiškai kiekvieną naktį arba po kiekvieno persikrovimo tikrina Debiano
   archyvus ir siunčiasi naujus paketus upgreidinimui, pranešdamas apie tai
   root'ui paštu.  Tikriausiai ekvivalentus <a href="http://packages.debian.org/search?keywords=apticron">apticron</a>,
-  bet daug paprastesnis.
+  bet daug paprastesnis.  Naujesnė apt-checkupdates versija guli <a
+  href="https://launchpad.net/~mgedmin/+archive/ppa/">mano PPA</a>.
   </dd>
 </dl>
 

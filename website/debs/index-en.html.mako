@@ -10,9 +10,12 @@ deb     http://gedmin.as debs/
 deb-src http://gedmin.as debs/
 </pre></blockquote>
 
+<p>But please don't.  I no longer maintain this repository; I now use
+a <a href="https://launchpad.net/~mgedmin/+archive/ppa/">Launchpad PPA</a>.</p>
+
 <h2>Packages</h2>
 
-<dl class="package" id="apt-checkupdates">
+<dl class="obsolete package" id="apt-checkupdates">
 <dt>apt-checkupdates (0.6)
 <a class="good" href="apt-checkupdates_0.6_all.deb">[deb]</a>
 <a class="good" href="apt-checkupdates_0.6.dsc">[dsc]</a>
@@ -22,7 +25,8 @@ deb-src http://gedmin.as debs/
   Automatically checks and downloads Debian updates every night (or after every
   reboot) and notifies the system administrator by email.  More or less
   equivalent to <a href="http://packages.debian.org/search?keywords=apticron">apticron</a>,
-  but simpler.
+  but simpler.  A newer version of apt-checkupdates exists in <a
+  href="https://launchpad.net/~mgedmin/+archive/ppa/">my PPA</a>.
   </dd>
 </dl>
 
