@@ -6,3 +6,6 @@ distribute-*.tar.gz
 linkchecker-out.html
 bin
 tags
+include/
+lib/
+local/
