@@ -1,0 +1,28 @@
+Šiame pakete rasite naują Lietuvos laiko juostos aprašą (1998 m. Lietuva
+pakeitė laiko juostą į CET; 1999 m. grįžo atgal; 2000 m. panaikino vasaros
+laiką).
+
+Failai
+------
+
+Europe/Vilnius      sukompiliuoti laiko juostos duomenys
+lithuania           laiko juostos aprašas
+europe.diff         diff-as `europe' failui iš tzdata2000d paketo, kurio
+                    autoriai -- Arthur David Olson ir kt.
+
+
+Instaliacija
+------------
+
+Pakeiskite seną Europe/Vilnius failą nauju (rasite jį /usr/share/zoneinfo
+kataloge jei naudojate Slackware distribuciją, kitos distribucijos gali
+naudoti kitus katalogus) arba paleiskitę `zic':
+
+  # zic lithuania
+
+Dabar galite iškviesti `timeconfig' arba analogišką programą ir pasikeisti
+savo laiko juostą į Europe/Vilnius.
+
+
+Marius Gedminas
+<marius@gedmin.as>

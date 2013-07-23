@@ -1,0 +1,42 @@
+Šiame pakete rasite naują Lietuvos laiko juostos aprašą (Nuo 2003 m. Lietuva
+vėl turi vasaros laiką).
+
+Failai
+------
+
+Europe/Vilnius      sukompiliuoti laiko juostos duomenys
+lithuania           laiko juostos aprašas
+
+
+Patikrinimas
+------------
+
+Paleiskite šią komandą:
+
+  date --date 'jul 1 2003'
+
+Jei gausite
+
+  Tue Jul  1 00:00:00 EEST 2003
+
+tai reiškia, kad jūsų libc versija yra pakankamai šviežia.  Bet jei gausite
+
+  Tue Jul  1 00:00:00 EET 2003
+
+tuomet jums reikalingas šis paketas.
+
+
+Instaliacija
+------------
+
+Pakeiskite seną Europe/Vilnius failą nauju (rasite jį /usr/share/zoneinfo
+kataloge) arba, geriau, paleiskite `zic':
+
+  # zic lithuania
+
+Dabar galite iškviesti `tzconfig' arba analogišką programą ir pasikeisti savo
+laiko juostą į Europe/Vilnius.
+
+
+Marius Gedminas
+<marius@gedmin.as>

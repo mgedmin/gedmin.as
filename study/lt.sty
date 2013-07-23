@@ -1,0 +1,56 @@
+%% Copyright (c) 2001 Marius Gedminas <marius@gedmin.as>
+%%
+%% Requires some TeX lithuanization files from www.vtex.lt
+%%
+%% $Id: lt.sty,v 1.1 2001/10/05 20:55:12 mg Exp $
+
+\ProvidesPackage{lt}
+
+\usepackage[cpRIM]{inputenc}
+\usepackage[english,lithuani]{babel}
+\usepackage{addltenc}
+
+% Use iso-8859-13 instead of windows-1257 (cpRIM)
+
+\catcode`\¥=\active\relax
+\def¥{,,}
+\catcode`\´=\active\relax
+\def´{``}
+
+% Use some TeX magic
+\makeatletter
+
+% Lithuanian standards
+
+% Maybe be consistent with Lithuanian traditions?
+%\renewcommand{\tan}{\mathop{\operator@font tg}\nolimits} 
+%\renewcommand{\arctan}{\mathop{\operator@font arctg}\nolimits} 
+%\renewcommand{\cot}{\mathop{\operator@font ctg}\nolimits} 
+%\renewcommand{\arccot}{\mathop{\operator@font arcctg}\nolimits} 
+
+\renewcommand{\labelenumii}{\theenumii)}
+
+% Say "X-th part" instead of "Part X"
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+       \Large\bfseries \thepart~\MakeLowercase{\partname}
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+
+% Back to reality
+\makeatother
+

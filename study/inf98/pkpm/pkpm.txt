@@ -1,0 +1,1701 @@
+Programų kūrimo proceso modeliai
+
+dėstys A. Adamonis
+
+http://www.mif.vu.lt/~adamonis/
+<andrius.adamonis@maf.vu.lt>
+
+Antradieniais, 17:00 - 18:45
+
+----------------------------------------------------------------------------
+Tue Sep  2 17:00:00 EEST 2003
+
+apžvalga:
+    pusiau paskaita, pusiau seminaras
+    egzaminas (žodžiu-raštu)
+    savarankiškas darbas (gal pranešimai, gal paskaitų medžiaga, gal referatai)
+    gal papildomi balai už lankymą
+    o gal neigiami balai už nelankymą (Auditorija: Ūūūūū!)
+    gal blic-testai ("O Dieve" -- balsas iš auditorijos)
+
+vertinimas:
+    min(10, egzaminas * .6 + savarankiškas darbas * .5 + blic testai * .5)
+    už egzas, sav.d. bei testai kiekvienas vertinami [0..10]
+
+savarankiško darbo temos:
+    paskelbs per savaitę puslapyje
+    galima pasisiūlyti savo variantus
+
+
+įžanga
+    klasikinį požiūrį į programų kūrimą turėjom pas Čaplinską:
+      reikalavimai, analizė, dizainas, programavimas, testavimas
+    procesinis požiūris -- naujesnis
+
+    procesas: transformuojam kažkokį inputą į kažkokį outputą
+
+    PKP procesas: programų kūrimo proceso procesas???
+
+    PKP proceso modelis: paralelė
+      executable failas <-> programos veikimas (vykdo CPU)
+      PKP proceso modelis <-> PKP procesas (vykdo kažkokia organizacija)
+
+    Kam modelių reikia:
+      matavimams
+      gerinimui
+      apibendrinimas   (bendravimas tarp organizacijų; vieninga terminologija)
+
+    pagrindiniai šaltiniai:
+      1. ISO 12207 standartas -- programų sistemų gyvavimo ciklo procesai
+      2. CMM modelis (tiksliau CMMI -- naujesnė CMM atmaina) [CMMI terminija
+           jau derinama su ISO 15504]
+      3. ISO 15504 (SPICE version 2) [remiasi ISO 12207 terminija]
+    {1-3 yra brandos modeliai}
+      4. RUP (Rational Unified Process), PSP (Personal Software Process),
+         TSP (Team Software Process), XP/agile procesai (judriosios metodikos),
+         gal ISO 9000
+    {čia kaip alternatyvos}
+
+    pora paveikslėlių apie tuos modelius:
+
+
+
+      SPICE
+
+         .---------------------------.         .-----------------.
+        ( proceso gebėjimų nustatymas ) <---> ( proceso gerinimas )
+         `---------------------------'         `-----------------'
+                                  ^               ^
+                                   \             /
+                                    \           /
+                                     v         v
+                               .-------------------.
+                              ( proceso įvertinimas )
+                               `-------------------'
+
+        ISO 15504 standartą sudaro 9 dokumentai (4 .. 80 lapų, kaina visų
+        vienoda), vienas iš jų -- normatyvinis modelis (privalomas skaitymas,
+        kiti nebūtini).
+
+      {gebėjimas == capability}
+
+
+
+      CMM
+
+        organizacijos brandos lygis:
+          1. initial {ad-hoc: jei pasiseka, tai tik dėl žmonių pastangų}
+          2. repeatable {pakartojami geri rezultatai}
+          3. defined {egzistuoja proceso dokumentacija}
+          4. managed {statistiškai valdomas -- kaupiama informacija}
+          5. optimizing {organizacija gerina savo darbą: analizuoja problemų
+             priežastis ir jas šalina}
+
+        {ISO 9000 lygis yra daugmaž CMM 2 arba 3; priklauso nuo įmonės}
+        {Pasaulyje į CMM 5 pretenduoja 17 kompanijų, į CMM 4 > 50}
+        {Lietuvoj senais laikais buvo dirbama daugmaž CMM 3 lygyje, ypač
+        karinei pramonei.  Dabar neaišku, ar kas siekia CMM 3}
+
+
+    VU, KTU, Alna ir Sintagma vykdo projektą "PKP branda" -- ruošia
+    metodiką bei įrankius brandaus proceso diegimui Lietuvos IT įmonėse.
+    http://www.mif.vu.lt/se/Branda/
+
+
+    1-3 iš aukščiau yra modeliai.  4 yra daugiau metodikos, more down-to-Earth.
+    RUPas sako jau konkrečią seką (project manageris turi daryti tą, tą ir tą.)
+
+    PSP ir TSP sugalvojo Watts S. Humphrey (kuris inicijavo ir CMM).
+    CMM skirtas organizacijai.  PSP sukurtas pagal CMM modelį ir skirtas vienam
+    žmogui.  {Ragaišis prastūmė privalomas PSP paskaitas pirmakursiams.}  PSP:
+    trackinimas (kiek laiko praleidžiu kam, kokias tipines klaidas darau,
+    etc.).  PSP irgi turi kažkiek lygių, kiekvienas prideda naujų disciplinų,
+    kurios gerina asmeninį darbą.
+
+    TSP (Team Software Process) -- panašu, tik nedidelėms komandoms.
+    {Suplanuota pirmakursiams 2 semestre}
+
+    XP/agile -- prasidėjo kaip kokakolos prisigėrusių programuotojų
+    svaičiojimai, o dabar į tai jau žiūri ir rimtos kompanijos.
+
+
+----------------------------------------------------------------------------
+Tue Sep  9 17:06:47 EEST 2003
+
+
+(yra slaidai.  PowerPointas.)
+
+(hm, rozetė dešinėje neveikia.  ta po lenta veikia.  turbūt galima pasiskolinti
+Adamonio prailgintuvo trečdalį.)
+
+PK proceso modelis -- abstraktus kūrimo proceso apibūdinimas, architektūra ir
+apibrėžimas.
+
+Kam modeliuoti PK procesą?
+
+  Yra žmonės, technologijos ir procesas.  Nuo šių trijų dalyku priklauso
+  kokybė.  (Vaizdi diagrama.)
+
+Proceso modelio elementai:
+  - agentas/aktorius
+  - vaidmuo/rolė
+  - veikla
+  - artefaktas/produktas
+  - įvykis
+
+(Procesas -- nuolatos vyksta.  Veikla turi griežtą pradžią ir pabaigą ir dar
+kažkokius rezultatus.)
+
+(Giliai prasmingi paveiksliukai.)
+
+
+ISO/IEC 12207 -- IT -- Software life cycle processes
+====================================================
+
+Patvirtintas kaip LST (viršelio būdu).
+
+ISO 12207 white paperį (18 psl, Ranghu Singh) reikės perskaityti.
+
+(skanerio nevaidinsiu; #include "Paskaita2.ppt")
+
+(32 min po pask. pradžios, o žmonės dar renkasi)
+
+SW life cycle skaidomas į procesus.  Procesai į aktivičius.  Aktivičiai į
+taskus.  (liet: activity = veikla, task = užduotis)
+
+Verifikavimas vs validavimas:
+
+  verifikavimas -- ar atitinka spekus
+  validavimas -- ar atitinka poreikius (ignoruojam spekus)
+
+PDCA == Plan, Do, Check, Act -- kiekvieno proceso schema
+  (planuojam, darom, patikrinam, pamatom, kad ne taip padarėm, taisom ir
+   pradedam iš pradžių)
+
+
+----------------------------------------------------------------------------
+Tue Sep 16 17:06:56 EEST 2003
+
+Testukas.  Woo hoo.  Ai ai ai.  Reikėjo neužmiršti slaidus pasižiūrėti.
+
+Pagrindiniai PK procesai
+========================
+(dėstė Maksas)
+
+Pagrindiniai PK procesai:
+- įsigijimo (acquisition)
+- tiekimo (supply) 
+- kūrimo (development)
+- eksploatacijos (operational)
+- priežiūros (maintenance)
+
+Įsigijimo procesas
+------------------
+atlieka: pirkėjas (acquirer)
+
+Veiklos:
+- inicijavimas
+  - noras
+  - reikalavimai
+  - kiek kainuos ir kaip tai darysiu (kursiu, pirksiu)
+  - ruošiam įsigijimo planą
+- konkurso skelbimas
+  - konkurso sąlygos (RFP -- Request for Proposal)
+- kontrakto sudarymas
+  - atrinkti tiekėją
+  - kontraktas (įsigijimo reikalavimai, kaina, terminai, garantijos)
+  - kontrakto pakeitimo kontrolė
+- tiekėjo stebėjimas
+  - pagalbiniai procesai: joint review, verification, validation
+  - kokiu būdu bus teikiama reikiama informacija tiekėjui
+- priėmimas (aka perdavimas)
+  - priėmimo strategija
+  - priėmimo tvarka (procedūra)
+  - pirkėjo atsakomybė už konfigūracijos valdymą po priėmimo
+    (jei po priėmimo pirkėjas daro kažkokius pakeitimus, tai jis pats kaltas;
+    tiekėjas nebėra atsakingas)
+
+Tiekimo procesas
+----------------
+atlieka: tiekėjas (supplier)
+
+Veiklos:
+- inicijavimas
+  - gavom RFP, žiūrim, ar mums apsimoka pateikti pasiūlymą, priimam sprendimą
+- pasiūlymo parengimas
+- kontrakto sudarymas
+- planavimas
+  - reikalavimų peržiūra
+  - pasirenkam konkretų proceso gyvavimo ciklo modelį (GCM)
+  - atvaizduojam ISO 12207 procesus į GCM
+    {A.A.: "kiek projektų dalyvavau, tokio dokumento nemačiau".  praktiškai
+    imama kokia nors detali metodika ir vadovaujamasi jos instrukcijomis.}
+  - reikalavimai projekto valdymo planui
+  - tiekimo galimybės (žiūrim, ar patiems daryti, ar pirkti, ar outsourcinti)
+  - projekto valdymo planas (project management plan)
+    - projekto organizacinė struktūra, dalyviai, rolės, padalinių bei
+      išorinių organizacijų atsakomybė
+    - kūrimo aplinka
+    - testavimo aplinka
+    - įranga, standartai, procedūros, įrankiai, kokybės valdymas
+    - subrangovų valdymas, pirkėjų dalyvavimas, vartotojų dalyvavimas
+    - etc.
+- valdymas ir kontrolė
+  - tiekėjas įsipareigoja įvykdyti planą
+  - tiekėjas turi 1) sukurti produktą pagal kūrimo procesą,
+                  2) eksploatuoti produktą pagal eksploatacijos procesą
+                  3) prižiūrėti produktą pagal priežiūros procesą.
+    {??? interpretacija: *jei* tiekėjas teikia kūrimo/eksploatacijos/priežiūros
+    paslaugas, tai jis tai daro pagal atitinkamus procesus.}
+  - tiekėjas turi stebėti ir kontroliuoti progresą ir kokybę
+- peržiūra ir įvertinimas
+- pristatymas (delivery) ir pabaiga (completion)
+
+Kūrimo procesas
+---------------
+
+kitą sykį...
+
+
+(kita syki nebuvo projektoriaus ir destytojo, 40 min. pasedejom ir
+issiskyrstem.  prezentacija yra paskaita3/ subdire
+
+
+----------------------------------------------------------------------------
+Tue Sep 30 17:05:11 EEST 2003
+
+tesiam.
+
+
+NB: veiklos ir užduotys *nėra* išrašytos chronologine tvarka
+
+
+Kūrimo procesas
+---------------
+
+veiklos:
+- proceso realizacija (process implementation)
+  - GCM pasirinkimas
+  - dokumentuojam standartus, metodus, irankius, programavimo kalbas
+  - veiklu vykdyumo planai
+- reikalavimų sistemai analizė
+  - reikalavimai:
+    - dalykinės srities, organizaciniai bei vartotojų;
+    - saugumo, žmogiškųjų faktorių inžinerijos, sąsajų, eksploatacijos,
+      palaikymo;
+    - projektavimo apribojimų.
+  - reikalavimų įvertinimas:
+    - gebėjimas nustatyti atitinkantį poreikį;
+    - neprieštaringumas ir vientisumas;
+    - gebėjimas patikrinti;
+    - sistemos architektūros projektavimo įvykdomumas; 
+    - eksploatacijos ir palaikymo įvykdomumas.
+- sistemos architektūros projektavimas
+  - aukštesnio sistemos architektūros lygmens projektavimas
+    - techninės įrangos elementai
+    - PĮ elementai (Software Items)
+    - rankiniu būdu atliekamos operacijos
+  - projektavimo rezultatų įvertinimas.
+- reikalavimų PĮ analizė
+  - reikalavimų PĮ nustatymas ir dokumentavimas:
+    - funkciniai reikalavimai (functional requirements);
+    - išoriniai interfeisai;
+    - kvalifikaciniai reikalavimai (qualification requirements);
+        {AFAIU atitinka XP acceptance tests}
+        {Kuo skiriasi funkciniai ir kvalifikaciniai reikalavimai?  Ilga
+        diskusija, aiškaus rezultato nėra, Adamonio nuomone tai irgi daugmaž
+        tas pats, kas acceptance testai.}
+    - saugumo reikalavimai;
+    - ergonominiai reikalavimai;
+    - duomenų apibrėžimai ir reikalavimai DB;
+    - diegimo ir priėmimo reikalavimai;
+    - vartotojų vadovas;
+    - eksploatacijos ir palaikymo reikalavimai.
+  - reikalavimų įvertinimas
+  - bendros peržiūros (Joint Review)
+- PĮ architektūros projektavimas
+  Kiekvienam PĮ elementui (Software Item):
+  - nustatoma ir aprašoma architektūra, reikalavimai komponentams (Software
+    Component)
+  - vidiniai ir išoriniai interfeisai
+  - duomenų bazė
+  - pradinė vartotojų vadovo versija
+  - pradiniai reikalavimai testams ir PĮ integravimo tvarkaraštis
+  - projektavimo įvertinimas
+  - Joint Review
+- PĮ detalus projektavimas
+  Kiekvienam PĮ elementui:
+  - detalus kiekvieno komponento projektavimas (Software Units)
+  - vidiniai ir išoriniai interfeisai
+  - duomenų bazė
+  - vartotojo vadovo tikslinimas
+  - reikalavimų testams ir PĮ integravimo tvarkaraščio tikslinimas
+  - detalaus projektavimo įvertinimas
+  - Joint Review
+- PĮ programavimas ir testavimas
+  - kiekvieno Software Unit ir duomenų bazės kūrimas ir dokumentavimas
+  - testų ir testinių duomenų kiekvienam SU ir DB kūrimas ir dokumentavimas
+  - testavimas (ar atitinka reikalavimus); rezultatai dokumentuojami
+  - vartotojo vadovo tikslinimas
+  - PĮ kodo ir testų rezultatų įvertinimas
+- PĮ integravimas
+  Kiekvienam PĮ elementui:
+  - integravimo planas (Software Units ir Software Component - į Software Item)
+  - integravimas ir gautų elementų testavimas
+  - vartotojo vadovo tikslinimas
+  - kiekvienam elemento kvalifikaciniam reikalavimui kuriamas ir aprašomas
+    testas (kad pravesti Software Qualification Testing)
+  - integravimo įvertinimas
+  - Joint Review
+- PĮ kvalifikacinis testavimas
+  Kiekvienam PĮ elementui:
+  - testuojama pagal kvalifikacinius reikalavimus PĮ elementui. rezultatai
+    dokumentuojami.
+  - vartotojo vadovo tikslinimas
+  - QT (Qualification Testing) įvertinimas
+  - auditų palaikymas
+  - projektavimo ir kodo "Baseline" nustatymas
+- sistemos integravimas
+  - PĮ elementų integravimas su technine įranga (hardware items), kitomis
+    sistemomis, rankiniu darbu
+  - kiekvienam sistemos kvalifikaciniam reikalavimui kuriamas ir aprašomas
+    testas (kad galima būtų atlikti System Qualification Testing)
+  - integravimo įvertinimas
+- sistemos kvalifikacinis testavimas
+  - testuojama pagal kvalifikacinius reikalavimus sistemai.  Rezultatai
+    dokumentuojami.
+  - sistema įvertinama atsižvelgiant į:
+    - kaip testai "padengia" reikalavimus sistemai;
+    - ar atitinka laukiamus rezultatus;
+    - eksploatavimo ir palaikymo įvykdomumą
+  - auditų palaikymas
+  - projektavimo ir kodo "Baseline" nustatymas
+- PĮ diegimas
+  - diegimo nustatytoje aplinkoje planas
+  - diegimas pagal planą; įvykių ir rezultatų dokumentavimas.
+- PĮ priėmimas
+  - pirkėjo priėmimo peržiūros palaikymas
+  - darbų užbaigimas ir produkto perdavimas
+  - pradinis ir tolimesnis apmokymas ir palaikymas, jei nustatyta kontraktu
+
+
+Eksploatavimo procesas
+----------------------
+
+veiklos:
+- proceso realizacija
+  - eksploatavimo proceso planas ir standartai
+  - problemų gavimo, įrašymo, sprendimo ir grįžtamojo ryšio procedūrų
+    nustatymas
+  - testavimo realioje aplinkoje procedūros, informavimo apie problemas ir
+    užklausų pataisymams atlikti procedūros
+- testavimas realioje aplinkoje
+  - testuojama kiekviena PĮ versija (release); jei tenkina kriterijus,
+    išleidžiama eksploatuoti
+  - PĮ inicializavimo, veikimo ir nutraukimo užtikrinimas pagal planą
+- sistemos eksploatavimas
+  - sistema eksploatuojama realioje aplinkoje taip, kaip nustatyta vartotojo
+    vadove
+- vartotojų palaikymas
+  - pagalba vartotojams, konsultavimas; užklausos ir veiksmai fiksuojami
+  - užklausų siuntimas Priežiūros procesui
+  - laikini sprendimai
+
+
+Priežiūros procesas
+-------------------
+
+veiklos:
+- proceso realizacija
+  (viskas tas pats: sukuriam planą, darysim viską pagal planą)
+- problemos ir pataisymų analizė
+  - problemos įtaka organizacijai, sistemai bei sąveikaujančioms sistemoms:
+    - problemos tipas (koreguojantis, gerinantis, apsaugojantis, ...)
+        {correcting, preventing, improving, adaptive -- kas yra adaptive
+        neaišku, diskutavo fakultete šulai ir nesutarė.  adaptive --
+        prisitaikymas prie operacinės aplinkos pasikeitimo}
+    - apimtis
+    - kritiškumas
+  - problemos patikrinimas
+  - pataisymų variantai
+  - pasirinkto varianto patvirtinimas, kaip to reikalauja kontraktas
+- pataisymai
+  - nustatoma, kas bus taisoma
+  - vykdomas Kūrimo procesas
+- priežiūros peržiūra/priėmimas
+  - peržiūros, užtikrinančios pakeistos sistemos vientisumą
+  - patvirtinimas, kad pakeitimus galima užbaigti (kaip nusakyta kontrakte)
+- migracija
+  - migracijos planas
+    - reikalavimai;
+    - migracijos įrankiai;
+    - PĮ ir duomenų konversija;
+    - migracijos vykdymas;
+    - migracijos rezultatų patikrinimas;
+    - senos aplinkos palaikymas ateityje
+  - vartotojų įspėjimas
+  - lygiagretus senos ir naujos aplinkos veikimas
+  - senos aplinkos dokumentacijų, įrašų, kodo archyvavimas
+  - priėjimas prie senos aplinkos duomenų
+- demontavimas (software retirement)
+  - demontavimo planas
+  - vartotojų įspėjimas
+  - lygiagretus senos ir naujos PĮ veikimas
+  - priėjimas prie senos PĮ duomenų
+
+
+
+----------------------------------------------------------------------------
+Tue Oct  7 17:06:54 EEST 2003
+
+Pagalbiniai gyvavimo ciklo procesai
+===================================
+(dėstė Virginija)
+
+Pagalbiniai PK procesai:
+- dokumentavimo
+- konfiguracijos valdymo
+- kokybes užtikrinimo
+- verifikacijos
+- atestacijos
+- peržiūrų
+- audito
+- problemų sprendimo
+
+Dokumentavimo procesas
+----------------------
+
+veiklos:
+- paruošiamieji darbai (implementation)
+
+    išsiaiškinam, kokių dokumentų reikia ir kas juose turi būti (antraštė,
+    tikslas, kokiai auditorijai skiriama, procedūros ir atsakomybė, tarpinių
+    ir galutinių versijų grafikas)
+
+    rezultatas: dokumentacijos planas
+
+- projektavimas ir vystymas (design and development)
+
+    kiekvienas dokumentas turi būti suprojektuoti pagal tokio tipo dokumentų
+    standartus; pradinių duomenų šaltinis turi būti patvirtinas; atitikimą
+    standartams tvirtina atsakingas asmuo.
+
+    rezultatas: paruošti dokumentai
+
+- išleidimas (production)
+
+    planingai.  reikalavimai (kopijų skaičius, saugumas etc).  suderinimas su
+    konfigūracijų valdymų.
+
+    rezultatas: išleisti dokumentai
+
+- priežiūra (maintenance)
+
+    ryšys su konfigūracijų valdymų.
+
+    rezultatas: pakeisti dokumentai
+
+Dokumentavimo procesas vykdomas visose gyvavimo ciklo stadijose
+
+
+Nukrypimas: programinės įrangos gyvavimo ciklo stadijos
+-------------------------------------------------------
+
+- reikalavimų formulavimas
+- projektavimas
+- realizacija
+- testavimas
+- naudojimo pradžia
+- eksploatacija ir palaikymas
+- naudojimo pabaiga
+
+
+Konfigūracijos valdymo procesas
+-------------------------------
+
+veiklos:
+- paruošiamieji darbai (implementation)
+
+    rezultatas: konfigūracijos valdymo planas
+
+- konfigūracijos identifikacija (identification)
+
+    identifikuojam komponentus (items), priskiriam jiems dokumentaciną etc.
+
+    rezultatas: identifikacijos schema, baziniai dokumentai.
+
+- konfigūracijos kontrolė (control)
+
+    rezultatas: kontrolės rezultatai
+
+- konfigūracijos būklės apskaita (status accounting)
+
+    rezultatas: konfigūracijos būklės ataskaita.
+
+- konfigūracijos įvertinimas (evaluation)
+
+    rezultatas: įvertinimo ataskaitos
+
+- išleidimų valdymas ir tiekimas (release management and delivery)
+
+    rezultatas: pateikiami produktai
+
+Versijų kontrolė -- dalis konfigūracijos valdymo.
+
+Konfigūracijos elemento dokumento pavyzdys:
+  - CI (Configuration Item – konfigūracijos produktas) atributai
+  - CI vardas
+  - Serijinio numerio kopija
+  - Kategorija (hardaware, software, dokumentacija)
+  - Tipas (pvz. konfigūracija)
+  - Modelio numeris
+  - Galiojimo pasibaigimo data
+  - Versijos numeris
+  - Vieta
+  - Atsakingas asmuo
+  - Atsakingumo data
+  - Source
+  - Licenzija (Nr arba nuoroda)
+  - Pristatymo data
+  - Patvirtinimo data
+  - Statusas - esamas (test, live, archived)
+  - Statusas – planuojamas
+  - Komentaras
+
+Konfigūracijų valdymas vykdomas:
+  paruošiamieji: reikalavimų formulavimo etape
+  identifikacija: projektamvime
+  kontrolė, būklės apskaita, vertinimas: nuo projektavimo iki eksploatacijos
+    ir palaikymo
+  išleidimų valdymas: nuo testavimo iki eksploatacijos ir palaikymo
+
+
+Kokybes užtikrinimo procesas
+----------------------------
+
+veiklos:
+- paruošiamieji darbai (implementation)
+  rezultatas – kokybės užtikrinimo planas.
+- produkto kokybės užtikrinimas (product assurance)
+  rezultatas – produkto kokybės patvirtinimas.
+- proceso kokybės užtikrinimas (process assurance)
+  rezultatas – proceso kokybės patvirtinimas.
+- sistemos kokybės rodiklių užtikrinimas (assurance of quality systems)
+  vykdoma pagal kontraktą ir ISO 9001
+  rezultatas priklauso nuo kontrakto.
+
+Kokybes užtikrinimo procesas daromas per visas gyvavimo ciklo stadijas
+  (paruošiamieji darbai tik reikalavimų stadijoje)
+
+
+Verifikavimo procesas
+---------------------
+
+verifikacija: tikrinam, ar produktas atitinka reikalavimų specifikaciją
+
+veiklos:
+- paruošiamieji darbai (implementation)
+  rezultatas – verifikacijos planas.
+- verifikavimas (verification)
+  užduotys:
+  - kontrakto verifikavimas
+  - proceso verifikavimas
+  - reikalavimų verifikavimas
+  - projektavimo verifikavimas
+  - kodo verifikavimas
+  - integracijos verifikavimas
+  - dokumentacijos verifikavimas
+  rezultatas – verifikuoti produktai ir paslaugos.
+
+Verifikavimo procesas daromas:
+  nuo reikalavimų formulavimo iki eksploatacijos ir palaikymo.
+
+
+Atestacijos procesas (validation)
+---------------------------------
+
+atestacija: tikrinam, ar produktas atitinka reikalavimų specifikaciją bei
+konkrečią funkcinę paskirtį.
+
+veiklos:
+- paruošiamieji darbai (implementation)
+  rezultatas – atestacijos planas.
+- atestacija (validation)
+  rezultatas – atestuoti produktai ir paslaugos.
+
+Atestacijos procesas daromas:
+  paruošiamieji darbai -- testavimo etape
+  atestacija -- naudojimo pradžioje, eksploatacijos ir palaikymo metu.
+
+% daug maž: verifikavimas == peržiūros, validavimas == testavimas
+
+
+% čia sustojom
+% testukas: 5 klaidos iš 20ties :(
+
+----------------------------------------------------------------------------
+Tue Oct 14 17:04:57 EEST 2003
+
+
+Peržiūrų (bendro įvertinimo) procesas
+-------------------------------------
+
+veiklos:
+- paruošiamieji darbai (implementation)
+  rezultatas – agenda, galimybės (scope), forum.
+- projekto valdymo įvertinimas (project management reviews)
+  rezultatas – projekto būklės įvertinimas.
+- techninis įvertinimas (technical reviews)
+  rezultatas – įvertinimo rezultatai.
+
+
+    reikia viską dokumentuoti.  rastos problemos perduodamos problemų
+    sprendimo procesui.  ir t.t.
+
+Peržiūros procesas vykdomas visu kontrakto galiojimo laikotarpiu (išskyrus
+demontavimo stadiją)
+
+
+Audito procesas
+---------------
+
+veiklos:
+- paruošiamieji darbai (implementation)
+  rezultatas – agenda, galimybės
+- auditas (audit)
+  - ar kodas atitinka dokumentaciją
+  - ar testavimo rezultatai atitinka tai ko norima iš to produkto
+  - ar testiniai duomenys suderinami su specifikacija
+  - ar produktas sėkmingai pratestuotas ir atitinka specifikaciją
+  - ar testavimo ataskaitos yra teisingos ir nėra trūkstamų rezultatų
+  - ar vartotojo dokumentacija yra suderinama su specifikacija
+  - ar veiklos suderinamos su reikalavimais, planais, kontraktais
+  rezultatas – audito rezultatai.
+
+
+    Auditą daro trečia šalis, neturinti tiesioginio ryšio su PĮ kūrėjais
+
+    Audito rezultatai turi būti dokumentuoti ir pateikti audituojamai šaliai
+
+
+Audito procesas vykdomas visu kontrakto galiojimo laikotarpiu (išskyrus
+demontavimo stadiją)
+
+
+Problemų sprendimo procesas
+---------------------------
+
+veiklos:
+- paruošiamieji darbai (implementation)
+- problemų sprendimas (problem resolution)
+  rezultatas – problemos išsprendimas.
+
+
+    Kiekviena problema turi būti identifikuota, aprašyta, išanalizuota ir
+    išspręsta.
+
+    Incidentas – bet koks įvykis, kuris nėra standartinių operacijų dalis ir
+    kuris gali reikšti serviso kokybės pakenkimą.
+
+    Problema yra siauresnis terminas.
+
+    Incidento gyvavimo ciklas:
+
+      Aptikimas ir užregistravimas -> Klasifikacija ir pradinis servisas
+       -> Serviso užklausa (t/n) -> Serviso užklausos procedūra
+       -> Incidento uždarymas arba -> Tyrimas ir diagnozė
+       -> Sprendimas ir atstatymas -> Incidento uždarymas.
+
+    Turi būti aiškus problemų kategorizavimas bei prioritetai.
+
+
+Problemų sprendimo procesas vykdomas visu kontrakto galiojimo laikotarpiu
+(išskyrus demontavimo stadiją)
+
+
+
+Organizaciniai procesai
+=======================
+(dėstė Adomas)
+
+Organizaciniai PK procesai:
+- valdymo (management)
+- infrastruktūros (infrastructure)
+- gerinimo (improvement)
+- mokymo (training)
+
+Valdymo procesas
+----------------
+
+veiklos:
+- iniciacija ir srities apibrėžimas (iniciation and scope definition)
+  taip pat reikia užtikrinti resursus ir projekto įgyvendinamumą
+  rezultatas: proceso reikalavimai
+- planavimas
+    apibrėžiam veiklas, užduotis ir rezultatus -- produktus.  reikia
+    nusakyti užduočių įvykdymo laiką, pastangų įvertinimą (estimation of
+    effort), resursų nustatymą, užduočių vykdytoją, atsakomybę, rizikos
+    vertinimą, kokybės rodiklius, kaštus, įrangos ir infrastruktūros tiekimą
+  rezultatas: valdymo planas
+- vykdymas ir kontrolė
+    inicijuojam, vykdom, kontroliuojam, sprendžiam problemas, pateikinėjam
+    ataskaitas.
+  rezultatas: ataskaitos
+- peržiūra ir įvertinimas
+    vertinam produktų ir planų atitikimą reikalavimams; vertinam produktų,
+    veiklų bei užduočių vykdymo rezultatus
+  rezultatas: ataskaitos
+- užbaigimas
+    patikrinam pagal iš anksto nustatytus kriterijus, ar užbaigėm viską;
+    patikrinam rezultatus ir archyvuojam įrašus
+  rezultatas: produktai, paslaugos
+
+
+Infrastruktūros procesas
+------------------------
+
+veiklos:
+- proceso įgyvendinimas (process implementation)
+    apibrėžiam ir dokumentuojam infrastruktūrą; suplanuojam ir dokumentuojam
+    infrastruktūros kūrimą.
+  rezultatas: infrastruktūra
+- infrastruktūros sukūrimas (establishment of infrastructure)
+    suplanuojam ir konfigūruojam infrastruktūros konfigūraciją; infrastruktūrą
+    įdiegiam laiku
+  rezultatas: infrastruktūros konfigūracija
+- infrastruktūros palaikymas (maintenance of infrastructure)
+    palaikom ir atnaujinam infrastruktūrą, kad atitiktų proceso reikalavimus
+  rezultatas: įrašai
+
+
+Gerinimo procesas
+-----------------
+
+veiklos:
+- proceso sukūrimas (process establishment)
+    sukuriam rinkinį organizacinių procesų, viską dokumentuojam, sukuriam
+    mechanizmą procesų valdymui (kūrimui, kontrolei ir gerinimui)
+    {norint kažką gerinti reikia turėti tų gerinamų procesų apibrėžimus}
+  rezultatai: sukurti procesai
+- proceso įvertinimas (process assessment)
+    sukuriam vertinimo procedūras ir jas taikom tinkamais laiko intervalais
+  rezultatai: vertinimo procedūros ir planai
+- proceso gerinimas (process improvement)
+    keičiam procesus atsižvelgdami į įvertinimo rezultatus; neužmirštam
+    atnaujinti dokumentacijos; renkam ir analizuojam istorinius duomenis,
+    randam silpnąsias ir stipriąsias nagrinėjimo proceso puses; renkam
+    duomenis apie kokybės užtikrinimo kaštus ir naudojam juos organizacijos
+    procesų gerinimui
+  rezultatai: įvertinimas, istorija, kokybės išlaidų įrašai
+
+
+Mokymo procesas
+---------------
+
+veiklos:
+- proceso įgyvendinimas (project implementation)
+    turi būti nustatyti mokymo tipai, lygiai bei kurios personalo
+    kategorijos turėtų būti apmokytos; turi būti sudarytas mokymo planas,
+    tvarkaraštis, resursų reikalavimai
+  rezultatas: mokymo planas
+- mokymo medžiagos rengimas (preparation of training materials)
+  rezultatas: mokymo vadovai
+- mokymo plano įgyvendinimas (realisation of training plan)
+    turi būti užtikrinta, kad reikiamų kategorijų ir atitinkamai apmokyti
+    žmonės gali dalyvauti suplanuotuose apmokymuose
+  rezultatas: mokymo įrašai, apmokytas personalas
+
+----------------------------------------------------------------------------
+Tue Oct 28 17:09:15 EET 2003
+
+% sako, praeitą antradienį paskaitos nebuvo
+% testukas: 10 klausimų, o aš, žinoma, nepasiruošęs.  3 klaidos :(
+
+
+Kas yra geras procesas, kas yra ne toks geras procesas?  Kaip pasakyti, ar
+firma dirba gerai, ar ne?
+
+Išoriniai požymiai:
+  - rezultatai (past performance)
+  - įvaizdis
+
+(Čia, panašu, apie CMMą šneka, tik to neįvardina)
+
+1. Chaotiška organizacija:
+   (ad hoc, even chaotic)
+   - neįmanoma apibrėžti proceso, nes jo nėra.  žmonės kažką daro.  rezultatai
+     neprognozuojami.  nežinom, kas darosi.  žmonės kažką sugalvoja, puola
+     daryti, atsibosta, meta.
+   - pagrindinis požymis: krizė ("rytoj reikia priduoti!" -- visi sėdi po darbo
+     ir dirba)
+2. Stabili organizacija:
+   - yra rezultatai
+   - krizių beveik nėra
+   - yra planas, kuris palaikomas up-to-date
+3. Organizacijos, turinčios apibrėžtą procesą:
+   - žmonės ne tik kad žino, kaip reikia dirbti, bet ir turi tai apsibrėžę
+   - pavyzdžiai: gamyba, valstybinės įstaigos
+4. Organizacijos, turinčios matuojamą procesą:
+   - statistiškai matuojam, kaip mums sekasi daryti veiklas
+   - turim objektyvius duomenis, kurie nepriklauso nuo žmogaus nuomonės
+5. Organizacijos, turinčios nuolatos gerėjantį procesą
+   - procesą gerinam
+
+% 5 lygis -- komunizmas ;)
+
+Pirmas bičas, kuris šitą užrašė (nuotraukose -- senas ir plikas; Watts
+Humphrey) vadovavosi patirtim, žiūrėdamas į pasaulio organizacijas.
+
+Skirtumas tarp lygių -- kokybinis.
+
+Taip, tai CMM.  Pirmas toks daiktas, kuris davė startą proceso kokybės
+tyrimams.  US DoD užsakymu.
+
+% IBMas kartą padarė rekordą -- pasamdė outside Oraclo konsultantą per dvi
+% dienas.  O ten taisyklių rinkiniai -- outside įmonė turi būti spec. sąraše ir
+% t.t. ir t.t.
+
+CMM lygiai:
+1. Initial -- pradinis
+2. Repeatable -- atkartojamas
+3. Defined -- apibrėžtas
+4. Managed -- valdomas
+5. Optimized -- gerinantis
+
+SPICE esmė ta pati, nors pavadinimai skiriasi
+
+1 lygio rizikos:
+- nepadarysim, ko reikia
+
+Perėjimas 1->2:
+- projektų valdymas: įsipareigojimų prisiėmimas, jų vykdymo kontrolė (apimtis
+  ir terminai)
+- vadovybės dalyvavimas (peržiūrimi projektų rezultatai; periodiniės peržiūros
+  kaip mums apskirtai sekasi projektus daryti)
+- kokybės valdymas (QA)
+- pakeitimų kontrolė (change management -- konfigūracijų valdymas + apimties
+  kontrolė)
+
+2 lygio rizikos:
+- naujos technologijos/įrankiai
+- dideli pasikeitimai organizacijoje (pvz. išėjo Jonas ir kompanijai blogai)
+
+Perėjimas 2->3:
+- proceso grupės sukūrimas (process group, system process owner's group (SPOG)
+  -- žmonės, atsakingi už procesų sudarymą ir palaikymą)
+- programų kūrimo proceso architektūros sukūrimas (kokį gyvavimo ciklo modelį
+  naudosim, kokia bus terminologija, kokius standartus naudosim)
+- programų inžinerijos įrankiai ir technologijos (pvz., RUP, ErWin)
+
+3 lygio rizikos:
+- valdymą atlieka žmonės, valdymo procesas neatsparus žmogiškai klaidai
+
+Perėjimas 3->4:
+- apibrėžiam aibę proceso matavimo metrikų (trukmė, kaina, kokybiniai
+  rodikliai)
+- matavimų duomenų bazė
+- resursai matavimams vykdyti
+- matuojama kiekvieno produkto kokybė (įskaitant tarpinius darbo produktus)
+
+ką tai duoda: žinom, kaip procesas vyksta, objektyviai, o ne "man taip atrodo".
+valdymą darantys žmonės gali daryti statistiškai argumentuotus sprendimus.
+
+4 lygio rizikos:
+- ??? ("literatūroj nebuvo, tai ir aš jums nepateikiau")
+
+Perėjimas 4->5:
+- automatizuotas matavimo duomenų rinkimas (kad būtų pigu ir kad būtų
+  užtikrinta, kad duomenys bus renkami -- jei žmogus pusę dienos turės
+  pildyti visokias formas, kiek jis laiko praleido ką darydamas, bus
+  blogai)
+- matavimo duomenys naudojami *procesams* analizuoti
+
+Skirtumas tarp 4 ir 5 -- tas pabrauktas žodis 'procesams'.  Remiantis patirtimi
+ir statistika pamatom įvairias detales (e.g. "code review" randa daugiau bugų
+per trumpesnį laiką, nei "QA", tai davai daugiau resursų skiriam "code
+review").  4 lygyje tuos duomenis naudojam konkretiems projektams (turiu laisvą
+žmogų, skirsiu jį prie reviewerių, o ne QA), o 5-tame tobuliname proceso
+aprašą.
+
+5 lygio rizikos:
+- ??? ("literatūroj nebuvo, tai ir aš jums nepateikiau")
+
+----------------------------------------------------------------------------
+Tue Nov  4 17:07:49 EET 2003
+
+(Knygelė: _Managing the Software Process_ by Humphrey.)
+
+Diagrama.  Trikampis, trys viršūnės: procesas, technologijos, žmonės.
+Trikampio plotas vaizduoja kokybę.  Kuo toliau nuo centro nutola tos viršūnės,
+tuo geresnė kokybė.  Jei tempsim tik vieną ašį, plotas smarkiai nedidės.  Visos
+ašys vienodai svarbios.
+
+Tokios tezės yra teisingos:
+- gerų žmonių visada yra mažai
+- tai, ką turiu, yra tai, ką aš geriausiai galėjau gauti
+- jei gerai vadovausim ir teisingai padėsim, žmonių darbo rezultatai gerės
+
+- geriausių produktų būna geriausias dizainas
+- gerą dizainą gali padaryti žmonės, kurie išmano taikomąją sritį
+
+Proceso gerinimo principai
+--------------------------
+
+1. Visi didieji pasikeitimai turi prasidėti nuo aukščiausio lygio vadovybės
+   (top management)
+
+        jei programeriai sugalvos patys įsivesti CMMą, nieko neišeis.  Arba jei
+        vienam projekte naudos TSP, kitam PSP, vėl bus blogai.
+
+2. Visi turi būti įtraukti
+
+        jei pakeitimai liečia tik dalį žmonių, blogai, atsiranda du procesai --
+        vieną vykdo vienas padalinys, kitą vykdo kitas.
+        visi turi būti motyvuojami dalyvauti pasikeitimuose.
+
+3. Reikia žinoti tikslus ir žinoti, kur esame
+
+4. Keitimasis turi būti nuolatinis
+
+        negalima sustoti, reikia nuolatos gerinti
+        jei sustosim, bus rutina, žmonėms atsibos po poros metų
+
+5. Pokyčiai išlaikyti reikia nuolatinių pastangų
+
+        pakėlėm procesą iki sekančio CMM lygio, bet jei nesistengsim, jis pats
+        nukris atgal.
+
+6. Proceso gerinimui reikia investicijų
+
+        tai kainuoja $$$
+
+
+[mg: IMHO 1-as principas išplaukia iš 2 ir 6]
+
+Turi būti žmonės, kurie dirba su procesu (anksčiau minėta proceso grupė).  Tai
+neturi būti programerių hobis.
+
+Pakeitimus reikia daryti mažais žingsneliais.  (Pvz. peršokti per CMM lygį
+negalima.  O ir pereiti į kitą lygį reikia mažesniais žingsneliais.)
+
+Labai pabrėžiamas mokymas (training).
+
+
+Klaidingos nuostatos apie programų kūrimo procesą
+-------------------------------------------------
+
+- programų kūrimo veiklos valdymas skiriasi nuo kitokių darbų valdymo
+
+- kurti sistemą galima tada, kai yra aiškiai pasakyti vartotojo reikalavimai
+
+        nors šiais laikais visi žino, kad reikalavimai keičiasi nuolatos
+        ir niekas nemano, kad reikalavimai bus žinomi iš anksto
+
+- jei sistema praėjo testus, joje nėra klaidų
+
+        (negi kas nors iš tiesų taip galvoja???)
+
+- programų kokybės negalima išmatuoti
+
+        o čia jau įdomiau.  Yra ISO standartas, kalbantis apie produkto kokybės
+        matavimus.  Yra metrikos: pvz. rastų klaidų skaičius / KLOC.  Yra
+        statistikos (surastų/nesurastų klaidų santykis, nors čia įdomiai
+        sugalvota).
+
+- problemų šaknys yra techninės
+
+        pvz., "projektai žlunga dėl techninių problemų".
+        Yra Demingas, Curtis ir kt., kurie sako, kad problemos yra ne
+        techninės, o valdymo.
+
+- reikia geresnių žmonių -- tai prisidės prie problemų sprendimo
+
+        na taip, geresni žmonės padarys darbą geriau, bet ne čia pagrindinė
+        priežastis
+
+
+Pasipriešinimo formos
+---------------------
+
+- profesionalai mano, kad visos problemos yra techninės ir tik jie gali jas
+  išspręsti, todėl vadovai neturėtų kištis į problemų sprendimą
+
+        grr, projektas dega, o dabar sėdim čia meetinge su vadovais, kurie vis
+        tiek nieko nesupranta
+
+- vadovybė nesupranta techninių detalių, dėl to mano, kad egzistuoja techninis
+  sprendimas ir problemas turi spręsti technikai
+
+        "mano darbas vadovauti, o ne spręsti problemas"
+
+
+Procesų keitimo strategija
+--------------------------
+
+1. "Atšildymas" (refreezing?)
+
+   ledų pralaužimas, pasipriešinimo nugalėjimas
+   žmonių kategorijos pagal sociologinį elgesį:
+    - čempionai/pionieriai (greitai nusičiumpa visokias naujoves)
+    - sponsoriai (žmogus top managemente, į kurį galima kreiptis pagalbos)
+    - agentai/darytojai (tie, kurie realiai tai daro)
+
+2. Keitimas
+   - planuojam
+   - įgyvendinam
+   - skelbiam apie sėkmę (o taip pat apie tikslus)
+
+        komunikacija yra labai svarbi, žmonės turi jausti, kad vyksta gerėjimas
+
+        100 žmonių įmonėj turi būti 1-2 etatai atsakingi už procesą (šaltinis:
+        pasaulio statistika apie CMM diegimus)
+
+3. "Užšaldymas"
+
+    reikia imtis priemonių, kad pasiekti rezultatai bus užtvirtinti taip, kad
+    nenusiristumėm atgal
+
+    priemonės:
+     - sponsoriai turi išlikti, ko gero agentai irgi
+     - užfiksuojam procedūras (atsakingi žmonės ir t.t.)
+     - matavimai
+     - turi būti nustatyta mokymo programa
+       (trainingai turi būti nuolatiniai: žmonėms primenama, kaip elgtis)
+
+----------------------------------------------------------------------------
+Tue Nov 11 17:05:50 EET 2003
+
+
+Brandos/gebėjimo modeliai
+=========================
+
+CMM kalba apie organizacijos brandą.  CMMI jau daugiau šneka apie gebėjimus nei
+apie brandą.  Tradiciškai branda vartojama šnekant apie organizaciją, o
+gebėjimai -- šnekant apie procesą.
+
+SPICE (Software Process Improvement and Capability dEtermination) šneka apie
+programų kūrimo proceso gebėjimų nustatymą.
+
+CMM šneka ir apie nustatymą (tiek brandos tiek gebėjimo) ir apie gerinimą.
+
+ISO 12207 buvo šnekama apie programų gyvavimo ciklo procesus.  Ten buvo daug
+procesų (developmentas ir t.t.).  Norime juos atskirti nuo visuminio
+organizacijos vykdomo proceso, tad vadiname juos "vardiniais procesais", o
+visuminį vadiname "visuminiu procesu".
+
+Žodis "procesas" naudojamas trimis prasmėmis:
+1) visuminio proceso prasme (tiesiog praleidžiamas žodis "visuminis", jei tai
+   aišku iš konteksto) -- abstraktus daiktas
+2) konkretus organizacijos procesas (konkreti veiksmų seka vykdoma konkrečioje
+   organizacijoje; nebūtinai formaliai aprašytas)
+3) vykdomas procesas (visuminio proceso egzempliorius; analogija iš OS:
+   programa (~ konkretus organizacijos procesas) ir procesas (~ vykdomas
+   procesas); tuomet "visuminis procesas" būtų gal programų klasė)
+
+"vardinis procesas" yra dalis visuminio proceso.
+
+Gebėjimas -- proceso charakteristika, nusakanti laukiamų rezultatų
+pasiskirstymą.
+
+% įdomus paveiksliukas:
+%   Ox ašis -- biudžetas, laikas, klaidų skaičius
+%   tikslas -- kažkoks apribojimas Ox ašyje (norim, kad būtų kairiau)
+%   Oy ašis -- pasiskirtstymas (iš N projektų kur jie baigės)
+% žmonės tai statistiškai skaičiavo
+% CMM 2 lygyje tai daugmaž Gauso kreivė, kiek į dešinę už tikslo
+% CMM 5 lygyje tikslas kairiau, kreivė daug siauresnė ir pataiko tiksliai
+
+Galima sakyti, kad gebėjimas ~= tikimybė, kad proceso rezultatai atitiks
+tikslus.
+
+Gebėjimo lygis -- įvertis diskrečioje skalėje, nusakantis proceso gebėjimo
+padidėjimą.
+
+% ne tolydi skalė -- pereini nuo 1.4 iki 1.56 ir jau kitame lygyje, bet
+% kokybiniai šuoliai
+
+Kaip išmatuoti gebėjimo lygį?  Iš to ir kilo šitas mokslas.
+
+Branda -- organizacijos charakteristika, nusakanti kiek (angl. extent)
+organizacijos procesas yra apibrėžtas, valdomas, matuojamas, kontroliuojamas ir
+nuolatos gerinamas.
+
+Brandos lygis -- aiškiai apibrėžta pakopa organizacijos brandos evoliucijoje,
+nusakoma rinkiniu procesų, kurių tikslai turi būti įgyvendinti, kad būtų
+pasiektas tam tikras organizacijos proceso gebėjimas.
+
+Yra dviejų architektūrų brandos modeliai:
+1) pakopiniai -- leidžia išmatuoti organizacijos brandos lygį (skaičiu [1..5])
+2) tolydinis -- leidžia matuoti proceso gebėjimo lygį (po skaičių [1..5]
+   kiekvienam vardiniam procesui) == organizacijos gebėjimo profilį
+
+Čia šnekėsim tik apie tolydinį.  Remsimės SPICE 2 modeliu (ISO/IEC TR 15504) ==
+SPICE be numerio (1996 m.) + papildymai iš CMMo (1998 m.).  Tai nėra ISO
+standartas (gal po poros metų bus).
+
+Praktikos (practices) ISO 15504 ~= ISO 12207 veiklos (activities).  Kad
+parodytų, jog 15504 yra ne nurodantis, o vertinantis modelis.
+
+Tolydinis PKP brandos modelis
+=============================
+
+Yra dvi dimensijos: proceso dimensija ir gebėjimo dimensija.
+
+Proceso dimensija aprašo patį procesą: kokie dalykai turi būti daromi (programų
+kūrimo proceso veiklos).
+
+Gebėjimo dimensija nusako (leidžia išmatuoti) tų procesų gebėjimo lygį.
+
+Proceso dimensija -- tos pačios ISO 12207 veiklos (gal kitaip sugrupuotis, bet
+iš esmės 1:1).  Grupavimas toks:
+
+  Procesų katerogijos:
+  - Customer-Supplier
+    procesai: Acquisitio, Supply
+  - Engineering
+    procesai: Development, Maintenance, Operation
+  - Support
+    procesai: visi pagalbiniai
+  - Management
+    procesai: Valdymo
+  - Organization
+    procesai: visi organizaciniai (infrastruktūros, trainingo, etc)
+
+  Kiekvienas (vardinis) procesas aprašomas jam keliamais tikslais.  Taip pat (bet
+  jau ne normatyvioj o informatyvioj dalyje) pateikiami proceso vykdymo
+  indikatoriai:
+   - bazinės praktikos (~= veiklos)
+   - daromi produktai ir jų charakteristikos
+
+Gebėjimo dimensija:
+
+  Yra gebėjimo lygiai ([0..5]), juose rašomi proceso atributai (vardinis
+  procesas siekia šį gebėjimo lygį, jei jis pasižymi visais šio ir mažesnių
+  lygių atributais)
+
+  Taip pat yra gebėjimo indikatoriai:
+   - valdymo praktikos ir jų atlikimo charakteristikos
+   - resursų ir infrastruktūros charakteristikos
+
+  Gebėjimo lygiai:
+   0) nevykdomas (incomplete) -- kažkoks procesas vykdomas tik dalinai (ne
+      visos būtinos veiklos yra atliekamos).  Atributų nėra.
+   1) vykdomas (performed) -- vienas proceso atributas:
+        PA1.1 -- Proceso vykdymo atributas
+          proceso bazinės praktikos yra vykdomos
+          valdymo praktikos, rodančios, kad šis atributas įgyvendinamas
+            MP1.1.1 identifikuoti bazinių praktikų inputus ir outputus
+            MP1.1.2 užtikrinama, kad identifikuojama darbo apimtis
+            MP1.1.3 užtikrinama, kad bazinės praktikos yra atliekamos
+   2) valdomas (managed)
+        PA2.1 -- Vykdymo valdymo atributas
+          proceso vykdymo valdymo praktykos yra vykdomos
+            MP2.1.1 identifikuojami proceso atlikimo tikslai (per kiek laiko,
+                    kokios apimties etc.)
+            MP2.1.2 proceso vykdymas planuojamas
+            MP2.1.3 paskiriamos atsakomybės ir įsipareigojimai
+            MP2.1.4 valdomas veiklų atlikimas
+        PA2.2 -- Darbo produktų valdymo atributas
+            MP2.2.1 identifikuojami reikalavimai darbo produktams
+            MP2.2.2 valdoma darbo produktų dokumentacija, atliekamas
+                    konfigūracijų ir pakeitimų valdymas
+            MP2.2.3 nustatomos darbo produktų tarpusavio priklausomybės
+                    (dependencies)
+            MP2.2.4 valdoma darbo produktų kokybė
+----------------------------------------------------------------------------
+Mon Nov 17 17:07:17 EET 2003
+
+   3) apibrėžtas (defined)
+        PA3.1 -- Proceso apibrėžimo atributas
+          nurodo, kad procesas vykdomas pagal dokumentuotą proceso apibrėžimą 
+            MP3.1.1 identifikuojamas organizacijos standartinis procesas
+            MP3.1.2 standartinis procesas įgyvendinamas ir adaptuojamas
+            MP3.1.3 renkami proceso vykdymo duomenys
+            MP3.1.4 proceso analizavimas
+        PA3.2 -- Proceso resursų apibrėžimo atributas
+            MP3.2.1 identifikuoti ir dokumentuoti roles ir kompetencijas
+            MP3.2.2 identifikuoti ir dokumentuoti proceso infrastruktūros
+                    reikalavimus
+            MP3.2.3 teikiami ir paskiriami resursai procesui vykdyti
+            MP3.2.3 teikiama/sukuriama reikiama infrastruktūra
+   4) kiekybiškai valdomas (predictable [SPICE]/quantitatively managed [CMM])
+        PA4.1 -- Proceso matavimo atributas
+            MP4.1.1 identifikuoti produkto ir proceso tikslus ir metrikas
+            MP4.1.2 rinkti produkto ir proceso matavimus
+            MP4.1.3 analizuoti tendencijas
+            MP4.1.4 matuoti proceso gebėjimą
+        PA4.2 -- Proceso kontrolės atributas
+          vykdymo duomenys turi būti analizuojami ir naudojami proceso valdymui
+            MP4.2.1 identifikuoti išmatuojamas charakteristikas ir naudoti
+                    matavimo metodikas
+            MP4.2.2 rinkti matavimus ir identifikuoti proceso kontrolės
+                    parametrus
+            MP4.2.3 kontroliuoti proceso vykdymą naudojant surinktus įverčius
+                    ir identifikuoti veiksmus, kurie pagerintų proceso vykdymą
+   5) nuolatos gerinamas (optimized; "komunizmas")
+        PA5.1 -- Proceso keitimo atributas
+            MP5.1.1 identifikuoti standartinio proceso pakeitimai
+            MP5.1.2 įvertinamas siūlomų pakeitimų poveikis
+            MP5.1.3 apibrėžiama įgyvendinimo strategija
+            MP5.1.4 įgyvendinami pakeitimai
+            MP5.1.5 įvertinamas pakeitimų efektyvumas/nauda
+        PA5.2 -- Proceso nuolatinio gerinimo atributas 
+            MP5.2.1 nustatomi proceso gerinimo tikslai
+            MP5.2.2 identifikuojami/analizuojami problemų šaltiniai
+            MP5.2.3 įdiegiami pagerinimai ir t.t.
+            ir t.t.
+
+----------------------------------------------------------------------------
+Tue Nov 25 17:00 (paskaitą praleidau, persirašiau)
+
+Pakopinis PKP brandos modelis
+=============================
+
+Tolydiniame brandos modelyje visi vidiniai procesai buvo matuojami atskirai.
+
+Pakopinių architektūrų, pvz.:
+  CMM-SW (1993 m.)
+  CMMI-SW/SR/AI/PPD v1.1 (2001 m.)
+
+Čia visur sakoma ne „procesas“, o „proceso sritis“ -- rinkinys susijusių
+veiklų, kurios kartu padeda pasiekti tikslus, laikomus svarbiausiais
+proceso gebėjimui pagerinti.
+
+Organizacija yra tam tikrame lygyje, jei ji vykdo tam tikrą aibę veiklų (iš
+skirtingų vardinių procesų).
+
+Proceso sritis ir bus rinkinukas tam tikrų veiklų (iš skirtingų procesų).
+Proceso sričiai apibrėžti tikslai.  Kiekvienas tikslas skaidomas į 5 dalis:
+
+  - įsipareigojimas (commitment to perform)
+      kokioje būsenoje turi būti proceso sritis, kad būtų galima vykdyti
+      proceso sritį.
+  - pasirengimas (ability)
+      planuoti vykdymą ir pan.
+  - veikla (activities)
+  - įgyvendinimo valdymas (directing implementation)
+  - įgyvendinimo kontrolė (verification)
+
+Skaidrės pavyzdyje:
+
+  Projekto planavimas -- proceso sritis.
+  Jo tikslai: SG 1, SG 2, SG 3 ir t.t.
+  Kiekvieno tikslo veiklos yra SP 1.1, SP 1.2 ir t.t.
+  Pvz. GG 2 - bendrieji tikslai.
+  Jie yra tokie patys kiekvienai proceso sričiai.  Jų yra 5.
+  Kiekvienas dalinamas į 1 iš 4 dalių (CO, AB, DI, VE)
+
+  Proceso sritis:
+    SG1      \
+      SP1.1   |
+      SP1.2    \ visi
+      ...      / skirtingi
+    SG2       |
+      ...    /
+    GG1      \
+      CO1     |
+      AB1      \ visi
+      ...      / vienodi
+    GG2       |
+      ...    /
+
+Dabar proceso sritys sudalintos į lygius:
+
+  L5  ...
+  L4  ...
+  L3  ...
+  L2  „projektavimas ir planavimas", "kontrolės valdymas" ir t.t.
+  L1  ad-hoc procesai(?)
+
+Viso CMMI modelyje yra 25 projekto sritys, kiti modeliai turi mažiau arba
+daugiau.
+
+Žaidimas iš skaidrių: „kaip priskirti lygiams“:
+
+  5. Defektų prevencija, proceso automatizavimas
+  4. Procesų standartų apibrėžimas, duomenų rinkimas ir analizė
+  3. Kokybės valdyma, proceso inspektavimas, projektų testavimas (planavimas ir
+     pan.)
+  2. Projektų valdymas, kokybės užtikrinimas, konfigūracijų valdymas 
+
+CMMI
+====
+(dėstė Jaroslavas)
+
+CMMI gimė iš:
+  - SW-CMM
+  - EIA 731 (SECM)
+  - IPD-CMM
+
+CMMI yra sudarytas iš 2 dalių (pakopinės ir tolydinės).
+
+Pakopinė sudaryta iš 5 ML (Maturity Level).
+Tolydinė sudaryta iš 5 CL (Capability Level).
+
+Proceso srities (PA - Process Area) schematinis vaizdavimas:
+
+  +----+
+  | PA |--------------+--------------+-------------+
+  +----+          ____|______    ____|____      ___|____
+    ||           |  tikslo   |  |įvadinės |    |susijusi|
+    | \          |pareiškimas|  | pastabos|    |   PA   |
+    |   \         ~~~~~~~~~~~    ~~~~~~~~~      ~~~~~~~~
+    |     \
+    |       -----------------------.
+    |                               \
+   .+------------.                  .+----------.
+   | Specifiniai | <-- esminiai --> | Bendrieji |
+   | tikslai     |                  | tikslai   | <--- vienodi visom PA
+   `---+--+---+--'                  `--+--+--+--'
+      /    \   \                      /   |   \
+     \/   _\/_  \|                   \/  \|/   \|
+      __--    --__      patarimai,   __--   --__
+  __-- Specifinės --__    kaip   __--  Bendros  --__
+    --_praktikos__--    pasiekti   --_praktikos_--
+        --____--         tikslus       --___--
+       /        \                         |
+  ___--___      ___---___             ____|______
+ /Tipiniai\    /         \           /  Bendri   \
+| išėjimo  |  |Pagrindinis|         |patikslinimai|
+ \produktai    \produktas/           \___________/
+   ^^--^^        ^^---^^
+
+
+Pvz.: PA -- Reikalavimų valdymas
+
+  vienas iš jo spec. tikslų (SG) turi tam tikrus produktus
+
+  Kiekvienas specifinis tikslas priklauso 1 ir tik 1 proceso sričiai
+
+  Kiekvienas bendras tikslas priklausyti gali kiekvienai proceso sričiai
+  (tai priklauso nuo brandos lygio, jei žiūrim 2 lygį, tai vienus tų
+  bendrų tikslų reikės tenkinti, jei 3 lygį, tai jų bus daugiau).
+
+Tolydiniame:
+
+  +------+            +------+                    +------+
+  | PA 1 |            | PA 2 |        ...         | PA n |
+  +------+            +-+--+-+                    +------+
+                       /    \
+                    /          \
+                 |_              _|
+         _______                    _______
+        | spec. |   <-__    __->   |bendri |
+        |tikslai|   <--- CL --->   |tikslai|
+         ~~~~~~~    <-^^    ^^->    ~~~~~~~
+
+
+Čia lyg kiekvienas tikslas (spec. ir bendr.) gali būti vertinamas pagal
+tolydinį, t.y. kiekvienam tikslui galima pasakyti kuriam lygyje (CL) tas
+tikslas yra.
+
+----------------------------------------------------------------------------
+Tue Dec  2 17:23:36 EET 2003
+
+PSP ir TSP
+==========
+(dėstė Arūnas)
+
+Sukūrė Humphrey.  Kai jis dirbo su CMMu, susilaukė daug priekaištų, kad tai
+geras dalykas, bet tinka tik didelėms organizacijoms.  Tad jis sugalvojo CMM
+level 5 lygio dalyką, tinkantį vienam asmeniui.  1995 m. pasirodė pirma
+versija, pasklido po universistetus.  Pats procesas dabar yra naudojamas, bet
+nelabai dažnai.
+
+PSP apima visą sistemų gyvavimo ciklą.
+
+(yra slaidai, kurių beveik nematau iš šio auditorijos užkampio)
+
+Bazinis procesas (šituos aktivičius darysim bet kada):
+  * planavimas
+  * reikalavimų analizė
+  * projektavimas
+  * kodavimas
+  * testavimas
+  * rezultatų analizė
+
+papildomi PSP lygiai prideda papildomus aktivičius
+
+- PSP0
+    * laiko fiksavimas
+        (griežtas time trackingas: kiekviena pertraukėlė, kiekviena užduotis)
+    * defektų fiksavimas
+        (issue trackingas)
+    * defektų tipų standartas
+        (apsibrėžiam galimus defektų tipus: bugas, kritinis bugas, wishlistas ir t.t.)
+- PSP0.1
+    * kodavimo standartas
+        (yep, coding standard)
+    * dydžio fiksavimas
+        (trackinam? programų/komponentų dydį kodo eilutėmis, kad galėtumėme
+        tiksliau ateityje prognozuoti, kiek laiko užtruks ką parašyti)
+    * proceso gerinimo pasiūlymai
+        (ką aš galėčiau daryti geriau?  kokios mano tradicinės klaidos?)
+- PSP1
+    * dydžio įvertinimas
+        (turim istorinius duomenis, galim estimatinti)
+    * testavimo dokumentavimas
+        (procedūros, kaip atlikti testavimą, kokias formas pildyti ir t.t.)
+        (Humphrey šiuo klausimu prirašė 300 psl. instrukciją, skirtą
+        studentams...)
+- PSP1.1
+    * užduočių planavimas
+        (susiplanuoti, ką reikia padaryti ir estimatinti, kiek tai užtruks)
+    * darbo grafiko planavimas
+- PSP2
+    * kodo peržiūros
+        (labai stipriai stumia.  Pagal Humphrey pateikiamas ataskaitas
+        testavimo metu surandama klaidų tūkstančiais procentų mažiau nei kodo
+        peržiūrų metu.  Aš linkęs tikėti.)
+        (kodo peržiūra atliekama iki kompiliacijos)
+    * dizainų peržiūros
+- PSP2.1
+    * dizainų šablonai
+        (nieko bendro su GoF Design Patterns.  Formalizuojama, kokioje formoje
+        turi būti pateikta dizaino informacija.)
+
+Dar yra trečias PSP lygis, ciklinis -- jei reikia tą patį procesą kartoti kelis
+kartus.  Ten naujų veiklų neįvedama.  Peržiūrimi projektų planai, problemų
+ataskaitos.  Proceso peržiūros.  PSP3 pažvelgia ir kiek toliau, užsimenama apie
+strategiją ir kaip PSP būtų galima pritaikyti dirbant komandoje.
+
+PSP prideda laaaabai daug popierizmo ir rankomis to padaryti praktiškai
+neįmanoma.  Reikia automatizuotų toolsų.
+
+Prognozavimas.  Galima naudoti sudėtingesnius statistinius metodus, bet užtenka
+ir aritmetinio vidurkio.
+
+Dabar TSP.
+
+Viskas labai smarkiai formalizuota.  Rolės, pareigos, atsakomybė.
+
+(Pora diagramų su daug dėžučių ir rodyklėlių.)
+
+----------------------------------------------------------------------------
+Tue Dec  9 17:06:11 EET 2003
+
+
+RUP
+===
+(dėstė Lina)
+
+Rational Unified Process
+
+Objektiškai orientuotas, labai susijęs su UML, komercinis, palaikomas įrankių,
+palengvinantis darbą komandoje, konfigūruojamas, apimantis geriausias programų
+kūrimo praktikas.
+
+RUP yra procesas, bet nėra metodika -- iki metodikos RUPui trūksta notacijos.
+
+RUP + UML jau metodika programų sistemoms kurti.
+
+RUP komercinis -- t.y. yra kažkokie apribojimai naudojimui.  Yra nekomercinis
+variantas UP.
+
+BTW Rational firmutę nusipirko IBMas.
+
+Istorija:
+
+  1967 m. Ivaras Jacobsenas, dirbo Ericssone, sugalvojo kažkokį metodą (UML
+  užuomazgos).
+
+  1976 m. Specification and Description Language -- pirma objektinio
+  modeliavimo kalba.
+
+  1987 m. Jacobsenas sukuria firmą Objectory ir programų kūrimo procesą
+  Objectory su įrankiais bei konsultacijomis.
+
+  1995 m. Objectory firmutę nusipirko Rational kompanija.  Jie turėjo savo
+  metodikas.  Sujungė Objectory su tuo, ką patys turėjo ir 1997 m. pagamino
+  Rational Objectory Process.
+
+  1997 m. UML tapo industrijos standartu.
+
+  1998 m. atsirado Rational Unified Process.  Komercinis.
+
+  1999 m. Jacobsenas išleido knygą apie Unified Software Development Process
+  (UP) -- nekomercinis RUP variantas.
+
+  UPui toolsus rašė visi, RUPui tik Rational.  UPas stovi, RUPas vystosi.
+
+  2001 m. RUP 2001 updeitas.
+
+RUP įrankiai: Rational Rose, dokumentacija, visokie testavimo įrankiai,
+reikalavimų valdymo įrankiai, Rational CASE ir t.t.
+
+RUP aksiomos:
+
+  - pagrįstas užduotimis (Use-Case Driven)
+
+    - reikalavimai kuriamai sistemai išreiškiami per užduotis
+
+  - akcentuojama architektūra (Architecture-centric)
+
+    - kuriant sistemą svarbu sukonstruoti patikimą architektūrą.  Kokybiška
+      architektūra yra kokybiškos sistemos pagrindas.
+
+  - iteratyvus ir augantis (Iterative and incremental)
+
+    - iteratyvus procesas suskaldomas į smulkeles dalis (subprojektus), kurios
+      taip pat laikomos projektais
+
+    - augantis: kiekvienos dalelės įgyvendinimas prisideda prie viso projekto
+      įgyvendinimo
+
+Geriausios praktikos ir RUP:
+
+  - iteratyvus PĮ kūrimas
+
+  - reikalavimų valdymas
+
+  - komponentinė architektūra
+
+  - vizualus PĮ modeliavimas (diagramos)
+
+  - nuolat tikrinama PĮ kokybė
+
+  - kontroliuojami PĮ pasikeitimai
+
+RUP veikimo schema:
+
+  graži diagrama.
+
+RUP iteracijos:
+
+  - iteracijos: cikliukai.
+  - visos komponentės vystomos lygiagrečiai
+  - kiekvienos iteracijos gale turime visą vykdomą sistemos versiją
+  - integravimas daromas iteracijos pabaigoje
+  - kuo trumpesnės iteracijos, tuo geriau (proto ribose)
+  - kiekvienoje iteracijoje vykdomi visi RUP procesai (vėlesnėse iteracijose
+    vis mažiau dėmesio analizei, dizainui ir vis daugiau realizavimui ar
+    diegimui, bet vis tiek visi procesai vykdomi)
+
+        kiekvienos iteracijos pabaigoje vykdomas testavimas
+        tiksliau, jis vykdomas visą laiką, bet link iteracijos pabaigos
+        suintensyvėja
+
+RUP fazės:
+
+  - pradžia (inception)
+
+      - nustatyti sistemos sritį bei jos ribas
+      - išskirti svarbiausias užduotis (use cases; svarbiausius 10%)
+      - pateikti bent vieną galimą sistemos architektūrą
+      - įvertinti sistemos kaštus
+      - įvertinti pagrindines rizikas
+
+  - paruošimas (elaboration)
+
+      - susikurti veikiantį architektūrinį pagrindą (prasideda programavimas)
+        - sukurti koncepcinį modelį
+        - sukurti technologinę platformą)
+      - išskirti sistemos užduotis - funkcinius reikalavimus (> 80%)
+
+          NB RUPo trūkumas: siplnai atsižvelgiama į nefunkcinius reikalavimus
+          (saugumo, interfeiso, ergonomiškumo ir t.t. reikalavimai -- ne "ką"
+          daryti, o "kaip" daryti.)
+
+          Aha: "sistema turi būti patogi" -- nefunkcinis reikalavimas.  Ką
+          reiškia "patogi"?  Kai tą išsiaiškini, gali parašyti konkrečius jau
+          funkcinius reikalavimus.  RUPas neduoda frameworko tokiam nefunkcinių
+          reikalavimų pervedimui į funkcinius.
+
+      - spręsti didžiausią riziką keliančias problemas, įvertinti kitas rizikas
+      - išskirti kokybės parametrus
+
+          ką laikysime kokybiška sistema?  (web puslapio atidarymas per <5 sek.
+          ir t.t.)
+
+      - sukurti detalų konstravimo fazės planą
+      - suformuluoti resursų poreikius (laikas, įranga, darbuotojai, biudžetas
+        ir pan.)
+
+  - konstravimas (construction)
+
+      - išskirti likusius reikalavimus, baigti projektinį modelį
+      - iš architektūrinio pagrindo sukurti veikiančią sistemą (beta versiją)
+
+      čia daugiausia vykdomas programavimas
+
+  - perėjimas (transition)
+
+      - ištaisyti klaidas
+      - įdiegti sistemą
+      - išskilus nenumatytoms problemoms modifikuoti PĮ
+      - baigti kurti naudotojo vadovus ir kitą dokumentaciją
+      - paruošti naudotojus eksploatuoti sistemą
+      - konsultuoti naudotojus
+      - atlikti projekto vykdymo analizę
+
+RUP statinė struktūra:
+
+  - rolės (roles)
+
+      žmogaus ar žmonių grupės pareigos, atsakomybė.
+      vienas žm. gali turėti kelias roles; vieną rolę gali vykdyti daug žmonių
+
+  - užduotys (activities)
+
+      darbas, kurį turi atlikti rolė
+
+  - artefaktai (artifacts)
+
+      informacija, kuri kuriama ar naudojama projekto eigoje
+
+  - veiklos (workflows)
+
+      tam tikra užduočių seka, kurios laikantis pasiekiamas žymesnis rezultatas
+
+      pagrindinės (core) veiklos:
+        - 6 inžinerinės: business modeling, requirements, A/D, impl, test, depl.
+        - 3 palaikančios: Proj Mgmt, CfgMgmt, aplinkos?
+
+Pagrindinės (core) veiklos:
+
+  - Inžinerinės (engineering):
+
+    - verslo logikos modeliavimo (business modeling)
+
+        use cases
+
+    - reikalavimų (requirements)
+
+        reikalavimai: užduočių diagramos
+
+    - analizės ir projektavimo (analysis and design)
+
+        turi būti apibrėžtas coding style
+        projektinis modelis: abstraktus išeities kodas ("griaučiai")
+
+    - realizavimo (implementation)
+
+        rašomas išeities kodas ir unit testai
+
+    - testavimo (testing)
+
+        patikrinama sąveika tarp objektų, ar teisinga komponentų integracija,
+        ar visi reikalavimai realizuoti, nustatomi defektai
+
+    - diegimo (deployment)
+
+        sukomplektuojama parduodama versiją, PĮ diegiama naudotojams
+
+  - Palaikančiosios (support) veiklos:
+
+    - projekto valdymas (project management)
+
+        sprendžiami tikslų konfliktai, valdoma rizika, užtikrinama, kad būtų
+        laiku ir biudžeto ribose, užtikrinama kokybė
+
+    - konfigūracijos ir pasikeitimų valdymo (configuration and change
+      management)
+
+    - aplinkos (environment?)
+
+        PĮ kūrimo organizacimas susiejamas su RUP palaikančia PĮ; kūrimo
+        aplinka apima ir procesą, ir įrankius.
+
+
+Egzas sausio 19 d., 9 val. ryto
+----------------------------------------------------------------------------

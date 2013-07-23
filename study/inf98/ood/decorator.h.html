@@ -1,0 +1,265 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-13">
+  <title>decorator.h</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<pre>
+<font color="0000ff"><strong>#ifndef DECORATOR_H_INCLUDED</strong></font>
+<font color="0000ff"><strong>#define DECORATOR_H_INCLUDED</strong></font>
+
+<font color="0000ff"><strong>#include <font color="#008000">&lt;string&gt;</font></strong></font>
+
+<font color="#444444">// --------------------------------------------------------------------------</font>
+
+<font color="#444444"><i>/**
+ * @addtogroup interfaces Interfeisai
+ * @{
+ */</i></font>
+
+<strong>class</strong> <font color="#2040a0">Decorator</font><font color="4444FF">;</font>
+
+<font color="#444444"><i>/**
+ * Abstraktus dokumentas.  Galima jį peržiūrinėti, spausdinti, redaguoti.
+ *
+ * Taip pat pateikiamos funkcijos darbui su dekoratoriais.
+ */</i></font>
+<strong>class</strong> <font color="#2040a0">Document</font> <font color="4444FF"><strong>{</strong></font>
+<strong>public</strong><font color="4444FF">:</font>
+
+    <font color="#444444"><i>/** Konstruktorius. */</i></font>
+    <font color="#2040a0">Document</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font><font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444"><i>/** Virtualus destruktorius. */</i></font>
+    <strong>virtual</strong> ~<font color="#2040a0">Document</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Darbas su dokumentais</font>
+
+    <font color="#444444"><i>/** Galime dokumentą peržiūrėti. */</i></font>
+    <strong>virtual</strong> <strong>void</strong> <font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+
+    <font color="#444444"><i>/** Galime dokumentą spausdinti. */</i></font>
+    <strong>virtual</strong> <strong>void</strong> <font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+
+    <font color="#444444"><i>/** Galime dokumentą redaguoti. */</i></font>
+    <strong>virtual</strong> <strong>void</strong> <font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Darbas su dekoratoriais</font>
+
+    <font color="#444444"><i>/**
+     * Grąžina nurodyto tipo dekoratorių.
+     *
+     * Jei dekoratorių grandinėje yra daugiau nei vienas nurodyto tipo
+     * dekoratorius, gražina išoriškiausią.  Jei nurodyto tipo dekoratoriaus
+     * nėra, grąžina 0.
+     *
+     * Taisyklės primena dynamic_cast&lt;&gt;, t.y., jei objektas yra dekoruotas ne
+     * pačios DecoratorType klasės, bet iš jos išvestos poklasės dekoratoriumi,
+     * jis bus grąžinamas.
+     *
+     * Jei norite rasti visus nurodyto tipo dekoratorius, darykite šitaip:
+     *
+     * &lt;pre&gt;
+     *     for (Document* tmp = document;
+     *          DecoratorType* d = tmp-&gt;decorator&lt;DecoratorType&gt;();
+     *          tmp = d-&gt;next())
+     *     {
+     *         // do something with d
+     *     }
+     * &lt;/pre&gt;
+     */</i></font>
+    <strong>template</strong><font color="4444FF">&lt;</font><strong>typename</strong> <font color="#2040a0">DecoratorType</font><font color="4444FF">&gt;</font> <font color="#2040a0">DecoratorType</font><font color="4444FF">*</font> <font color="#2040a0">decorator</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444"><i>/**
+     * Grąžina dokumentą be nurodyto tipo dekoratoriaus.
+     *
+     * Parametras all sako, ar reikia išmesti visus nurodyto tipo dekoratorius
+     * (jei true), ar tik išoriškiausią (jei false).
+     *
+     * Išmesti dekoratoriai (jei tokių buvo) sunaikinami.
+     *
+     * Taisyklės primena dynamic_cast&lt;&gt;, t.y., jei objektas yra dekoruotas ne
+     * pačios DecoratorType klasės, bet iš jos išvestos poklasės dekoratoriumi,
+     * jis bus išmetamas.
+     */</i></font>
+    <strong>template</strong><font color="4444FF">&lt;</font><strong>typename</strong> <font color="#2040a0">DecoratorType</font><font color="4444FF">&gt;</font> <font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">unwrap</font><font color="4444FF">(</font><strong>bool</strong> <font color="#2040a0">all</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444"><i>/**
+     * Grąžina kitą objektą dekoratorių grandinėje.  Jei objektas nedekoruotas,
+     * grąžina 0.
+     */</i></font>
+    <strong>virtual</strong> <font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next</font><font color="4444FF">(</font><font color="4444FF">)</font> <strong>const</strong> <font color="4444FF"><strong>{</strong></font> <strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+
+<strong>private</strong><font color="4444FF">:</font>
+
+    <font color="#444444"><i>/**
+     * Nustato kitą objektą dekoratorių grandinėje.
+     *
+     * Funkcija reikalinga norint realizuoti dekoratoriaus išmetimą iš
+     * sąrašo unwrap metode.
+     */</i></font>
+    <strong>virtual</strong> <strong>void</strong> <font color="#2040a0">setNext</font><font color="4444FF">(</font><font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font><font color="4444FF"><strong>}</strong></font>
+
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444">/// @}</font>
+
+<strong>template</strong><font color="4444FF">&lt;</font><strong>typename</strong> <font color="#2040a0">DecoratorType</font><font color="4444FF">&gt;</font>
+<font color="#2040a0">DecoratorType</font><font color="4444FF">*</font> <font color="#2040a0">Document</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">decorator</font><font color="4444FF">(</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">DecoratorType</font><font color="4444FF">*</font> <font color="#2040a0">p</font> <font color="4444FF">=</font> <strong>dynamic_cast</strong><font color="4444FF">&lt;</font><font color="#2040a0">DecoratorType</font><font color="4444FF">*</font><font color="4444FF">&gt;</font><font color="4444FF">(</font><strong>this</strong><font color="4444FF">)</font><font color="4444FF">)</font>
+	<strong>return</strong> <font color="#2040a0">p</font><font color="4444FF">;</font>
+    <strong>else</strong> <strong>if</strong> <font color="4444FF">(</font><font color="#2040a0">Document</font> <font color="4444FF">*</font> <font color="#2040a0">n</font> <font color="4444FF">=</font> <font color="#2040a0">next</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">)</font>
+	<strong>return</strong> <font color="#2040a0">n</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">decorator</font><font color="4444FF">&lt;</font><font color="#2040a0">DecoratorType</font><font color="4444FF">&gt;</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>else</strong>
+	<strong>return</strong> <font color="#FF0000">0</font><font color="4444FF">;</font>
+<font color="4444FF"><strong>}</strong></font>
+
+<strong>template</strong><font color="4444FF">&lt;</font><strong>typename</strong> <font color="#2040a0">DecoratorType</font><font color="4444FF">&gt;</font>
+<font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">Document</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">unwrap</font><font color="4444FF">(</font><strong>bool</strong> <font color="#2040a0">all</font><font color="4444FF">)</font>
+<font color="4444FF"><strong>{</strong></font>
+    <strong>if</strong> <font color="4444FF">(</font><strong>dynamic_cast</strong><font color="4444FF">&lt;</font><font color="#2040a0">DecoratorType</font><font color="4444FF">*</font><font color="4444FF">&gt;</font><font color="4444FF">(</font><strong>this</strong><font color="4444FF">)</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font>
+	<font color="#2040a0">Document</font> <font color="4444FF">*</font> <font color="#2040a0">n</font> <font color="4444FF">=</font> <font color="#2040a0">next</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+	<font color="#2040a0">setNext</font><font color="4444FF">(</font><font color="#FF0000">0</font><font color="4444FF">)</font><font color="4444FF">;</font>
+	<strong>delete</strong> <strong>this</strong><font color="4444FF">;</font>
+	<strong>return</strong> <font color="#2040a0">n</font><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font> <strong>else</strong> <font color="4444FF"><strong>{</strong></font>
+	<font color="#2040a0">setNext</font><font color="4444FF">(</font><font color="#2040a0">next</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">unwrap</font><font color="4444FF">&lt;</font><font color="#2040a0">DecoratorType</font><font color="4444FF">&gt;</font><font color="4444FF">(</font><font color="#2040a0">all</font><font color="4444FF">)</font><font color="4444FF">)</font><font color="4444FF">;</font>
+	<strong>return</strong> <strong>this</strong><font color="4444FF">;</font>
+    <font color="4444FF"><strong>}</strong></font>
+<font color="4444FF"><strong>}</strong></font>
+
+<font color="#444444">/// @{</font>
+
+<font color="#444444"><i>/**
+ * Abstraktus dekoratorius.
+ */</i></font>
+<strong>class</strong> <font color="#2040a0">Decorator</font> <font color="4444FF">:</font> <strong>public</strong> <font color="#2040a0">Document</font> <font color="4444FF"><strong>{</strong></font>
+
+    <font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next_</font><font color="4444FF">;</font>		<font color="#444444">///&lt; Dekoruotas objektas</font>
+
+<strong>public</strong><font color="4444FF">:</font>
+
+    <font color="#444444"><i>/**
+     * Konstruktorius.
+     *
+     * Dekoruotas objektas @a next gali būti 0, bet tik tuo atveju, jei
+     * dekoratorių naudosite kaip parametrą unwrap arba decorator funkcijoms ir
+     * niekam daugiau.
+     */</i></font>
+    <font color="#2040a0">Decorator</font><font color="4444FF">(</font><font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next</font><font color="4444FF">)</font>
+	<font color="4444FF">:</font> <font color="#2040a0">next_</font><font color="4444FF">(</font><font color="#2040a0">next</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font><font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444"><i>/** Destruktorius.  Taip pat sunaikina ir dekoruotą objektą. */</i></font>
+    ~<font color="#2040a0">Decorator</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF">=</font> <font color="#FF0000">0</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Darbas su dokumentu</font>
+    <strong>void</strong> <font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font> <font color="#2040a0">next_</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+    <strong>void</strong> <font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font> <font color="#2040a0">next_</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+    <strong>void</strong> <font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font> <font color="#2040a0">next_</font><font color="4444FF">-</font><font color="4444FF">&gt;</font><font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444">// Darbas su dekoratoriais</font>
+    <font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next</font><font color="4444FF">(</font><font color="4444FF">)</font> <strong>const</strong> <font color="4444FF"><strong>{</strong></font> <strong>return</strong> <font color="#2040a0">next_</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+
+<strong>private</strong><font color="4444FF">:</font>
+
+    <strong>void</strong> <font color="#2040a0">setNext</font><font color="4444FF">(</font><font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font> <font color="#2040a0">next_</font> <font color="4444FF">=</font> <font color="#2040a0">next</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444">/// @}</font>
+
+<font color="#444444">// --------------------------------------------------------------------------</font>
+
+<font color="#444444"><i>/**
+ * @addtogroup documents Konkretūs dokumentai
+ * @{
+ */</i></font>
+
+<font color="#444444"><i>/**
+ * Tekstinis dokumentas.
+ */</i></font>
+<strong>class</strong> <font color="#2040a0">TextDocument</font> <font color="4444FF">:</font> <strong>public</strong> <font color="#2040a0">Document</font> <font color="4444FF"><strong>{</strong></font>
+<strong>public</strong><font color="4444FF">:</font>
+
+    <font color="#444444">// Darbas su dokumentais</font>
+    <strong>void</strong> <font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>void</strong> <font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>void</strong> <font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444"><i>/**
+ * Paveiksliukas.
+ */</i></font>
+<strong>class</strong> <font color="#2040a0">Image</font> <font color="4444FF">:</font> <strong>public</strong> <font color="#2040a0">Document</font> <font color="4444FF"><strong>{</strong></font>
+<strong>public</strong><font color="4444FF">:</font>
+
+    <font color="#444444">// Darbas su dokumentais</font>
+    <strong>void</strong> <font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>void</strong> <font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>void</strong> <font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444">/// @}</font>
+
+<font color="#444444">// --------------------------------------------------------------------------</font>
+
+<font color="#444444"><i>/**
+ * @addtogroup decorators Konkretūs dekoratoriai
+ * @{
+ */</i></font>
+
+<font color="#444444"><i>/**
+ * Nemodifikuojamas dokumentas.
+ */</i></font>
+<strong>class</strong> <font color="#2040a0">ReadOnly</font> <font color="4444FF">:</font> <strong>public</strong> <font color="#2040a0">Decorator</font>
+<font color="4444FF"><strong>{</strong></font>
+<strong>public</strong><font color="4444FF">:</font>
+
+    <strong>explicit</strong> <font color="#2040a0">ReadOnly</font><font color="4444FF">(</font><font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next</font><font color="4444FF">)</font>
+	<font color="4444FF">:</font> <font color="#2040a0">Decorator</font><font color="4444FF">(</font><font color="#2040a0">next</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font><font color="4444FF"><strong>}</strong></font>
+
+    <strong>void</strong> <font color="#2040a0">edit</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444"><i>/**
+ * Anotacija skaitytojui.
+ */</i></font>
+<strong>class</strong> <font color="#2040a0">Annotation</font> <font color="4444FF">:</font> <strong>public</strong> <font color="#2040a0">Decorator</font>
+<font color="4444FF"><strong>{</strong></font>
+    <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">string</font> <font color="#2040a0">annotation_</font><font color="4444FF">;</font>
+
+<strong>public</strong><font color="4444FF">:</font>
+
+    <font color="#2040a0">Annotation</font><font color="4444FF">(</font><font color="#2040a0">Document</font><font color="4444FF">*</font> <font color="#2040a0">next</font>, <strong>const</strong> <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">string</font><font color="4444FF">&amp;</font> <font color="#2040a0">annotation</font><font color="4444FF">)</font>
+	<font color="4444FF">:</font> <font color="#2040a0">Decorator</font><font color="4444FF">(</font><font color="#2040a0">next</font><font color="4444FF">)</font>, <font color="#2040a0">annotation_</font><font color="4444FF">(</font><font color="#2040a0">annotation</font><font color="4444FF">)</font> <font color="4444FF"><strong>{</strong></font><font color="4444FF"><strong>}</strong></font>
+
+    <strong>void</strong> <font color="#2040a0">view</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+    <strong>void</strong> <font color="#2040a0">print</font><font color="4444FF">(</font><font color="4444FF">)</font><font color="4444FF">;</font>
+
+    <font color="#444444">// Papildomas funkcionalumas</font>
+
+    <font color="#444444"><i>/** Grąžina anotaciją. */</i></font>
+    <strong>const</strong> <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">string</font><font color="4444FF">&amp;</font> <font color="#2040a0">annotation</font><font color="4444FF">(</font><font color="4444FF">)</font> <strong>const</strong>
+    <font color="4444FF"><strong>{</strong></font> <strong>return</strong> <font color="#2040a0">annotation_</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+
+    <font color="#444444"><i>/** Pakeičia anotaciją. */</i></font>
+    <strong>void</strong> <font color="#2040a0">changeAnnotation</font><font color="4444FF">(</font><strong>const</strong> <font color="#2040a0">std</font><font color="4444FF">:</font><font color="4444FF">:</font><font color="#2040a0">string</font><font color="4444FF">&amp;</font> <font color="#2040a0">annotation</font><font color="4444FF">)</font>
+    <font color="4444FF"><strong>{</strong></font> <font color="#2040a0">annotation_</font> <font color="4444FF">=</font> <font color="#2040a0">annotation</font><font color="4444FF">;</font> <font color="4444FF"><strong>}</strong></font>
+
+<font color="4444FF"><strong>}</strong></font><font color="4444FF">;</font>
+
+<font color="#444444">/// @}</font>
+
+<font color="#444444">// --------------------------------------------------------------------------</font>
+
+<font color="0000ff"><strong>#endif</strong></font>
+
+</pre>
+<hr>
+syntax highlighted by <a href="http://www.palfrader.org/code2html">Code2HTML</a>, v. 0.9.1
+</body>
+</html>

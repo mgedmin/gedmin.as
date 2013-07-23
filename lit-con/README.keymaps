@@ -1,0 +1,67 @@
+--------------------------------------------------------------------------
+Lithuanian keymaps by Marius Gedminas <marius@gedmin.as>
+Version 0.99.7, 2001-04-04
+Newest version can be found at http://gedmin.as/lit-con/
+--------------------------------------------------------------------------
+
+mg.map			Generic keyboard map without lithuanian letters
+			(Based on standard US keyboard layout)
+mglt<layout>-<enc>.map	Lithuanian keyboard layouts
+
+<enc> is one of lat7/lat4/lat6/cp1257/cp775/cp773
+
+    lat7		ISO-8859-13 (Latin-7)
+    lat4		ISO-8859-4 (Latin-4)
+    lat6		ISO-8859-10 (Latin-6)
+    cp1257		code page 1257 (Baltic RIM)
+    cp775		code page 775 (also works for 772, 774)
+    cp773		code page 775 (also works for 771)
+
+<layout> is one of
+    a			"AltGr"
+    b			"Baltic"
+    p			"Programmers"
+    s			"Sticky"
+    z			"AZERTY"
+
+General notes
+  Both Alt keys are Alt
+  Both Win keys are AltGrs
+
+"AltGr" keyboard layout (experimental):
+  use AltGr + 1 2 3 4 5 6 7 8 =
+  or  AltGr + a c e w i s u q z
+
+"Baltic" keyboard layout (probably most widely used):
+  use Alt-Shift or LWin to toggle AltGr mode
+  when in AltGr mode use
+     1 2 3 4 5 6 7 8 =
+
+"Programmers" keyboard layout (my favourite):
+  use Alt-Shift or LWin to toggle AltGr mode
+  when in AltGr mode use
+     [`~]  1 2 3 4 5 6 7 8 =
+  or [`~]  a c e w i s u q z
+
+"Sticky" keyboard layout (experimental):
+  use AltGr + 1 2 3 4 5 6 7 8 =
+  or  AltGr + a c e w i s u q z
+  [`~] is sticky AltGr
+  use AltGr + [space] to get `
+  use Shift + (AltGr + [space]) to get ~
+
+"AZERTY" keyboard layout:
+
+  ` ! " / ; : , . ? ( ) _ + \
+   ą ž e r t y u i o p į „
+    a s d f g h j k l ų ė
+     z ū c v b n m č š ę
+
+  ~ 1 2 3 4 5 6 7 8 9 0 - = |
+   Ą Ž E R T Y U I O P Į “
+    A S D F G H J K L Ų Ė
+     Z Ū C V B N M Č Š Ę
+
+See comments inside for more information.
+
+$Id: README.keymaps.in,v 1.2 2001/04/03 23:20:18 mg Exp $

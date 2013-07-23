@@ -1,0 +1,14 @@
+Eilės nr.,Stud. paž. nr.,Vardas ir pavardė,Naudotojo vardas,Užduotis,Pogrupis,1uzd,data,pastabos,2uzd,data,pastabos,3uzd,data,pastabos
+1.,,Audrius Indriūnas,,14,3k 7gr matinf
+2.,,Šarūnas Kiselis,,12,3k 7gr matinf
+3.,,Donatas Šereikia,,19,3k 9gr kompmoksl,1.5-0.3-0.1,2005-04-28,kodas netvarkingokas,1.5-0.1,2005-04-28,kodas netvarkingas,1+0.1,2005-05-12,C/Java
+4.,,Aras Čeika,,4,3k 3gr inf
+5.,,Marius Rupšys,,5,3k 4gr inf
+6.,,Donatas Gurklys,,,inf neakiv
+7.,,Matas Vžesniauskas,,8,3k ?gr matinf,1.5,2005-04-07,atsiskaitymą priėmė E. Augilius,1.5+0.1,2005-04-21,atsiskaitymą priėmė kolega magistrantas,1-0.1,2005-05-26,C/Java; multiklientiškumas (Java select loopas!) kodas parėjęs (tab = 4 ar 8?) tradicinė read klaida; norėjo atsiskaityti prieš savaitę bet manęs nepažino
+8.,,Eugenijus Paulauskas,,(kryžiukai nuliukai),3k 1gr,,,atsiskaitė pas V. Kiško,,,atsiskaitė pas V. Kiško,1-0.1,2005-05-26,C/Java; tradicinė recv klaida; kodas netvarkingokas
+9.,,Šarūnas Jankaitis,,(laivų mūšis),2k 7gr,1.5-0.8+0.1,2005-06-02,nespėjo atsiskaityti pas savo dėstytoją; C++; multiklientiškumas su select loopu,1.5-0.5+0.1,2005-06-02,Java; GUI; multiklientiškumas,1-0.2,2005-06-02,C++/Java
+10.,,Dainius Šerėnas,,(skaičių spėjimas),3k 7gr,1.5-0.8,2005-06-02,Java; multiklientiškumas,1-0.5,2005-06-02,Java/C
+11.,,Darius Mikalajūnas,,(blackjack),3k 7gr,1.5-0.8,2005-06-02,Java; multiklientiškumas,1.5-0.5,2005-06-02,C++,1-0.2,2005-06-02,C++/Java
+12.,,Antanas Matakanskas,,(mastermind),3k 8gr,1.5-0.8,2005-06-02,C++,1.5-0.5,2005-06-02,Java
+13.,,Povilas Smolskas,0212429,(kryžiukai nuliukai),?,1.5-0.8,2005-06-02,atsiskaitymą priėmė kolega; C,1.5-0.5+0.1,2005-06-02,atsiskaitymą priėmė kolega; Java; GUI

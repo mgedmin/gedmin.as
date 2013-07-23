@@ -1,0 +1,1437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Computer Network Architecture</title>
+  <link rev="made" href="mailto:marius@gedmin.as" />
+  <link rel="stylesheet" type="text/css" href="http://gedmin.as/style.css" />
+  <meta name="Author" content="Marius Gedminas" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://mgedmin.myopenid.com/" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <link rel="openid2.local_id" href="http://mgedmin.myopenid.com/" />
+  <meta http-equiv="X-XRDS-Location"
+        content="http://www.myopenid.com/xrds?username=mgedmin.myopenid.com" />
+  
+</head>
+<body>
+
+<div class="toolbox langbox">
+<div class="title">Language</div>
+  <a href="index-lt.html"
+     title="Lithuanian"><img src="http://gedmin.as/lt.png" alt="Lt" title="Lithuanian" height="16" width="26" /></a>
+  <span class="sep">::</span>
+  <a href="index-en.html"
+     title="English"><img src="http://gedmin.as/en.png" alt="En" title="English" height="16" width="26" /></a>
+</div>
+
+<div class="title">
+<h1 class="title">Computer Network Architecture</h1>
+</div>
+
+<div class="navbar">
+<span class="right">
+<a href="http://gedmin.as/sitemap/index-en.html">Site Map</a>
+<span class="hide">|</span>
+</span>
+
+  <a href="http://gedmin.as/index-en.html"
+     title="Marius Gedminas home">Home</a>
+  &gt;
+  <a href="http://gedmin.as/study/index-en.html"
+     title="Studies">Study</a>
+  &gt;
+  <strong>CNA</strong>
+  <span class="sep"> | </span>
+  <a href="http://gedmin.as/study/cna/advice/index-en.html"
+     title="Advice">advice</a>
+  ::
+  <a href="http://gedmin.as/study/cna/2005/index-en.html"
+     title="Computer Network Architecture (2005)">2005</a>
+</div>
+
+<div class="content">
+
+
+
+
+<h2>Computer Network Architecture</h2>
+
+<p>This page is interesting only to Vilnius University students, therefore
+it is only available in Lithuanian.</p>
+
+
+
+
+
+<h2>Kompiuterių tinklai</h2>
+
+<div style="float:right; padding-left: 3em; padding-bottom: 1em; font-size: small; text-align: center; color: #888">
+  <img src="http://gedmin.as/about/mugshot2.jpg" alt="Mano nuotrauka" />
+  <br/>Taip atrodo dėstytojas
+  <br/><span style="font-size: xx-small">(tik kostiumo nesitikėkite)</span>
+</div>
+
+<p>2006 m. pavasario semestrą aš vedžiau <a
+  href="http://www.mif.vu.lt/~adam/courses/cna/index.html">kompiuterių
+  tinklų kurso</a> pratybas.</p>
+
+<p>Pratybų metu reikėjo pasirinkti užduotį ir atsiskaityti tris variantus:</p>
+<ol>
+  <li>Dvi programos (klientas ir serveris) C arba C++ kalba (naudojant BSD socket API)</li>
+  <li>Dvi programos (klientas ir serveris) Java kalba</li>
+  <li>Viena programa C/C++, kita Java kalba.</li>
+</ol>
+
+<p>Būtinai perskaitykite <a
+  href="http://www.mif.vu.lt/~adam/courses/cna/ND2006.html">reikalavimus</a>.
+Ten taip pat nurodytos ir <strong>atsiskaitymų datos</strong> bei vertinimo
+sistema.</p>
+
+<p>Užduotis pasirinkti galite ir <a href="mailto:marius@gedmin.as">paštu</a>.
+Užduotys negali kartotis grupėje.  Užduotį galima (o kai kuriems teks)
+susigalvoti ir savo.</p>
+
+<p>Pridėjau puslapėlį su <a href="advice/index-lt.html">praktiniais patarimais.</p>
+
+<p>Nuorodos apie soketų programavimą:</p>
+
+<ul>
+  <li><a href="http://www.mif.vu.lt/~adam/courses/cna/index.html">Kurso puslapyje</a> yra kelios nuorodos į tutorialus</li>
+  <li><a href="http://beej.us/guide/bgnet/">Beej's Guide to Network Programming</a></li>
+  <li><a href="http://www.mif.vu.lt/~alga/unix/">Unix programavimo kurso konspektas (trumpai apie socketus, procesus, gijas)</li>
+</ul>
+
+<ul>
+  <li><a href="http://isds.bus.lsu.edu/cvoc/reposit/bpr/eventtrace/bc.html">Event Trace diagramų paaiškinimas</a></li>
+</ul>
+
+
+
+
+
+
+<h3 style="clear:both" id="gr3">3 grupė</h3>
+
+<p>
+
+Pratybos vyko pirmadieniais 16 val, 14 kompiuterių klasėje.
+
+</p>
+
+<div style="float: left; padding-bottom: 1em">
+<h4>Studentai</h4>
+<table class="simple">
+<tr><th>Nr</th><th>Studentas</th><th>Užduotis</th><th>1</th><th>2</th><th>3</th></tr>
+<tr class="odd">
+  <td class="right">1</td>
+  <td style="width: 10em">Mantas Aleknavičius</td>
+  <td style="width: 9em" class="right">14 (žaidimas 21)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">2</td>
+  <td style="width: 10em">Agnė Askoldavičiūtė</td>
+  <td style="width: 9em" class="right">19</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">3</td>
+  <td style="width: 10em">Asta Bevainytė</td>
+  <td style="width: 9em" class="right">5</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">4</td>
+  <td style="width: 10em">Simona Bražiūnaitė</td>
+  <td style="width: 9em" class="right">21</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">5</td>
+  <td style="width: 10em">Vismantas Bukauskas</td>
+  <td style="width: 9em" class="right">20</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">6</td>
+  <td style="width: 10em">Egidijus Cibulskas</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">7</td>
+  <td style="width: 10em">Evaldas Dervinis</td>
+  <td style="width: 9em" class="right">6</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">8</td>
+  <td style="width: 10em">Adomas Galdikas</td>
+  <td style="width: 9em" class="right">10</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">9</td>
+  <td style="width: 10em">Šarūnas Grigas</td>
+  <td style="width: 9em" class="right">15</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">10</td>
+  <td style="width: 10em">Paulius Jonikas</td>
+  <td style="width: 9em" class="right">22</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">11</td>
+  <td style="width: 10em">Elina Jonušaitė</td>
+  <td style="width: 9em" class="right">3 (biblioteka)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">12</td>
+  <td style="width: 10em">Simonas Kardokas</td>
+  <td style="width: 9em" class="right">4</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">13</td>
+  <td style="width: 10em">Romualdas Kilius</td>
+  <td style="width: 9em" class="right">3 (studentų duombazė)</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">14</td>
+  <td style="width: 10em">Dmitrijus Kožemiakinas</td>
+  <td style="width: 9em" class="right">3 (telefonų knyga)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">15</td>
+  <td style="width: 10em">Sandra Merkytė</td>
+  <td style="width: 9em" class="right">11</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">16</td>
+  <td style="width: 10em">Edgaras Paluckas</td>
+  <td style="width: 9em" class="right">12</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">17</td>
+  <td style="width: 10em">Aušra Peciukonytė</td>
+  <td style="width: 9em" class="right">2 (videonuoma)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">18</td>
+  <td style="width: 10em">Mindaugas Regina</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">19</td>
+  <td style="width: 10em">Justinas Sabaitis</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">20</td>
+  <td style="width: 10em">Almantas Skarbalius</td>
+  <td style="width: 9em" class="right">7</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">21</td>
+  <td style="width: 10em">Saulius Stasiukaitis</td>
+  <td style="width: 9em" class="right">23 (lygčių sprendimas)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">22</td>
+  <td style="width: 10em">Vadim Stelikov</td>
+  <td style="width: 9em" class="right">23 (chronometras)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">23</td>
+  <td style="width: 10em">Vytautas Susnys</td>
+  <td style="width: 9em" class="right">16</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">24</td>
+  <td style="width: 10em">Tomas Urbanavičius</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">25</td>
+  <td style="width: 10em">Sigitas Vilkelis</td>
+  <td style="width: 9em" class="right">8</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">26</td>
+  <td style="width: 10em">Andrius Zlotkus</td>
+  <td style="width: 9em" class="right">2 (bilietai)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">27</td>
+  <td style="width: 10em">Tomas Šileika</td>
+  <td style="width: 9em" class="right">9</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">28</td>
+  <td style="width: 10em">Aleksej Šubnikov</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+</table>
+<p>
+<a href="results/index-lt.html#gr3">Detalūs rezultatai</a>
+</p>
+</div>
+
+<div style="float: left; padding-left: 5em; width: 40%">
+<h4>Užduotys</h4>
+
+<table class="simple">
+<tr><th>Nr</th><th>Užduotis</th></tr>
+<tr class="odd ">
+  <td class="right">1</td>
+  <td style="width: 25em;" title=Reisų (autobusų, lėktuvų, etc.) tvarkaraštis, vietų rezervacija.</td>Reisų (autobusų, lėktuvų, etc.) tvarkaraštis,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">2</td>
+  <td style="width: 25em;" title=Videonuoma, knygynas, e-parduotuvė, picų, tortų ir pan. užsisakymas.</td>Videonuoma, knygynas, e-parduotuvė, picų, tortų...</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">3</td>
+  <td style="width: 25em;" title=Įvairios DB - žmonių, knygų, filmų - su registracija bei paieška.</td>Įvairios DB - žmonių, knygų,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">4</td>
+  <td style="width: 25em;" title=Nutolęs kalkuliatorius.</td>Nutolęs kalkuliatorius.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">5</td>
+  <td style="width: 25em;" title=Fibonačio skaičiai.</td>Fibonačio skaičiai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">6</td>
+  <td style="width: 25em;" title=Užrašų knygutė.</td>Užrašų knygutė.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">7</td>
+  <td style="width: 25em;" title=Žinučių (pašto) serveris.</td>Žinučių (pašto) serveris.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">8</td>
+  <td style="width: 25em;" title=Failų serveris.</td>Failų serveris.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">9</td>
+  <td style="width: 25em;" title=Banko veikla, bankomatas (sąskaitos, operacijos).</td>Banko veikla, bankomatas (sąskaitos, operacijos)....</td>
+</tr>
+<tr class="even taken">
+  <td class="right">10</td>
+  <td style="width: 25em;" title=Žodynas serveryje (vertimai).</td>Žodynas serveryje (vertimai).</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">11</td>
+  <td style="width: 25em;" title=Testai/ viktorinos/ apklausos/ matematiniai uždavinukai (klausimai/ atsakymai).</td>Testai/ viktorinos/ apklausos/ matematiniai uždavinukai...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">12</td>
+  <td style="width: 25em;" title=Žodžio spėjimas, kartuvės.</td>Žodžio spėjimas, kartuvės.</td>
+</tr>
+<tr class="odd ">
+  <td class="right">13</td>
+  <td style="width: 25em;" title=Lines.</td>Lines.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">14</td>
+  <td style="width: 25em;" title=Black jack.</td>Black jack.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">15</td>
+  <td style="width: 25em;" title=Laivų mūšis.</td>Laivų mūšis.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">16</td>
+  <td style="width: 25em;" title=Skaičių spėjimai (su pasakymu daugiau mažiau; su pasakymu, kiek skaitmenų atspėta ir kiek savo vietoj)</td>Skaičių spėjimai (su pasakymu daugiau...</td>
+</tr>
+<tr class="odd ">
+  <td class="right">17</td>
+  <td style="width: 25em;" title=Šaškės, šachmatai.</td>Šaškės, šachmatai.</td>
+</tr>
+<tr class="even ">
+  <td class="right">18</td>
+  <td style="width: 25em;" title=Reversi.</td>Reversi.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">19</td>
+  <td style="width: 25em;" title=Kryžiukai nuliukai.</td>Kryžiukai nuliukai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">20</td>
+  <td style="width: 25em;" title=Degtukų žaidimas (kas paims paskutinį).</td>Degtukų žaidimas (kas paims paskutinį)....</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">21</td>
+  <td style="width: 25em;" title=Žaidimas Taip/ne.</td>Žaidimas Taip/ne.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">22</td>
+  <td style="width: 25em;" title=Gyvatė tinkle.</td>Gyvatė tinkle.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">23</td>
+  <td style="width: 25em;" title=Kiti žaidimai, nutolę piešimai, skaičiavimai ir t.t....</td>Kiti žaidimai, nutolę piešimai, skaičiavimai...</td>
+</tr>
+</table>
+<p>Neužmirškite, kad galima susigalvoti savo užduotį!  Užduotis tokias kaip 1,
+2 ar 23 gali rinktis ir keli studentai, jei darys pakankamai skirtingus
+variantus.</p>
+</div>
+
+
+
+
+<h3 style="clear:both" id="gr4">4 grupė</h3>
+
+<p>
+
+Pratybos vyko pirmadieniais 18 val, 14 kompiuterių klasėje.
+
+</p>
+
+<div style="float: left; padding-bottom: 1em">
+<h4>Studentai</h4>
+<table class="simple">
+<tr><th>Nr</th><th>Studentas</th><th>Užduotis</th><th>1</th><th>2</th><th>3</th></tr>
+<tr class="odd">
+  <td class="right">1</td>
+  <td style="width: 10em">Paulius Aleliūnas</td>
+  <td style="width: 9em" class="right">3 (krepšininkai)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">2</td>
+  <td style="width: 10em">Liudas Bakšys</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">3</td>
+  <td style="width: 10em">Artur Baniukevič</td>
+  <td style="width: 9em" class="right">4</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">4</td>
+  <td style="width: 10em">Ernestas Blažys</td>
+  <td style="width: 9em" class="right">2 (picos)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">5</td>
+  <td style="width: 10em">Andrius Dirvanauskas</td>
+  <td style="width: 9em" class="right">15</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">6</td>
+  <td style="width: 10em">Vladas Freimanas</td>
+  <td style="width: 9em" class="right">23 (network tools)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">7</td>
+  <td style="width: 10em">Sergej Galkin</td>
+  <td style="width: 9em" class="right">14</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">8</td>
+  <td style="width: 10em">Oleg Grinkevič</td>
+  <td style="width: 9em" class="right">20</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">9</td>
+  <td style="width: 10em">Liudas Jankauskas</td>
+  <td style="width: 9em" class="right">16</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">10</td>
+  <td style="width: 10em">Artūras Jasevičius</td>
+  <td style="width: 9em" class="right">11</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">11</td>
+  <td style="width: 10em">Audrius Kildušis</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">12</td>
+  <td style="width: 10em">Arūnas Liogas</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">13</td>
+  <td style="width: 10em">Paulius Maruška</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">14</td>
+  <td style="width: 10em">Kristina Matutytė</td>
+  <td style="width: 9em" class="right">2 (videonuoma)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">15</td>
+  <td style="width: 10em">Deividas Mickūnas</td>
+  <td style="width: 9em" class="right">5</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">16</td>
+  <td style="width: 10em">Darjuš Naganovič</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">17</td>
+  <td style="width: 10em">Justinas Pečiūra</td>
+  <td style="width: 9em" class="right">6</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">18</td>
+  <td style="width: 10em">Juozas Rimša</td>
+  <td style="width: 9em" class="right">7</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">19</td>
+  <td style="width: 10em">Sigita Sabaliauskaitė</td>
+  <td style="width: 9em" class="right">19</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">20</td>
+  <td style="width: 10em">Gediminas Stasiūnas</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">21</td>
+  <td style="width: 10em">Aleksandr Stelmach</td>
+  <td style="width: 9em" class="right">12</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">22</td>
+  <td style="width: 10em">Robert Svatkovskij</td>
+  <td style="width: 9em" class="right">10</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">23</td>
+  <td style="width: 10em">Saulius Vingilis</td>
+  <td style="width: 9em" class="right">21</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">24</td>
+  <td style="width: 10em">Jekaterina Zorina</td>
+  <td style="width: 9em" class="right">1 (reiktų patikslinimo)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">25</td>
+  <td style="width: 10em">Irma Šimaitytė</td>
+  <td style="width: 9em" class="right">9</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">26</td>
+  <td style="width: 10em">Aleksas Šulnius</td>
+  <td style="width: 9em" class="right">8</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+</table>
+<p>
+<a href="results/index-lt.html#gr4">Detalūs rezultatai</a>
+</p>
+</div>
+
+<div style="float: left; padding-left: 5em; width: 40%">
+<h4>Užduotys</h4>
+
+<table class="simple">
+<tr><th>Nr</th><th>Užduotis</th></tr>
+<tr class="odd taken">
+  <td class="right">1</td>
+  <td style="width: 25em;" title=Reisų (autobusų, lėktuvų, etc.) tvarkaraštis, vietų rezervacija.</td>Reisų (autobusų, lėktuvų, etc.) tvarkaraštis,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">2</td>
+  <td style="width: 25em;" title=Videonuoma, knygynas, e-parduotuvė, picų, tortų ir pan. užsisakymas.</td>Videonuoma, knygynas, e-parduotuvė, picų, tortų...</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">3</td>
+  <td style="width: 25em;" title=Įvairios DB - žmonių, knygų, filmų - su registracija bei paieška.</td>Įvairios DB - žmonių, knygų,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">4</td>
+  <td style="width: 25em;" title=Nutolęs kalkuliatorius.</td>Nutolęs kalkuliatorius.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">5</td>
+  <td style="width: 25em;" title=Fibonačio skaičiai.</td>Fibonačio skaičiai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">6</td>
+  <td style="width: 25em;" title=Užrašų knygutė.</td>Užrašų knygutė.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">7</td>
+  <td style="width: 25em;" title=Žinučių (pašto) serveris.</td>Žinučių (pašto) serveris.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">8</td>
+  <td style="width: 25em;" title=Failų serveris.</td>Failų serveris.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">9</td>
+  <td style="width: 25em;" title=Banko veikla, bankomatas (sąskaitos, operacijos).</td>Banko veikla, bankomatas (sąskaitos, operacijos)....</td>
+</tr>
+<tr class="even taken">
+  <td class="right">10</td>
+  <td style="width: 25em;" title=Žodynas serveryje (vertimai).</td>Žodynas serveryje (vertimai).</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">11</td>
+  <td style="width: 25em;" title=Testai/ viktorinos/ apklausos/ matematiniai uždavinukai (klausimai/ atsakymai).</td>Testai/ viktorinos/ apklausos/ matematiniai uždavinukai...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">12</td>
+  <td style="width: 25em;" title=Žodžio spėjimas, kartuvės.</td>Žodžio spėjimas, kartuvės.</td>
+</tr>
+<tr class="odd ">
+  <td class="right">13</td>
+  <td style="width: 25em;" title=Lines.</td>Lines.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">14</td>
+  <td style="width: 25em;" title=Black jack.</td>Black jack.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">15</td>
+  <td style="width: 25em;" title=Laivų mūšis.</td>Laivų mūšis.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">16</td>
+  <td style="width: 25em;" title=Skaičių spėjimai (su pasakymu daugiau mažiau; su pasakymu, kiek skaitmenų atspėta ir kiek savo vietoj)</td>Skaičių spėjimai (su pasakymu daugiau...</td>
+</tr>
+<tr class="odd ">
+  <td class="right">17</td>
+  <td style="width: 25em;" title=Šaškės, šachmatai.</td>Šaškės, šachmatai.</td>
+</tr>
+<tr class="even ">
+  <td class="right">18</td>
+  <td style="width: 25em;" title=Reversi.</td>Reversi.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">19</td>
+  <td style="width: 25em;" title=Kryžiukai nuliukai.</td>Kryžiukai nuliukai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">20</td>
+  <td style="width: 25em;" title=Degtukų žaidimas (kas paims paskutinį).</td>Degtukų žaidimas (kas paims paskutinį)....</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">21</td>
+  <td style="width: 25em;" title=Žaidimas Taip/ne.</td>Žaidimas Taip/ne.</td>
+</tr>
+<tr class="even ">
+  <td class="right">22</td>
+  <td style="width: 25em;" title=Gyvatė tinkle.</td>Gyvatė tinkle.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">23</td>
+  <td style="width: 25em;" title=Kiti žaidimai, nutolę piešimai, skaičiavimai ir t.t....</td>Kiti žaidimai, nutolę piešimai, skaičiavimai...</td>
+</tr>
+</table>
+<p>Neužmirškite, kad galima susigalvoti savo užduotį!  Užduotis tokias kaip 1,
+2 ar 23 gali rinktis ir keli studentai, jei darys pakankamai skirtingus
+variantus.</p>
+</div>
+
+
+
+
+<h3 style="clear:both" id="gr5">5 grupė</h3>
+
+<p>
+
+Pratybos vyko penktadieniais 14 val, 308 ir 309 kompiuterių klasėse
+Baltupiuose.
+
+</p>
+
+<div style="float: left; padding-bottom: 1em">
+<h4>Studentai</h4>
+<table class="simple">
+<tr><th>Nr</th><th>Studentas</th><th>Užduotis</th><th>1</th><th>2</th><th>3</th></tr>
+<tr class="odd">
+  <td class="right">1</td>
+  <td style="width: 10em">Andžej Aleksandrovič</td>
+  <td style="width: 9em" class="right">15</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">2</td>
+  <td style="width: 10em">Agnė Andriūnaitė</td>
+  <td style="width: 9em" class="right">23 (sek ir sunaiking)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">3</td>
+  <td style="width: 10em">Rasa Balčiūnaitė</td>
+  <td style="width: 9em" class="right">2 (videonuoma)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">4</td>
+  <td style="width: 10em">Audrius Bareišis</td>
+  <td style="width: 9em" class="right">6</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">5</td>
+  <td style="width: 10em">Valdemar Bartoševič</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">6</td>
+  <td style="width: 10em">Ignas Bačius</td>
+  <td style="width: 9em" class="right">17</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">7</td>
+  <td style="width: 10em">Konstantin Bielko</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">8</td>
+  <td style="width: 10em">Andrius Bistrickis</td>
+  <td style="width: 9em" class="right">16</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">9</td>
+  <td style="width: 10em">Egidijus Bobina</td>
+  <td style="width: 9em" class="right">4</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">10</td>
+  <td style="width: 10em">Mindaugas Busila</td>
+  <td style="width: 9em" class="right">7</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">11</td>
+  <td style="width: 10em">Guoda Cesiulytė</td>
+  <td style="width: 9em" class="right">11 (sostinių spėjimas)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">12</td>
+  <td style="width: 10em">Modestas Dobrovolskis</td>
+  <td style="width: 9em" class="right">23 (pokalbis)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">13</td>
+  <td style="width: 10em">Irma Dobrovolskytė</td>
+  <td style="width: 9em" class="right">2 (lombardas)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">14</td>
+  <td style="width: 10em">Aleita Ganatovskaja</td>
+  <td style="width: 9em" class="right">1 (tvarkaraštis)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">15</td>
+  <td style="width: 10em">Gintarė Gumbytė</td>
+  <td style="width: 9em" class="right">23 (loterija)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">16</td>
+  <td style="width: 10em">Giedrius Jankauskas</td>
+  <td style="width: 9em" class="right">12</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">17</td>
+  <td style="width: 10em">Darius Jonauskas</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">18</td>
+  <td style="width: 10em">Stasys Jurkšaitis</td>
+  <td style="width: 9em" class="right">11 (viktorinos)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">19</td>
+  <td style="width: 10em">Artur Karaznevič</td>
+  <td style="width: 9em" class="right">21</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">20</td>
+  <td style="width: 10em">Dmitrij Kovrigin</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">21</td>
+  <td style="width: 10em">Kazimieras Lukauskas</td>
+  <td style="width: 9em" class="right">2 (kasos aparatas)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">22</td>
+  <td style="width: 10em">Laurynas Mališauskas</td>
+  <td style="width: 9em" class="right">22</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">23</td>
+  <td style="width: 10em">Milana Marfinaitė</td>
+  <td style="width: 9em" class="right">19</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">24</td>
+  <td style="width: 10em">Valentinas Marčenkovas</td>
+  <td style="width: 9em" class="right">23 (remote whiteboard)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="odd">
+  <td class="right">25</td>
+  <td style="width: 10em">Audrius Miknevičius</td>
+  <td style="width: 9em" class="right">11 (matematiniai uždavinukai)</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">26</td>
+  <td style="width: 10em">Linas Patapavičius</td>
+  <td style="width: 9em" class="right">20</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">27</td>
+  <td style="width: 10em">Domas Petkevičius</td>
+  <td style="width: 9em" class="right">14</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">28</td>
+  <td style="width: 10em">Alina Čuiko</td>
+  <td style="width: 9em" class="right">5</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">29</td>
+  <td style="width: 10em">Vilius Šumskas</td>
+  <td style="width: 9em" class="right">8</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+</table>
+<p>
+<a href="results/index-lt.html#gr5">Detalūs rezultatai</a>
+</p>
+</div>
+
+<div style="float: left; padding-left: 5em; width: 40%">
+<h4>Užduotys</h4>
+
+<table class="simple">
+<tr><th>Nr</th><th>Užduotis</th></tr>
+<tr class="odd taken">
+  <td class="right">1</td>
+  <td style="width: 25em;" title=Reisų (autobusų, lėktuvų, etc.) tvarkaraštis, vietų rezervacija.</td>Reisų (autobusų, lėktuvų, etc.) tvarkaraštis,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">2</td>
+  <td style="width: 25em;" title=Videonuoma, knygynas, e-parduotuvė, picų, tortų ir pan. užsisakymas.</td>Videonuoma, knygynas, e-parduotuvė, picų, tortų...</td>
+</tr>
+<tr class="odd ">
+  <td class="right">3</td>
+  <td style="width: 25em;" title=Įvairios DB - žmonių, knygų, filmų - su registracija bei paieška.</td>Įvairios DB - žmonių, knygų,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">4</td>
+  <td style="width: 25em;" title=Nutolęs kalkuliatorius.</td>Nutolęs kalkuliatorius.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">5</td>
+  <td style="width: 25em;" title=Fibonačio skaičiai.</td>Fibonačio skaičiai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">6</td>
+  <td style="width: 25em;" title=Užrašų knygutė.</td>Užrašų knygutė.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">7</td>
+  <td style="width: 25em;" title=Žinučių (pašto) serveris.</td>Žinučių (pašto) serveris.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">8</td>
+  <td style="width: 25em;" title=Failų serveris.</td>Failų serveris.</td>
+</tr>
+<tr class="odd ">
+  <td class="right">9</td>
+  <td style="width: 25em;" title=Banko veikla, bankomatas (sąskaitos, operacijos).</td>Banko veikla, bankomatas (sąskaitos, operacijos)....</td>
+</tr>
+<tr class="even ">
+  <td class="right">10</td>
+  <td style="width: 25em;" title=Žodynas serveryje (vertimai).</td>Žodynas serveryje (vertimai).</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">11</td>
+  <td style="width: 25em;" title=Testai/ viktorinos/ apklausos/ matematiniai uždavinukai (klausimai/ atsakymai).</td>Testai/ viktorinos/ apklausos/ matematiniai uždavinukai...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">12</td>
+  <td style="width: 25em;" title=Žodžio spėjimas, kartuvės.</td>Žodžio spėjimas, kartuvės.</td>
+</tr>
+<tr class="odd ">
+  <td class="right">13</td>
+  <td style="width: 25em;" title=Lines.</td>Lines.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">14</td>
+  <td style="width: 25em;" title=Black jack.</td>Black jack.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">15</td>
+  <td style="width: 25em;" title=Laivų mūšis.</td>Laivų mūšis.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">16</td>
+  <td style="width: 25em;" title=Skaičių spėjimai (su pasakymu daugiau mažiau; su pasakymu, kiek skaitmenų atspėta ir kiek savo vietoj)</td>Skaičių spėjimai (su pasakymu daugiau...</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">17</td>
+  <td style="width: 25em;" title=Šaškės, šachmatai.</td>Šaškės, šachmatai.</td>
+</tr>
+<tr class="even ">
+  <td class="right">18</td>
+  <td style="width: 25em;" title=Reversi.</td>Reversi.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">19</td>
+  <td style="width: 25em;" title=Kryžiukai nuliukai.</td>Kryžiukai nuliukai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">20</td>
+  <td style="width: 25em;" title=Degtukų žaidimas (kas paims paskutinį).</td>Degtukų žaidimas (kas paims paskutinį)....</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">21</td>
+  <td style="width: 25em;" title=Žaidimas Taip/ne.</td>Žaidimas Taip/ne.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">22</td>
+  <td style="width: 25em;" title=Gyvatė tinkle.</td>Gyvatė tinkle.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">23</td>
+  <td style="width: 25em;" title=Kiti žaidimai, nutolę piešimai, skaičiavimai ir t.t....</td>Kiti žaidimai, nutolę piešimai, skaičiavimai...</td>
+</tr>
+</table>
+<p>Neužmirškite, kad galima susigalvoti savo užduotį!  Užduotis tokias kaip 1,
+2 ar 23 gali rinktis ir keli studentai, jei darys pakankamai skirtingus
+variantus.</p>
+</div>
+
+
+
+
+<h3 style="clear:both" id="grN">Kiti</h3>
+
+<p>
+
+Atsirado keli žmonės, kurie kartojo kursą ir norėjo pas mane atsiskaitinėti.
+
+</p>
+
+<div style="float: left; padding-bottom: 1em">
+<h4>Studentai</h4>
+<table class="simple">
+<tr><th>Nr</th><th>Studentas</th><th>Užduotis</th><th>1</th><th>2</th><th>3</th></tr>
+<tr class="odd">
+  <td class="right">1</td>
+  <td style="width: 10em">Justinas Koreiva</td>
+  <td style="width: 9em" class="right">16</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">2</td>
+  <td style="width: 10em">Anžej Monkevič</td>
+  <td style="width: 9em" class="right">20</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">3</td>
+  <td style="width: 10em">Daumantas Jankauskas</td>
+  <td style="width: 9em" class="right">9 (valiutų keitimas)</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">4</td>
+  <td style="width: 10em">Tomas Stamulis</td>
+  <td style="width: 9em" class="right">5</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">5</td>
+  <td style="width: 10em">Auksė Paškonytė</td>
+  <td style="width: 9em" class="right">19</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">6</td>
+  <td style="width: 10em">Edita Davolytė</td>
+  <td style="width: 9em" class="right">11 (atspėk ar suma lyginė?)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">7</td>
+  <td style="width: 10em">Edmundas Backierius</td>
+  <td style="width: 9em" class="right">8</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">8</td>
+  <td style="width: 10em">Linas Šėvelis</td>
+  <td style="width: 9em" class="right">2 (e-parduotuvė)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">9</td>
+  <td style="width: 10em">Martynas Danys</td>
+  <td style="width: 9em" class="right">6</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">10</td>
+  <td style="width: 10em">Marius Rupšys</td>
+  <td style="width: 9em; color: red" class="right">nepasirinkta</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">11</td>
+  <td style="width: 10em">Mindaugas Gestautas</td>
+  <td style="width: 9em" class="right">14</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:gray" class="center">&#183;</td>
+</tr>
+<tr class="even">
+  <td class="right">12</td>
+  <td style="width: 10em">Tomas Barbaraušas</td>
+  <td style="width: 9em" class="right">10</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">13</td>
+  <td style="width: 10em">Aras Čeika</td>
+  <td style="width: 9em" class="right">8</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">14</td>
+  <td style="width: 10em">Tadas Zdanavičius</td>
+  <td style="width: 9em" class="right">10 (testas)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">15</td>
+  <td style="width: 10em">Romas Sitavičius</td>
+  <td style="width: 9em" class="right">4</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="even">
+  <td class="right">16</td>
+  <td style="width: 10em">Antanas Matakanskas</td>
+  <td style="width: 9em" class="right">14</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+<tr class="odd">
+  <td class="right">17</td>
+  <td style="width: 10em">Andrej Konygin</td>
+  <td style="width: 9em" class="right">23 (atspėk skaičių)</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+  <td style="color:green" class="center">+</td>
+</tr>
+</table>
+<p>
+<a href="results/index-lt.html#grN">Detalūs rezultatai</a>
+</p>
+</div>
+
+<div style="float: left; padding-left: 5em; width: 40%">
+<h4>Užduotys</h4>
+
+<table class="simple">
+<tr><th>Nr</th><th>Užduotis</th></tr>
+<tr class="odd ">
+  <td class="right">1</td>
+  <td style="width: 25em;" title=Reisų (autobusų, lėktuvų, etc.) tvarkaraštis, vietų rezervacija.</td>Reisų (autobusų, lėktuvų, etc.) tvarkaraštis,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">2</td>
+  <td style="width: 25em;" title=Videonuoma, knygynas, e-parduotuvė, picų, tortų ir pan. užsisakymas.</td>Videonuoma, knygynas, e-parduotuvė, picų, tortų...</td>
+</tr>
+<tr class="odd ">
+  <td class="right">3</td>
+  <td style="width: 25em;" title=Įvairios DB - žmonių, knygų, filmų - su registracija bei paieška.</td>Įvairios DB - žmonių, knygų,...</td>
+</tr>
+<tr class="even taken">
+  <td class="right">4</td>
+  <td style="width: 25em;" title=Nutolęs kalkuliatorius.</td>Nutolęs kalkuliatorius.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">5</td>
+  <td style="width: 25em;" title=Fibonačio skaičiai.</td>Fibonačio skaičiai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">6</td>
+  <td style="width: 25em;" title=Užrašų knygutė.</td>Užrašų knygutė.</td>
+</tr>
+<tr class="odd ">
+  <td class="right">7</td>
+  <td style="width: 25em;" title=Žinučių (pašto) serveris.</td>Žinučių (pašto) serveris.</td>
+</tr>
+<tr class="even conflict">
+  <td class="right">8</td>
+  <td style="width: 25em;" title=Failų serveris.</td>Failų serveris.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">9</td>
+  <td style="width: 25em;" title=Banko veikla, bankomatas (sąskaitos, operacijos).</td>Banko veikla, bankomatas (sąskaitos, operacijos)....</td>
+</tr>
+<tr class="even taken">
+  <td class="right">10</td>
+  <td style="width: 25em;" title=Žodynas serveryje (vertimai).</td>Žodynas serveryje (vertimai).</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">11</td>
+  <td style="width: 25em;" title=Testai/ viktorinos/ apklausos/ matematiniai uždavinukai (klausimai/ atsakymai).</td>Testai/ viktorinos/ apklausos/ matematiniai uždavinukai...</td>
+</tr>
+<tr class="even ">
+  <td class="right">12</td>
+  <td style="width: 25em;" title=Žodžio spėjimas, kartuvės.</td>Žodžio spėjimas, kartuvės.</td>
+</tr>
+<tr class="odd ">
+  <td class="right">13</td>
+  <td style="width: 25em;" title=Lines.</td>Lines.</td>
+</tr>
+<tr class="even conflict">
+  <td class="right">14</td>
+  <td style="width: 25em;" title=Black jack.</td>Black jack.</td>
+</tr>
+<tr class="odd ">
+  <td class="right">15</td>
+  <td style="width: 25em;" title=Laivų mūšis.</td>Laivų mūšis.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">16</td>
+  <td style="width: 25em;" title=Skaičių spėjimai (su pasakymu daugiau mažiau; su pasakymu, kiek skaitmenų atspėta ir kiek savo vietoj)</td>Skaičių spėjimai (su pasakymu daugiau...</td>
+</tr>
+<tr class="odd ">
+  <td class="right">17</td>
+  <td style="width: 25em;" title=Šaškės, šachmatai.</td>Šaškės, šachmatai.</td>
+</tr>
+<tr class="even ">
+  <td class="right">18</td>
+  <td style="width: 25em;" title=Reversi.</td>Reversi.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">19</td>
+  <td style="width: 25em;" title=Kryžiukai nuliukai.</td>Kryžiukai nuliukai.</td>
+</tr>
+<tr class="even taken">
+  <td class="right">20</td>
+  <td style="width: 25em;" title=Degtukų žaidimas (kas paims paskutinį).</td>Degtukų žaidimas (kas paims paskutinį)....</td>
+</tr>
+<tr class="odd ">
+  <td class="right">21</td>
+  <td style="width: 25em;" title=Žaidimas Taip/ne.</td>Žaidimas Taip/ne.</td>
+</tr>
+<tr class="even ">
+  <td class="right">22</td>
+  <td style="width: 25em;" title=Gyvatė tinkle.</td>Gyvatė tinkle.</td>
+</tr>
+<tr class="odd taken">
+  <td class="right">23</td>
+  <td style="width: 25em;" title=Kiti žaidimai, nutolę piešimai, skaičiavimai ir t.t....</td>Kiti žaidimai, nutolę piešimai, skaičiavimai...</td>
+</tr>
+</table>
+<p>Neužmirškite, kad galima susigalvoti savo užduotį!  Užduotis tokias kaip 1,
+2 ar 23 gali rinktis ir keli studentai, jei darys pakankamai skirtingus
+variantus.</p>
+</div>
+
+
+
+</div>
+
+<p />
+
+<div class="bottombar">
+<hr class="hide" />
+<span class="valid">
+<a href="http://validator.w3.org/check/referer"><img
+        src="http://gedmin.as/valid-xhtml11.png"
+        alt="Valid XHTML 1.1!" height="31" width="88" /></a>
+<a href="http://jigsaw.w3.org/css-validator/"><img
+        src="http://gedmin.as/valid-css.png"
+        src="http://jigsaw.w3.org/css-validator/images/vcss" 
+        alt="Valid CSS!" height="31" width="88" /></a>
+</span>
+<span class="lastupdated">
+Last updated: 2012-10-09
+</span>
+
+</body>
+</html>
+
+
+
+
+
+
+

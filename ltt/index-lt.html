@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Lietuviško teksto perkodavimas</title>
+  <link rev="made" href="mailto:marius@gedmin.as" />
+  <link rel="stylesheet" type="text/css" href="http://gedmin.as/style.css" />
+  <meta name="Author" content="Marius Gedminas" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://mgedmin.myopenid.com/" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <link rel="openid2.local_id" href="http://mgedmin.myopenid.com/" />
+  <meta http-equiv="X-XRDS-Location"
+        content="http://www.myopenid.com/xrds?username=mgedmin.myopenid.com" />
+  
+</head>
+<body>
+
+<div class="toolbox langbox">
+<div class="title">Language</div>
+  <a href="index-lt.html"
+     title="Lithuanian"><img src="http://gedmin.as/lt.png" alt="Lt" title="Lithuanian" height="16" width="26" /></a>
+  <span class="sep">::</span>
+  <a href="index-en.html"
+     title="English"><img src="http://gedmin.as/en.png" alt="En" title="English" height="16" width="26" /></a>
+</div>
+
+<div class="title">
+<h1 class="title">Lietuviško teksto perkodavimas</h1>
+</div>
+
+<div class="navbar">
+<span class="right">
+<a href="http://gedmin.as/sitemap/index-lt.html">Turinys</a>
+<span class="hide">|</span>
+</span>
+
+  <a href="http://gedmin.as/index-lt.html"
+     title="Mariaus namai">Namai</a>
+  &gt;
+  <strong>LTT</strong>
+</div>
+
+<div class="content">
+
+
+
+
+<h2>Lietuviško teksto perkodavimas</h2>
+
+<h3>Kas tai?</h3>
+
+<p> Senais tamsiais laikais buvo vartojama daug skirtingų kodavimo
+lentelių lietuviškiems tekstams saugoti.  LTT (Lithuanian Text Tool) yra
+programėlė, atliekanti dvi funkcijas: </p>
+
+<ul><li>ji bando nustatyti, kokia lentele yra užkoduotas tekstas</li></ul>
+
+<blockquote class="example"><pre class="small">
+<strong>$ ltt index.in</strong>
+index.in
+Probability   Charset                                      Seen characters&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    57%  *!   Latin-7/ISO-8859-13/Baltic-RIM/ANSI-1257     .........ąč.ėįšųūž
+    38%       771/773/KBL                                  ..š...ų.........ū.
+     4%       Latin-4/ISO-8859-4/Latin-6/ISO-8859-10       ..........č.....ž.
+  * -- file contains Lithuanian letters unique to this charset
+  ! -- file contains no Lithuanian letters outside of this charset
+</pre></blockquote>
+
+<ul><li>ji gali perkoduoti lietuviškas raides iš vienos lentelės į kitą</li></ul>
+
+<blockquote class="example"><pre class="small">
+<strong>$ ltt -c latin-7 latin-4 index.in</strong>
+Latin-7/ISO-8859-13/Baltic-RIM/ANSI-1257 -&gt; Latin-4/ISO-8859-4/Latin-6/ISO-8859-10:
+index.in
+
+<strong>$ ltt index.in</strong>
+index.in
+Probability   Charset                                      Seen characters
+    66%  *!   Latin-4/ISO-8859-4/Latin-6/ISO-8859-10       .........±č.ģē¹łž¾
+    16%       771/773/KBL                                  ...............ł..
+    11%       Latin-7/ISO-8859-13/Baltic-RIM/ANSI-1257     ..........č......ž
+     5%       772/774/775                                  .....¾............
+  * -- file contains Lithuanian letters unique to this charset
+  ! -- file contains no Lithuanian letters outside of this charset
+</pre></blockquote>
+
+<h3> Įvairios pastabos: </h3>
+
+<ul>
+<li> Perkoduojant keičiamos tik lietuviškos raidės </li>
+<li> Palaikomos šios kodų lentelės:
+     <ul>
+       <li>772, 774, 775</li>
+       <li>770 (dar vadinama IBM Baltic)</li>
+       <li>771 (dar vadinama KBL), 773</li>
+       <li>ISO-8859-13 (dar vadinama Latin-7), Windows-1257 (dar vadinama
+           Baltic RIM)</li>
+       <li>ISO-8859-4 (dar vadinama Latin-4), ISO-8859-10 (dar vadinama
+           Latin-6)</li>
+     </ul>
+     Vienoje eilutėje surašytos lentelės, kuriose lietuviškų raidžių kodai
+     yra tie patys. </li>
+<li> Taip pat yra galimybė perkoduoti į „šveplą“ tekstą (deja,
+     perkoduoti atgal nebepavyks...) </li>
+<li> Programa su vartotoju bendrauja angliškai (aš keistas žmogus) </li>
+<li> Programėlė parašyta Paskaliu.  Ją galima sukompiliuoti DOS,
+     Windows bei Linux terpėse naudojant Turbo Pascal, Borland Delphi arba Free
+     Pascal.  </li>
+<li> Programa yra laisva ir nemokama, jos licencija -- <a href="COPYING">GNU
+     GPL</a>.</li>
+</ul>
+
+<h3> Instrukcija </h3>
+
+<blockquote class="example"><pre class="small">
+<strong>$ ltt</strong>
+Lithuanian Text Tool version 0.9.0
+Copyright (c) 1999-2001 Marius Gedminas &lt;<del title="New email: marius@gedmin.as">mgedmin@b4net.lt</del>&gt;
+This is Free Software.  See the GNU General Public Licence for details.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+Try to autodetect charset:
+  ltt [-q] &lt;filename&gt;
+
+      -q        quick mode: only check first kilobyte
+
+Convert between charsets:
+  ltt -c &lt;charset1&gt; &lt;charset2&gt; [-b &lt;ext&gt;] &lt;filename&gt; ...
+
+      -b &lt;ext&gt;  create backup files with extension &lt;ext&gt;
+                (&lt;ext&gt; should begin with a dot, e.g. -b .bak)
+
+Use `-' instead of &lt;filename&gt; for standard input
+
+Possible charset values:
+  772 774 775
+  770
+  771 773 kbl
+  lat7 latin-7 iso-8859-13 brim baltic-rim 1257
+  lat4 latin-4 iso-8859-4 lat6 latin-6 iso-8859-10
+You can also use `ascii' for &lt;charset2&gt;
+
+Note: only 18 Lithuanian national letters are affected.
+</pre></blockquote>
+
+<h3> Parsisiuntimas </h3>
+
+<p> LTT versija 0.9.0 </p>
+<ul>
+  <li> <a href="ltt.pas">ltt.pas</a> (16K) -- pradinis kodas </li>
+  <li> <a href="COPYING">COPYING</a> (18K) -- licencija (GNU GPL v2) </li>
+  <li> <a href="ltt-0.9.0.zip">ltt-0.9.0.zip</a> (51K) -- ZIP archyvas
+     su pradiniu kodu bei sukompiliuotomis Windows ir DOS versijomis. </li>
+  <li> <a href="ltt-0.9.0.tar.gz">ltt-0.9.0.tar.gz</a> (46K) -- TAR.GZ
+     archyvas su pradiniu kodu bei sukompiliuota Linux versija. </li>
+</ul>
+<p> Linux </p>
+<ul>
+  <li> <a href="ltt">ltt</a> (79K) -- statinė ELF programa i386 architektūrai </li>
+</ul>
+<p> Windows </p>
+<ul>
+  <li> <a href="ltt32.exe">ltt32.exe</a> (51K) -- Win32 programa </li>
+</ul>
+<p> DOS </p>
+<ul>
+  <li> <a href="ltt16.exe">ltt16.exe</a> (13K) -- DOS programa </li>
+</ul>
+
+</div>
+
+<p />
+
+<div class="bottombar">
+<hr class="hide" />
+<span class="valid">
+<a href="http://validator.w3.org/check/referer"><img
+        src="http://gedmin.as/valid-xhtml11.png"
+        alt="Valid XHTML 1.1!" height="31" width="88" /></a>
+<a href="http://jigsaw.w3.org/css-validator/"><img
+        src="http://gedmin.as/valid-css.png"
+        src="http://jigsaw.w3.org/css-validator/images/vcss" 
+        alt="Valid CSS!" height="31" width="88" /></a>
+</span>
+<span class="lastupdated">
+Paskutiniai pakeitimai: 2012-10-09
+</span>
+
+</body>
+</html>
+
+
+
+
+
+
+

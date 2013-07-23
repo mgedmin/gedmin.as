@@ -1,0 +1,39 @@
+@import url("/style.css");
+
+dt {
+  float: left;
+  font-weight: bold;
+  width: 8em;
+  padding-left: 1em;
+}
+
+table {
+  width: 100%;
+  border: none;
+}
+
+th, td {
+  border: none;
+}
+
+th {
+  padding: 1px 5px;
+  background: #444;
+  color: white;
+}
+tr {
+  background: #eee;
+  color: black;
+}
+tr.evengroup {
+  background: white;
+  color: black;
+}
+td {
+  padding: 1px 5px;
+  border-bottom: 1px solid #eee;
+}
+
+tr.mif {
+  font-weight: bold;
+}

@@ -1,0 +1,65 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Indėnai</title>
+</head>
+<body>
+<h1>Indėnai</h1>
+
+<p>Įsivaizduokime, kad indėnai dar gyvi. Jie kaip ir senovėje gyvena išsibarstę
+po visą preriją. Kaip viena iš galimybių ryšiui palaikyti indėnai naudoja dūmų
+signalus. Tačiau šis metodas turėjo vieną gana ryškų trūkumą – dūmus galėdavai
+matyti tik ribotą atstumą.  Tarkime, kad mūsiškiai indėnai buvo gana draugiški.
+Jei vienas kaimelis nematydavo kito, jiems visuomet galėdavo padėti gretimi
+kaimeliai persiųsdami žinią toliau. Todėl jei iš kaimo A buvo norima nusiųsti
+žinią į kaimą B, tačiau kaimas A nematydavo B, buvo galima pasinaudoti tarpinio
+kaimo C pagalba, kuris matydavo abu kaimelius. Jei tokio kaimo nebūdavo, buvo
+galima siųsti žinią per daugiau tarpinių kaimelių. Akivaizdu, kad kai kuriose
+situacijose įmanomi keli siuntimo keliai. Deja sukrauti laužą užimdavo gana
+daug laiko, taigi jei žinios kelyje yra labai daug tarpinių kaimelių tai ji
+keliaudavo ilgai. Todėl indėnai norėtų siųsti žinia pačiu trumpiausiu keliu.
+Taigi tavo užduotis tokį kelią rasti.</p>
+
+<h2>Pradiniai duomenys (indians.in)</h2>
+
+<p>Pradiniai duomenys yra faile <tt>indians.in</tt>.  Pirmoje eilutėje įrašytas
+skaičius N (2 &lt;= N &lt;= 1000), kuris nurodo, kiek iš viso yra kaimelių.
+Antroje eilutėje yra du skaičiai: A ir B. A – kaimas iš kurio siunčiama žinia,
+B – kaimas į kuri siunčiama žinia. Likusiose N eilučių yra įrašyta informacija
+apie i-tąjį kaimą.  Pirmas skaičius M i-tojoje eilutėje nurodo kiek i-tasis
+kaimas mato kaimų.  Toliau seka M skaičių atskirtų tarpais, kurie nurodo
+numerius kaimų matomų iš i-tojo kaimo. Jei i-tasis kaimas mato j-tajį, tai ir
+j-tasis mato i-tajį.  Kaimai numeruojami nuo 1.</p>
+
+<h2>Rezultatai (indians.out)</h2>
+
+<p>Į šį failą reikia įrašyti rastą trumpiausią kelią. Į pirmą eilutę reikia
+įrašyti tokio kelio ilgį, į antrą – patį kelia. Kelią turi sudaryti skaičių
+seka, kuri iš eilės nurodo kaimus, per kuriuos reikia siųsti žinią. Jei
+egzistuoja keli sprendimo variantai su vienodu kelio ilgiu, reikia pateikti bet
+kurį.</p>
+
+<h2><tt>indians.in</tt> pavyzdys</h2>
+
+<img style="float: right" src="indians.png" ALT="Sample graph">
+<pre>
+8
+1 2
+3 3 4 6
+3 3 5 8
+3 1 4 2
+4 1 3 5 6
+2 4 2
+3 1 4 7
+2 6 8
+2 7 2
+</pre>
+
+<h2><tt>indians.out</tt> pavyzdys</h2>
+
+<pre>
+3
+1 3 2
+</pre>
+</body>
+</html>

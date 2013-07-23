@@ -1,0 +1,26 @@
+--------------------------------------------------------------------------
+Lithuanian screen fonts by Marius Gedminas <marius@gedmin.as>
+Version 0.99.7, 2001-04-04
+Newest version can be found at http://gedmin.as/lit-con/
+--------------------------------------------------------------------------
+
+There are two fonts:
+
+mg-<size>.psf		supports cp1257, cp773, cp775, lat4, lat6, lat7,
+                        cp437, lat1, lat9 (more or less)
+
+This font is based on standard IBM code page 437 font.  Control
+characters (0--31, and 255) are replaced with Lithuanian letters and
+additional punctuation signs (see the .sfm file for details).
+
+mgrus-<size>.psf	supports cp1251, cp771, koi8-r (more or less)
+
+This font is based on mg-<size>.psf.  International characters
+(128--175) and greek letters (224--239) are replaced with Cyrillic
+letters.
+
+
+Currently the only <size> is 8x16.
+
+
+$Id: README.fonts.in,v 1.2 2001/04/03 23:20:17 mg Exp $

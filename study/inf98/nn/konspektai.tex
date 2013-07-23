@@ -1,0 +1,1850 @@
+\documentclass[draft,a4paper]{article}
+\usepackage{lt}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\title{Dirbtiniai neuroniniai tinklai \\
+       {\large Ð. Raudþio paskaitø konspektas}}
+\author{Marius Gedminas}
+\date{2003 m. pavasaris \\
+      (VU MIF informatikos magistrantûros studijø 2 semestras)}
+
+\newcommand{\Def}{\emph}
+
+\begin{document}
+\maketitle
+
+% ----------------------------------------------------------------------------
+
+\begin{quote}\footnotesize
+Ðis konspektas rinktas \LaTeX{}u Ð. Raudþio paskaitø metu.  Poroje paskaitø
+paskaitø að nedalyvavau ir jas paskui nusiraðiau nuo kolegø (3, 4, 5, 15, 16,
+17 skyriai).  Deja, laiko tvarkingai viskà patikrinti ir suredaguoti dar
+neradau, tad patariu per daug ðiuo konspektu nepasitikëti.  Jei rasite klaidø
+ar turësite kokiø pastabø, galite jas atsiøsti man elektroninio paðto adresu
+\texttt{marius@gedmin.as}.
+\end{quote}
+
+% --- 1 paskaita
+
+\section{Neuroniniai tinklai}   % 1
+
+% Smegenyse yra 1e10 ... 1e14 làsteliø (niekas neþino, kaip reiktø jas
+% suskaièiuoti).
+
+% neuronai, aksonai, dendritai.
+
+% Neuronas: yra n inputø (n ~ 5000) ir vienas outputas
+
+1943 m. neurono modelis:
+\[
+   s = w_0 + \sum_{i=1}^p w_i x_i
+\]
+èia $x_1, \dots, x_p$ -- áëjimai.  Paskui pritaikomas slenkstis ir reikðmë
+keièiama á $0$ arba $1$.  Tai -- neurono iðëjimas.
+
+Vëliau buvo sugalvota rezultatà perleisti pro \Def{sigmoidinæ} funkcijà (angl.
+\emph{logistic sigmoid})
+\[ f(s) = \frac{1}{1+e^{-s}}
+\]
+Ðios funkcijos ypatybës:
+\begin{itemize}
+\item $f(s)$ beveik tiesinë, kai $|s|$ yra maþas;
+\item $f(s)$ artëja prie $0$, kai $s \to -\infty$;
+\item $f(s)$ artëja prie $1$, kai $s \to \infty$.
+\end{itemize}
+
+% èia bûtø gerai grafikà ádëti.
+
+Kartais vietoje sigmoidinës funkcijos naudojamas hiperbolinis tangentas,
+duodantis atsakymà ið intervalo $(-1; 1)$.
+
+
+\paragraph{Atpaþinimo uþdavinys}
+
+Reikia suskirstyti duomenis á klases.  Tarkime, kad turime du poþymius: $x_1$
+-- svoris, $x_2$ -- ûgis.  Norime atskirti berniukus nuo mergaièiø.  Tai gali
+padaryti vienas neuronas, tinkamai parinkus svorius $w_i$:
+\[ s = x_1 w_1 + x_2 w_2 + w_0 \]
+
+$s = 0$ yra skeliamasis pavirðius.  $s > 0$ -- berniukai, $s < 0$ --
+mergaitës.  Jei átrauksime sigmoidinæ funkcijà, tuomet $f(s) > 0.5$ --
+berniukai, $f(s) < 0.5$ -- mergaitës.
+
+Sudëtingesniais atvejais vieno neurono nepakanka -- reikia tinklo, sudaryto ið
+keliø sluoksniø.  Pvz., keturi neuronai pirmajame sluoksnyje duoda rezultatus
+$y_1$, \dots, $y_4$, o penktasis neuronas antrajame sluoksnyje juos ima kaip
+ávestis.
+
+Dirbtinis neuroninis tinklas -- rinkinys tarpusavyje sujungtø neuronø.
+Labiausiai paplitusios yra dvi dirbtiniø neuroniniø tinklø rûðys:
+\begin{itemize}
+\item \Def{vienasluoksnis perceptronas} arba tiesiog perceptronas (angl.
+      \emph{single layer perceptron}; \Def{SLP}) -- tiesiog vienas neuronas.
+\item \Def{daugiasluoksnis perceptronas} (angl. \emph{multilayer perceptron};
+      \Def{MLP}) -- daug neu\-ro\-nø, iðdëstytø sluoksniais.  Kiekvieno
+      sluoksnio neuronø iðëjimai sujungti su kito ið eilës sluoksnio neuronø
+      áëjimais.  Áëjimo sluoksnis -- pradiniai duomenys; iðëjimo sluoksnis --
+      paskutiniame sluoksnyje esantys neuronai ir jø iðëjimai; visi kiti
+      sluoksniai vadinami paslëptais.
+\end{itemize}
+
+Didþioji dauguma dirbtiniø neuroniniø tinklø yra SLP arba MLP.
+
+MLP su vienu paslëtu sluoksniu gali modeliuoti bet kokio sudëtingumo
+atpaþinimo pavirðiø.
+
+\paragraph{Prognozavimo uþdavinys}
+
+Perceptronus galima naudoti ir prognozavimui.
+
+MLP su vienu paslëtu sluoksniu gali aproksimuoti bet kokià funkcijà (jei tame
+sluoksnyje yra pakankamai neuronø).
+
+% Periodiniø reisiniø modeliavimas.  Sûkuriai.  Refraktorinis periodas.
+% Emocijø modeliavimas.
+
+
+\section{Vienasluoksniai ir daugiasluoksniai perceptronai ir jø mokymo
+         principas} % 2
+
+Kas yra vienasluoksniai ir daugiasluoksniai perceptronai paraðyta praeitame
+skyriuje.
+
+Problema: kaip reikëtø rasti perceptrono koeficientus $w_i$?  Sprendimas:
+perceptronà reikia apmokyti.
+
+% Repetitio est mater studiorum
+
+Turime rinkiná mokymo vektoriø $(x_{11}, \dots, x_{1p}, t_1)$, \dots,
+$(x_{n1}, \dots, x_{np}, t_n)$.  Èia $x_{ji}$ -- áëjimo reikðmës, $t_j$ --
+tikslas (\emph{desired target}).  Apibrëþkime kainos funkcijà
+\[ c = \sum_{j=1}^n \big(t_j - f(w_1x_{j1} + \dots + w_px_{jp} + w_0)\big)^2
+\]
+
+Norime jà minimizuoti.  Tai bûtø trivialu, jei nebûtø netiesinës f-jos f.
+
+Minimizavimui (apmokymui) yra daug ávairiø metodø -- \emph{error back
+propagation}, \emph{conjugate gradient} ir t.t.
+
+% --- 2 paskaità praleidau, nusiraðiau nuo Ramûno
+
+\section{Klasifikavimo uþdavinys. Statistinis klasifikavimas.  Mokymas
+         vienasluoksniu perceptronu.} % 3
+
+Kas yra klasifikavimo uþdavinys -- þr. pirmàjá skyriø.
+
+\paragraph{Statistinis klasifikavimas}
+
+Ávertiname kiekvienos klasës pasiskirstymo tanká $f_i(x)$.  Tarkime, kad
+klasiø yra dvi.  Jei kaþkuriame taðke $f_1(x) > 0$, o $f_2(x) = 0$, aiðku, jog
+ðis taðkas priklauso pirmajai klasei ir atvirkðèiai, jei $f_1(x) = 0$, o
+$f_2(x) > 0$, taðkas priklauso antrajai klasei.  Kà daryti, jei $f_1(x) > 0$
+ir $f_2(x) > 0$?  Galime tiesiog imti klasæ, kurios tankis tame taðke
+didesnis:
+\[ g(x) = \ln\Big(\frac{f_1(x)}{f_2(x)}\Big) \]
+
+Jei $g(x) > 0$, reiðkia, $f_1(x) > f_2(x)$ ir $x$ priskiriame pirmajai klasei;
+jei $g(x) < 0$, reiðkia, $f_1(x) < f_2(x)$ ir $x$ priskiriame antrajai.
+
+Kai kurios klasës pasitaiko daþniau nei kitos.  Jei klasiø pasirodymo
+tikimybës yra $q_1$ ir $q_2$ ($q_1 + q_2 = 1$), galime lyginti ne $f_1(x)$ ir
+$f_2(x)$, o $q_1 f_1(x)$ ir $q_2 f_2(x)$.
+
+Galima taip pat atsiþvelgti á klaidos kainà (geriau suklysti á saugesnæ pusæ).
+
+\paragraph{Sprendimas vienasluoksniu perceptronu}
+
+Þr. pavyzdá pirmame skyriuje.
+
+% Konkreèiai ðià paskaità buvo kiek kitas pavyzdys:
+%
+%   grafikëlis: x1 -- ûgis, x2 -- klubø apimtis.  Du debesëliai -- vyrai ir
+%   moterys.
+%
+%   skiriamoji linija x2 = a + x1 * tg alpha
+%
+%   neuronas g(x) = x1 w1 + x2 w2 + w0
+%   g(x) > 0 -- berniukai
+%   g(x) < 0 -- mergaitës
+%
+% bet esmë ta pati.
+
+Turime perceptronà:
+\[ g(x) = x_1 w_1 + x_2 w_2 + w_0
+\]
+
+Kaip rasti koeficientus?
+
+Nuostoliø funkcija:
+\[ c = \sum_{j=1}^n \big(t_j - f(w_1x_{j1} + \dots + w_px_{jp} + w_0)\big)^2
+\]
+
+$n$ -- mokymo duomenø kiekis, $p$ -- poþymiø skaièius, $x_j$ -- mokymo
+vektorius, $t_j$ -- trokðtamas iðëjimas tam vektoriui.
+
+Kas toliau?
+\begin{enumerate}
+\item \Def{atsitiktinë paieðka} -- prigeneruojame $10^{20}$ variantø svoriø ir
+      ieðkome geriausio rezultato
+\item \Def{genetiniai algoritmai} -- ieðkome rajono, kuriame yra teisingas
+      variantas ir toliau dirbame tame rajone
+\item \Def{maþiausiøjø kvadratø metodas} -- sprendþiame lygèiø sistemà
+      \[ \left\{\begin{array}{l}
+            \frac{\partial c}{\partial w_1} = 0 \\
+            \frac{\partial c}{\partial w_2} = 0 \\
+            \vdots
+          \end{array}\right.
+      \]
+      Jei f-ja turi daug minimumø, gali bûti sunku surasti teisingà atsakymà.
+
+      Niutono metodu
+      \[ w_{t+1} = w_t - \eta \frac{\partial c}{\partial w}
+      \]
+      $\eta$ -- mokymo þingsnis.  Jei jis per didelis, diverguosime.
+
+      % $t \to \infty$, $\eta \to 0$ tada artëjame prie tikslo.
+
+      % grafikëlis kreivë artëjanti prie 0, statesnë kreivë, kuri prie 0
+      % priartëja anksèiau, ir visai stati kreivë, kuri staiga uþsilenka
+      % ir ðoka á virðu, o paskui pradeda ðokinëti aukðtyn þemyn.
+
+      % namø darbams: pakaitalioti mokymo þingsná 1 uþduotyje
+
+      Mokymo þingsná galima reguliuoti pagal sëkmæ: jei sekasi -- didiname,
+      jei nesiseka -- maþiname.
+
+      Beje, galima ir atsisakyti nuo atsakymo pateikimo, t.y. atsakyti
+      ¥neþinau, modelis per silpnas ðiam atvejui´.
+
+      Pradedant mokyti reikia paduoti pradinius svorius.  Vienasluoksniam
+      perceptronui jø reikðmës nesvarbios, tad galime imti nuliukus.
+\end{enumerate}
+
+\section{Tiesinë ir kvadratinë diskriminantinës funkcijos} % 4
+
+% (statistika)
+
+Prielaida: duomenys yra normaliai pasiskirstæ.   $\mu x = Ex$ -- vidurkis (aka
+matematinë viltis), $\sigma^2 = E(x-\mu)^2$ -- variacija, $\sigma$ --
+dispersija.
+
+Normalinis tankis yra
+\[ f(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}(x-\mu)\sigma^{-2}(x-\mu)}
+\]
+% \int_{-\infty}^y f(x)dx -- tikimybë, kad atsitiktinis dydis < y?
+
+Bendru atveju $p$-matëje erdvëje (daugiamatis) normalinis tankis yra
+\[ f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}}
+          e^{-\frac{1}{2}(x-\mu)^T \Sigma^{-1} (x-\mu)}
+\]
+
+Èia $\Sigma$ -- kovariacinës matrica. $x$ bei $\mu$ ðiuo atveju yra vektoriai.
+
+% Matlabe kovariacinæ matricà gauname ðitaip:
+%   D1 = (x11, ..., x1p; x21, ..., x2p; ...);
+%   S1 = cov(D1);
+
+Taigi, jei turime dvi klases su vidurkiais $\mu_1$, $\mu_2$ ir kovariacinëmis
+matricomis $\Sigma_1$, $\Sigma_2$, gauname ðtai tokià diskriminantinæ funkcijà:
+\[ g(x) = -\frac{1}{2} (x-\mu_1)^T \Sigma_1^{-1} (x-\mu_1) - \frac{1}{2}ln(|\Sigma_1|)
+          +\frac{1}{2} (x-\mu_2)^T \Sigma_2^{-1} (x-\mu_2) + \frac{1}{2}ln(|\Sigma_2|)
+\]
+
+Ji vadinama \Def{kvadratine diskriminantine funkcija}.
+
+Jei $g(x) > 0$, tai $x$ priklauso pirmajai klasei, jei $g(x) < 0$, antrajai.
+
+Dar galime pridëti kitus daugiklius (tikimybes, klaidos kainos áverèius, etc.
+-- þr. aukðèiau).
+
+\medskip
+
+Problema: kaip turint maþai duomenø gauti kovariacinæ matricà?  Tada galime
+nutarti, kad $\Sigma_2 = \Sigma_1 = \Sigma$, nors tai netiesa.  Gauname
+tiesinæ funkcijà
+\[ g(x) = w^T x + w_0 = \sum_i w_i x_i + w_0
+\]
+kur $w = \Sigma(\mu_1 - \mu_2)$, $w_0 = \frac{1}{2} w^T(\mu_1 + \mu_2)$
+
+Tai -- \Def{Fiðerio tiesinë diskriminantinë funkcija}.
+
+\section{Perceptrono evoliucija mokymo metu (klasifikavimo uþdavinys)} % 5
+
+% Pakartojam, kas yra perceptronas:
+% \[ f(w^T x + w_0)
+% \]
+
+% XXX ðá skyriø reiktø pertvarkyti
+
+Klaidos funkcija
+\[ w_{sf} = \frac{1}{N} \sum_{\alpha=1}^N \big(t_\alpha - f(w^Tx_\alpha + w_0) \big)^2
+\]
+% ten sf ar st ar kas?
+
+ðià funkcijà minimizuojam.
+% èia kitas puslapis, tik kaþko neskilijuoja...?
+
+Tarkime, kad koordinates perkeliam á duo\-me\-nø vidurká, t.y. vidurkis visada
+yra 0.
+
+% Ðito totaliai nesupratau:
+$\Sigma \Sigma_\alpha = 0$ -- vidurkis, $N_1 = N_2$ -- objektø nëra(?), $w_{t=0}
+= 0$ -- pradiniai svoriai.
+
+$t_\alpha \in \{ -1, +1 \}$.
+
+Funkcija pas mus tiesinë $f(x) = x$
+% èia kiek suprantu imam 'purelin' neuronà
+
+$w_1 = w_0 - \frac{\partial cost}{\partial w^t} = const (\overline{x}^{(1)} -
+\overline{x}^{(2)}$.  Geometrinë prasmë tokia: sujungiame srièiø vidurkius
+atkarpa ir per jos vidurá iðvedame statmenà tiesæ.
+
+Tai -- \Def{Euklidinio atstumo klasifikatorius}.
+
+$D(X, \overline{X}^{(2)}) - D(X, \overline{X}^{(1)})$ -- atstumai nuo vidurkio
+iki tiesës lygûs.
+
+Fiðerio atveju gautume $W_F = S^{-1} (\overline{X}^{(1)} - \overline{X}^{(2)})$.
+
+Per vidurá gauname
+\[ W_t = \big(S + \underbrace{\frac{2}{\eta(t-1)}}_\text{Haley narys}
+                  \begin{pmatrix} 1 & 0 & \ldots\\
+                                  0 & 1 & \ldots\\
+                                  \vdots & \vdots & \ddots
+                  \end{pmatrix} \big)^{-1}
+         (\overline{X}^{(1)} - \overline{X}^{(2)})
+\]
+
+T.y. perceptronas duoda tà patá Fiðerio klasifikatoriø, tik prie diagonaliniø
+elementø pridëtas ðioks toks triukðmas, kuris artëja prie nulio, kai $t \to
+\infty$.
+
+\bigskip
+\paragraph{Atraminiø vektoriø klasifikavimas}
+
+Idëja: tarp artimiausiø kaimynø atstumas -- ma\-þiau\-sias.  Imame tris
+artimiausius kaimynus (du ið vienos klasës, treèià ið kitos) ir brëþiam tarp
+jø tiesæ, kad ji bûtø labiausiai nuo jø visø nutolusi.
+
+% Ar kaþkas panaðaus.
+
+% Ðito nesupratau:
+% "Perceptronas dar gali apversti matricà, kai ði neapsiverèia."
+
+% --- 3 paskaita: 2003-03-06
+
+% Pakalbësim apie regresijà, paskui vël apie apmokymà.
+
+% Klausimas nr 6.  Statistinis prognozavimas.
+
+\section{Statistinis prognozavimas} % 6
+
+% aka tiesinis prognozavimas?
+
+Po klasifikavimo daþniausiai sutinkamas uþdavinukas yra prognozavimas.
+Galima prognozuoti taip:
+\[
+   y = \sum w_i x_i + w_0
+\]
+
+% Pora paveiksliukø ið statistikos.  Normalinis bei ¥atvirkðèias U´ (x -- kiek
+% studentas laiko mokësi, y -- koká balà gauna.  Kreivë atrodo /~\)
+% Paveiksliukai Palme.
+
+Formulë tinka, jei turime normaliná pasiskirstymà.
+
+% Prognozavimas: pvz., metalurgija.  Vaistø pramonë (superkompiuteriai) --
+% vienas ið pagrindiniø taikymø.  Valiutø kursai (5 metams á prieká!  Ford
+% Research Labs, Raudys ten dirbo.  Kaip sekës, tiesa, neaiðku.).  Prognozuoja
+% politikà, akcijø kursus, ...
+
+Svarbiausias dalykas -- atrinkti visus rodiklius $x_i$.  Na ir þinoti, kà nori
+prognozuoti (y).
+
+% Formulë, programa -- easy.  Sunku suformuluoti uþdaviná.
+
+Vienas ið prognozavimo bûdø -- imti vidurká.  Kitas -- imti artimiausià
+variantà ið turimos imties.  Treèias -- maþiausiøjø kvadratø metodas:
+minimizuojam paklaidø kvadratø sumà
+\[
+  c = \frac{1}{n}\sum_{\alpha=1}^n \left(y_\alpha - \sum_{i=1}^p w_i x_i^\alpha + w_0\right)^2
+\]
+Taip daro statistikai.  Su neuroniniais tinklais turime
+\[
+  c = \frac{1}{n}\sum_{\alpha=1}^n \left(y_\alpha - 
+            f\big(\sum_{i=1}^p w_i x_i^\alpha + w_0\big)\right)^2
+\]
+Reikia normuoti prognoziojamà dydá, kad bûtø kitimas tarp 0 ir 1:
+\[
+  c = \frac{1}{n}\sum_{\alpha=1}^n \left(y_\alpha -
+             \left(f\big(\sum_{i=1}^p w_i x_i^\alpha + w_0\big) - 0.5\right) \cdot \beta \right)^2
+\]
+Ðitas daiktas vadinamas standartine regresija
+
+Yra ir kitas sprendimo bûdas.  Kas, jei yra dideliø nukrypimø?  % pav
+
+% Olandai turi atominæ elektrinæ ant sienos su Belgija, miestuke Borel.  Ið ten
+% ateina 64 rodikliai.  Pagal 63 ið jø prognozuoja 64-tàjá.  Ið pradþiø
+% mokymas.  Paskui jei kas ne taip, iðkart turi prognozë sustreikuoti ir turi
+% uþsidekti raudona lemputë.  (Ten kaþko neuroninis tinklas nelabai tiko, o va
+% standartinë regresija pats tas.)
+
+% Medicina: daaaug indikatoriø, jokia seselë nesusigaudys.  Reikia kaþkaip
+% prisiderinti prie paciento ir pastebëti nukrypimus.
+
+% Tai va, avariniø situacijø detektavimas irgi vienas pritaikymas.
+
+% Per egzà gali bûti klausimas: iðvardinti 20 srièiø, kur regresija gali bûti
+% pritaikyta.  Ar kaþkas tokio.  Klausimas ¥ant galvojimo´.
+
+% Ok. Klasikinë regresija: naudojamas matematinis vidurkis.  Dideli,
+% netipiniai nukrypimai negerai.  Statistikai turi spec. priemoniø su tuo
+% kovoti.  Neuroniniai tinklai tai daro automatiðkai.
+
+Vidurkis skaièiuojamas
+\[
+   \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i
+\]
+netipinius nukrypimus reiktø iðmesti:
+\[
+   \overline{x} = \overline{x}_n
+   \qquad
+   \overline{x}_k = \frac{1}{\sum_{i=1}^k f(x_i - \overline{x}_{k-1})}
+                    \sum_{i=1}^k x_i f(x_i^\alpha - \overline{x}_{k-1})
+\]
+kur $f$ stengiasi numesti nukrypimus (þr paveiksliukus palme.  Pvz., $f(x) =
+|1-x|$ kai |x| didelis arba $1$, kai $x$ maþas).  Tai yra
+robastinë regresija.  (Robust -- atsparus nukrypimams.)
+
+Nuostoliø funkcija (kurià reikia minimizuoti) viensluoksniam perceptronui
+norint robastinës regresijos: 
+\[
+  c = \frac{1}{n}\sum_{\alpha=1}^n \Psi\Big(
+   y_\alpha - \big(\sum_{i=1}^p w_i x_i^\alpha + w_0\big) \Big)
+\]
+
+Kur $\Psi(x) = x^2$ kai $|x| <= z$ ir $\Psi(x) = \Psi(z)$ kai $|x| > z$.  Arba
+galima dar uþapvalinti kampus ties $|x| \approx z$.
+
+Problema: kokio platumo $z$ imti?  Jei bus platu, bus ta pati klasikinë
+regresija.  Jei bus siaura, ims tik labai siaurius duomenis.  Menas yra
+nusakyti, kas yra ¥dideli nukrypimai´.
+
+% Tiek apie regresijà.
+
+% Ok, kiek apie atsiskaitymà.  Pagrindindinis rodiklis -- savarankiðkas
+% darbas.  Jis po vienà darbelá mailina kad palengvintø mums ásivaþiavimà.
+% Bus paskui robastinë regresija -- prognozuosim Londono birþà.  23 rodikliai
+% per 3.5 metø, 5 kartus á savaitæ.  Dvideðimt ketvirtas (tiksliau, pirmas)
+% -- birþos indeksas.  Galima prognozuoti tai paèiai, galima vienai dienai á
+% prieká (labai gerai gaunasi).  Dviems jau nieko neiðeis.  Mes bandysim
+% prognozuoti vienai dienai á prieká.  Hint, hint: geriausiai veikia alpha =
+% 17 (alpha = z? regresijos plotis) Yra programëlë order.  Reikës kaþkà
+% pakaitalioti.  Raudþiui pakako dviejø rodikliø 1 ir 11, tik ið dviejø dienø.
+%
+% Birþa -- ne ekonominis procesas, o (labai primityvus) loðëjø elgesys.
+% Smulkios þuvys naudoja strategijà ¥ðiandien kilo, reiðkia ir rytoj kils´ ir
+% pralaimi.  Didieji rykliai turi gerus kompus, turi specialistø, surenka daug
+% duomenø, prognozuoja ir laimi.
+
+% Reikia þmones matyti kuo daþniau, tada jie geriau vertins.
+
+% Savarankiðkas darbas: svarbiausiai reikia mokëti savarankiðkai formuluoti
+% uþdavinius.
+
+% Neigiamas rezultatas irgi rezultatas.  Reikia pateikti savo samprotavimus,
+% kodël nesigavo.
+
+% Tokia formulytë: \sigma^2_{poen?} = \sigma^2_0 (1 + \frac{p}{n-p})
+% ateityje bus
+
+% Darbo pateikimo forma:
+%   pradþioje turi bûti uþdavinio formulavimas.  Kà noriu pademonstruoti,
+%   gauti, etc.  Po to: kokius naudosiu metodus, ið kur duomenis gausiu (pvz
+%   internete).  Po to pats darbas: kà dariau, kà bandþiau, kà gavau.  Na ir
+%   iðvados, pvz., teorinis ir experimentinis grafikas, va kiek nesutapo,
+%   imho todël ir todël, lia lia lia.
+% Kukliai galima sutalpinti á 3 psl.  Normaliai 4--5 psl.  Nereikia grûsti 30
+% psl pilnø visokiø neaiðkiø lenteliø.
+
+% Visad reikia ávado ir iðvadø.  Ávado pagrindinë dalis: kà að darysiu.  Jei
+% sudëtingesnis projektas, reikia dar ir paaiðkinti, kodël tà darysiu.
+
+\section{Robastiniai algoritmai klasifikacijoje} % 7
+
+% pav 19:10: du rinkiniai, yra dideliø nukrypimø, kurie numeta vidurká toli.
+% robastiðkumas atmeta tuos nukrypimus ir vidurkis artëja ðalia reikiamos
+% vietos.
+
+% Didelë dalis Lietuvos karviø yra su leukoze.  Sovietø laikais á tai dëmesio
+% niekas nekreipdavo (na, CK nariai gaudavo pienà ið atskiros bandos).  Dabar
+% turbût dar maþiau dëmesio...
+
+% Ok, trokðtami iðëjimai tarp 0 ir 1.  Viena klasë 0, kita 1.  Pradedam
+% mokyti.  PS èia kartojimas
+
+Paklaida
+\[
+   c = \sum_\alpha \big( t_\alpha - f\big(\sum w_i x_i^\alpha - w_0\big) \Big)
+\]
+($t_\alpha$ -- norima reikðmë (target))
+
+Apmokymo metu svoriai laiko momentu $t+1$ skaièiuojami
+\[
+   W(t+1) = W(t) - \eta \frac{\partial c}{\partial W}
+\]
+($W$ -- vektorius ið $w_i$.  $\eta$ -- mokymo þingsnis (kaþkaip pasirinktas))
+
+Kadangi f-ja $f$ uþsirieèia, tai per dideli nukrypimai nuo diskriminantinës
+plokðtumos duoda daugmaþ tokià pat paklaidos vertæ, kaip ir maþi.  Tad
+perceptronas automatiðkai nereaguoja á tolimus nukrypimus.
+
+Perceptronas yra automatiðkai robastiðkas dideliems nukrypimams.  O
+matematikai/ statistikai tik neseniai tai sugalvojo (robastinei statistikai
+apie 30 metø).
+
+% diskriminantinë plokðtuma
+
+% BTW f-jos f ir \Psi yra tokios, nes jos primena jø grafikus.  Asociative
+% memories.
+
+Beje, apie gradientiná mokymo algoritmà.  Yra du reþimai: stochastinis ir
+totalinis. Stochastinis metodas: skaièiuojam gradientà kiekvienam mokymo
+vektoriui atskirai ir darom pataisymà.  Jei skaièiuojam gradientà visiems
+kartu (imam vidurká) prieð darydami pataisymà, turime totaliná gradientà (dar
+kartais vadinama batch mode).
+
+Stochastinsi lengviau iðlenda ið lokaliniø minimumø.  Totalinis geriau
+konverguoja jei yra vienas graþus minimumas.
+
+Vienasluoksniams perceptronams geriau totalinis, daugiasluoksniams geriau
+sto\-chas\-ti\-nis.
+
+\section{Minimalios klasifikavimo klaidos
+         ir atraminiø vek\-to\-riø klasifikatoriai} % 8
+
+% èia su vienasluoksniu perceptronu
+
+% Pav 19:31
+
+Prielaida: pasiskirstymas normalinis.  Tada gaunam optimalø klasifikatoriø.
+Bet jei prielaida nepatenkinta, negausim maþiausio klaidø kiekio.
+
+Kaip padaryti tiesinæ diskriminantinæ funkcijà, kad minimizuotume mokymo metu
+gautø klaidø kieká?  Literatûroje yra kokie 14-15 bûdø.  O perceptronai tai
+daro automatiðkai.
+
+Mokant perceptronà svoriai auga ir dideli nukrypimai nebeturi átakos (suveikia
+funkcijos $f$ uþsirietimai).  Kuo svoriai didesni, tuo tai labiau pasireiðkia.
+
+Pvz., atimam $\lambda W'W$
+\[
+   c' = \sum_\alpha \big( t _\alpha - f\big(\sum w_i x_i^\alpha - w_0\big) \Big)^2 - \lambda W'W
+\]
+Tai skatina svoriø augimà.  ($W'$ yra transponuotas vektorius $W$)
+
+Po truputá auginant svorius po truputá maþëja klaidø skaièius.  Ten faktiðkai
+gaunasi $f$ outputai 0 ir 1, t.y. $c$ (variantas be $\lambda W'W$) sumuoja
+klaidø skaièiø. Jei padalintume ið $n$, gautume klaidø daþná.
+
+% Per egzà galima naudotis viena lapo dydþio ðpera.  Ðperà paims ir ten ieðkos
+% klaidø :)
+
+Jei klaidø nëra, svoriai auga patys.  Jei jie neauga, pridedam tà $-\lambda W'
+W$ ir pri\-ver\-èiam juos augti.
+
+O dabar apie atraminiø vektoriø klasifikatorius.
+
+Jei klasës yra nutolusios viena nuo kitos, tinka daug diskriminantiniø
+plokðtumø, kurios daro po 0 klaidø.  Kurià reikia pasirinkti?  Reikia
+papildomo kriterijaus.  Kokio?  Skonio reikalas.  Vienas sprendimas: per
+vidurá -- maksimizuoti atstumà iki artimiausiø klasiø atstovø.  Tuos tris
+artimiausius vektoriukus (dvimatëj erdvëj; trimatëj bus keturi ir t.t.), nuo
+kuriø imam tiesæ, vadinam atraminiais (support vector).  Kad graþiau
+skambëtø, turime ne klasifikatoriø, o support vector machine.  Beje, atraminiø
+vektoriø skaièiø galima paimti pagal skoná.  Galima spresti matematiðkai,
+taikant kvadratiná programavimà.  Þmonës ilgai galvojo, pirmas straipsnis apie
+tai buvo 1992 m.  O perceptronas tai daro automatiðkai, daþnai ir geriau.
+
+% Ateityje dar bus atraminiø vektoriø regresija.
+
+Mes nagrinësime atvejá, kai klaidø nëra (klasës nesikerta)
+
+Manykim, kad perceptronas jau apmokytas.  Kiekvienas taðkas ($\equiv$
+vektorius) turi indëlá á nuostoliø funkcijà.  $f(...)$ kiekvienam taðkui yra
+labai arti 0 arba 1.  Didþiausià indëlá duoda arèiausiai plokðtumos esantys
+vektoriai.  Mokai, mokai, gauni maksimalios klaidos klasifikatoriø ir jei
+mokai toliau, svoriai vis dar auga, plokðtuma stengiasi patekti á viduriukà.
+Ir gauni atraminiø vektoriø klasifikatoriø (support vector classifier arba
+support vector machine).
+
+% Ðá metodà sugalvojo vienas Raudþio draugas senai senai.  Maskvoj já vadino
+% obobschionnyj portret, 1974 m.  Paskui iðvaþiavo á Amerikà.  Ten sugalvojo
+% kità pavadinimà -- support vector machine.  Krûèiau skamba ;)
+
+Vietoj dvimatës ervdës galima padaryti penkiamatæ: $x_1, x_2$ turim, dar
+pridedam $x_1^2, x_2^2, x_1x_2$.  Penkiamatëj erdvëj jau lengviau sudalinti
+taðkus, kad liktø 0 klaidø (jei neiðeina gauti 0 klaidø).  Ir t.t.  $x_1^3,
+x_2^3, x_1^2 x_2, x_1 x_2^2, ...$.  Mokom iki nulinës klaidos ir tada laukiam,
+kol svoriai iðaugs (vienas ið bûdø -- palaipsniui didinti þingsná $\eta$ kai
+pasiekiam nulinæ klaidà, kitas ið bûdø -- ávesti tà nará $\lambda W'W$).
+
+% Jei turim 100 taðkø, galime 99-matëj erdvëj sudalinti á dvi klases be problemø.
+% Maþesnëse erdvëse sunku.
+
+Apibendrinimas: yra du kriterijai.  Vienas -- minimizuoti mokymo klaidø kieká.
+Antras -- kai jø nelieka, maksimizuoti tarpà.
+
+% Praeità paskaità buvo:
+%   mokai perceptronà -- gauni Euklidinio atstumo klasifikatoriø.
+%   jei duomenys yra graþiuose apskritimuose, gausime iðkart idealø atsakymà
+%   po pirmos iteracijos
+
+Perceptronas palaipsniui realizuoja visus algoritmus:
+\begin{enumerate}
+\item euklidinio atstumo
+\item reguliarizuota
+\item fiðerio algoritmas arba
+\item pseudo-inversija
+\item robastinë
+\item minimalios klaidos
+\item atraminiø vektoriø klasifikatorius
+\end{enumerate}
+
+% apie porà ið jø mums nekalbëjo.
+
+% --- 4 paskaita: 2003-03-20
+
+% Kiekvienoj iteracijoj perskaièiuojam svorius:
+%   W_naujas = W_senas - \eta \frac{\partial c}{\partial W}
+%
+% kai atsiranda nulinë klaida, iðvestinë pasidaro labai maþa, tad W pokytis
+% irgi labai sumaþëja.  Todël apsimoka didinti mokymo þingsná \eta:
+%
+%   \eta_naujas = \eta_senas * 1.001
+%
+% tai va taip ir veikia atraminiø vektoriø klasifikatorius -- þr. jo atsiøstà
+% KeliKlasifikatoriai.m
+%
+
+\section{Klasifikavimo ir prognozavimo klaidø rûðys} % 9
+
+Prognozuoti galima viskà -- bet reikia þinoti, kokiu tikslumu.
+
+% Oro prognozës prieð daugelá metø:
+%   mesi monetà -- pataikysi 50%
+%   sakysi, kad bus kaip ðiandien -- pataikysi 75%
+%   pritaikysi visas meteorologijos þinias -- bus 85%
+% dabar gal geriau
+
+Kaip vertinti tikslumà?  Paskaièiuoti paklaidos vidurká.
+\[
+  \sigma_{pr} = \sqrt{\frac{1}{N}\sum_{j=1}^N (y_{tikra,j} - y_{prognozuota,j})^2}
+\]
+
+Bet jei N labai didelis (pvz., prognozuojam kaþkà visiems Þemës þmonëms)?
+
+Jei turim tik dalá duomenø, tai apsimoka juos sudalinti á dvi dalis:
+mokymui ir testavimui.  Jei viskà panaudosim mokymui, gausim labai gerà
+prisitaikymà bet tik tiems duomenims...  ¥Kaip meluoti su statistika.´
+
+Didëjant duomenø kiekiui (kai $N \to \infty$), $\sigma_t \to \sigma_0$, kur
+$\sigma_0 = \sigma_{pr}$, o $\sigma_t$ -- testinë klaida,
+
+Galima apytiksliai ávertinti
+\[
+  E \sigma_t^2 = \sigma_0^2 (1 + \frac{p}{N-p})
+\]
+kur $p$ -- poþymiø skaièius (duomenø dimensija).
+
+% Generalizavimo klaida = minimali arba asimptotinë klaida kart kaþkas
+
+Generalizavimo klaida -- testinës klaidos matematinë viltis.  Kitaip tariant,
+laukiama testinë klaida.
+
+% O kas po perkûnais yra \sigma_t???  Perceptrono daromø klaidø skaièius?
+
+Klasifikavimo klaidos yra dviejø rûðiø:
+\begin{enumerate}
+\item objektà ið klasës A neteisingai priskyrëm klasei B
+\item objektà ið klasës B neteisingai priskyrëm klasei A
+\end{enumerate}
+Vienos rûðies klaidos gali kainuoti daugiau, nei kitos.
+
+Bendra klaida \[P = q_1 P_1 + (1-q_1) P_2\] kur $q_1$ -- tikimybë, kad objektas
+priklauso klasei A, $P_1$ -- pirmos rûðies klasifikavimo klaida, $P_2$ --
+antros rûðies klasifikavimo klaida.
+
+Jei turim du duomenø gabalus su normaliniu pasiskirstymu $N(\mu_1, I)$ ir
+$N(\mu_2, I)$ ($\mu_1, \mu_2$ -- centrai, $I$ -- vienetinë kovariacijos
+matrica) su atstumu $\delta$ tarp klasiø (Euklidinis atstumas, t.y. $\delta =
+|\mu_1 - \mu_2|$), tuomet asimptotinë klasifikavimo klaida $P_\infty =
+\Phi(-\frac{\delta}{2})$ (kur $\Phi$ yra pasiskirstimo funkcija ar kaþkas
+panaðaus ið statistikos -- $\Phi(x) = \int_0^x \phi(x)$, kur $\phi$ yra
+ta monontoniðkai didëjanti nuo 0 iki 1 tankio f-ja, atrodo, $\phi(x) = $
+tikimybë, kad atsitiktinis dydis yra $< x$).
+
+% Beje, $\delta = |\mu_1 - \mu_2|$, kur $\mu_1, \mu_2$ -- klasiø vidurkiai
+% (vektoriai) ir imame jø Euklidiná atstumà.
+
+Jei pasiskirstymas nëra toks graþus apvalus, paprastas atstumas nelabai
+veikia.  Yra gudresnë Machaonobi formulë.  Apibendrintas atstumas tarp klasiø
+\[ \delta_M^2 = (\mu_1 - \mu_2)' \Sigma^{-1} (\mu_1 - \mu_2) \] kur $\mu_1,
+\mu_2$ -- klasiø vidurkiai (vektoriai), $v'$ -- vektoriaus transponavimas,
+$\Sigma$ -- tokia baisi kovariacinë matrica (ástriþainëje dispersijos, kitur
+kovariacija padauginta ið kvadratiniø nuokrypiø sandaugos ar kþk. panaðaus).
+Paëmæ $\delta_M$ vietoje $\delta$ anoje formulëje gauname kità klasifikavimo
+klaidos ávertá.
+
+Taigi, skirtingi metodai (ðiuo atveju buvo Euklido ir Fiðerio) duoda
+skirtingas klasifikavimo klaidas.
+
+Svarbu.  Kartoju: klasifikavimo klaida priklauso nuo metodo.
+
+Pati primityviausia prognozë (turi kaþkoká paprastà pavadinimà) -- kitas
+duomuo bus toks pats, koks ðitas.  Apsimoka savo prognozæ palyginti su ðita --
+jei pagerini, gerai, jei pablogini, pradëk nuo pradþiø.
+
+% Kiek suprantu, imi $\sigma_pr$ formulëje $y_{prognoze,j} = y_{tikras,j-1}$.
+
+Dar yra koreliacijos koeficientas, kuris kaþkà pasako.  Vidutinë kvadratinë
+paklaida 5 -- o kas tie 5?  kà tai sako?  Priklauso nuo uþdavinio.  Fordui
+51\% tikslumo akcijø kurso prognozë yra prieþastis padvigubinti laboratorijos
+finansavimà, kitur gal reikia 99\% tikslumo.
+
+NB sakoma 'klasifikavimo klaida', bet 'prognozavimo paklaida'.
+
+\section{Klasifikavimo ir prognozavimo klaidø ávertinimo \\ bûdai} % 10
+
+% Teoriniu paklaidø skaièiavimu Raudys nepasitiki -- tariam, kad normalinis
+% pasiskirstymas, imam Machaonobi atstumà, statom á formulæ gaunam ávertá.  O
+% jei prielaida apie normaliná daugiamatá pasiskirstymà yra klaidinga?  Geriau
+% tikrinti su tikrais eksperimentiniais duomenimis.  Tik duomenys turi bûti
+% homogeniðki!
+
+Primityviausias metodas -- savos imties metodas (\emph{resubstitution}): ant
+tø paèiø padarau, ant tø paèiø testuoju.  Bet jei duomenø nedaug, yra pavojus,
+kad prisiderinsim prie tø duomenø.  Jei $N$ ir $p$ artimi, galim gauti labai
+artimà nuliui paklaidà, bet paëmus kitus duomenis gali bûti nei á tvorà, nei á
+mietà.
+
+\[ E\sigma^2_R \approx \frac{\sigma^2_0}{1 - \frac{p}{N-p}} \] $\sigma_0$ --
+tikra paklaida, $E\sigma_R$ -- $\sigma_R$ matematinë viltis, $R$ reiðkia
+\emph{resubstitution}.
+
+Kitas bûdas -- testiniai duomenys (\emph{hold-out} arba
+\emph{cross-validation} metodas): ap\-mo\-kom su vienais duomenimis, su kitais
+testuojam.  (Galima dar ir pakartoti kelis kartus tuos paèius duomenis
+skirtingai sudalinus á mokymo ir testinius.)
+
+% Matlabe randperm(100) duos iðmaiðytà masyvà su skaièiais nuo 1 iki 100
+
+Kartais duomenø yra maþai ir gaila dalá aukoti tikrinimui.  Tada mokom ant
+visø iðskyrus vienà ir tikrinam ant to vieno.  Paskui já gràþinam ir iðmetam
+kità, mokom, ant to kito tikrinam.  Ir taip su visais ið eilës.  Slenkantis
+egzaminas (\emph{leaving out}).
+
+Standartinë cross-validation -- dalinam á dvi dalis, ant vienos mokinam, su
+kita tikrinam, ir taip 2 kartus -- 2-fold cross-validation.  N-fold
+cross-validation yra tas pats, kas leaving one out.  Tas tinka ir
+klasifikavimui, ir prognozavimui.  Ðis metodas tinka ir normaliniams ir
+nenormaliniams duomenims, bet yra jautrus duomenø homogeniðkumui (mokom su
+Lietuvos miestø duomenim, testuojam su Mozambiko, gaunam ðnipðtà).
+
+Gráþtam prie rodikliø: prognozavime tai -- vidutinis kvadratinis nukrypimas
+bei koreliacijos koeficienta; klasifikavime -- klasifikavimo klaidos ávertis
+$\hat{P} = \frac{n_\text{klaidø}}{N}$.  Beje, $\hat P$ yra atsitiktinis dydis,
+pasiskirstæs pagal binominá dësná $B(P, N)$.  Jo dispersija \[\sigma(\hat P) =
+\sqrt{\frac{P(1-P)}{N}} \approx \sqrt{\frac{\hat P(1-\hat P)}{N}}\] (kadangi
+binominio skirstymo parametro $P$ neþinome, imame $\hat P$ ir dël to gauname
+apytiksliai).  Taigi, jei þinome, kad ið 100 stebëjimø paklaida yra 10\%, tai
+galime tikëtis realiai, kad ji bus 7\%--13\% (pagal vienos sigmos taisyklæ),
+arba 3\% -- 16\% (pagal dviejø sigmø taisyklæ).  Jei turime 1000 stebëjimø,
+tai patiklumo intervalas bus tarp 9.4\% ir 10.6\% (dviejø sigmø taisyklë duoda
+$\sim$96\%).
+
+Svarbiausia suprasti, kad ávertinimas yra atsitiktinis dydis.  Kuo tiksliau
+norime ávertinti paklaidà, tuo didesnio $N$ reikia (didesnis $N$ maþina
+dispersijà ir galime tiksliau ávertinti paklaidà).
+
+% Digression á statistikà: 95% patiklumo intervalas -- ið 100-o vidutiniðkai
+% 95 stebëjimai paklius á tà intervalà.  Jis daugmaþ atitinka 1.96\sigma
+% taisyklæ.  1 sigmos taisyklë -- gal 50% ar kaþkas panaðaus.  Lia lia.
+% Daþniausiai pateikia vienà sigmà, o toliau galima pasiskaièiuoti.
+
+% Londono birzos pvz: alpha yra regresija, su maza alpha gaunam standartine
+% kvadratine regresija, su didelia alpha gaunam robastiskuma; alpha labai
+% priklauso nuo duomenu ir niekas nezino, kaip ja parinkineti -- cia galima
+% pasidaryti PhD is to; londono birzoje alpha=17 buvo geriausias ir dave
+% 2x maziau paklaidu nei standartine regresija; alpha tame pvz yra paskutinis
+% parametras.
+
+Viena gudrybë apmokant neuroninius tinklus: verta normalizuoti duomenis
+(pa\-da\-ry\-ti kad sigma = 1 o vidurkis = 0).  Kitas "fintas" yra juos dar ir
+dekoreliuoti.
+
+\section{Algoritmo sudëtingumo, mokymo duomenø kiekio ir kokybës ryðys} % 11
+
+\[
+  E \sigma_t^2 = \sigma_0^2 (1 + \frac{p}{N-p})
+\]
+kur $p$ atspindi algoritmø sudëtingumà, $N$ -- duomenø kieká, na o $\sigma_t$
+-- kokybæ.
+
+% Generalizavimo klaida = minimali arba asimptotinë klaida kart kaþkas
+
+% Ten toks grafikëlis...  sigma_t artëja prie sigma_0 ið virðaus, o sigma_R ið
+% apaèios (virðus -- klaidø sk. testiniuose duomenyse, apaèioje -- mokymo
+% duomenyse; pagal tà formulæ gauname, kad sigma_R <=0 kai N <= p, t.y. kai
+% algoritmo sudëtingumas virðyja duomenø kieká, gauname idealø modelá,
+% nedarantá klaidø.
+
+Klasifikavimo klaidos pagal Euklido metodà (Euklidas BTW tai perceptronas po
+pirmos iteracijos):
+\[ EP_N \approx \Phi\left(-\frac{\delta}{2} \cdot
+                           \frac{1}{\sqrt{1+\frac{2p}{N\delta^2}}}\right)
+\]
+
+Jei mokom percpeptronà iki Fiðerio lygio, gaunam
+\[ EP_N \approx \Phi\left(-\frac{\delta}{2} \cdot
+                           \frac{1}{\sqrt{1+\frac{2p}{N\delta^2}}} \cdot
+                           \frac{1}{\sqrt{1+\frac{p}{2N+1-p}}} \right)
+\]
+($N$ -- stebëjimø sk., $N_1$ -- stebëjimø skaièius vienoje klasëje)
+Klaida ið pradþiø didesnë, linksta smarkiau.
+
+Kitaip tariant, kuo ilgiau mokom percpetronà (daugiau iteracijø), tuo daugiau
+mo\-ky\-mo duomenø reikia.  Kuo didesnis sudëtingumas (tik èia sudëtingumas
+jau yra algoritmo sudëtingumas, o ne $p$ ávertis), tuo daugiau duomenø reikia
+mokymui.  Viena ið problemø -- ¥permokymo´.
+
+Kuo sudëtingesnis organizmas, tuo ilgiau mokosi.  Palyginimas: katë ir
+studentas.
+
+% Pritaikymai realiam gyvenimui: laikas nustoti mokytis ið tëvø/dëstytojø etc.
+% Pasaulis keièiasi.
+
+Uþ sudëtingesná algoritmà moki didesniu duomenø kiekiu.
+% TANSTAAFL
+
+Vienas ið bûdø, kaip patikrinti, ar duomenø algoritmui pakanka -- naudoti
+slenkantá egzaminà.  Su vienu paskirstymu gaunam 5\% klaidø, su kitu
+paskirstymu gaunam 15\% -- blogai, didelis skirtumas, duomenø nepakanka.
+Reikia imti paprastesná algoritmà.
+
+Arba galima vertinti paklaidas teoriðkai (jei duomenys normaliniai) ir paskui
+þiû\-rë\-ti, ar praktiðkai klaidø tikimybë panaði.  Jei ne, blogai, nepakanka
+duomenø arba per sudëtingas algoritmas.
+
+Beje, ið anksèiau: viena idëja -- reikia triukðmo duomenyse.  Algoritmas turi
+prisitaikyti prie triukðmo!  Duosim idealiai ðvarius mokymo duomenis ir bus
+neatsparus tikram gyvenimui.
+
+% Higiena: per daug higienos kenkia, organizmas pasidaro neatsparus.
+
+% Back to now: viena ið sekanèiø temø -- kaip maþinti poþymiø kieká, ir
+% apskritai algoritmo sudëtingumà.
+
+% --- 5 paskaita: 2003-04-03
+
+% Namø darbai vël: iniciatyva, kûribingumas!
+% Pakanka pastangø, o ne rezultato.  Jei stengsimës, mûsø neskriaus.
+
+% Paskaita bus ne geguþës 1, o geguþës 8
+% Paskutinë paskaita geguþës 15
+% Taigi, liko paskaitos: 04-03, 04-17, 05-08, 05-15.
+
+% Egzas: leidþiama ðpera -- 1 didelis lapas
+% Per perlaikymà bus sunkiau, jokiø ðperø
+
+\section{Daugiasluoksnis percpetronas ir jo mokymas} % 12
+
+% Perceptrono su 1 paslëptu sluoksniu diagrama:
+%   kriterijai x_1 ... x_p
+%   paslëptas sluoksnis: h neuronø
+%     s_i = \sum_{j=1}^p W_{ij} x_j + W_{i0}   kur i = 1..h
+%     y_i = f(s_i) = (1+e^{-s}_i)^{-1}
+%   iðorinis sluoksnis: k neuronø
+%     \sigma_i = f(\sum_{j=1}^h v_{ij} y_j + v_{i0})   kur i = 1..k
+
+% flashback f(x) := (1+e^{-x})^{-1} -- sigmoidinë funkcija; angl logistic
+% sigmoid
+
+Galima taikyti atpaþinimui.  Pvz, angliðko teksto atpaþinimas: $k=26$,
+po vienà klasæ kiekvienai raidei.  Kurioj klasëj $\sigma_i$ reikðmë didþiasia,
+pagal tai ir atpaþástam.  Trokðtamas iðëjimas: $\sigma_i = 1$, $\sigma_j = 0$
+jei $i \ne j$.
+
+Jei naudojam prognozavimui, daþniausiai apsieinam be sigmoidinës f-jos:
+\[
+   \sigma_i' = \sum_{j=1}^h v_{ij} y_j + v_{i0}   kur i = 1..k
+\]
+
+Arba galima normuoti á intervalà $[0, 1]$, bet praktikoje to niekas nedaro.
+Praktiðkai visi naudoja neuroniná tinklas be netiesiniø elementø iðëjimo
+sluoksnyje.
+
+Va tokia daugiasluoksnio perceptrono architektûra.  Jo mokymas
+sudëtingesnis, nei vienasluoksnio perceptrono.
+
+Daugiasluoksnis perceptronas gali daryti netiesinius atskyrimo pavirðius.
+
+Daugiasluoksnis perceptronas su vienu paslëptu sluoksniu yra universalus
+aproksimatorius: galima gauti bet kokio sudëtingumo atskyrimo pavirðiø.
+
+Funkcijos neteisiðkos, turi lokaliø maksimumø, optimizavimas sudëtingas.
+
+Kaip já mokyti?  Kaip visad, reikia ásivesti nuostoliø funkcijà ir jà
+minimizuoti.
+
+Didþiulë nuostoliø funkcijos formulë:
+\[
+  cost = \sum_{l=1}^k \sum_{s=1}^k \sum_{t=1}^{N_s}(t^l_{st} - \sigma^l_{st})^2
+\]
+$t^l_{st}$ -- trokðtamas iðëjimas ($1 \le l \le k$ -- iðëjimo neurono numeris,
+$st$ -- mokymo vektoriaus numeris),
+$\sigma^l_{st}$ -- gautas $l$-tasis iðëjimas testavimo vektoriui $x_{st}$,
+$k$ -- klasiø skaièius
+$N_s$ -- mokymo vektoriø skaièius $s$-tajai klasei.
+
+Iðëjimas skaièiuojamas
+\[ \sigma^l_{st} = f(\sum_{j=1}^h v_{lj} y_j^{st} + v_{l0})
+\]
+kur
+\[ y_j^{st} = f(\sum_{i=1}^p w_{ji} x_i^{st} + w_{j0})
+\]
+paslëptø vektoriø iðëjimai.
+
+Èia áëjimo vektoriai yra $\mathbf{x^{st}} = (x_i^{st})$ ($s$-tosios klasës
+$t$-asis vektorius, $1 \le s \le k$, $1 \le t \le N_s$, $1 \le i \le p$).
+
+Mokymo algoritmo bendras principas:
+\[ \mathbf{W}_{z+1} = \mathbf{W}_{z}
+                      - \eta \frac{\partial cost}{\partial \mathbf{W}}\Bigg|_z
+\]
+kur $z$ -- mokymo þingsnis (iteracijos numeris), $\mathbf{W}$ -- bendras
+visø perceptronø svoriø vektorius.
+\[ \mathbf{W} = (w_{10}, w_{11}, \dots, w_{1p}, \dots,
+w_{h0}, \dots, w_{hp}, v_{10}, v_{11}, \dots, v_{1h}, \dots, v_{k0}, \dots,
+v_{kh})
+\]
+
+Iðvestinë
+\[
+\frac{\partial cost}{\partial \mathbf{W}}
+  = 2 (t^l_{st} - \sigma^l_{st})
+    \cdot f'(\sum_{j=1}^h v_{lj}y_j^{st} + v_{l0}) \dots
+\]
+
+Algoritmas vadinamas error back-propagation.
+
+% error back-propagation -- klaidos sklidimas atgal.
+
+% s/iðvestinë/gradientas/ ?
+
+Kai svoriai maþi, iðvestinë didelë.  Kai svoriai iðauga, iðvestinë priartëja
+prie $0$, mokymas labai labai smarkiai sulëtëja.
+
+% Atskiras klausimas, 
+% Matlabe yra Nguen widrow[sic?] initialization
+
+% Dþoukas: kodël Paksas gali bûti geru prezidentu?  Nes turi poþiûrá ið
+% virðaus.
+
+% Prieð 13 m. neuroniniai tinklai turëdavo po 100000 svoriø.  Mokë juos po 7
+% mënesius.  OCRui.  Source'as: 20x30 -- 600 pixeliø.  Bet á kiekvienà neuronà
+% paduodavo 5x5 kvadratëlius, paslinktus po truputá.  Pirmame sluoksnyje daug
+% neuronø buvo vienodø, in fact, buvo tik 4 rûðys neuronø: atpaþindavo
+% vertikalià tiesià linijà, horizontalià, dvi diagonalias.  Taip sumaþino
+% svoriø kieká.  Tinklas turëjo 7 sluoksnius.  Mokë já su back-propagation
+% algoritmu.
+
+% Tai - viena ið "weight sharing technique".
+
+% Prieð porà metø kvapø atpaþinimo tinklus mokë 3 paras,
+
+\section{Daugiasluoksnio perceptrono mokymo ypatybës} % 13
+
+Pirma ypatybë -- jis labai lëtai mokosi.  Svoriams padidëjus iðvestinë labai
+smarkiai sumaþëja.  Svoriø labai daug.  Pakliûna á lokalinius minimumus, ið jø
+ne visada iððoka.
+
+% Laibai vaizdinga demonstracija ant lentos: papieðti poros svoriø kitimà
+% laikui einant: pasisukioja, pradeda eiti tiesiai, lëtëja, lëtëja, lëteja...
+% beveik sustoja.  Padidinus \eta vël paeina ta paèia kryptim ir vël sulëtëja
+% iki sustojimo.
+
+Kaip su tuo kovoti?  Vienas ið bûdø -- antros eilës metodai (skaièiuoja antros
+eilës iðvestines, bet jie jautresni lokaliniams minimumams).
+
+Levenberg-Market ar tai conjugate gradients metodas ima antros eilës
+iðvestines, o kadangi jø daug ($|W|^2/2$), ima tik diagonalines.  Konverguoja
+greièiau, bet labau greitai patenka á lokaliná minimumà.
+
+Su lokaliniais minimumais kovoja multistart metodas.  Mokai 10 kartø nuo 0
+su skirtingais pradiniais svoriais.
+Ið jø 3 kartus gaunas gerai (3-5\% klaidø), 7 labai prastai (15\% klaidø)...
+
+% Raudys jau back-propagation nebenaudoja, naudoja ðità, gradientiná.
+
+% O ðiaip daug kas já tebenaudoja.  Bûtent dël lokaliniø minimumø.
+
+% Dar ateity pasakos apie genetinius alg.  Jie geriau susidoroja su
+% lokaliniais min, bet konverguoja lëèiau uþ gradientiná.
+
+Kitas bûdas -- didinam mokymo þingsná.  Pvz, kas $50$ iteracijø paþiûrim, ar
+su\-ma\-þë\-jo nuostoliø funkcija.  Jei sumaþëjo, padidinam $\eta$ (padauginam
+ið $1.07$).  Jei padidëjo, sumaþinam $\eta$ (padauginam ið $0.7$).
+
+% Ðità galima ir su vienasluoksniu perceptronu daryti.  Tas jau buvo:
+% atraminiai vektoriai.  Kiek konkreèiai didinti \eta priklauso ir nuo
+% duomenø.
+
+1986 m. Rumelharto ir dar kaþkieno straipsnis pradëjo naujà erà
+neuroniniuose tinkluose: sigmoidinë funkcija.  Jie pasiûlë trokðtamø iðëjimø
+reikðmes imti 0.1 ir 0.9 vietoje 0 ir 1, kad svoriai neiðaugtø per daug
+dideli.  Tada ir iðvestinë bus toli graþu ne 0.
+
+Sumaþëja plokðèios vietos iðëjimo sluoksnyje (paslëptame sluoksnyje
+nesumaþëja)
+
+% TANSTAAFL.
+
+Lygiai taip pat nëra ir to blogo, kas neiðeitø á gerà.  Iðloðiam
+didesnæ iðvestinæ -- greitesnis mokymas.  Praloðiam va kà: jei t = 0/1, tai
+funkcija cost yra lygi klaidø kiekui -- taigi oficialiai mes minimizuojam
+klaidø kieká, which gives us a warm and fuzzy feeling.  Su 0.1/0.9 jau
+matuojam neþinia kà.  Uþ tai mokam dar didesniu skirtumu nuo klasifikavimo
+klaidos.
+
+% Kà daryti?  Apie tai kalbës vëliau.
+
+Baisiausiais svarbus dalykas yra pradinës sàlygos. $\mathbf{W_0}$
+
+Vienasluoksniu atveju apsimoka nustumti centrà tarp klasiø á koordinaèiø
+pradþià, ir pradëti mokyti nuo nuliniø svoriø.
+
+Èia neiðeis: jei visus paslëptus neuronus mokysim su tai paèiais pradiniais
+svoriais, jie visi bus vienodi... nebebus jokio daugiasluoksnio perceptrono.
+
+Pradinë sàlyga: $\mathbf{W}_0$ svoriai skirtingi.  Paprastai juos parenka intervale
+$[-a, a]$.  $a$ parenkam toká, kad pradinës áëjimo sluoksnio perceptronø reikðmës
+\[ \sum_{i=1}^p w_{ji} x_i^{st} + w_{j0}
+\]
+reikðmës bûtø pakankamai maþos.
+
+Daþnai dar áëjimo reikðmës normalizuojamos, kad pakliûtø á intervalà $[0, 1]$
+(taip daro Matlabas), arba kad jø dispersija bûtø arti $1$, o vidurkis $0$
+(taip daro Raudys).
+
+Tai labai svarbu!
+
+% Perka paketà uþ $10,000 ir nieko jiems neveikia.  Meta á ðiukðliø dëþæ.
+% Iðtraukia, normalizuoja duomenis ir viskas veikia!
+
+% Nguen-Widrow inicializavimas.  Paslëptas sluoksnis bei iðëjimo sluoksnis
+% inicializuojami vienodai.
+
+Dar apie pradines sàlygas: jei pradedi nuo gerø pradiniø sàlygø ir laiku
+sustoji, rezultatas bûna geresnis.
+
+% Vaizdingas grafikëlis.  Kuo geriau inicializuoji, tuo geriau -- vidutiniðkai
+% arèiau tikro minimumo.  Ir svarbu laiku sustoti!
+
+% Kuo geriau pradedam, tuo anksèiau reikia sustoti.
+
+% Yra krûva bûdø gerai pradëti.  Ateityje: gabalais tiesinis klasifikatorius.
+% Dar vienas ið bûdø: pirma pamokyk su paprastesniu algoritmu, o jau paskui su
+% tikrais duomenimis.
+
+% Data mining: dësningumø paieðka dideliuose duomenyse.  Duomenys netelpa.
+% Tarkim, turim 10 Gb.  Skaldom á 10 gabalø po 1 GB.  Apmokom su 1, laiku
+% sustojam.  Pradedam nuo tos galutinës padëties, apmokom su 2 gabalu.  Ir
+% t.t.
+
+Kartojam:
+\begin{enumerate}
+\item kai $|W|$ auga, $f' \to 0$,
+\item lokaliniai minimumai,
+\item didinam arba maþinam mokymo þingsná priklausomai nuo pasisekimo.
+\item trokðtami iðëjimai -- imam ne 0 ir 1, o 0.1 ir 0.9.
+\item praloðiam lygybæ cost = klaidø kiekis
+\item pradinës sàlygos: svoriai skirtingi ir pakankamai maþi
+\item pradiniai duomenys normalizuoti -- arba $0 <= x_i <= 1$,
+      arba $Ex = 0$ (vidurkis) ir $\sigma = 1$ (dispersija)
+\item gerai pradëti ir laiku sustoti!
+\end{enumerate}
+
+% Treèias namø darbas: daugiasluoksnis perceptronas.  Reikia pademonstruoti
+% kai kuriuos ið ðiø efektø.
+
+% Namø darbo reikia ant popieriaus
+
+% VU vienà kartà 5 studai pateikë tà patá darbà -- 100% identiðka iðskyrus
+% pavardæ.  Bet tik 1 kartà, aukðtas nusiraðinëjimo lygis!
+
+% Dar apie namø darbà:
+%   ¥kas yra ant aðiø´?  Paveiksliukai be captionø, aðys be labeliø, nër
+%   paaiðkinimø, kas yra kas, etc -- atkreipti dëmesá.
+
+\section{Duomenø nuosavos reikðmës ir mokymo þingsnis.
+         Duomenø transformavimas prieð mokant} % 14
+
+% Paveiksliukas: labai sunku atskirti klases, jei jos yra tokios siauros greta
+% viena kitos ir labai siauras tarpas tarp jø.  Atsiskiria 100%, bet
+% perceptronas mokosi nepaprastai sunkiai, labai lëtai konverguoja, ypaè
+% daugiamatëse erdvëse.
+
+% Vadovëliuose labai retai á tai kas kreipia dëmesá.  Pagal Raudá ðis dalykas
+% yra labai svarbus.
+
+Nuostoliø funkcija
+\[ cost = \frac{1}{N_1+N_2} \sum_{i=1}^2 \sum_{j=1}^{N_i} (t_{ij} - W'x_{ij} - W_0)^2
+\]
+
+Jei $Ex = 0$, galima imti $W_0 = 0$ ir supaprastëja funkcija:
+\[ cost = \frac{1}{N_1+N_2} \sum_{i=1}^2 \sum_{j=1}^{N_i} (t_{ij} - W'x_{ij})^2
+\]
+
+Tarkime $\widehat{W}$ yra minimumas:
+\[ cost_{min} = \frac{1}{N_1+N_2} \sum_{i=1}^2 \sum_{j=1}^{N_i} (t_{ij} -
+                                                         \widehat{W}'x_{ij})^2
+\]
+tuomet
+\begin{align*}
+ cost & = \frac{1}{N_1+N_2} \sum_{i=1}^2 \sum_{j=1}^{N_i}
+                 (t_{ij} - (W + (\widehat{W}-W)'x_{ij})^2
+    \\& = cost_{min} + (W - \widehat{W})' K (W - \widehat{W})
+    \\& = cost_{min} + (W - \widehat{W})' \Phi \lambda \Phi' (W - \widehat{W})
+    \\& = cost_{min} + U' \lambda U
+\end{align*}
+kur
+\[ K = \frac{1}{N_1 + N_2} \sum \sum x_{ij} x_{ij}' \quad\text{(kovariacinë matrica)}
+\]
+ir
+\[ U = \Phi'(W - \widehat{W})
+\]
+
+Kovariacinë matrica
+\[ K = \Phi \lambda \Phi'
+\]
+kur $\Phi$ -- ortogonali matrica ($\Phi \Phi' = \Phi' \Phi = I$ -- vienetinë
+matrica).  Matricos $\Phi$ eilutës bus matricos $K$ tikriniai vektoriai.
+$\lambda$ yra ástriþaininë matrica, kurios ástriþainëje juos atitinkanèios
+tikrinës reikðmës $\lambda_1, \dots \lambda_p$ -- dispersijos.  Vektoriai yra
+kryptys, liambdos -- dispersijos tomis kryptimis.
+
+% [U, D, V] = svd(K) -- signular value decomposition -- skaido matricà á
+% tikrines reikðmes, U = \Phi, D = diagonalinë matrica, V = U jei matrica
+% simetrinë, o jei ne, bala þino kas
+
+Iðvestinë nepriklauso nuo $cost_{min}$ nario, tik nuo to
+$U'\lambda U$.  
+Kitaip tariant, pasukam erdvæ ir vietoje W gauname U.  Èia lengviau
+konverguos.  Mokymas yra
+\[ U_{z+1} = U_z - \eta \frac{\partial cost}{\partial U}
+\]
+Iðvestinë
+\[ \frac{\partial cost}{\partial U} = 2 \lambda U_z
+\]
+tad
+\[ U_{z+1} = (I - 2\eta \lambda) U_z
+\]
+Kad seka konverguotø, turi bûti
+\[ \forall i: |1 - 2\eta \lambda_i| < 1
+\]
+(Pakanka paimti tik maksimalià $\lambda$ reikðmæ).  Tad reikia parinkti
+pakankamai maþà $\eta$:
+\[ \eta < \frac{1}{\lambda_{max}}
+\]
+Bet kuo maþesnë $\eta$, tuo lëtesnis mokymas.
+
+Taigi, jei duomenys tokie bjaurûs ir nesimoko, vienas ið bûdø yra pasukti
+erdvæ ir sunormuoti duomenis:
+\[
+  Z = \lambda^{-\frac{1}{2}} \Phi X
+\]
+Tuomet visomis kryptimis $\lambda$ yra vienodi ir turime vienà bendrà $\eta$
+visoms kryptims.  Tas labai pagreitina.  Jei duomenys normaliniai, tai jau po
+pirmos iteracijos gauname teisingà Euklidiná klasifikatoriø.
+
+% Ðita formulë yra iðvesta regresija.  Nëra netiesinës f-jos etc, bet tai
+% regresija.
+
+Kà daryti su daugiasluoksniu perceptronu, vienas Dievas teþino -- daug
+per\-cep\-tro\-nø, neaiðku, kuria kryptimi sukti....
+
+Prie tø punktø priraðom
+\begin{enumerate}
+\item[9.] reikia pasukti duomenis, transformacija yra $\lambda^{-1/2} \Phi$
+\end{enumerate}
+
+% --- 6 paskaita: 2003-04-24; praþiopsojau...
+
+% Kartojimas
+
+Daugiasluoksnio perceptrono atveju duomenø nepasukiosi/nepanormalizuosi, kad
+lengviau bûtø mokytis.
+
+Jei skiriamasis pavirðius labai jau sudëtingas ir perceptronas lëtai mokosi,
+tai galime pridëti triukðmo -- aplink rutuliukus pribarstyti atsitiktinai
+daugiau rutuliukø, t.y. padidinam mokymo duomenø kieká.  Tada skiriamasis
+pavirðius ¥iðsitiesins´ -- supaprastës (nors atsiras daugiau klaidø).
+
+Kad svoriai neiðaugtø pridedamas reguliarizavimo narys (weight decay) prie
+cost funkcijos:
+\[  ... + \lambda W' W\]
+prieðingas efektas gaunamas (kad svoriai augtø), kai atimamas narys
+\[  ... - \lambda V' V\]
+(t.y. yra aspektø, kai ðito reikia)
+
+% Raudþio atsiøsta programëlë mokosi Levenbergo-Market ar tai back-propagation
+% metodu.  Ðitas metodas lengvai ákrenta á lokalø minimumà.
+
+\section{Duomenø transformacija} % 15
+
+% Kaip sumaþinti poþymiø kieká?  Bus 2 metodai
+
+Prognozavimo paklaida lygi $\sigma_{pr}^2 = \sigma_0^2 \left(1 +
+\frac{p}{n-p}\right)$, t.y., kuo daugiau poþymiø imame, tuo didesnæ paklaidà
+gauname.
+
+Fiðerio klasifikatoriaus paklaida:
+\[ EP_{kl} = \Phi \left(\frac{\delta}{2}
+\frac{1}{\sqrt{(1+\frac{2p}{N\delta^2})(1+\frac{p}{N_1+N_2})}}\right)
+\]
+elgiasi taip pat.
+
+Taigi, poþymiø skaièius $p$ turi bûti nedidelis.  Kaip þinoti, kuriuos
+poþymius imti?
+
+Vienas ið bûdø -- \Def{poþymiø iðrinkimas}.
+
+Pvz., turime poþymius
+\[ X = \left[ \begin{array}{l} x_1\\x_2\\\vdots\\x_p \end{array}\right]
+\]
+ir atrenkame
+\[ X' = \left[ \begin{array}{l} x_7\\x_{1012}\\x_{38779} \end{array}\right]
+\]
+
+Kitas bûdas -- \Def{transformacija (iðskyrimas)}
+
+Pvz., turime poþymius
+\[ X = \left[ \begin{array}{l} x_1\\x_2\\\vdots\\x_p \end{array}\right]
+\]
+ir iðvedame
+\[ Y' = \left[ \begin{array}{l} y_1\\\vdots\\y_r \end{array}\right] = T \cdot X
+\]
+kur $r << p$, o $T$ -- transformacijos matrica.
+\[ y_i = \sum_{j=1}^p t_{ij} x_j
+\]
+
+\paragraph{Pagrindiniø komponenèiø metodas} % populiariausias
+
+Reikia taip suprojektuoti duomenis, kad viena (pirma) kryptimi jø
+iðsibarstymas bûtø didþiausias, antra -- maþesnis, treèia -- dar ma\-þes\-nis
+ir t.t.  Kaip tø krypèiø ieðkoma: suskaièiuojam duomenims kovariacinæ matricà
+\[
+   K = \frac{1}{n-1} \sum_{j=1}^n (X_j - \overline{X})
+                                  (X_j - \overline{X})^T
+\]
+% Matlabe K = cov(Dx);
+% kur Dx -- matrica ið p stulpeliø ir n eiluèiø
+
+Matricà $K$ galima uþraðyti tokiu pavidalu: $K = G \cdot D \cdot G'$, kur
+$D$ yra diagonalinë matrica, o $G$ -- ortogonali matrica ($GG' = I$).
+
+% Matlabe G ir D radimui yra komanda
+%  (G, D, Ga) = svd(K);     -- singular value decomposition
+
+$G$ -- posûkio matrica (gaunama su minimalia paklaida).
+% jei duomenys neuþsivertæ; jei uþsivertæ, gali neiðeiti.
+% XXX: o kà tai reiðkia???
+
+Tai va, vietoje matricos $T$ galima naudoti matricà $G$: $Y = X' G$
+($X'$ turi vienà eilutæ ir $p$ stulpeliø, ið $G$ imame $p$ eiluèiø ir tik
+pirmuosius $r$ stulpeliø; likusius stul\-pe\-lius iðmetame).
+
+$Y$ kovariacinë matrica yra $D$ (tiksliau, pirmos $r$ eilutës/stulpeliai).
+
+Beje, ðis metodas leidþia ið maþesnio skaièiaus komponenèiø atstatyti likusias
+-- t.y. turint $Y$ galima gan tiksliai atgaminti $X$.
+
+\bigskip
+
+Daþnai ið pradþiø poþymiai iðrenkami, o paskui transformuojami, t.y. naudojami
+abu bûdai.
+
+% Þr. Fooley-Sammon optimal discriminant plane (optimali diskriminantinë
+% plokðtuma).
+% Þr. dar straipsná apie poþymiø iðskyrimus
+
+% Jei turime $t_{1j}$, tai $t_{2j}$ ieðkomas toks, kad \sum_j t_{2j}t_{1j} = 0
+% t.y. daromas 2 perceptronas su tokia sàlyga ir 
+%    min_{t_2} Cost(t_2) = Cost_{SLP}(t_2) + \lambda (\sum_j t_{2j}t_{1j})^2
+% t.y. ieðkom tokios krypties, statmenos pirmai, kad geriausiai skirtø klases.
+
+\section{Poþymiø atrinkimo algoritmai} % 16
+
+\begin{enumerate}
+\item ¥Daryk, kaip darë kiti´ % -- apie kà èia???
+\item Imti poþymius po vienà, su jais klasifikuoti/prognozuoti ir iðrinkti
+      tuos po\-þy\-mius, su kuriais geriausiai gaunasi.
+
+      Bet ðitai ne visada gerai pasiteisina: bûna, kad po vienà nelabai gerai
+      parodo, o poroj iðprognozuoja klasifikatoriø be klaidø,
+\item Nagrinëti poþymius po 2 ar daugiau.  Jei poþymiø nedaug, tai viskas
+      gerai, bet jei daug, tai tokiø tuplø susidarys labai daug.  Tada galima
+      ið pradþiø iðrinkti tarkime 100 geriausiø ir jau tada nagrinëti po 2
+      (bendru atveju po n).
+
+      Arba galima atsitiktinai parinkti pvz. 5000 deriniø po 2 ir ið jø
+      iðsirinkti geriausià.
+
+\item Poþymiø atrinkimas su paskatinimu -- remiantis tuo, kad geriausi
+      poþymiai daþniau pasitaiko, nei blogesni.  Tai kaþkaip (kaip??) atskirti
+      $m$ daþniausiai pa\-si\-tai\-kan\-èiø poþymiø ir ið jø rinkti pilnu
+      perrinkimu $n|$ reikalingø poþymiø.
+
+      Apriorinëm tikimybëm iðrenkam kaþkoká poþymiø rinkiná.  Ávertinam --
+      pvz., paskaièiuojam klaidà.  Ir taip daaaug rinkiniø.  Iðrenkam tada
+      deðimt geriausiø rinkiniø.  Ir paþiûrime tuose deðimtyje, kokie
+      poþymiai geriausiai pasirodo.
+
+\item \emph{forward selection} -- atrenkam 1 geriausià.  Tada bandom jo
+      kombinacijas su likusiais.  Atrenkame antrà poþymá -- jau turime porà.
+      Tada bandome tø dviejø kombinacijas su likusiais ir t.t.  Ðis bûdas
+      vadinamas \Def{nuosekliu pridëjimu}.  Yra dar \Def{nuoseklus atmetimas}
+      -- analogiðkai, tik atvirkðèiai: atmetame blogiausius poþymius.  Yra dar
+      ir ðiø dviejø metodø kombinacijos.
+
+\item Genetiniai algoritmai.
+\end{enumerate}
+
+Poþymiø rinkiniai skirtingais metodais gaunami skirtingai, bet daþniausiai jø
+paklaida yra panaði.  Moralas: nereikia siekti tobulumo.
+
+\section{Poþymiø iðskyrimas su neuroniniu tinklu} % 17
+
+Klasikinis bûdas iðskirti poþymius yra toks: turime perceptronà su $x_1,
+\dots, x_p$ áëjimais, kaþkiek paslëptø neuronø ir $p$ iðëjimø.  Paslëptø
+neuronø turëtø bûti $r$ -- tiek, kiek mums reikia poþymiø.
+
+Idëja tokia: iðëjimø reikðmës turi bûti tokios paèios, kaip ir áëjimø.  O
+vidinis paslëptas sluoksnis juos suspaudþia.
+
+Iðskirti poþymiai yra vidiniø paslëptø neuronø duodamos reikðmës prieð
+paduodant jas sigmoidinei funkcijai.
+
+% paveiksliukas ið dviejø sluoksniø
+
+% modifikuojame su daugiau neuronø
+
+% kitas paveiksliukas ið trijø sluoksniø
+% viduriniame -- tiek neuronø, kiek poþymiø norime palikti
+
+Þr. AANN -- auto asociatyviniai neuroniniai tinklai
+
+% Antras bûdas: kaþkoks paveiksliukas, kaþkoks skiriamojo pavirðiaus grafikas
+% Tokio tinklo tikslas: pavaizduoti ekrane, t.y. atskirti dvimatëj plokðtumoj
+
+% Taigi daugiasluoksnis perceptronas gali bûti panaudomas poþymiø iðskyrimui
+
+Galima pritaikyti duomenø vizualizacijai (pavaizdavimui dvimatëje ar trimatëje
+erdvëje).
+
+% --- 7 paskaita: 2003-05-08
+
+% 10 minuèiø vëlavau.  èia mano science fiction:
+
+\section{Duomenø klasterizavimas (grupavimas)} % 18
+
+Problema: nehomogeniniai duomenys, modeliavimas nesiseka.  Reikia
+sus\-kai\-dy\-ti duo\-me\-nis á klasterius ir juos modeliuoti atskirai.
+
+% va èia áëjau.  lenta dar buvo tuðèia
+
+% Grafikëlis: x -- income per capita, y -- gyvenimo trukmë.  Toks ádomus
+% iðsidëstymas.  Pasirodo, yra 2 gyvenimo bûdai: Olandija etc -- kuo daugiau
+% uþdirbi, tuo geriau gyveni; Mozambikas etc -- kuo daugiau uþdirbi, tuo
+% daugiau kenksmingø áproèiø gali sau leisti, tuo trumpiau gyveni.
+
+% Picas kameroj
+
+% Ðios paskaitos tema: kaip nagrinëti duomenis, jei jie nehomogeniðki.
+
+% Kaþkà bendro su regresija.
+
+% Paveiksliukas.  Dviejø neuronø suma -- gaunam tokià \Phi formos kreivæ
+
+Nehomogeniniai duomenys.  Pasiskirstymo tankis
+\[ f(x) = \sum_{i=1}^{k} q_i f_i(x)
+\]
+yra $k$ komponenèiø suma.
+% Paveiksliukas: dviejø komponenèiø suma -- pasiskirstymas va toks.
+
+Reikia nehomogeninius duomenis suskirstyti á tokias klases prieð nagrinëjant.
+
+% Anecdote: anglijoj gyventojø suraðymas, kaþkoks bankas bandë pagal tai
+% nustatyti, kam reikia duoti paskolas.  Iðsiaiðkino, kad pagal paðto indeksà.
+% :)  Pasirodo, ten pas juos gyvenimo rajonas labai priklauso nuo visuomeninës
+% padëties.
+
+Daþniausiai $f_i(x)$ yra normalinio pasiskirstymo -- $f(x, \mu_i, \Sigma_i)$.
+Bet labai daug parametrø.  Galime supaprastinti tardami, kad visos $\Sigma_i$
+yra diagonalinës matricos -- netiesa, bet paprasèiau.
+
+Daug greitesni algoritmai yra euristiniai.
+
+Euristika -- paimta ið lubø sveiko proto taisyklë pagal principà ¥man taip
+atrodo´.
+
+Pavyzdys: n taðku.  "Man atrodo", kad yra tiek grupiø -- taip ir suskirstom,
+paimam kiekvienos grupës centrà, tada tiesiog ieðkom, prie kurio centro
+taðkas artimiausias, tai grupei ir priskiriam.
+
+Ðis algoritmas vadinamas $k$ vidurkiø algoritmu ($K$-means algorithm).
+
+Jis labai daþnai naudojamas.  Pirmasis.
+
+O paskui sugalvojo dar 200 ar 400.  Prieð 20 metø buvo disertacijø bumas --
+sugalvojam naujà, parodom, kad veikia, ginam disertacijà.  Paskui pamatë,
+kad naudos 0 ir gráþo prie paprasèiausiø algoritmø.
+
+% Jei kas nori, Raudys gali duoti kaþkokiø jo draugo programø.  Google for
+% Duin (pavardë) Delf ar tai Delft (miestas Olandijoje, kaþkada buvo sostinë).
+
+% Duin Pattern Recognition Group or somefing.
+
+% Uþsienieèiai -- programas reikia pirkt, o mokesèiø nereikia slëpt.  O mes va
+% dabar uþsiraðysim á jø Europos sàjungà.  Ir pamokysim juos :-)
+
+Paprasèiau paaiðkinti, jei yra tik du centrai.
+
+Imam du taðkus ir vedam per vidurá statmená.  Tada vienai grupei suskaièiuojam
+vienà vidurká, kitai grupei antrà.  Uþmirðtam pirmà skiriamàjà linijà ir vedam
+statmená per tø dviejø vidurkiø vidurá.  Kartojam.  Po keliø iteracijø jis
+nusistovi ir nustoja slankioti.
+
+Paskui pradedi nuo pradþiø su kitais pradiniais taðkais -- ir taip kokius 8
+kartus.  Paimi tà variantà, su kuriuo vidutinis atstumas iki centro yra
+maþiausias.
+
+% XXX: o èia tas pats, ar jau kitas algoritmas?
+
+% Þmogaus akis -- geras daiktas, daugelá algoritmø praneða.  Dvimatëj erdvëj.
+% Trimatëj jau sunkiau, o keturmatëj iðvis kapas.
+
+% Pora picø su 3 taðkais.
+
+% labels = Kmeans(D, k, m)
+%   D -- duomenys, k -- kiek grupiø, m -- kiek bandymø
+
+\medskip
+
+Kitas algoritmas: suskaièiuojam atstumus tarp visø mokymo vektoriø porø.
+Artimiausias poras sujungiam poromis.  Tada jungiam poras, kuriø vidurkiai
+panaðiausi.  Jei kas labai toli, nejungiam.  Ir t.t.  Gaunam toká medá.  Tada
+pasirenkam kaþkurá lygá ir kiek ðakø yra þemiau jo, tiek ir bus klasiø.
+
+Tai vadinama \Def{dendrograma}.
+
+% Paveiksliukas.
+
+% Kaþkas sudarë pasaulio kalbø dendrogramà.  Dvi: pagal þodþiø panaðumà ir pagal
+% gramatikos panaðumà.
+
+Viena neiðpræsta problema -- o kokià $k$ reikðmæ pasirinkti?  Niekas neþino.
+Reikia kaþkaip pasirinkti, kad iðeitø paskui geriausiai.
+
+% Klausimas baigësi.
+
+% Egzas: Þemaièio auditorija, 3 vienodi klausimai visiems, mes paraðom
+% Namø darbai: dabar visi gaus po max. jei ne tragiðki ND, visi kas vëliau,
+% turës apsiginti "kodël tu pridëjai kaþkà naujo".
+
+% Egzas 4 d. 9:30 atrodo
+
+% Perlaikymas 20 d.
+
+% Apie kaþkurià uþduotá ðneka -- atrodo 3-iosos 1 dalá.  Pvz. galima paimti
+% 50% duomenø mokymui, 50% testavimui.  Ið pirmos pusës apmokom su maþu
+% gabaliuku, testuojam, gaunam 5% klaidø.  Apmokom su visais, test, gaunam 4%
+% klaidø.  Darom iðvadà: kuo daugiau duomenø apmokymui, tuo geriau.  Ðito
+% pakanka.
+
+% O dabar antrà.
+% Kas geriausiai gaus, gaus 1 balà per egzà.  Kiti du/trys irgi.
+
+% 3 darbas -- juokas: paleidi ir apraðai.  Jei ne paskutiniu momentu atneði,
+
+% 4 uþduotis: tà patá, kà darëm su 1,2,3, tik reikia suformuluoti savo sàlygà.
+% Paimti savo duomenis.  Etc.
+
+% Vertinimas: uþ pratybø 1, 2, 3 -- 2 balai, uþ pratybø 4 -- 2 balai, uþ egzà
+% -- 6 balai.  Galima susitarti, kad uþ egzà 5 ir uþ pratybas 5 (4-toji uþd.
+% 50%).
+% Duoda extra 11-tà balà uþ namø darbus -- originalumas, idëjos, etc.
+
+% 4tà darbà galima atneðti ir á konsultacijà.
+% Konsultacija: pirmadiená (birþelio 2 d) vakare 18 val. po darbo èia fakultete.
+
+% Recap: perlaikymas 20 d. 15 val. pas já MII.
+
+\section{Radialiniø baziniø funkcijø neuroninis tinklas} % 19
+
+Jie -- antri pagal populiarumà po perceptronø.  Tinka ir klasifikavimui, ir
+prognozavimui.
+
+Idëja: prielaida, kad duomenys nehomogeniðki.  Pavyzdys: turim $x$, bandom
+prognozuoti $y$.  Sugrupuojam á grupes su centrais $c_1$, \dots.  Kiekvienà
+centrà $c_i$ atitinka kaþkoks $y_i$.  Idëja daryti prognozæ taip:
+\[ y(x) = \sum_{i=1}^k y_i \cdot \frac{1}{D(x, c_i)}
+\]
+$D(x, c_i)$ -- atstumas nuo $x$ iki centro.  T.y. tie, kas arèiau turi didesnæ
+átakà.
+% Èia daug neteisybës -- èia tik supraprastina idëja.
+% Èia vël buvo statistinis metodas -- su neuroniniu tinklu tà D surasim patys
+
+Ið tikrøjø funkcija yra kitokia:
+\[ y(x) = \sum_{i=1}^k y_i \cdot K(\frac{D(x, c_i)}{\lambda_i})
+\]
+$K$ yra varpo formos kreivë.  $\lambda$ átakoja varpo platumà.
+
+Toks bûtø statistinis algoritmas.  Neuroninis tinklas mokymo metu suras ir
+$c_i$ ir $\lambda_i$.
+
+% Vakarø univeruose uþ doktorantà univeras gauna 40000 guldenø per metus.
+
+Panaðiai kaip ir su perceptronu: imam pradines $c_i$ ir $\lambda_i$ reikðmes
+(su klasterizavimu), tada imam kainos funkcijà $c$ ir gradientiniu metodu
+ieðkom minimumo pagal visus $\lambda_i$ ir $c_i$.
+\[ c = \sum (y_z - y(x_i))^2
+\]
+
+Minusas: reikia daug skaièiavimo.
+
+Galima paprasèiau: tiesiog kvantuoti pagal mokymo vektorius.  T.y. jei yra arti
+centro, imam to centro vidurká o nebandom skaièiuoti atstumø.
+
+% Dabar mada: kvantiniai neuroniniai tinklai.  Niekuo nesiskiria nuo paprastø
+
+% Schematinis vaizdavimas
+
+% "Dëstymas -- idëjø lygyje."
+% "Mokëjimas -- tas, kas lieka, kai viskà viskà uþmirðti"
+
+Klasifikavimas: kiekvienam klasteriui trys parametrai $q_i$, $c_i$ bei
+$\lambda_i$:
+\[ y(x) = \sum_{i=1}^k q_i \cdot K(\frac{D(x, c_i)}{\lambda_i})
+\]
+Pradinë $q_i$ ($i$-tojo klasterio apriorinë tikimybë) reikðmë -- vektoriø
+skaièius $i$-tajame klaseryje padalintas ið visø vektoriø skaièiaus.
+
+Funkcija $K(s)$ paprastai yra $e^{-s}$.
+
+Radialiniø baziniø funkcijø neuroniniame tinkle gaunama reikðmë yra daugmaþ
+tankio ávertinimas.
+
+Kiek suprantu, paskui taikom skirtingiems klasteriams skirtingus jø modelius
+ir kombinuojam atsakymà pagal tà tanká.  Bet kadangi skaièiavimø daug galima
+tiesiog kvantuoti ir taikyti tik vienà modelá.
+
+Ið principo klaseriø skaièiais skirtingose klasëse gali bûti skirtingi.
+Pvz., klasifikuojam á sveikus ir serganèius.  Sveiki beveik visi vienodi --
+vienas ar du klasteriai.  Sergantys yra skirtingi -- daug klasteriø.
+
+Klasteriai gali persidengti.
+
+Kvantavime ne -- grieþtai nubrëðime ribas.
+
+% 10x maþiau tyrimø naudoja ðitas radialines f-jas, nei perceptronus.
+% Èia daugiau skaièiavimo, bet mokymas labai maþas.
+
+% Po mokymo klasteriø nebelieka -- galima tuos blobus vadinti kvantais?
+
+% Per egzà paklaus, kurá (?) ar du iðmesti -- mes turim iki to laiko
+% susitarti.  Reikia bent 3 palikti :)
+
+
+% Okay, back to klusterizavimas:
+%   radial etc. -- skaièiuojam atstumus iki visø klasteriiø, dauginam tø
+%   klasteriø vidurkius ið to atstumo perleisto pro K ir sumuojam -- gaunam
+%   atsakymà
+%   klasterizavimas -- skaièiuojam atstumus ið visø klasteriø, parenkam
+%   maþiausià atstumà ir tiesiog imam to klasterio vidurká.
+
+% Dabar bus genetiniai algoritmai ARBA sprendimo medþiai.
+
+
+\section{Sprendimo medþiai} % 20
+
+Pagrindinë idëja: reikia suklasifikuoti/suprognozuoti daugiamatá vektoriø.
+Dalinam sritá á dvi dalis, etc.  Gaunam toká medá, kurio ðakose yra kaþkurio
+poþymio palyginimas (daugiau/maþiau), o medþio lapai yra klasës.  Paskui
+leidþiamës tuo medþiu ir þiûrim, kurioj kas pusëje.  Tai ir yra sprendimo
+medis.
+
+% Anekdotas.
+
+Sprendimo medis nebûtinai binarinis.  Ir sprendimus galima daryti pagal
+daugiau nei vienà poþymá.
+
+% Google for Quinlan[d]?  ten yra 4.5, 5 versija etc -- populiariausi
+% algoritmai pasaulyje.
+
+Padarius sprendimø medá galime ið jo padaryti neuroniná tinklà.
+
+Kaip su klasterizavimu galima pradëti inicializuoti radialiniø baziniø
+funkcijø neu\-ro\-ni\-ná tinklà, taip su sprendimø medþiu galima pradëti
+inicializuoti perceptronà.
+
+Kaip tà medá parinkinëti?  Pereinam visus poþymius, randam slenkstá, kad kiek
+galima maþiau klaidø bûtø.
+
+Beje, èia irgi svarbu laiku sustoti.  Per ilgai mokant bus blogai.  Galima
+imti maksimalø klaidø skaièiø lape (jei maþiau, nebeskaidom).  Arba riboti
+medþio gylá.
+
+Sprendimø medis naudojamas klasifikavimui vadinamas klasifikavimo medþiu.
+
+Spren\-di\-mø medis naudojamas prognozavimui vadinamas regresijos medþiu.
+
+Egzistuoja ir sprendimø miðkai.
+
+Ðakojimo kriterijus gali bûti bet koks -- kai kas stato ten neuroninius
+tinklus...
+
+Kaip ið sprendimø medþio gauti neuronà:   Ið naujo: kiekviena sàlyga yra
+neuronas áëjimo sluoksnyje.  Gauna reikiamus $x_i$ ir gràþina 0 arba 1 vietoje
+true/false.  Ten slenksèiai statûs, t.y. visi atsakymai yra 0 arba 1
+
+Antras sluoksnis: po vienà kiekvienam lapui (atsakymui).  Duoda 1 jei
+kiekviena ðaka kelyje buvo atitinkamai 0 arba 1.
+
+% --- 8 paskaita: 2003-05-15
+
+\section{Genetiniai algoritmai} % 21
+
+% Problema: lokaliniai minimumai
+
+Vienas ið bûdø, kaip optimizuoti daugiamatëje erdvëje, kur yra daug lokaliniø
+mi\-ni\-mu\-mø, yra Monte-Karlo metodas (arba atsitiktinë paieðka) -- primëtai
+randomu daug taðkø ir iðrenki minimumà.
+
+Modifikacija: primëtom daug taðkø, randam erdvës sritá, kur geriau, tada mëtom
+taðkus toje srityje ir t.t.
+
+Kita modifikacija -- genetiniai algoritmai.  Bandoma kopijuoti gamtà.  Turime
+(ið pradþiø susigeneruojame atsitiktinai, o galima ir neatsitiktinai) sekà
+vienetukø ir nu\-liu\-kø, kurie nusako kaþkoká svoriø vektoriø.  Tiksliau,
+turime daug tokiø rinkiniø (tarkim, 1000).  Apskaièiuojam kainos funkcijos
+reikðmæ visiems.  Iðrikiuojam (geriausius á prieká) ir sudalinam á dvi dalis
+-- pirmi 100 dauginsis, kiti ne.  ¥Dauginimasis´: imam dvi sekas, sudalinam
+gabaliukais, imam dalá gabaliukø ið vieno, dalá ið kito.  Ir t.t.
+
+Ðis algoritmas irgi gali álásti á lokaliná minimumà.  Su tuo galima kovoti
+ávedam mutacijas -- su tam tikra tikimybe keièiam kai kuriuos vienetukus
+nuliukais ir atvirkðèiai.
+
+Algoritmas labai lëtas, bet stabilus, maþiau jautrus lokaliniams minimumams.
+
+Toks yra bazinis algoritmas, paskui galima fantazuoti.
+
+% Inercija, paveldëjimas ið seneliø
+
+Variantai: pirma apmokom kiekvienà kartà truputá gradientiniu metodu, o jau
+tada vertinam kainas ir skaièiuojam naujà kartà.
+
+Idëja: visada pasilaikyti 10 geriausiø genø ið praeitos kartos.
+
+% Antrà idëjà pramiegojau
+
+Idëja: sudalinti á kelias grupes, jas mokyti atskirai, ir karts nuo karto
+suleisti tarpusavyje.
+
+Galima dirbti ne su svoriais, o svoriø skirtumu.
+
+% Kaukë nusako kryþminimà: turim du genus, sukeièiam kaukëje nurodytus bitus
+% tarp jø ir gaunam du naujus.  Kaip kaukæ pasirinkti -- fantazijos reikalas.
+
+Galima ið pradþiø padidinti mutacijø tikimybæ ir sumaþinti kryþminimo skaièiø,
+o paskui, kai truputá pasimoko, maþinti mutacijø ir didinti kryþminimà.  Taip
+galima iðloðti laiko (algoritmas greièiau mokosi).
+
+Galima lygiagreèiai vertinti skirtingas kainos funkcijas (skirtingus
+kriterijus).  Dalis blogiausiø pagal kiekvienà kriterijø þûsta.
+
+% Reminiscence: svoriai dideli -- SLP lëtai mokosi.  Triukðmas sumaþina
+% svorius.
+
+% Katastrofa: radikaliai pasikeièia duomenø pobûdis.
+
+% Genetika: lëtai besimokantys neuronai mirðta.  Jei yra daug katastrofø,
+% triukðmo lygis didesnis, jei maþai, maþesnis.  Taip sakant, paveldimas
+% triukðmo lygis.
+
+
+% Dabar apie savarankiðkà darbà:
+%   idealus variantas -- susirandam savo duomenis.
+%   galima praðyti Raudþio.  galima ieðkoti Duin Delfto web puslapyje
+%   galima praðyti Giedriaus.
+%   "pasikniskit", èia kûrybinis darbas.  Uþ naujumà/originalumà extra balai.
+%
+%   darbà galima daryti po du ar net po tris.  ta prasme ávadas bendras etc.,
+%   bet aiðkiai parodyta, kas kurià dalá darë.
+
+\section{Neuroniniø tinklø kooperavimas} % 22
+
+Labai svarbus klausimas.  Kiekvienais metais vyksta konferencijos ðia tema.
+
+Kuo sudëtingesnis tinklas, tuo lengviau jis pakliûna á lokaliná minimumà ir
+tuo ilgiau mokosi, tuo daugiau resursø reikalauja.  Idëja: paimti keletà
+neuroniniø tinklø ir paskui kaþkaip apjungti jø atsakymus.
+
+% Situacija panaði á þmoniø grupës bendrà sprendimà.
+
+Vienas, bet labai neádomus variantas: paimti vieno tinklo atsakymà.
+
+Kitas: imti vidurká.  Arba svoriná vidurká.  Arba balsuoti.  Arba gali bûti
+pasvertas balsavimas.
+% balsavimas == majority voting
+
+Galima skirstyti uþdavinius á grupes ir apmokyti skirtingus tinklus kiekvienai
+grupei.
+
+Ir taip toliau.  Galima daug tokiø bûdø prigalvoti.
+
+% Èia buvo ávadas.
+
+Arba galima tø tinklø atsakymus paduoti kaip áëjimus naujam tinklui.
+
+Tokios sistemos skirtumas nuo daugiasluoksnio perceptrono yra tas, kad
+visi tie perceptronai apmokomi atskirai.  Be to galima naudoti skirtingo
+tipo tinklus -- pvz. radial-ir-taip-toliau, sprendimø medá etc.
+
+Paslëptas akmuo: neuroniniai tinklai prisiderina prie mokymo duomenø ir
+¥giriasi´, kad daro maþesnæ klaidà, nei ið tiesø.  Reikia tai ávertinti.  Kuo
+sudëtingesnis tinklelis, tuo jis labiau giriasi.
+
+Reikia duomenis skirstyti ne tik á mokymo ir testinius, bet ir á daugiau
+daliø ir nemokyti ¥boso´ su tais duomenimis, su kuriais apmokyti ¥pavaldiniai´.
+
+"Boso taisyklë".  Sudëtingas klausimas.  Neiðspræstas.
+
+% Alegorijos su bosu ir pavaldiniais.
+
+Angl. toks tinklø sujungimas yra "fusion" arba "gating rule", "combiner".
+Daug tø terminø yra.
+
+Behaviour knowledge space (BKS) metodas -- bandom visas neuroniniø tinklø
+kombinacijas ir þiûrim, kokie atsakymai gaunasi.
+
+% Skystoka, bet negaliu dabar aiðkiau suformuluoti
+
+% Real life: sovietai, daug skirtingø radarø.  Reikia apjungti á vienà
+% sprendimà: ar reikia kelti aliarmà, ar ne.
+
+% OT: Radarai lëktuvuose matydavo nuo Maskvos iki Olandijos.
+
+\section{Geriausio varianto parinkimo tikslumas} % 23
+
+% Yra daug modeliø.  Kurá parinkti?
+
+Neuroniniai tinklai dar taikomi ir optimizavimo uþdaviniams.
+
+% Re pradiniai svoriai: vienasluoksniam ypaè jei jie pastumti/pasukti, nuliai
+% tinka.  Daugiasluoksniams NEGALIMA naudoti vienodø nuliniø svoriø, nes tada
+% visi paslëpti neuronai tada bus vienodi.  Dar papildomas reikalavimas, kad
+% bûtø ortogonalûs paslëptø neuronø svoriø vektoriai.  Svoriø parinkimas --
+% atskira problema.
+
+Variantø yra daug.  Kartais nuo pradiniø mokymo sàlygø priklauso klaidø
+skaièius -- 7 ar 17\%.
+
+Vienas ið sprendimø -- bandyti kelis variantus su tais paèiais duomenimis ir
+parinkti geriausià.
+
+Pvz.: apmokom 6 tinklus su mokymo duomenimis.  Tikrinam testinius duomenis,
+gaunam skirtingas klaidas.  Natûralu iðsirinkti variantà su maþiausia klaida.
+
+Bet ta klaida yra testiniams duomenims.  Realiai klaida yra kitokia ir galbût
+jà þinodami pasirinktumëme kità.
+
+Tada imam dar daugiau testiniø duomenø: mokymo duomenimis apmokome,
+tik\-ri\-ni\-mo duomenimis paimame geriausià, testiniais duomenimis uþsakovas
+tikrina.
+
+Ásivaizduojama klaida -- maþiausia klaida su testiniais duomenimis.  Ideali
+klaida -- maþiausia tikroji klaida (bet jos niekas neþino).  Faktinë klaida --
+mûsø pasirinkto varianto (to, kurio testinë klaida maþiausia) tikroji klaida
+(kurios irgi niekas neþino).
+
+Kuo daugiau variantø, tuo maþëja ásivaizduojama klaida.  Faktinë klaida ið
+pradþiø maþëja, o paskui pradeda augti.  Kuo daugiau variantø nagrinëji, tuo
+labiau apsirinki.
+
+% Ta pati tema -- laiku sustoti.  (Jei tavo kriterijus netikslus).
+
+Praktinis pasiûlymas: padalinti testinius duomenis á dvi dalis, vienà naudoti
+pa\-rin\-ki\-mui, kità naudoti faktinës klaidos paskaièiavimams, pasipaiðyti
+dvi kreives (ási\-vaiz\-duo\-ja\-mos ir faktinës klaidos bandymams).  Paskui
+sukeisti tas dvi dalis pasipaiðyti dar dvi kreives.  Ir paskui pagal tai
+þiûrëti, kiek variantø apsimoka imti.
+
+Tradicinis apgavystës bûdas: nerodyti blogø variantø -- uþsakovui pateikti tik
+vienà, geriausià variantà.
+
+Ðiaip moralas: neturëdamas informacijos, nieko gero nepadarysi.  Jei duomenø
+maþai, nieko nepadarysi.
+
+% Viskas, paskutinë paskaita.
+
+% Uþ nepilnø dviejø savaièiø paliekam pas Dièiûnà (arba ið bëdos pas Mitaðiûnà)
+% treèiàjà uþduotá.  Ketvirtà atneðam á konsultacijà.
+
+% Konsulacija birþelio 2 d., egzas 4 d.
+
+\appendix
+\newpage
+
+\section{Egzamino klausimai}
+
+\begin{enumerate}
+\item Dirbtiniai neuroniniai tinklai (DKT) klasifikavimo ir prognozavimo uþdaviniuose.
+\item Vienasluoksnis perceptronas (SLP) ir jo mokymo principai.
+\item Tiesinë klasifikavimo taisyklë. Jos gavimas SLP pagalba. SLP mokymo algoritmas.
+\item Tiesinë ir kvadratinë diskriminantinës funkcijos.
+\item SLP evoliucija mokymo metu.
+\item Tiesinis prognozavimas statistiniu metodu ir su SLP.
+\item Robastiniai algoritmai klasifikavimo ir prognozavimo uþdaviniuose.
+\item Minimalios klasifikavimo klaidos ir atraminiø vektoriø (SVM) klasifikatoriai.
+\item Klasifikavimo ir prognozavimo klaidø rûðys, tikslumo rodikliai.
+\item Klasifikavimo ir prognozavimo klaidø ávertinimas.
+\item Algoritmo sudëtingumo, mokymo duomenø kiekio ir gauto tikslumo ryðys.
+\item Daugiasluoksnis perceptronas (DSP) ir jo mokymas.
+\item DSP mokymo ypatybës.
+\item Pagrindiniø komponenèiø ir kiti metodai duomenims vizualizuoti ir jiems transformuoti.
+\item Duomenø nuosavos reikðmës ir mokymo þingsnis. Duomenø transformavimas mokymui pagreitinti.
+\item Poþymiø atrinkimo algoritmai.
+\item Daugiasluoksnio perceptrono panaudojimas informatyviø poþymiø iðskyrimui.
+\item Duomenø klasterizacija ir jos panaudojimai.
+\item Radialiniø baziniø funkcijø (RBF) ir mokymo vektoriaus kvantavimo (LVQ) DNT.
+\item Sprendimo medþiai klasifikavimo ir prognozavimo (regresijos) uþdaviniuose.
+\item Genetiniai mokymo algoritmai.
+\item Neuroniniø tinklu kooperavimas.
+\item Geriausio varianto parinkimo tikslumas.
+\end{enumerate}
+
+% Konsultacija
+
+%   Ideali prognozavimo paklaida kvadratu: sigma_0^2 = avg(y - (um w_i x_i + w_0))^2
+%   sigma_n^2 -- kur gaunam su testiniais duomenimis
+%   avg sigma_n^2 = sigma_0^2 (1 - p/N-p)).
+
+% Iðmesti klausimai: 6, 15; 14 ir taip neduos.
+
+% Egzas 9:30 fakultete
+
+\end{document}

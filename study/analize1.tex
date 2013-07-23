@@ -1,0 +1,1476 @@
+\documentclass[a4paper]{article}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{inputenc}
+\usepackage[T1,LT]{fontenc}
+\inputencoding{cpRIM}
+\addtolength{\hoffset}{-2cm}
+\addtolength{\textwidth}{4cm}
+\addtolength{\voffset}{-2 cm}
+\addtolength{\textheight}{2.5cm}
+\renewcommand{\labelenumii}{\theenumii)}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\BDD}{\mathrm{BDD}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\divides}{\vdots}
+% Maybe be consistent with Lithuanian traditions?
+%\renewcommand{\tan}{\mathrm{tg}}
+%\renewcommand{\arctan}{\mathrm{arctg}}
+%\renewcommand{\cot}{\mathrm{ctg}}
+%\renewcommand{\arccot}{\mathrm{arcctg}}
+\newcommand{\arccot}{\mathrm{arccot}}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\varnothing}
+
+\newtheorem{ap}{Apibrëþimas}[section]
+\newtheorem{tg}[ap]{Teiginys}
+\newtheorem{tgg}[ap]{Teiginiai}
+\newtheorem{tr}[ap]{Teorema}
+\newtheorem{lm}[ap]{Lema}
+\newtheorem{ps}[ap]{Pastaba}
+\newtheorem{pss}[ap]{Pastabos}
+\newtheorem{isv}[ap]{Iðvada}
+\newtheorem{pvz}[ap]{Pavyzdys}
+\newtheorem{pvzz}[ap]{Pavyzdþiai}
+
+\newenvironment{ps*}{\noindent\textbf{Pastaba}\begin{em}}{\end{em}}
+\newenvironment{pss*}{\noindent\textbf{Pastabos}\begin{em}}{\end{em}}
+\newenvironment{pvz*}{\noindent\textbf{Pavyzdys}\begin{em}}{\end{em}}
+\newenvironment{pvzz*}{\noindent\textbf{Pavyzdþiai}\begin{em}}{\end{em}}
+
+%\newcommand{\Def}[1]{\emph{#1}}
+%\newcommand{\Def}[1]{\underline{#1}}
+%\newcommand{\Def}[1]{\textnormal{\textsf{#1}}}
+%\newcommand{\Def}[1]{\textbf{#1}}
+\newcommand{\Def}[1]{\textnormal{\textbf{#1}}}
+
+\hyphenation{va-di-na-ma se-kos re-lia-ty-viai me-tri-ka}
+
+\title{Matematinës analizës konspektai \\ (be árodymø)}
+\author{Marius Gedminas \\ pagal V.~Mackevièiaus paskaitas}
+\date{1998~m. rudens semestras (I kursas)}
+
+\pagestyle{fancy}
+\lhead{\nouppercase{\leftmark}}
+\chead{}
+\rhead{\nouppercase{\rightmark}}
+\lfoot{Matematinës analizës konspektai}
+\cfoot{\thepage}
+\rfoot{\copyright~M.~Gedminas, 1998~11~11 -- 1999~01~10}
+
+\begin{document}
+\maketitle
+
+%Rekomenduojama literatûra
+%...
+
+%\setcounter{section}{-1}
+%\section{Aibës ir funkcijos}						% 0
+%...
+
+\section{Realieji skaièiai}						% 1
+
+\begin{ap}								% 1.1
+Uþdarøjø intervalø seka $[a_n, b_n]$, $n = 1, 2, \ldots$ vadinama
+\Def{ádëtøjø uþdarøjø intervalø seka}, jei $[a_{n+1}, b_{n+1}] \subset [a_n, b_n]$,
+$n \in \N$.
+\end{ap}
+
+\begin{tg}[Ádëtøjø intervalø principas (aksioma)]			% 1.2
+Bet kokios ádëtøjø uþdarøjø intervalø sekos sankirta -- netuðèia aibë
+(\/$\exists c \in \R \quad \forall n \in \N, c \in [a_n, b_n]$\/).
+\end{tg}
+
+\begin{ps*}
+Vien racionaliesiems skaièiams ðis principas neteisingas. Pvz.,
+\[ [1.4, 1.5] \supset [1.41, 1.42] \supset \ldots \]
+\[ \bigcap_{n=1}^{\infty} [a_n, b_n] = \{\sqrt{2}\} \not\in \Q \]
+\end{ps*}
+
+\begin{ps*}
+Intervalø uþdarumas yra svarbus dalykas. Pvz.,
+\[ {\textstyle
+%  \left(0, \frac{1}{n+1}\right) \in \left(0, \frac{1}{n}\right)}%
+   (0, \frac{1}{n+1}) \in \left(0, \frac{1}{n}\right)}%
+   \textrm{, bet }
+   \bigcap_{n=1}^{\infty} {\textstyle \left(0, \frac{1}{n}\right) = \emptyset}
+\]
+\end{ps*}
+
+\begin{ap}								% 1.3
+Aibë $A \subset \R$ vadinama \Def{aprëþta ið virðaus}, jei $\exists c
+\in \R$ toks, kad $\forall x \in A, x \le c$. $c$ vadinamas aibës
+\Def{virðutiniu rëþiu}. Aibës $A \subset \R$ maþiausias virðutinis
+rëþis, jei jis egzistuoja, vadinamas aibës $A$ \Def{tiksliuoju virðutiniu
+rëþiu} ir þymimas $\sup A$ (``supremum $A$'').
+
+Aibë $A \subset \R$ vadinama \Def{aprëþta ið apaèios}, jei $\exists c
+\in \R$ toks, kad $\forall x \in A, x \ge c$. $c$ vadinamas aibës
+\Def{apatiniu rëþiu}. Aibës $A \subset \R$ maþiausias apatinis rëþis,
+jei jis egzistuoja, vadinamas aibës $A$ \Def{tiksliuoju apatiniu
+rëþiu} ir þymimas $\inf A$ (``infimum $A$'').
+\end{ap}
+
+\begin{tr}[Tiksliøjø rëþiø egzistavimas]				% 1.4
+Kiekviena netuðèia aprëþta ið virðaus (apaèios) ai\-bë $A \subset \R$ turi
+tiksløjá virðutiná (apatiná) rëþá.
+\end{tr}
+
+\begin{ps}								% 1.5
+Susitarsime raðyti $\sup A = +\infty$ $(\inf A = -\infty)$, jei A nëra
+aprëþta ið virðaus (apaèios).
+\end{ps}
+
+\begin{tr}[Borelio-Lebego teorema apie baigtiná denginá]		% 1.6
+Jei atvirøjø intervalø sistema $\{ \mathcal{G}_{\alpha}: \alpha \in I \}$ dengia
+intervalà $[a, b]$ (t.y. $\bigcup_{\alpha \in I} \mathcal{G}_{\alpha} \supset [a, b]$),
+tai egzistuoja posistemis $\{ \mathcal{G}_{\alpha_1}, \ldots, \mathcal{G}_{\alpha_r} \}$, taip
+pat dengiantis ðá intervalà.
+\end{tr}
+
+\begin{ps*}
+Tiek atvirøjø intervalø sistema, tiek uþdaras intervalas yra bûtini dalykai
+teoremoje ir jø negalima atsisakyti. Pvz.,
+\[ \bigcup_{n \in \N} {\textstyle \left[0, 1-\frac{1}{n}\right]} 
+   \cup [1, 2] \supset [0, 2],
+\] 
+bet ið gautos sistemos negalime iðrinkti baigtinio posistemio, kuris dengtø
+intervalà $[0, 2]$.
+\end{ps*}
+
+\section{Sekos riba}							% 2
+
+\begin{ap}								% 2.1
+Sakoma, kad seka $(x_n)$ turi ribà $x \in \R$, jei su visais (``kiek
+norima maþais'') $\eps > 0$ atsiras $N \in \N$, kad $|x_n - x| < \eps$,
+kai $n > N$ (``$x_n$ yra kiek norima arti x su pakankamai dideliais n'').
+Tokiu atveju þymima
+\[ \lim_{n \to \infty} x_n = x \]
+\[ \lim_n x_n = x \]
+\[ \lim x_n = x \]
+\[ x_n \to x, n \to \infty \]
+\end{ap}
+
+\begin{ps*}
+Vietoje $N \in \N$ galime imti $N \in \R$.
+\end{ps*}
+
+\begin{pvzz}~\par							% 2.2
+\begin{enumerate}
+  \item $\displaystyle x_n = \frac{1}{n}$, $\lim x_n = 0$
+  \item[1'] $\displaystyle x_n = \frac{1}{n^3 + 5n^2 + 7n + 2}$, $\lim x_n = 0$
+  \item $\displaystyle x_n = \frac{19 \sin n - 98 \cos^3 n}{\sqrt{n}}$, $\lim x_n = 0$
+  \item $x_n = \sqrt{n}$. Seka diverguoja (neturi baigtinës ribos)
+  \item $x_n = (-1)^n$. Seka diverguoja (neturi ribos)
+  \item $\left\{[a_n, b_n]\right\}$ -- ádëtøjø uþdarøjø intervalø seka,
+        $b_n - a_n \to 0$, kai $n \to \infty$. Remiantis ádëtøjø intervalø
+	principu, $\exists c \in \displaystyle \bigcap_{n \in \N} [a_n, b_n]$. Tada
+	$\lim a_n = \lim b_n = c$
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 2.3
+Skaièiø seka $(x_n)$ vadinama \Def{aprëþta} (\Def{aprëþta ið virðaus}, 
+\Def{aprëþta ið apaèios}), jei $\exists M \in \R: |x_n| \le M, n \in \N)$
+(atitinkamai $x_n \le M, n \in \N$, $x_n \ge M, n \in \N$).
+\end{ap}
+
+\begin{tgg}~\par							% 2.4
+\begin{enumerate}
+  \item Kiekviena konverguojanti seka yra aprëþta.
+  \item Seka gali turëti ne daugiau kaip vienà ribà.
+\end{enumerate}
+\end{tgg}
+
+\begin{tr}[Veiksmai su ribomis]						% 2.5
+Tarkime, kad $\lim x_n = x$ ir $\lim y_n = y$. Tada
+\begin{enumerate}
+  \item $\lim (x_n + y_n) = x + y$
+  \item $\lim (x_n \cdot y_n) = x \cdot y$
+  \item Jei $y \neq 0$, tai $\displaystyle \lim \frac{x_n}{y_n} = \frac{x}{y}$
+\end{enumerate}
+\end{tr}
+
+\begin{tg}[Perëjimas prie ribos nelygybëse]~\par			% 2.6
+\begin{enumerate}
+  \item Jei $x_n \to x$, $y_n \to y$ ir $x < y$, tai $\exists N \in \N:
+        x_n < y_n$, kai $n > N$.\\
+	Atskiru atveju, jei $y_n \to y$ ir $y > 0$, tai $\exists N \in \N:
+        y_n > 0$, kai $n > N$.
+  \item Jei $x_n \le y_n$, $n \in \N$ ir $x_n \to x$, $y_n \to y$, tai
+        $x \le y$
+  \item \Def{(Dviejø policininkø principas)}  Jei $x_n \le z_n \le y_n$ ir
+        $x_n \to x$, $y_n \to x$, tai $z_n \to x$.
+\end{enumerate}
+\end{tg}
+
+\begin{pvzz}~\par							% 2.7
+\begin{enumerate}
+  \item Ið $x_n < y_n$, $x_n \to x$, $y_n \to y$ neiðplaukia $x < y$! Pvz.,
+        $\forall n: 0 < \frac{1}{n}$. Tada $x = \lim x_n = y = \lim y_n = 0$.
+  \item \[ z_n = \frac{1}{\sqrt{n^2+1}} + \frac{1}{\sqrt{n^2+2}} + \cdots +
+           \frac{1}{\sqrt{n^2+n}}, n \in \N \].
+	\[ 1 \gets \frac{n}{n+1} = \frac{n}{\sqrt{n^2 + 2n + 1}} \le z_n \le
+	   \frac{n}{\sqrt{n^2}} = 1 \to 1 \]
+	Taigi, $z_n \to 1$.
+	
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 2.8
+Sakykime, turim sekà $(x_n)$. Imkime didëjanèià natûraliøjø skaièiø sekà 
+$(n_k)$, $k \in \N$. Tada seka $(x_{n_k})$ vadinama sekos $(x_n)$ \Def{posekiu}
+(arba \Def{daline seka}). Jei sekos $(x_n)$ posekis turi ribà $x$, tai $x$
+vadinama sekos $(x_n)$ \Def{daline riba}.
+\end{ap}
+
+\begin{ps*}
+Jei seka $(x_n)$ turi ribà $x$, tai visi jos posekiai turi tà paèià ribà.
+\end{ps*}
+
+\begin{tg}[Vejerðtraso teorema apie konverguojantá poseká]		% 2.9
+Kiekviena aprëþta seka turi konverguojantá poseká.
+\end{tg}
+
+\begin{tr}[Sekos konvergavimo Koði kriterijus]				% 2.10
+Tarkime, turime sekà $(x_n)$. Tada ðie du teiginiai ekvivalentûs:
+\begin{enumerate}
+  \item Seka $(x_n)$ konverguoja
+  \item $\forall \eps > 0 \quad \exists N \in \N: |x_n - x_m| < \eps$, kai
+        $n, m > N$
+\end{enumerate}
+\end{tr}
+
+\begin{pss*}
+\begin{enumerate}
+  \item Sekos $(x_n)$, pasiþyminèios antra savybe, vadinamos
+        \Def{fundamentaliosiomis} arba \Def{Koði sekomis}. Erdvës,
+	kuriose kiekviena Koði seka konverguoja, vadinamos \Def{pilnomis}.
+	Taigi, ði teorema teigia, kad $\R$ yra pilna erdvë.
+  \item Antrasis teiginys daþnai uþraðomas taip:
+        \[ |x_n - x_m| \to 0 \textrm{, kai } n, m \to \infty \]
+\end{enumerate}
+\end{pss*}
+
+\begin{pvzz}~\par							% 2.11
+\begin{enumerate}
+  \item $ x_n = \frac{\cos 1}{2} + \frac{\cos 2}{2^2} + \frac{\cos 3}{2^3} + 
+          \cdots + \frac{\cos n}{2^n}, n \in \N $
+	Seka turi ribà remiantis Koði kriterijumi.
+  \item $x_n = (-1)^n, n \in \N$. Seka diverguoja.
+  \item $x_n = 1 + \frac{1}{2} + \cdots + \frac{1}{n}$. Seka diverguoja.
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 2.12
+Sekà $(x_n)$ vadinsime
+\begin{enumerate}
+  \item \Def{didëjanèia}, jei $\forall n \in \N \quad x_{n+1} \ge x_n$.
+  \item \Def{grieþtai didëjanèia}, jei $\forall n \in \N \quad x_{n+1} > x_n$.
+  \item \Def{maþëjanèia}, jei $\forall n \in \N \quad x_{n+1} \le x_n$.
+  \item \Def{grieþtai maþëjanèia}, jei $\forall n \in \N \quad x_{n+1} < x_n$.
+\end{enumerate}
+\end{ap}
+
+\begin{tg}								% 2.13
+Didëjanti (maþëjanti) seka $(x_n)$ konverguoja tada, ir tik tada, kai ji
+yra aprëþta ið virðaus (apaèios). Tokiu atveju $\lim x_n = \sup \{ x_n \}$
+(\/$\inf \{ x_n \}$\/).
+\end{tg}
+
+\begin{pvzz}~\par							% 2.14
+\begin{enumerate}
+  \item $\displaystyle x_n = \frac{n}{q^n}, \qquad |q| > 1$. $\lim x_n = 0$.
+  \item $\lim \sqrt[n]{n} = 1$
+  \item[2'] $\lim \sqrt[n]{a} = 1, \qquad a > 0$
+  \item $\displaystyle \lim \frac{q^n}{n!} = 0, \qquad q \in \R$
+  \item $\displaystyle \lim \left(1 + \frac{1}{n}\right)^n = e$
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 2.15
+\Def{Iðplëstine realiøjø skaièiø tiese} vadiname aibæ 
+$\RR := \R \cup \{+\infty, -\infty\}$
+su tokiais papildomais sàryðiais:
+\begin{enumerate}
+  \item $-\infty < x < +\infty, \qquad x \in \R$
+  \item $x + (\pm \infty) = (\pm \infty) + x = \pm \infty, \qquad x \in \R$
+  \item $x \cdot (\pm \infty) = (\pm \infty) \cdot x = \left\{\begin{array}{ll}
+         \pm \infty & x > 0 \\
+	 \mp \infty & x < 0
+         \end{array}\right., \qquad x \in \R \setminus \{0\}$
+\end{enumerate}
+\end{ap}
+
+\begin{ap}								% 2.16
+Turime sekà $(x_n)$. Sakysime, kad
+\begin{enumerate}
+  \item $\lim x_n = +\infty$, jei $\forall \Delta \in \R \quad \exists N \in \N$,
+        toks, kad $x_n > \Delta$, kai $n > N$.
+  \item $\lim x_n = -\infty$, jei $\forall \Delta \in \R \quad \exists N \in \N$,
+        toks, kad $x_n < \Delta$, kai $n > N$.
+  \item $\lim x_n = \infty$, jei $\lim |x_n| = +\infty$.
+\end{enumerate}
+\end{ap}
+
+\begin{pss}~\par							% 2.17
+\begin{enumerate}
+  \item Baigtiniø ir begaliniø ribø apibrëþimus galima unifikuoti
+        naudojant taðko aplinkos sàvokà.
+	
+	Taðko $x \in \R$ \Def{$\eps$-aplinka} vadinamas intervalas $(x-\eps,
+	x+\eps)$. Ji þymima $U_\eps(x)$. $y \in U_\eps(x) \Longleftrightarrow
+	|y - x| < \eps$.
+	
+	Taðko $+\infty$ \Def{$\Delta$-aplinka} vadinamas intervalas $(\Delta,
+	+\infty]$. Þymima $U_\Delta(+\infty)$.
+	
+	Taðko $-\infty$ \Def{$\Delta$-aplinka} vadinamas intervalas $[-\infty,
+	\Delta)$. Þymima $U_\Delta(-\infty)$.
+	
+	Tada $\lim x_n = x \quad \Longleftrightarrow \quad \forall U(x) \quad
+	\exists N \in \N \quad x_n \in U(x)$, kai $n > N$.
+  \item Monotoniðka seka iðplëstinëje realiøjø skaièiø tiesëje visada turi
+        ribà (baigtinæ arba begalinæ).
+  \item Dalinës ribos sàvoka turi pramæ ir begaliniø ribø atveju.
+        Todël tiesëje $\RR$ bet kokia seka turi bent vienà dalinæ ribà.
+\end{enumerate}
+\end{pss}
+
+\begin{tg}								% 2.18
+Turime sekas $(x_n)$ ir $(y_n)$, $x_n, y_n \in \R$. Tada
+\begin{enumerate}
+  \item Jei $x_n \to +\infty$ ir $y_n \ge c \in \R$, $n \in \N$, tai
+        $x_n + y_n \to +\infty$.\\
+	Atskiru atveju, jei $x_n \to +\infty$ ir $y_n \to y \in \R$ 
+	(arba $y = +\infty$\/), tai $x_n + y_n \to +\infty$.
+  \item[1'] Jei $x_n \to -\infty$ ir $y_n \le c \in \R$, tai
+	$x_n + y_n \to -\infty$.  
+  \item
+    \begin{enumerate}
+      \item Jei $x_n > 0$, tai $\lim x_n = +\infty$ tada, ir tik tada, kai
+            $\lim \frac{1}{x_n} = 0$.
+      \item Jei $x_n < 0$, tai $\lim x_n = -\infty$ tada, ir tik tada, kai
+            $\lim \frac{1}{x_n} = 0$.
+    \end{enumerate}
+  \item Jei $x_n \to +\infty$ ir $\forall n \in \N \quad x_n \le y_n$, tai
+        $y_n \to +\infty$.
+\end{enumerate}
+\end{tg}
+
+\begin{ap}								% 2.19
+Sekos $(x_n)$, $x_n \in \RR$, \Def{apatine} ir \Def{virðutine ribomis} 
+vadinami skaièiai 
+\[ i = \lim_{n \to \infty} \inf_{k \ge n} x_k = 
+      \lim_{n \to \infty} \inf \{x_n, x_{n+1}, \ldots \} \] ir
+\[ s = \lim_{n \to \infty} \sup_{k \ge n} x_k = 
+     \lim_{n \to \infty} \sup \{x_n, x_{n+1}, \ldots \} \]
+	    
+Þymima: 
+  \[\liminf_{n \to \infty} x_n = i\] 
+  \[\limsup_{n \to \infty} x_n = s\]
+
+Apatinë ir virðutinë ribos visada egzistuoja, nes sekos $i_n =
+\inf \{x_n, x_{n+1}, \ldots \}$ ir $s_n = \sup \{x_n, x_{n+1}, \ldots \}$
+yra monotoniðkos.
+\end{ap}
+
+\begin{pvzz}~\par							% 2.20
+\begin{enumerate}
+  \item $x_n = (-1)^n$. $\liminf x_n = -1$, $\limsup x_n = 1$.
+  \item $x_n = (-1)^n \cdot n$. $\liminf x_n = -\infty$, $\limsup x_n = +\infty$.
+  \item $x_n = n^{(-1)^n}$. $\liminf x_n = 0$, $\limsup x_n = +\infty$.
+  \item $x_n = n$. $\liminf x_n = +\infty$, $\limsup x_n = +\infty$.
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}								% 2.21
+Apatinë ir virðutinë sekos ribos yra lygios maþiausiai ir didþiausiai tos
+sekos dalinëms riboms
+\end{tg}
+
+\begin{isv}								% 2.22
+Seka $(x_n)$ turi ribà tada, ir tik tada, kai $\liminf x_n = \limsup x_n$.
+Tokiu atveju $\lim x_n = \liminf x_n = \limsup x_n$.
+\end{isv}
+
+\section{Skaièiø eilutës}						% 3
+
+\newcommand{\meil}[1]{\sum_{n=1}^{\infty} #1_n}
+\newcommand{\eil}[1]{\(\sum_{n=1}^{\infty} #1_n\)}
+\newcommand{\meiln}[1]{\sum_{n=0}^{\infty} #1_n}
+\newcommand{\eiln}[1]{\(\sum_{n=0}^{\infty} #1_n\)}
+
+\begin{ap}								% 3.1
+\Def{Skaièiø eilute} vadinamas reiðkinys 
+\[\sum_{n=1}^{\infty} a_n = a_1 + a_2 + \cdots + a_n + \cdots, \qquad 
+  \forall n \quad a_n \in \R \]
+  
+Sekos $(a_n)$ nariai vadinami eilutës \eil{a} \Def{nariais}.
+
+Skaièiai $S_N := \sum_{n=1}^{N} a_n$, $N \in \N$ vadinami eilutës
+\Def{dalinëmis sumomis}.
+
+Jei $\exists S := \lim_{N \to \infty} S_N$, tai $S$ vadinamas \Def{eilutës
+suma} ir raðoma
+\[ S = \sum_{n=1}^{\infty} a_n \]
+
+Jei $S \in \R$ (t.y. suma baigtinë), tai sakoma, kad eilutës suma
+\Def{konverguoja}, prieðingu atveju (kai suma begalinë arba neegzistuoja) --
+\Def{diverguoja}
+\end{ap}
+
+\begin{tgg}~\par							% 3.2
+\begin{enumerate}
+  \item \Def{(Eiluèiø konvergavimo Koði kriterijus)}
+  
+        Eilutë \eil{a} konverguoja tada, ir tik tada, kai
+	\[ \forall \eps > 0 \quad \exists N_0 \in \N \quad
+	   \left|\sum_{n=N+1}^{M} a_n\right| < \eps \quad \textrm{kai } M > N > N_0 \]
+  \item \Def{(Bûtinoji eilutës konvergavimo sàlyga)}
+  
+        Jei eilutë \eil{a} konverguoja, tai $a_n \to 0, \quad n \to \infty$.
+  \item Jei $a_n \ge 0$, $n \in \N$, tai \eil{a} konverguoja tada, ir tik
+        tada, kai jos daliniø sumø seka $(S_N)$ yra aprëþta.
+\end{enumerate}
+\end{tgg}
+
+\begin{ps}								% 3.3
+Jei $a_n \ge 0$, tai eilutë \eil{a} visada turi sumà -- baigtinæ arba
+begalinæ (\/$+\infty$\/), todël eilutei \eil{a} su $a_n \ge 0$ prasminga
+raðyti $\meil{a} < +\infty$, kai ji konverguoja, ir $\meil{a} = +\infty$,
+kai ji diverguoja.
+\end{ps}
+
+\begin{pvzz}~\par							% 3.4
+\begin{enumerate}
+  \item \( \displaystyle
+           \sum_{n=1}^{\infty} x^n = 
+	     \left\{\begin{array}{ll}
+                \frac{x}{1-x}	& \textrm{kai } |x| < 1 \\
+		+\infty		& \textrm{kai } x \ge 1 \\
+		\textrm{neapibrëþta}	& \textrm{kai } x \le -1
+	     \end{array}\right. \)
+  \item $\displaystyle \sum_{n=1}^{\infty} (-1)^n$ diverguoja.
+  \item $\displaystyle \sum_{n=1}^{\infty} \frac{1}{n} = +\infty$ (diverguoja).
+  \item $\displaystyle \sum_{n=1}^{\infty} \frac{1}{n^2} \le 2$ (konverguoja).
+\end{enumerate}
+\end{pvzz}
+
+\begin{tgg}[Eiluèiø palyginimas]~\par					% 3.5
+\begin{enumerate}
+  \item Jei $|a_n| \le c_n$, $n \in \N$ ir $\meil{c} < +\infty$, tai 
+        \eil{a} konverguoja.
+  \item Jei $0 \le d_n \le a_n$, $n \in \N$ ir $\meil{d} = +\infty$, tai
+        $\meil{a} = +\infty$ (diverguoja).
+  \item Tarkime, kad $a_n \ge 0$, $b_n \ge 0$, $n \in \N$ ir $\exists
+        \alpha := \lim_{n \to \infty} \frac{a_n}{b_n} \in [0, +\infty]$.
+	
+	Jei $\alpha < +\infty$ ir $\meil{b} < +\infty$, tai $\meil{a} < +\infty$.
+	
+	Jei $\alpha > 0$ ir $\meil{b} = +\infty$, tai $\meil{a} = +\infty$.
+	
+	Kitaip tariant, jei $\alpha \in (0, +\infty)$, tai \eil{a} ir \eil{b}
+	arba abi konverguoja, arba abi diverguoja.
+\end{enumerate}
+\end{tgg}
+
+\begin{lm}								% 3.6
+Tarkime, $a_n \ge a_{n+1} \ge 0$, $n \in \N$. Tokiu atveju $\meil{a} < +\infty$ 
+tada, ir tik tada, kai $\sum_{k=1}^{\infty} 2^k a_{2^k} < +\infty$.
+\end{lm}
+
+\begin{pvzz}~\par							% 3.7
+\begin{enumerate}
+  \item $\displaystyle
+         \sum_{n=1}^{\infty} \frac{1}{n^p} < +\infty \quad \Longleftrightarrow
+         \quad p > 1$
+  \item $\displaystyle
+         \sum_{n=2}^{\infty} \frac{1}{n \ln^p n} < +\infty \quad \Longleftrightarrow
+         \quad p > 1$
+	
+	$\displaystyle
+	 \sum_{n=2}^{\infty} \frac{1}{n \ln n \ln^p \ln n} < +\infty \quad \Longleftrightarrow
+         \quad p > 1$ 
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}								% 3.8
+\[
+   e = \sum_{n=0}^{\infty} \frac{1}{n!} = 2 + \frac{1}{2} + \frac{1}{3!} +
+       \cdots + \frac{1}{n!} + \cdots
+\]
+\end{tg}
+
+\begin{tg}[Eilutës konvergavimo Koði poþymis]				% 3.9
+Bet kokiai eilutei \eil{a} paþymësime $\alpha := \limsup \sqrt[n]{|a_n|}$.
+\begin{enumerate}
+  \item Jei $\alpha < 1$, tai eilutë \eil{a} konverguoja;
+  \item Jei $\alpha > 1$, tai eilutë \eil{a} diverguoja;
+  \item Yra tiek konverguojanèiø, tiek diverguojanèiø eiluèiø, kurioms
+        $\alpha = 1$.
+\end{enumerate}
+\end{tg}
+
+\begin{tg}[Eilutës konvergavimo Dalambero poþymis]			% 3.10
+Sakykime, \eil{a} yra eilutë su $a_n \ne 0$, $n \in \N$.
+\begin{enumerate}
+  \item Jei $\alpha := \limsup \left|\frac{a_n+1}{a_n}\right| < 1$, tai 
+        eilutë \eil{a} konverguoja;
+  \item Jei $\exists N \in \N \quad \left|\frac{a_n+1}{a_n}\right| \ge 1 $,
+        kai $n > N$, tai eilutë \eil{a} diverguoja
+	(tam pakanka $\liminf \left|\frac{a_n+1}{a_n}\right| > 1$);
+  \item Yra tiek konverguojanèiø, tiek diverguojanèiø eiluèiø, kurioms
+        $\lim \left|\frac{a_n+1}{a_n}\right| = 1$.
+\end{enumerate}
+\end{tg}
+
+\begin{pvzz}~\par							% 3.11
+\begin{enumerate}
+  \item $\displaystyle \sum_{n=1}^{\infty} \frac{x^n}{n!}$ konverguoja (Dalamberas arba
+        Koði).
+  \item $\displaystyle \frac{1}{2} + \frac{1}{3} + \frac{1}{2^2} + \frac{1}{3^2} + \cdots
+         + \frac{1}{2^k} + \frac{1}{3^k} + \cdots$ konverguoja (Koði;
+        Dalamberas atsakymo neduoda).
+\end{enumerate}
+\end{pvzz}
+
+\begin{ps*}
+Koði poþymis stipresnis: jei Koði poþymis neduoda atsakymo, tai neduos
+ir Dalambero.
+\end{ps*}
+
+\begin{tg}[Eilutës konvergavimo Abelio-Dirichlë poþymis]		% 3.12
+Tarkime, kad a) eilutës \eil{a} daliniø sumø seka yra aprëþta:
+\[ |A_n| \le M, \quad n \in \N, \quad M < +\infty \]
+b) $b_n \ge b_n - 1 \ge 0$, $n \in \N$,
+c) $\lim b_n = 0$.  
+Tada eilutë $\sum_{n=1}^{\infty} a_n b_n$ konverguoja.
+\end{tg}
+
+\begin{pss*}
+\begin{enumerate}
+  \item Kai iðpildytos sàlygos b) ir c), daþnai sakoma, kad $b_n$
+        \Def{monotoniðkai artëja} á nulá (þymima $b_n \downarrow 0$
+	arba $\lim_{n \to \infty} \downarrow b_n = 0$\/).
+  \item Yra prasmë naudoti ði poþymá tik tada, kai $a_n$ nariai ágyja
+        skirtingus þenklus be galo daug kartø.
+\end{enumerate}
+\end{pss*}
+
+\begin{isv}[Leibnico teorema]						% 3.13
+Jei $b_n \downarrow 0$, $n \to \infty$, tai eilutë $\sum_{n=1}^{\infty}
+(-1)^{n+1} b_n$ konverguoja.
+\end{isv}
+
+\begin{pvzz}~\par							% 3.14
+\begin{enumerate}
+  \item $\displaystyle \sum_{n=1}^{\infty} \frac{x^n}{n}$ konverguoja, kai 
+          $x \in [-1, 1)$
+        (Dalambero poþymis, kai $|x| \ne 1$, Leibnico teorema, kai $x = -1$,
+	 harmoninë eilutë, kai $x = 1$).
+  \item $\displaystyle \sum_{n=1}^{\infty} \frac{\sin \frac{\pi n}{4}}{\ln(n+1)}$ konverguoja
+        (Abelio-Dirichlë poþymis).
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 3.15
+Sakoma, kad eilutë \eil{a} \Def{konverguoja absoliuèiai}, jei $\sum_{n=1}^{\infty}
+|a_n| < +\infty$.
+
+Jei \eil{a} konverguoja, o $\sum_{n=1}^{\infty} |a_n| = +\infty$, tai sakoma,
+kad eilutë \eil{a} \Def{konverguoja reliatyviai}.
+\end{ap}
+
+\begin{tg}								% 3.16
+Jei eilutë konverguoja absoliuèiai, tai ji konverguoja.
+\end{tg}
+
+\begin{ap}								% 3.17
+Dviejø eiluèiø \eiln{a} ir \eiln{b} sandauga vadinama eilutë \eiln{c},
+kurioje $c_n = \sum_{i=0}^{n}a_i b_{n-i} = a_0b_n + a_1b_{n-1} + \cdots
++ a_nb_0$.
+\end{ap}
+
+\begin{tr}[Mertenso teorema]						% 3.18
+Jei $A = \meiln{a} \in \R$, $B = \meiln{b} \in \R$ ir bent viena ið ðiø 
+eiluèiø konverguoja absoliuèiai, tai ðiø eiluèiø sandauga \eil{c}
+konverguoja, o jos suma lygi $AB$.
+\end{tr}
+
+\begin{ps}								% 3.19
+Abiejø eiluèiø (reliatyvaus) konvergavimo nepakanka, kad teoremos tvirtinimas
+bûtø teisingas. Pvz.,
+\[ \meiln{a} = \meiln{b} = \sum_{n=0}^{\infty} (-1)^n \frac{1}{\sqrt{n+1}} \]
+Jø sandaugos \eil{c} nariai
+\begin{eqnarray*}
+|c_n| & = & \left|\sum_{i=0}^n(-1)^i \frac{1}{\sqrt{i+1}} (-1)^{n-i}\frac{1}{\sqrt{n-i+1}}\right| \\
+& = & \left| \sum_{i=0}^{n} \frac{(-1)^n}{\sqrt{(i+1)(n-i+1)}} \right| \\
+& = & \sum_{i=0}^{n} \frac{1}{\sqrt{(i+1)(n-i+1)}} \\
+& \underbrace{\ge}_{\frac{a+b}{2} \ge \sqrt{ab}} &
+  \sum_{i=0}^{n} \frac{1}{\frac{i+1 + n-i+1}{2}} \\
+& = & \sum_{i=0}^{n} \frac{2}{n+2} = 2 \frac{n+1}{n+2} \to 2 
+\end{eqnarray*}
+Neiðpildyta bûtina konvergavimo sàlyga, tad \eil{c} diverguoja.
+\end{ps}
+
+\begin{ap}								% 3.20
+Tarkime, kad duota eilutë \eil{a} ir bijekcija $f: \N \to \N$. Paþymëkime
+$\tilde{a}_n := a_{f(n)}$. Tada \eil{\tilde{a}} vadinama pradinës eilutës
+\eil{a} \Def{perstata}.
+\end{ap}
+
+\begin{tr}								% 3.21
+Jei eilutë \eil{a} konverguoja absoliuèiai, tai absoliuèiai konverguoja
+ir bet kuri jos perstata, kuri be to turi tà paèià sumà.
+\end{tr}
+
+\begin{pss}~\par							% 3.22
+\begin{enumerate}
+  \item Galima árodyti ir prieðingà teoremà (Rymano teoremà): jei \eil{a}
+        konverguoja reliatyviai, tai $\forall a \in \R \quad \exists f \quad
+	\sum_{n=1}^{\infty} a_{f(n)} = a$.
+  \item Absoliuèiai konverguojanèios eilutës turi ir kitø baigtinëms sumoms
+        bûdingø savybiø, pvz., jei $a_{nm} \ge 0$, $n, m \in \N$, tai
+	$\sum_{n=1}^{\infty} \sum_{m=1}^{\infty} a_{nm} =
+	 \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} a_{nm}$. Ði lygybë iðlieka
+        teisinga ir su $a_{nm} \in \R$, $n, m \in \N$, jei
+	$\sum_{n=1}^{\infty} \sum_{m=1}^{\infty} |a_{nm}| < +\infty$.
+\end{enumerate}
+\end{pss}
+
+\section{Funkcijos riba ir tolydumas}					% 4
+
+\begin{ap}								% 4.1
+Duota funkcija $f: E \to \R$, $a \in \R$. Sakoma, kad funkcija $f$
+\Def{turi ribà} $A \in \RR$ taðke $a$, ir raðoma $\lim_{x \to a} f(x)
+= A$, jei kiekvienai sekai $E \setminus \{a\} \owns x_n \to a$ galioja
+$f(x_n) \to A$.
+
+Kiti þymëjimai:
+\begin{itemize}
+  \item	$\displaystyle \lim_{x \to a, \ x \in E} f(x) = A \quad$ (kai
+	apibrëþimo sritis nëra aiðki ið konteksto).
+  \item $f(x) \to A$, $x \to a$
+  \item Jei $E = (a, b)$, $a < b$, raðoma $\lim_{x \to a+0} f(x) = A$
+	(riba ið deðinës) arba $\lim_{x \downarrow a} f(x) = A$ (ið
+	virðaus).
+  \item Jei $E = (b, a)$, $b < a$, raðoma $\lim_{x \to a-0} f(x) = A$
+	(riba ið kairës) arba $\lim_{x \uparrow a} f(x) = A$ (ið
+	apaèios).
+\end{itemize}
+\end{ap}
+
+\begin{ps*}
+Kad apibëþimas turëtø prasmæ, turi egzistuoti bent viena tokia seka
+$x_n$, sudaryta ið aibës $E \setminus \{a\}$ elementø ir artëjanti
+prie $a$. Ðiuo atveju sakoma, kad taðkas $a$ yra \Def{ribinis} aibës
+$E$ taðkas.
+\end{ps*}
+
+\begin{tg}\label{4.2}							% 4.2
+Tarkime, $a \in \R$, $A \in \R$, $f(x): E \to \R$. Tada ðie teiginiai
+ekvivalentûs:
+\begin{enumerate}
+  \item $\displaystyle \lim_{x \to a} f(x) = A$;
+  \item $\forall \eps > 0 \quad \exists \delta > 0 \quad |f(x)-A| <
+        \eps$, kai $0 < |x - a| < \delta$ ir $x \in E$.
+\end{enumerate}
+\end{tg}
+
+\begin{ps*}
+Ðis teiginys tvirtina, kad abu ribos apibrëþimai (``sekø kalba'' ir
+``$\eps$-$\delta$-kalba'') yra ekvivalentûs, kai $a, A \in \R$.
+\end{ps*}
+
+\begin{ps*}
+Analogiðki teiginiai yra teisingi, ir kai $a$ ir/arba $A$ lygûs $\pm
+\infty$, imant atitinkamai tø taðkø aplinkas vietoje $\eps$-aplinkø:
+\[ \forall \textrm{ taðko } A \textrm{ aplinkai } U(A) \quad \exists
+\textrm{ taðko } a \textrm{ aplinka } V(a) \textrm{ tokia, kad } f(x)
+\in U(A) \textrm{, kai } x \in V(a) \setminus \{ a \} \textrm{ ir } x
+\in E.
+\]
+(Apibrëþimas ``aplinkø kalba'').
+\end{ps*}
+
+\begin{tgg}~\par							% 4.3
+\begin{enumerate}
+  \item Funkcija viename taðke gali turëti tik vienà ribà.
+  \item Sakykime, $f: E \to \R$, $g: E \to \R$ ir $\lim_{x \to a} f(x) 
+	= A \in \R$, o $\lim_{x \to a} g(x) = B \in \R$. Tada
+	\begin{enumerate}
+	  \item $\lim_{x \to a} \left( f\left(x\right) + g\left(x\right) 
+	        \right) = A + B$
+	  \item $\lim_{x \to a} \left( f\left(x\right) \cdot g\left(x\right) 
+	        \right) = A \cdot B$
+	  \item Jei, be to, $B \ne 0$, tai $\lim_{x \to a} 
+		\frac{f(x)}{g(x)} = \frac{A}{B}$
+	  \item Jei $f(x) \le g(x)$, kai $x \in E \setminus \{a\}$, tai 
+		$A \le B$.
+	\end{enumerate}
+  \item Jei $f(x) \le h(x) \le g(x)$, kai $x \in E \setminus \{a\}$, ir
+        $\lim_{x \to a} f(x) = \lim_{x \to a} g(x) = A$, tai 
+	$\lim_{x \to a} h(x) = A$.
+  \item Jei $A < B$, tai egzistuoja taðko $a$ aplinka $U$, tokia, kad 
+	$f(x) < g(x)$ kai $x \in U \setminus \{a\}$, $x \in E$.
+\end{enumerate}
+\end{tgg}
+
+\begin{pvzz}~\par							% 4.4
+\begin{enumerate}
+  \item $\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1$
+  \item $\displaystyle \lim_{x \to 0} (1+x)^{\frac{1}{x}} = e$
+  \item $\displaystyle \lim_{x \to 0} \sin \frac{1}{x}$ neegzistuoja.
+  \item[3'] $\displaystyle \lim_{x \to 0} x \sin \frac{1}{x} = 0$
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 4.5
+Sakoma, kad funkcija $f: E \to \R$ yra \Def{tolydi} taðke $x_0 \in E$, jei su 
+kiekviena seka $E \ni x_n \to x_0$ turime $f(x_n) \to f(x_0)$, $n \to 
+\infty$. Sakoma, kad funkcija $f: E \to \R$ yra tolydi aibëje $A 
+\subset E$, jei ji yra tolydi visuose aibës $A$ taðkuose.
+\end{ap}
+
+\begin{pss}~\par							% 4.6
+\begin{enumerate}
+  \item Palyginæ funkcijos ribos apibrëþimà su tolydþios funkcijos 
+	apibrëþimu, matome, kad funkcija yra tolydi taðke $x_0$, kai 
+	$lim_{x \to x_0} f(x) = f(x_0)$, ir $x_0$ yra ribinis aibës $E$ 
+	taðkas. Jei $x_0$ nëra ribinis taðkas, tai funkcija tame taðke 
+	visada tolydi.
+  \item Atsiþvelgdami á \ref{4.2} teiginá, matome, kad funkcija $f: E 
+	\to \R$ yra tolydi taðke $x_0 \in E$ tada ir tik tada, kai
+	$\forall \eps > 0 \quad \exists \delta > 0 \quad |f(x) - f(x_0)|
+	< \eps$, kai $|x - x_0| < \delta$ ir $x \in E$.
+\end{enumerate}
+\end{pss}
+
+\begin{tgg}~\par							% 4.7
+\begin{enumerate}
+  \item Jei $f: E \to \R$ ir $g: E \to \R$ yra tolydþios taðke $x_0 \in 
+	E$, tai funkcijos $(f+g)$, $(fg)$ ir (jei $g(x_0) \ne 0$) 
+        $\left(\frac{f}{g}\right)$ yra tolydþios taðke $x_0$.
+  \item Jei funkcija $f: E \to E_1$ yra tolydi taðke $x_0 \in E$, o 
+	funkcija $g: E_1 \to \R$ yra tolydi taðke $y_0 := f(x_0)$, tai
+	funkcija $(g \circ f)(x) := g\left(f\left(x\right)\right)$, 
+	$x \in E$ yra tolydi taðke $x_0$.
+\end{enumerate}
+\end{tgg}
+
+\begin{pvzz}~\par							% 4.8
+\begin{enumerate}
+  \item $f(x) = c$, $x, c \in \R$ yra tolydi aibëje $\R$.
+  \item $f(x) = x$, $x \in \R$ yra tolydi aibëje $\R$.
+  \item $f(x) = x^n$, $x \in \R$, $n \in \N$ yra tolydi aibëje $\R$.
+  \item[3'] $f(x) = a_n x^n + \cdots + a_1 x + a_0 \in \R[x]$ yra tolydi aibëje $\R$.
+  \item[3''] Kiekviena racionali funkcija $R(x) = \frac{P(x)}{Q(x)}$ 
+        (dviejø polinomø santykis) yra tolydi visuose taðkuose $x_0 \in 
+	\R$, kuriuose $Q(x_0) \ne 0$.
+  \item $f(x) = \sin x$, $x \in \R$ yra tolydi aibëje $\R$.
+  \item $f(x) = \cos x$, $x \in \R$ yra tolydi aibëje $\R$.
+  \item $f(x) = \tan x$, $x \in \R$ yra tolydi visuose taðkuose, kuriuose 
+	$\cos x \ne 0$.
+  \item $f(x) = a^x$, $x \in \R$, $a \ge 0$, $a \ne 1$ yra tolydi aibëje $\R$.
+  \item $f(x) = \log_a x$, $x > 0$, $a > 0$, $a \ne 1$ yra tolydi aibëje $\R$.
+  \item $f(x) = x^a$, $x > 0$, $a \in \R$  yra tolydi aibëje $\R$.
+  \item Iðvados:
+    \begin{enumerate}
+      \item $\displaystyle \lim_{x \to 0} \frac{\log_a(1 + x)}{x} = 
+	    \log_a e$
+	    
+	    Atskiru atveju, $\displaystyle \lim_{x \to 0}\frac{\ln(x+1)} 
+	    {x} = 1$
+      \item $\displaystyle \lim_{x \to 0} \frac{(1+x)^\alpha - 1}{x} = 
+	    \alpha$
+    \end{enumerate}
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 4.9
+Aibæ visø tolydþiø funkcijø $f: E \to \R$ þymësime $C(E)$. Galima 
+trumpinti: $C[a, b] = C([a, b])$.
+\end{ap}
+
+\begin{tg}[Bolcmano-Vejerðtraso teorema apie tarpines reikðmes]		% 4.10
+Sakykime, funkcija $f \in C[a, b]$, $f(a) = A$, $f(b) = B$ ir $A \le C \le B$ 
+arba $B \le C \le A$. Tada $\exists c \in [a, b] \quad f(c) = C$ 
+(``tolydi funkcija ágyja visas tarpines reikðmes'').
+\end{tg}
+
+\begin{tg}[Vejerðtraso teorema apie maksimalià reikðmæ]			% 4.11
+Sakykime, $f \in C[a, b]$. Tada
+\begin{enumerate}
+  \item $f$ yra aprëþta intervale $[a, b]$: $\exists M \in \R \quad 
+	\forall x \in [a, b] \quad |f(x)| \le M$.
+  \item $\exists x_d \in [a, b] \quad f(x_d) = \max\{ f(x): x \in [a, b] \}$
+        
+        $\exists x_m \in [a, b] \quad f(x_m) = \min\{ f(x): x \in [a, b] \}$  
+	
+	(Tolydi uþdarame intervale funkcija ágyja tame intervale 
+	didþiausià ir maþiausià reikðmæ).
+\end{enumerate}
+\end{tg}
+
+\begin{ps*}
+Intervalo uþdarumas -- esminë sàlyga. Pvz., $f(x) = \frac{1}{x}$, $x 
+\in (0, 1]$, $f \in C(0, 1]$, bet maksimumas neegzistuoja, nes $\lim_{x 
+\to 0} f(x) = +\infty$ (tiksliau, $\lim_{n \to \infty} f(\frac{1}{n}) = 
++\infty$\/).
+
+Kitas pavyzdys: $f(x) = \frac{1}{x+1}$, $x \in (0, 1)$. $f(x) \in C(0, 
+1)$, $\sup f(x) = 1$, $\inf f(x) = \frac{1}{2}$, bet neegzistuoja toks
+$x_d \in (0, 1) \quad f(x_d) = 1$.
+\end{ps*}
+
+\begin{tg}[apie atvirkðtinës funkcijos tolydumà]			% 4.12
+Tarkime, $f: X \subset \R \to Y \subset \R$ ($X$ -- intervalas) yra
+tolydi bijekcija. Tada
+\begin{enumerate}
+  \item $Y$ taip pat intervalas, be to $f$ yra monotoniðka.
+  \item $f^{-1}: Y \to X$ taip pat yra tolydi.
+\end{enumerate}
+\end{tg}
+
+\begin{isv}~\par							% 4.13
+\begin{enumerate}
+  \item Funkcijos $\log_n x$ (\/$x > 0$, $a > 0$, $a \ne 1$\/), $\arcsin 
+	x$ (\/$x \in [-1, 1]$\/), $\arccos x$ (\/$x \in [-1, 1]$\/),
+	$\arctan x$ (\/$x \in \R$\/) yra tolydþios funkcijos.
+  \item Visos elementarios funkcijois yra tolydþios savo egzistavimo 
+	srityse.
+	
+	\Def{elementarios funkcijos} -- daugianariai, racionaliosios
+	funkcijos, trigonometrinës ir jø atvirkðtinës, rodyklinë, 
+	logaritminë funkcijos, bei visos ið jø padarytos funkcijos,
+	naudojant aritmetinius veiksmus bei kompozicijà.
+	
+	\Def{egzistavimo sritis} -- aibë, kurioje funkcija turi prasmæ.
+	Apibrëþimo sritis visada yra egzistavimo srities poaibis.
+\end{enumerate}
+\end{isv}
+
+\begin{ps*}
+$|x|$ nëra tolydi funkcija: $|x| = \sqrt{x^2} = e^{\frac{1}{2}\ln x^2}$ 
+neegzistuoja, kai x = 0.
+\end{ps*}
+
+\begin{ap}								% 4.14
+Funkcija $f: E \to \R$ vadinama \Def{tolygiai tolydþia} aibëje $E$, jei
+$\forall \eps > 0 \quad \exists \delta > 0 \quad |f(y)-f(x)| < \eps$, kai
+$|x-y| < \delta$ ir $x, y \in E$.
+\end{ap}
+
+\begin{ps*}
+Palyginkime su tolydþios aibëje $E$ funkcijos apibrëþimu:
+$\forall x \in E \quad \forall \eps > 0 \quad \exists \delta > 0 \quad 
+|f(y)-f(x)| < \eps$, kai $|x-y| < \delta$ ir $y \in E$.
+\end{ps*}
+
+\begin{pvzz}~\par							% 4.15
+\begin{enumerate}
+  \item $f(x) = x^2$, $x \in [-a, a]$ yra tolygiai tolydi intervale $[-a, a]$.
+  \item $f(x) = x^2$, $x \in \R$ nëra tolygiai tolydi.
+  \item $f(x) = \sin x^2$, $x \in \R$ nëra tolygiai tolydi.
+  \item $\displaystyle f(x) = \sin \frac{1}{x}$, $x \in \R$ nëra tolygiai tolydi.
+\end{enumerate}
+\end{pvzz}
+
+\begin{tr}[Kantoro teorema]						% 4.16
+Jei $f \in C[a, b]$, tai funkcija yra tolygiai tolydi intervale $[a, b]$.
+\end{tr}
+
+\begin{pvz}								% 4.17
+$\displaystyle f(x) = \frac{\sin x}{x}$, $x \in (0, 1)$ yra tolygiai
+tolydi intervale $(0, 1)$.
+\end{pvz}
+
+\begin{ap}								% 4.18
+Sakoma, kad funkcija $f: E \subset \R \to \R$ \Def{turi trûká} taðke
+$x_0 \in E$, jei ji nëra tolydi tame taðke. Taðkas $x_0 \in E$ vadinamas
+funkcijos $f$ \Def{pirmo tipo trûkio taðku}, jei $\exists f(x_0 - 0) :=
+\lim_{x \to x_0-0} f(x) \in \R$ ir $\exists f(x_0 + 0) := \lim_{x \to x_0+0}
+f(x) \in \R$. Atskiru atveju, kai $f(x_0 - 0) = f(x_0 + 0)$, $x_0$
+vadinamas \Def{paðalinamu} funkcijos $f$ trûkio taðku. Likusiais
+atvejais (kai bent viena riba $f(x_0 - 0)$ arba $f(x_0 + 0)$
+neegzistuoja arba yra begalinë), $x_0$ vadinamas funkcijos $f$
+\Def{antro tipo trûkio taðku}.
+\end{ap}
+
+\begin{ps*}
+Daþnai patogu vadinti trûkio taðkais ir taðkus $x_0 \in \R$, kai
+$\dot{U}_{eps}(x_0) := U_{\eps} \setminus \{x_0\} \subset E$
+\end{ps*}
+
+\begin{ps*}
+Trûkio taðkai, panaðûs á funkcijos $f(x) = \sin \frac{1}{x}$ $x_0 = 0$ dar
+vadinami \Def{osciliuojanèiais}.
+\end{ps*}
+
+\begin{pvzz}~\par							% 4.19
+\begin{enumerate}
+  \item $\displaystyle f(x) = \frac{\sin x}{x}$, $x \in \R \setminus \{0\}$. $x_0 = 0$ yra
+        paðalinamas I tipo trûkio taðkas.
+  \item $\displaystyle f(x) = \arctan \frac{1}{x}$, $x \in \R \setminus \{0\}$. $x_0 = 0$ yra
+        I tipo trûkio taðkas.
+  \item $\displaystyle f(x) = e^{\frac{1}{x}}$, $x \in \R \setminus \{0\}$. $x_0 = 0$ yra
+        II tipo (begalinis) trûkio taðkas.
+  \item $\displaystyle f(x) = \sin \frac{1}{x}$, $x \in \R \setminus \{0\}$. $x_0 = 0$ yra
+        II tipo (osciliuojantis) trûkio taðkas.
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}								% 4.20
+Monotoninë funkcija $f: (a, b) \to \R$ neturi II tipo trûkio taðkø. Jos
+trûkio taðkø aibë yra baigtinë arba skaièioji.
+\end{tg}
+
+
+\section{Diferencijavimas}						% 5
+
+\begin{ap}								% 5.1
+Sakoma, kad funkcija $f: I \to \R$ (\/$I$ -- intervalas) yra
+\Def{diferencijuojama} taðke $x \in I$, jei $\exists \lim_{y \to x}
+\frac{f(y) - f(x)}{y - x} \in \R$. Tokiu atveju pastaroji riba vadinama
+funkcijos $f$ \Def{iðvestine} taðke $x$ ir þymima $f'(x)$.
+
+Pakeitæ nurodytà ribà riba ið deðinës (ið kairës), gausime \Def{deðininës}
+(\Def{kairinës}) iðvestinës apibrëþimà. Jos þymimos $f'_d(x)$, $f'_+(x)$
+(\/$f'_k(x)$, $f'_-(x)$\/).
+
+Jei funkcija $f$ yra diferencijuojama su visais $x \in I$, tai sakoma,
+kad funkcija $f$ yra diferencijuojama intervale $I$.
+\end{ap}
+
+\begin{ps}[Geometrinë iðvestinës prasmë]				% 5.2
+Sakykime, funkcija $f: I \to \R$ yra diferencijuojama taðke $x$. Tada
+$\eps(t) := \frac{f(t)-f(x)}{t-x} - f'(x) \to 0$, kai $t \to x$. $f(t) =
+f(x) + f'(x)(t-x) + \underbrace{\eps(t)(t-x)}_{\textrm{``maþas'', kai }
+t \to x}$. Atmetæ paskutiná (``maþà'') nará gauname tiesinæ funkcijà
+$y(t) = f(x) + f'(x)(t-x)$, $t \in \R$, kuri, kai $t$ ``arti'' $x$,
+ágyja reikðmes, ``artimas'' $f(x)$. Ði funkcija vadinama funkcijos
+$f(x)$ \Def{liestine} taðke $x$. Geometriðkai jos grafikas yra funkcijos
+$f$ grafiko liestinë taðke $(x, f(x))$.
+
+Liestinës kampinis koeficientas $\tan \alpha = f'(x)$.
+\end{ps}
+
+\begin{tg}								% 5.3
+Jei funkcija $f$ diferencijuojama taðke $x$, tai ji tolydi tame taðke.
+\end{tg}
+
+\begin{tg}								% 5.4
+Jei funkcijos $f, g$ yra diferencijuojamos taðke $x \in I$, tai
+\begin{enumerate}
+  \item $(f+g)'(x) = f'(x) + g'(x)$.
+  \item $(fg)'(x) = f'(x)g(x) + f(x)g'(x)$.
+  \item $\displaystyle \left(\frac{f}{g}\right)'(x) = \frac{f'(x)g(x) -
+        f(x)g'(x)}{g^2(x)}$, jei $g(x) \ne 0$.
+\end{enumerate}
+\end{tg}
+
+\begin{tg}								% 5.5
+Jei $f: (a, b) \to (c, d)$ yra diferencijuojama taðke $x \in (a, b)$, o
+$g: (c, d) \to \R$ yra diferencijuojama taðke $y = f(x)$, tai funkcija
+$g \circ f$ yra diferencijuojama taðke x ir $(g \circ f)'(x) =
+g'\left(f\left(x\right)\right) f'(x)$.
+\end{tg}
+
+\begin{pvzz}~\par							% 5.6
+\begin{enumerate}
+  \item $f(x) = C$, $x \in \R$. $f'(x) = 0$.
+  \item $f(x) = x$, $x \in \R$. $f'(x) = 1$.
+  \item $f(x) = x^2$, $x \in \R$. $f'(x) = 2x$. \par
+	$f(x) = x^n$, $x \in \R$, $n \in \N$. $f'(x) = n x^{n-1}$.  
+  \item $f(x) = \sin x$, $x \in \R$. $f'(x) = \cos x$. \par
+        $f(x) = \cos x$, $x \in \R$. $f'(x) = -\sin x$. \par
+	$f(x) = \tan x$, $x \in \R \setminus \{\frac{\pi}{2} + \pi n,\ n
+	\in \Z\}$. $\displaystyle f'(x) = \frac{1}{\cos^2 x}$. \par
+	$f(x) = \cot x$, $x \in \R \setminus \{\pi n,\ n \in \Z\}$.
+	$\displaystyle f'(x) = -\frac{1}{\sin^2 x}$. 
+  \item $f(x) = a^x$, $x \in \R$, $a > 0$, $a \ne 1$. $f'(x) = a^x \ln a$.\par
+        Atskiru atveju $f(x) = e^x$, $x \in \R$. $f'(x) = e^x$.
+  \item $f(x) = \log_a x$, $x > 0$, $a > 0$, $a \ne 1$. $\displaystyle
+	f'(x) = \frac{1}{x \ln a}$. \par         
+	Atskiru atveju $f(x) = \ln x$, $x > 0$. $\displaystyle f'(x) = \frac{1}{x}$.
+  \item $f(x) = x^a$, $x > 0$, $a \in \R$. $f'(x) = a x^{a-1}$. \par
+        Galima ásitikinti, kad ði formulë teisinga, ir kai $x < 0$, jei
+	$x^a$ turi prasmæ. \par 
+	$\left(x^\frac{m}{n}\right)' = \left(\sqrt[n]{x^m}\right)'$ -- ði
+	formulë irgi teisinga, kai $x \in \R$, $m \in \Z$, $n \in \N$.
+  \item $f(x) = \left\{\begin{array}{l|l} x^2 \sin \frac{1}{x} & x \ne 0 \\
+                	0 & x = 0 \end{array}\right.$, $x \in \R$. \par
+	$f'(x) = \left\{\begin{array}{l|l} 2x \sin \frac{1}{x} - \cos
+					              \frac{1}{x} & x \ne 0 \\
+			0 & x = 0 \end{array}\right.$. \par
+	Ádomu, kad riba $\lim_{x \to 0} f'(x)$ neegzistuoja (t.y. $f'$ nëra
+	tolydi funkcija).
+  \item $f(x) = |x|$, $x \in \R$. $f'_d(0) = 1$, $f'_k(0) = -1$.
+  \item $\displaystyle \left({\underbrace{f(x)}_{> 0}}^{g(x)}\right)' = 
+         f(x)^{g(x)} \left(g'(x) \ln f(x) + \frac{g(x)}{f(x)} f'(x)\right)$. \par
+	$(x^x)' = x^x (\ln x + 1)$.
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}[Atvirkðtinës funkcijos iðvestinë]				% 5.7
+Jei grieþtai didëjanti funkcija $f \in C(a, b)$ yra diferencijuojama taðke
+$x_0 \in (a, b)$ ir $f(x) \ne 0$, tai jos atvirkðtinë funkcija $f^{-1}$ yra
+diferencijuojama taðke $y_0 := f(x_0)$ ir $\left(f^{-1}\right)'(y_0) =
+\frac{1}{f'(x_0)}$.
+\end{tg}
+
+\begin{pvzz}~\par							% 5.8
+\begin{enumerate}
+  \item $\displaystyle (\arcsin x)' = \frac{1}{\sqrt{1 - x^2}}$, $x \in (-1, 1)$. \par
+        $\displaystyle (\arccos x)' = -\frac{1}{\sqrt{1 - x^2}}$, $x \in (-1, 1)$.
+  \item $\displaystyle (\arctan x)' = \frac{1}{1+x^2}$, $x \in \R$. \par
+        $\displaystyle (\arccot x)' = -\frac{1}{1+x^2}$, $x \in \R$. 
+\end{enumerate}
+\end{pvzz}
+
+~\par
+
+\begin{ap}								% 5.9
+Taðkas $x \in E$ vadinamas funkcijos $f: E \to \R$ \Def{lokaliojo maksimumo
+taðku}, jei $\exists \eps > 0 \quad f(y) \le f(x)$, kai $y \in U_{\eps}(x)
+\cap E$. Analogiðkai apibrëþiamas \Def{lokaliojo minimumo taðkas}. Ðie
+taðkai vadinami funkcijos (lokaliniais) \Def{ekstremumo taðkais}.
+\end{ap}
+
+\begin{tg}[Ferma teorema]						% 5.10
+Jei $x_0 \in (a, b)$ yra funkcijos $f: [a, b] \to \R$ ekstremumo taðkas ir
+$\exists f'(x_0) \in \R$, tai $f'(x_0) = 0$.
+\end{tg}
+
+\begin{tg}[Rolio teorema]						% 5.11
+Jei $f \in C[a, b]$ yra diferencijuojama intervale $(a, b)$, ir $f(a) = f(b)$,
+tai $\exists c \in (a, b) \quad f'(c) = 0$.
+\end{tg}
+
+\begin{tg}[Koði vidutinës reikðmës teorema]				% 5.12
+Jei funkcijos $f, g \in C[a, b]$ yra diferencijuojamos intervale $(a,
+b)$,  tai $\exists c \in (a, b) \quad \left(f(b)-f(a)\right)g'(c) =
+\left(g(b)-g(a)\right)f'(c)$.
+\end{tg}
+
+\begin{ps*}
+Jei $g'(x) \ne 0$, $x \in (a, b)$, tai lygybæ galima uþraðyti taip:
+\[
+\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(c)}{g'(c)}
+\]
+\end{ps*}
+
+\begin{isv}[Lagranþo vidutinës reikðmës teorema]			% 5.13
+Jei $f \in C[a, b]$ yra diferencijuojama intervale $(a, b)$, 
+tai $\exists c \in (a, b) \quad f(b) - f(a) = f'(c) (b-a)$.
+\end{isv}
+
+\begin{tg}								% 5.14
+Sakykme, funkcija $f$ yra diferencijuojama intervale $(a, b)$. Tada
+\begin{enumerate}
+  \item Jei $f'(x) \ge 0$, $x \in (a, b)$, tai $f$ didëja intervale $(a, b)$ 
+        (t.y. $\forall a \le x < y \le b \quad f(x) \le f(y)$\/).
+  \item Jei $f'(x) \le 0$, $x \in (a, b)$, tai $f$ maþëja intervale $(a, b)$ 
+        (t.y. $\forall a \le x < y \le b \quad f(x) \ge f(y)$\/).
+  \item Jei $f'(x) = 0$, $x \in (a, b)$, tai $f$ -- konstanta
+        (t.y. $\exists c \in \R \quad \forall x \in (a,b) \quad f(x) = c$\/).
+\end{enumerate}
+\end{tg}
+
+\begin{ps*}
+Pakeitæ nelygybes grieþtomis gausime grieþtai monotoniðkas funkcijas, bet ne
+atvirkðèiai. Pvz., $f(x) = x^3$ grieþtai didëja aibëje $\R$, bet $f'(0) = 0$.
+\end{ps*}
+
+\begin{tg}								% 5.15
+Jei $f: I \to \R$ (\/$I \subset \R$ -- baigtinis arba begalinis intervalas)
+turi aprëþtà iðvestinæ intervale $I$, tai $f$ yra tolygiai tolydi tame
+intervale.
+\end{tg}
+
+\begin{ps*}
+Ðis poþymis nëra bûtinas. Pvz., $\sqrt{x} \in (0, 1)$ yra tolygiai tolydi,
+nors neturi iðvestinës taðke $x = 0$.
+% Èia mano paistalai, nesu 100% tikras dël ðito.
+\end{ps*}
+
+\begin{tr}[Lopitalio taisyklë]						% 5.16
+Tarkime, kad funkcijos $f$ ir $g$ yra diferencijuojamos intervale $(a, b)$
+(\/$-\infty \le a < b < +\infty$\/) ir
+\begin{enumerate}
+  \item $\lim_{x \downarrow a} f(x) = \lim_{x \downarrow a} g(x) = 0$ arba
+        $\lim_{x \downarrow a} g(x) = +\infty$.
+  \item $g'(x) \ne 0$, kai $x \in (a, b)$.
+  \item $\exists \lim_{x \downarrow a} \frac{f'(x)}{g'(x)} = A \in \RR$.
+\end{enumerate}
+Tada $\lim_{x \downarrow a} \frac{f(x)}{g(x)} = A$.
+\end{tr}
+
+\begin{pvzz}~\par							% 5.17
+\begin{enumerate}
+  \item $\displaystyle \lim_{x \to 0} \frac{1-cos x}{x^2} = \frac{1}{2}$.
+  \item $\displaystyle \lim_{x \to \infty} \frac{x^{10}}{e^{\frac{x}{10}}} = 0$.
+  \item $\displaystyle \lim_{x \to \infty} \frac{ln x}{x^a} = 0$, $a > 0$. \par
+        Panaðiai galima árodyti, kad
+	$\displaystyle \lim_{x \to \infty} \frac{ln^n x}{x^a} = 0$, $a > 0$, $n \in \N$.
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 5.18
+Jei funkcija $f$ yra diferencijuojama intervale $I$, ir jos iðvestinë
+$f'(x)$, $x \in I$, taip pat yra diferencijuojama funkcija, tai jos
+iðvestinë $(f')'(x)$ vadinama funkcijos $f$ \Def{antràja iðvestine} ir
+þymima $f''(x)$ arba $f^{(2)}(x)$. Analogiðkai apibrëþiamos aukðtesniø
+eiliø iðvestinës $f'''(x) = f^{(3)}(x)$, $\ldots f^{(n)}(x) =
+(f^{(n-1)})'(x)$, su sàlyga, kad jos egzistuoja.
+
+Visø funkcijø $f: [a, b] \to \R$, turinèiø visø eiliø tolydþias
+iðvestines iki $n$-tosios eilës imtinai aibë þymima $C^n[a, b] := \{f(x):
+\quad \forall k = 1, \ldots, n \quad f^{(k)} \in C[a, b]\}$. Be to,
+$f \in C^{\infty}[a, b] \quad \Longleftrightarrow \quad
+\forall n \in \N \quad \exists f^{(n)} \in C[a, b]$.
+\end{ap}
+
+\begin{tr}[Teiloro formulë]						% 5.19
+Tarkime, funkcija $f \in C^n[x_0, x]$ yra $(n+1)$ kartà diferencijuojama
+intervale $(x_0, x)$ (tam pakanka $f \in C^{n+1}[x_0, x]$\/). Tada
+$\exists c \in (x_0, x):$
+\[
+    f(x) = \underbrace{f(x_0) + \sum_{k=1}^n \frac{f^{(k)}(x_0)}{k!} (x-x_0)^k}
+	   _{=: P_n(x_0; x)}
+	 + \underbrace{\frac{f^{(n+1)}(c)}{(n+1)!} (x-x_0)^{n+1}}
+	   _{=: R_n(x_0; x)}
+\]
+Daugianaris $P_n(x_0; x)$ vadinamas \Def{Teiloro daugianariu}, o reiðkinys
+$R_n(x_0; x)$ -- \Def{Teiloro formulës liekamuoju nariu Lagranþo pavidalu}.
+\end{tr}
+
+\begin{pss}~\par							% 5.20
+\begin{enumerate}
+  \item Formulë teisinga ir intervalui $[x, x_0]$, kai $x < x_0$.
+  \item Teiloro formulë leidþia ``sudëtingos'' funkcijos reikðmiø skaièiavimà
+        pakeisti ``paprastos'' funkcijos -- daugianario $P_n(x_0; x)$
+	reikðmiø skaièiavimu, kai $R_n(x_0; x)$ yra ``maþas'' (pastaroji
+	situacija yra tipiðka).
+  \item Ypaè daþnai ði formulë naudojama, kai $x_0 = 0$:
+        \[
+          f(x) = f(0) + \sum_{k=1}^n \frac{f^{(k)}(0)}{k!} x^k + 
+	         \frac{f^{(n+1)}(c)}{(n+1)!} x^{n+1}
+        \]
+	(Makloreno formulë)
+  \item Liekamojo nario \Def{Koði pavidalas}:
+        \[
+	  R_n(x_0; x) = \frac{f^{(n+1)}(\tilde{c})}{n!} (x-\tilde{c})(x-x_0)^n
+        \]
+  \item Kai $n = 2$:
+        \[
+          f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 
+	       + \frac{f'''(c)}{3!}(x-x_0)^3
+        \]
+	Pirmi du nariai -- liestinës lygtis (``geriausiai priglundanti
+	tiesë''), pirmi trys nariai -- ``geriausiai priglundanti parabolë''
+	ir t.t.
+\end{enumerate}
+\end{pss}
+
+\begin{ap}								% 5.21
+Raðysime $f(x) = o\left(g(x)\right)$, $x \to a$, jei egzistuoja tokia
+funkcija $\eps(x)$, apibrëþta taðko $a$ aplinkoje, kad $\eps(x) \to 0$,
+kai $x \to a$, ir $f(x) = \eps(x)g(x)$ (taðko $a$ aplinkoje). Jei $g(x)
+\ne 0$ taðko $a$ aplinkoje, tai $f(x) = o\left(g(x)\right)$, $x \to a$
+$\Longleftrightarrow$ $\frac{f(x)}{g(x)} \to 0$, $x \to a$.
+\end{ap}
+
+\begin{ps*}
+Jei $g(x) \to 0$ ir $f(x) = o\left(g(x)\right)$, $x \to a$, tai sakoma,
+kad ``$f$ nyksta greièiau nei $g$'', $x \to a$.
+
+Jei $g(x) \to +\infty$, tai sakoma, kad ``$f$ auga greièiau nei $g$''.
+\end{ps*}
+
+\begin{pvzz*}
+$x^2 = o(x)$, $x \to 0$ \par
+$x = o(x^2)$, $x \to +\infty$ \par
+$x^a = o(e^x)$, $x \to +\infty$ \par
+$\lg x = o(x^a)$, $x \to +\infty$
+\end{pvzz*}
+
+\begin{isv}[Teiloro formulë su Peano pavidalo liekamuoju nariu]		% 5.22
+Jei $f \in C^n[x_0, x]$, tai $f(t) = P_n(x_0; t) + o(|x-x_0|^n)$, $x \to x_0$,
+t.y. $\frac{R_n(x_0; x)}{|x-x_0|^n} \to 0$, $x \to x_0$.
+\end{isv}
+
+\begin{ap}								% 5.23
+Tarkime, kad funkcija $f$ yra be galo diferencijuojama taðko $x_0$ aplinkoje.
+Funkcijos $f$ \Def{Teiloro eilute} su centru $x_0$ vadinama funkcijø eilutë
+\[
+  f(x_0) + \sum_{n=1}^{\infty} \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+\]
+Pastebëkime, kad Teiloro eilutës dalinës sumos yra jos Teiloro
+daugianariai $P_n(x_0; x)$, todël ði eilutë konverguoja su tais $x$, su
+kuriais Teiloro formulës liekamasis narys $R_n(x_0; x) \to 0$, $n \to
+\infty$ ir tokiu atveju
+\[
+  f(x) = f(x_0) + \sum_{n=1}^{\infty} \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+\]
+\end{ap}
+
+\begin{pvzz}~\par							% 5.24
+\begin{enumerate}
+  \item $\displaystyle e^x = 1 + \sum_{n=1}^{\infty} \frac{x^n}{n!}$, $x \in \R$.
+  \item $\displaystyle \sin x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}$, $x \in \R$. \par
+        $\displaystyle \cos x = 1 + \sum_{n=1}^{\infty} (-1)^n \frac{x^{2n}}{(2n)!}$, $x \in \R$.
+  \item $\displaystyle \ln(1+x) = \sum_{n=1}^{\infty} (-1)^{n+1} \frac{x^n}{n}$,
+        $x \in (-\frac{1}{2}, 1]$ (ið tiesø formulë teisinga, kai $x \in (-1; 1]$,
+	tik tai sunku árodyti turimomis priemonëmis).
+  \item $f(x) = \left\{\begin{array}{ll} e^{-\frac{1}{x^2}} & x \ne 0 \\
+                	0 & x = 0 \end{array}\right.$. \par
+	Funkcijos Teiloro eilutë tapaèiai lygi nuliui.
+  \item $\displaystyle \lim_{x \to 0} \frac{sin x - x + \frac{x^3}{3!} - \frac{x^5}{5!}}{x^7} =
+         -\frac{1}{7!}$.
+	% Ðità reikëtø patikrinti...
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 5.25
+Funkcija $f: E \to \R$ vadinama \Def{iðkila (þemyn)} intervale $I
+\subset E \subset \R$, jei $f(\alpha_1 x_1 + \alpha_2 x_2) \le \alpha_1 f(x_1) +
+\alpha_2 f(x_2)$, su visais $x_1, x_2 \in I$, $\alpha_1, \alpha_2 > 0$, 
+$\alpha_1 + \alpha_2 = 1$.
+
+Reikalaudami grieþtos nelygybës gauname \Def{grieþtai iðkilos (þemyn)}
+funkcijos apibrëþimà.
+
+Pakeitæ nelygybæ prieðinga, gauname \Def{iðkilos aukðtyn} arba
+\Def{iðgaubtos} funkcijos apibrëþimà.
+\end{ap}
+
+\begin{tg}\label{5.26}							% 5.26
+Diferencijuojama funkcija $f: I \to \R$ yra iðkila (þemyn) intervale $I$
+tada ir tik tada, kai jos iðvestinë $f'$ didëja intervale $I$. Grieþtà
+iðvestinës didëjimà atitinka grieþtas funkcijos iðkilumas.
+\end{tg}
+
+\begin{isv}								% 5.27
+Dukart diferencijuojama funkcija $f$ yra iðkila intervale $I$ tada ir
+tik tada, kai $f'' \ge 0$ intervale $I$. Jei $f'' > 0$ intervale $I$,
+tai $f$ -- grieþtai iðkila (nebûtinai atvirkðèiai).
+\end{isv}
+
+\begin{ps*}
+Analogiðkas tvirtinimas teisingas ir iðgaubtai funkcijai.
+\end{ps*}
+
+\begin{ap}								% 5.28
+Taðkas $x_0 \in (a, b)$ vadinamas funkcijos $f: (a, b) \to \R$
+\Def{perlinkio taðku}, jei $\exists \eps > 0$ toks, kad $f$ yra iðkila
+intervale $U_\eps^-(x_0) := (x_0 - \eps, x_0)$ ir iðgaubta intervale
+$U_\eps^+(x_0) := (x_0, x_0 + \eps)$ arba atvirkðèiai.
+\end{ap}
+
+\begin{isv}[Ið \ref{5.26}]						% 5.29
+Jei $x_0$ yra dukart diferencijuojamas funkcijos perlinkio taðkas, tai
+$f''(x_0) = 0$ (nebûtinai atvirkðèiai).
+\end{isv}
+
+\section{Funkcijø sekø ir eiluèiø tolydusis konvergavimas}		% 6
+
+\begin{ap}								% 6.1
+Sakoma, kad funkcijø seka $(f_n)$, $n \in \N$ \Def{konverguoja á
+funkcijà} $f$ aibëje $E$, jei $\forall x \in E \quad f_n(x) \to f(x)$,
+kai $n \to \infty$. Toks funkcijø sekos konvergavimas vadinamas
+\Def{paprastu} arba \Def{pataðkiu} ir þymimas $f_n \to f$, $n \to \infty$
+(aibëje $E$\/).
+
+Sakoma, kad funkcijø seka $(f_n)$ konverguoja á funkcijà $f$ \Def{tolygiai}
+aibëje $E$, jei $\sup_{x \in E} |f_n(x) - f(x)| \to 0$, $n \to \infty$.
+Þymima $f_n \rightrightarrows f$, $n \to \infty$ (aibëje $E$\/).
+\end{ap}
+
+\begin{ps}								% 6.2
+\par
+$f_n \to f \quad \Longleftrightarrow \quad
+  \forall x \in E \quad \forall \eps > 0 \quad \exists N \in \N \quad
+    |f_n(x) - f(x)| < \eps$, kai $n > N$ \par
+$f_n \rightrightarrows f \quad \Longleftrightarrow \quad
+  \forall \eps > 0 \quad \exists N \in \N \quad
+    |f_n(x) - f(x)| < \eps$, kai $n > N$ \par
+Skirtumas -- tolygaus konvergavimo atveju $N$ priklauso tik nuo $\eps$ ir
+nepriklauso nuo $x$.
+\end{ps}
+
+\begin{pvzz}~\par							% 6.3
+\begin{enumerate}
+  \item $f_n(x) = x^n$, $x \in [0, 1]$.
+        $f(x) = \left\{\begin{array}{ll} 0 & x \in [0, 1) \\
+                	1 & x = 1 \end{array}\right.$. \par
+	Funkcijø seka konverguoja pataðkiui.
+  \item $f_n(x) = x^n - x^{n+1}$, $x \in [0, 1]$.
+        $f(x) = 0$. \par
+	Funkcijø seka konverguoja tolygiai.
+  \item $f_n(x) = x^n - x^{2n}$, $x \in [0, 1]$.
+        $f(x) = 0$. \par
+	Funkcijø seka konverguoja pataðkiui.
+\end{enumerate}
+\end{pvzz}
+
+\begin{ps}								% 6.4
+Funkcijoms $f,\ g: E \to \R$ paþymëkime $d(f, g) = d_E(f, g) := \sup_{x
+\in E} |f(x) - g(x)|$. Funkcija $d$ pasiþymi ðiomis savybëmis:
+\begin{enumerate}
+  \item $d(f, g) = d(g, f)$.
+  \item $d(f, g) \ge 0$, be to $d(f, g) = 0 \quad \Longleftrightarrow \quad f = g$.
+  \item $d(f, g) \le d(f, h) + d(h, g)$, $h: E \to \R$ (Trikampio nelygybë).
+\end{enumerate}
+Pastebime, kad $f_n \rightrightarrows f$ aibëje $E$ $\Longleftrightarrow$
+$d(f_n, f) \to 0$, $n \to \infty$.
+
+Funkcija $d$ vadinama \Def{tolygaus konvergavimo metrika (atstumu)}.
+Kartais -- \Def{supremumo metrika}.
+\end{ps}
+
+\begin{tg}[Funkcijø sekos tolygaus konvergavimo Koði kriterijus]	% 6.5
+Funkcijø seka $(f_n)$ konverguoja tolygiai (á kokià nors funkcijà $f$)
+aibëje $E$ tada ir tik tada, kai
+\[
+  \forall \eps > 0 \quad \exists N \in \N \quad
+    d(f_n, f_m) = \sup_{x \in E} |f_n(x) - f_m(x)| < \eps
+    \textrm{, kai } m, n > N
+\]
+\end{tg}
+
+\begin{ap}								% 6.6
+Sakoma, kad funkcijø eilutë $\sum_{n=1}^{\infty} f_n$ \Def{konverguoja
+tolygiai} aibëje $E$, jei jos daliniø sumø seka $S_n := \sum_{k=1}^n f_k$,
+$n \in \N$ konverguoja tolygiai aibëje $E$ á kokià nors funkcijà $f$. Tokiu
+atveju raðoma $f = \sum_{n=1}^{\infty} f_n$ tolygiai aibëje $E$ (arba
+$f = \sum_{n=1}^{\infty} f_n$ tolygiai pagal $x \in E$\/).
+\end{ap}
+
+\begin{tg}[Funkcijø eiluèiø tolygaus konvergavimo Vejerðtraso poþymis]	% 6.7
+Jei $|f_n(x)| \le c_n$, $x \in E$, $n \in \N$ ir $\sum_{n=1}^{\infty}
+c_n < +\infty$, tai funkcijø eilutë \eil{f} konverguoja tolygiai aibëje
+$E$.
+\end{tg}
+
+\begin{tr}[Teorema apie ribø sukeitimà]					% 6.8
+Tarkime, kad $f_n \rightrightarrows f$ aibëje $E$ ir $\forall n \in \N \quad
+\exists A_n := \lim_{t \to x} f_n(t) \in \R$, $t \in E$. Tada $\exists
+\lim_{t \to x} f(t) = \lim_{n \to \infty} A_n \in \R$. Kitaip tariant,
+\[
+  \lim_{t \to x} \lim_{n \to \infty} f_n(t) =
+  \lim_{n \to \infty} \lim_{t \to x} f_n(t)
+\]
+\end{tr}
+
+\begin{ps*}
+Be tolygaus konvergavimo toks ribø sukeitimas ne visada teisingas. Pvz.,
+$f_n(x) = x^n$, $x \in E = (0, 1)$: \par
+$\lim_{t \to x} \lim_{n \to \infty} f_n(t) = 0$ \par
+$\lim_{n \to \infty} \lim_{t \to x} f_n(t) = 1$
+\end{ps*}
+
+\begin{isv}								% 6.9
+Jei $f_n \in C(E)$, $n \in \N$ ir $f_n \rightrightarrows f$ aibëje $E$, tai
+$f$ taip pat tolydi.
+\end{isv}
+
+\begin{ps*}
+Funkcijø sekos tolydus konvergavimas yra esminis:
+
+$f_n(x) = x^n$, $x \in E = [0, 1]$,
+$f_n(x) \to f(x) = \left\{\begin{array}{l|l} 0 & x \in [0, 1) \\
+                	1 & x = 1 \end{array}\right.$. 
+\end{ps*}
+
+\begin{tr}[Dinio lema]							% 6.10
+Tarkime, kad funkcijø seka $(f_n \in C[a, b])$ kiekvienam taðke monotoniðkai
+artëja prie funkcijos $f \in C[a, b]$. Tada $f_n$ konverguoja tolygiai.
+\end{tr}
+
+\begin{ps*}
+Monotoniðkumas yra esminis. Pvz., $f_n(x) = x^n - x^{2n}$, $x \in [0, 1]$,
+$f_n \to 0$ (pataðkiui).
+\end{ps*}
+
+\begin{tr}[Vejerðtraso teorema apie tolydþiø funkcijø aproksimacijà
+daugianariais]								% 6.11
+Bet\\ % FIXME: how to force a linebreak here?
+kokiai funkcijai $f \in C[a, b]$ galima rasti daugianariø sekà $(P_n)$,
+konverguojanèià á $f$ tolygiai intervale $[a, b]$.
+\end{tr}
+
+\begin{lm}								% 6.12
+Egzistuoja daugianariø seka $(p_{nk}: n \in \N, k: 0, 1, \ldots, n)$,
+pasiþyminti ðiomis savybëmis:
+\begin{enumerate}
+  \item $\forall p_{nk}(x) \ge 0$, $x \in [0, 1]$.
+  \item $\displaystyle \forall n \in \N \quad \sum_{k = 0}^{n} p_{nk}(x) = 1$
+  \item $\displaystyle c_n := \max_{x \in [0, 1]} \sum_{k=0}^n 
+	    \left(\frac{k}{n} - x\right)^2 p_{nk}(x) \to 0$, $n \to \infty$.
+\end{enumerate}
+\end{lm}
+
+\begin{ap}								% 6.13
+Funkcijø eilutë $\sum_{n=0}^{\infty} c_n(x-a)^n$ vadinama \Def{laipsnine
+eilute} su \Def{centru} taðke $a$; èia $c_n$ vadinami laipsninës eilutës
+\Def{koeficientais}.
+\end{ap}
+
+\begin{tg}								% 6.14
+Sakykime, $c_n$, $n = 0, 1, \ldots$ -- laipsninës eilutës koeficientai. 
+Paþymëkime 
+\[R := \frac{1}{\limsup_{n \to \infty} \sqrt[n]{|c_n|}} \in
+[0, +\infty].\] Tada
+\begin{enumerate}
+  \item Laipsninë eilutë konverguoja absoliuèiai, kai $x \in (a-R, a+R)$
+	(t.y. $|x-a| < R$\/) ir diverguoja, kai $x \not\in [a-R, a+R]$
+	(t.y. $|x-a| > R$\/).
+  \item Jei $\exists \widetilde{R} = \lim_{n \to \infty} \left|\frac{c_n}{c_{n+1}}\right|$,
+	tai $\widetilde{R} = R$
+\end{enumerate}
+
+R vadinamas laipsninës eilutës \Def{konvergavimo spinduliu}, o intervalas
+$(a-R, a+R)$ -- \Def{konvergavimo intervalu}.
+\end{tg}
+
+\begin{tg}								% 6.15
+Tarkime, turime laipsninæ eilutæ $\sum_{n=0}^{\infty} c_n(x-a)^n$ su
+konvergavimo spinduliu $R$. Tada $\forall \widetilde{R} < R$ ði laipsninë
+eilutë konverguoja tolygiai intervale $[a-\widetilde{R}, a+\widetilde{R}]$.
+\end{tg}
+
+\begin{isv}								% 6.16
+Laipsninës eilutës suma -- tolydi funkcija laipsninës eilutës konvergavimo
+intervale $(a-R, a+R)$.
+\end{isv}
+
+\end{document}
+
+% ----------
+% Templates:
+
+%\begin{tg}								% 6.
+%
+%\end{tg}
+
+%\begin{enumerate}
+%  \item 
+%  \item 
+%\end{enumerate}
+
+%\begin{pvzz}~\par							% 6.
+%\begin{enumerate}
+%  \item 
+%  \item 
+%\end{enumerate}
+%\end{pvzz}

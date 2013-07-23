@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Flip Game</title>
+<style xml:space="preserve"> h1 { text-align: center; font-size: large; text-decoration: underline }  h2 { text-align: center; font-size: large; margin-bottom: 0 } </style></head>
+<body>
+
+<h1>2000-2001 ACM Northeastern European Regional Programming Contest</h1><h2>Problem A<br></br>&quot;Flip Game&quot;</h2>
+
+<table>
+<tr><td colspan="1" rowspan="1"><strong>Input file</strong></td><td colspan="1" rowspan="1"><tt>FLIP.IN</tt></td></tr>
+<tr><td colspan="1" rowspan="1"><strong>Output file</strong></td><td colspan="1" rowspan="1"><tt>FLIP.OUT</tt></td></tr>
+<tr><td colspan="1" rowspan="1"><strong>Time limit</strong></td><td colspan="1" rowspan="1">15 seconds per test</td></tr>
+</table>
+
+<p>Flip game is played on a rectangular 4x4 field with
+two-sided pieces placed on each of its 16 squares. One side of
+each piece is white and the other one is black and each piece
+is lying either it's black or white side up. Each round
+you flip 3 to 5 pieces, thus changing the color of their
+upper side from black to white and vice versa. The pieces
+to be flipped are chosen every round according to the
+following rules:</p>
+
+<ol>
+<li>Choose any one of the 16 pieces.</li>
+<li>Flip the chosen piece and also all adjacent pieces
+    to the left, to the right, to the top, and to the bottom
+    of the chosen piece (if there are any).</li>
+</ol>
+
+<p><img alt="Sample position" src="flip.gif" style="float:right"></img>
+Consider the following position as an example:</p>
+
+<pre xml:space="preserve"><tt>bwbw
+wwww
+bbwb
+bwwb</tt></pre>
+
+<p>Here &quot;b&quot; denotes pieces lying their black side up and &quot;w&quot;
+denotes pieces lying their white side up. If we choose to flip
+the 1st piece from the 3rd row (this choice is shown at the picture),
+then the field will become:</p>
+
+<pre xml:space="preserve"><tt>bwbw
+bwww
+wwwb
+wwwb</tt></pre>
+
+<p>The goal of the game is to flip either all pieces white side up or
+all pieces black side up. You are to write a program that 
+will search for the minimum number of rounds needed to 
+achieve this goal.</p>
+
+<h3>Input</h3>
+
+<p>The input file consists of 4 lines with 4 characters &quot;w&quot; or &quot;b&quot; each
+that denote game field position.</p>
+
+<h3>Output</h3>
+
+<p>Write to the output file a single integer number - the minimum
+number of rounds needed to achieve the goal of the game from the given 
+position. If the goal is initially achieved, then
+write 0. If it's impossible to achieve the goal, then write 
+the word &quot;Impossible&quot; (without quotes).</p>
+
+<table style="width:100%">
+<tr><td colspan="1" rowspan="1" style="width:50%; vertical-align:top">
+
+<h3>Sample input #1</h3>
+
+<pre xml:space="preserve"><tt>bwbw
+wwww
+bbwb
+bwwb</tt></pre>
+
+<h3>Output for the sample input #1</h3>
+
+<pre xml:space="preserve"><tt>Impossible</tt></pre>
+
+</td><td colspan="1" rowspan="1" style="width:50%; vertical-align:top">
+
+<h3>Sample input #2</h3>
+
+<pre xml:space="preserve"><tt>bwwb
+bbwb
+bwwb
+bwww</tt></pre>
+
+<h3>Output for the sample input #2</h3>
+
+<pre xml:space="preserve"><tt>4</tt></pre>
+
+</td></tr>
+</table>
+
+</body>
+</html>

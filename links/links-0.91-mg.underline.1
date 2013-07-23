@@ -1,0 +1,209 @@
+* Make all hyperlinks (+ form controls/image maps/etc) underlined.
+* Use default color instead of black for background
+
+Marius Gedminas
+<marius@gedmin.as>
+
+diff -ur links-0.91.orig/html_r.c links-0.91/html_r.c
+--- links-0.91.orig/html_r.c	Thu Jun 22 22:59:38 2000
++++ links-0.91/html_r.c	Thu Jun 29 12:33:11 2000
+@@ -113,14 +113,63 @@
+ 
+ static inline int fg_color(int fg, int bg)
+ {
+-	int l = bg < fg ? bg : fg;
+-	int h = bg < fg ? fg : bg;
++	int ul = fg & 0x10;
++	int l, h;
++	fg &= ~0x10;
++	l = bg < fg ? bg : fg;
++	h = bg < fg ? fg : bg;
++	/* WTF is this??? */
++	/* l = 0..7
++	 * h = 0..15 */
++	/*                                0  1  2  3  4  5  6  7
++	 * l:  .h 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
++	 * blk 0  +           +           +           +
++	 * red 1     +     +     +        +           +
++	 * grn 2        +           +
++	 * yel 3           +     +                    +
++	 * blu 4              +           +           +
++	 * mag 5                 +        +           +
++	 * cya 6                    +
++	 * whi 7                       +
++	 *
++	 *                                0  1  2  3  4  5  6  7
++	 * fg:    0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
++	 *bg:
++	 * blk 0  w           c           w           c
++	 * red 1     w     w     w        w           w
++	 * grn 2        b           b
++	 * yel 3     w     w     w                    w
++	 * blu 4  w           w           w           w
++	 * mag 5     w     w     w        w           w
++	 * cya 6        b           b
++	 * whi 7                       b
++	 *
++	 * blk 8  w  w        c  w        w
++	 * red 9                             w
++	 * grn A                                w
++	 * yel B                                   w
++	 * blu C  w  w     w  w  w                    w
++	 * mag D                                         w
++	 * cya E                                            w
++	 * whi F                                               w
++	 *
++	 *
++	 * c: [bright]blue on [bright]black -> cyan on [bright]black
++	 * b: any on green/cyan/white -> black on *
++	 * w: any other -> white on *
++	 *
++	 * blue/black -> cyan
++	 * brown/red -> white
++	 * magenta/red -> white
++	 * cyan/green -> black
++	 * magenta/brown -> white
++	 */
+ 	if (l == h || (!l && (h == 4 || h == 8 || h == 12)) ||
+ 	   (l == 1 && (h == 3 || h == 5 || h == 8 || h == 12)) ||
+ 	   (l == 2 && h == 6) || (l == 3 && (h == 5 || h == 12)) ||
+ 	   (l == 4 && (h == 8 || h == 12)) || (l == 5 && (h == 8 || h == 12)))
+-	   	return (fg == 4 || fg == 12) && (bg == 0 || bg == 8) ? 6 : (7 - 7 * (bg == 2 || bg == 6 || bg == 7));
+-	return fg;
++	   	return ul | ((fg == 4 || fg == 12) && (bg == 0 || bg == 8) ? 6 : (7 - 7 * (bg == 2 || bg == 6 || bg == 7)));
++	return fg | ul;
+ }
+ 
+ #define ALIGN(x) (((x)+0x7f)&~0x7f)
+@@ -479,6 +528,7 @@
+ 
+ 	int bg, fg;
+ 	int i;
++	int underline = 0;
+ 	struct link *link;
+ 	struct point *pt;
+ 	/*printf("%d-", p->cx);for (i=0; i<l; i++) printf("%c", c[i]); printf("-\n");sleep(1);*/
+@@ -496,7 +546,7 @@
+ 	end_format_change:
+ 	if (p->cx == par_format.leftmargin && *c == ' ' && par_format.align != AL_NO) c++, l--;
+ 	if (p->y < p->cy + 1) p->y = p->cy + 1;
+-	set_hline(p, p->cx, p->cy, l, c, (((fg&0x08)<<3)|(bg<<3)|(fg&0x07))<<8, 1);
++	set_hline(p, p->cx, p->cy, l, c, (((fg&0x08)<<3)|(bg<<3)|(fg&0x07)|((fg&0x10)<<4))<<8, 1);
+ 	p->cx += l;
+ 	nobreak = 0;
+ 	if (par_format.align != AL_NO)
+@@ -577,6 +627,7 @@
+ 		}
+ 		link->sel_color = ((fg & 8) << 3) | (fg & 7) | (bg << 3);
+ 		link->n = 0;
++		underline = 1;
+ 		set_link:
+ 		if ((pt = mem_realloc(link->pos, (link->n + l) * sizeof(struct point)))) {
+ 			link->pos = pt;
+@@ -592,10 +643,11 @@
+ 		fg = find_nearest_color(&format.fg, 16);
+ 		fg = fg_color(fg, bg);
+ 		if (format.attr & AT_ITALIC) fg = fg ^ 0x01;
+-		if (format.attr & AT_UNDERLINE) fg = (fg ^ 0x04) | 0x08;
++		if (format.attr & AT_UNDERLINE) fg = (fg ^ 0x04) | 0x08 | 0x10;
+ 		if (format.attr & AT_BOLD) fg = fg | 0x08;
+ 		fg = fg_color(fg, bg);
+ 		if (format.attr & AT_GRAPHICS) bg = bg | 0x10;
++		if (underline) fg |= 0x10;
+ 		memcpy(&ta_cache, &format, sizeof(struct text_attrib_beginning));
+ 		fg_cache = fg; bg_cache = bg;
+ 		goto end_format_change;
+diff -ur links-0.91.orig/links.h links-0.91/links.h
+--- links-0.91.orig/links.h	Sun Jun 18 18:36:55 2000
++++ links-0.91/links.h	Thu Jun 29 02:00:20 2000
+@@ -872,7 +872,7 @@
+ 
+ /* terminal.c */
+ 
+-typedef unsigned short chr;
++typedef unsigned chr;
+ 
+ struct event {
+ 	long ev;
+@@ -951,6 +951,7 @@
+ #define TERM_KOI8	3
+ 
+ #define ATTR_FRAME	0x8000
++#define ATTR_UNDERSCORE	0x10000
+ 
+ extern struct list_head term_specs;
+ 
+diff -ur links-0.91.orig/terminal.c links-0.91/terminal.c
+--- links-0.91.orig/terminal.c	Tue Jun 27 18:19:11 2000
++++ links-0.91/terminal.c	Thu Jun 29 11:38:19 2000
+@@ -443,26 +443,26 @@
+ {											\
+ 	unsigned ch = term->screen[p];							\
+ 	unsigned char c = ch & 0xff;							\
+-	unsigned char A = ch >> 8 & 0x7f;						\
++	unsigned A = ch >> 8 & 0x17f;							\
+ 	if (s->mode == TERM_LINUX) {							\
+ 		if (s->m11_hack) {							\
+-			if (ch >> 15 != mode) {						\
+-				if (!(mode = ch >> 15)) add_to_str(&a, &l, "\033[10m");	\
++			if ((ch >> 15 & 1) != mode) {					\
++				if (!(mode = ch >> 15 & 1)) add_to_str(&a, &l, "\033[10m");	\
+ 				else add_to_str(&a, &l, "\033[11m");			\
+ 			}								\
+ 		}									\
+-		if (s->restrict_852 && (ch >> 15) && c >= 176 && c < 224) {		\
++		if (s->restrict_852 && (ch >> 15 & 1) && c >= 176 && c < 224) {		\
+ 			if (frame_restrict[c - 176]) c = frame_restrict[c - 176];	\
+ 		}									\
+ 	} else if (s->mode == TERM_VT100) {						\
+-		if (ch >> 15 != mode) {							\
+-			if (!(mode = ch >> 15)) add_to_str(&a, &l, "\x0f");		\
++		if ((ch >> 15 & 1) != mode) {							\
++			if (!(mode = ch >> 15 & 1)) add_to_str(&a, &l, "\x0f");		\
+ 			else add_to_str(&a, &l, "\x0e");				\
+ 		}									\
+ 		if (mode && c >= 176 && c < 224) c = frame_vt100[c - 176];		\
+-	} else if (s->mode == TERM_KOI8 && (ch >> 15) && c >= 176 && c < 224) { c = frame_koi[c - 176];\
+-	} else if (s->mode == TERM_DUMB && (ch >> 15) && c >= 176 && c < 224) c = frame_dumb[c - 176];\
+-	if (!(A & 0100) && (A >> 3) == (A & 7)) A = (A & 070) | 7 * !(A & 020);		\
++	} else if (s->mode == TERM_KOI8 && (ch >> 15 & 1) && c >= 176 && c < 224) { c = frame_koi[c - 176];\
++	} else if (s->mode == TERM_DUMB && (ch >> 15 & 1) && c >= 176 && c < 224) c = frame_dumb[c - 176];\
++	if (!(A & 0100) && (A >> 3 & 7) == (A & 7)) A = (A & 070) | 7 * !(A & 020);	\
+ 	if (A != attrib) {								\
+ 		attrib = A;								\
+ 		add_to_str(&a, &l, "\033[0");						\
+@@ -473,10 +473,13 @@
+ 			add_to_str(&a, &l, m);						\
+ 			m[1] = '4';							\
+ 			m[2] = (attrib >> 3 & 7) + '0';					\
++			if ((attrib >> 3 & 7) == 0)					\
++				m[2] = (attrib & 0x100) ? '8' : '9';			\
+ 			add_to_str(&a, &l, m);						\
+ 		} else if (getcompcode(attrib & 7) < getcompcode(attrib >> 3 & 7))	\
+ 			add_to_str(&a, &l, ";7");					\
+ 		if (attrib & 0100) add_to_str(&a, &l, ";1");				\
++		if (attrib & 0x100) add_to_str(&a, &l, ";4");				\
+ 		add_to_str(&a, &l, "m");						\
+ 	}										\
+ 	if (c >= ' ' && c != 127/* && c != 155*/) add_chr_to_str(&a, &l, c);		\
+@@ -627,7 +630,7 @@
+ 	int i;
+ 	t->dirty = 1;
+ 	for (i = x >= 0 ? 0 : -x; i < (x+l <= t->x ? l : t->x-x); i++)
+-		t->screen[x+i + t->x * y] = (t->screen[x+i + t->x * y] & 0x80fff) | (c & ~0x80ff);
++		t->screen[x+i + t->x * y] = (t->screen[x+i + t->x * y] & 0x80ff) | (c & ~0x80ff);
+ }
+ 
+ void fill_area(struct terminal *t, int x, int y, int xw, int yw, unsigned c)
+diff -ur links-0.91.orig/view.c links-0.91/view.c
+--- links-0.91.orig/view.c	Sun Jun 18 11:56:17 2000
++++ links-0.91/view.c	Thu Jun 29 01:18:42 2000
+@@ -356,7 +356,7 @@
+ 						set_window_ptr(get_root_window(t), x, y);
+ 						f = 1;
+ 					}
+-					set_color(t, x, y, /*((link->sel_color << 3) | (co >> 11 & 7)) << 8*/ link->sel_color << 8);
++					set_color(t, x, y, /*((link->sel_color << 3) | (co >> 11 & 7)) << 8*/ (link->sel_color << 8) | ATTR_UNDERSCORE);
+ 				} else scr->link_bg[i].x = scr->link_bg[i].y = scr->link_bg[i].c = -1;
+ 			}
+ 			break;

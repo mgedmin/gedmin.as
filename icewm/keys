@@ -1,0 +1,12 @@
+key "Alt+Ctrl+t" Eterm
+key "Alt+Ctrl+s" Eterm -n "Root Terminal" -e su -
+key "Alt+Ctrl+a" Eterm -n "Admin Terminal" -e su - admin
+key "Alt+Ctrl+k" xkill
+key "Alt+Ctrl+m" Eterm -t mutt
+key "Alt+Ctrl+g" Eterm -t OmniMail --pause -e om
+#key "Alt+Ctrl+t" xterm
+#key "Alt+Ctrl+f" fte
+#key "Alt+Ctrl+n" netscape -noraise -remote openBrowser
+#key "Alt+Ctrl+b" netscape -noraise -remote openBookmarks
+#key "Alt+Ctrl+m" netscape -noraise -remote openURL(mailto:,new-window) 
+#key "Alt+Ctrl+m" xterm -e mc

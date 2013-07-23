@@ -1,0 +1,18 @@
+When ToolTipTime <= 0 in the config file, tooltips never disappear.
+
+Marius Gedminas
+marius@gedmin.as
+http://gedmin.as/icewm/
+
+diff -u ./src/ytooltip.cc.orig ./src/ytooltip.cc
+--- ./src/ytooltip.cc.orig	Sat Dec 25 14:45:39 1999
++++ ./src/ytooltip.cc	Mon Feb 14 09:04:15 2000
+@@ -93,7 +93,7 @@
+ void YToolTip::display() {
+     raise();
+     show();
+-    if (!fToolTipVisibleTimer)
++    if (!fToolTipVisibleTimer && ToolTipTime > 0)
+         fToolTipVisibleTimer = new YTimer(ToolTipTime);
+     if (fToolTipVisibleTimer) {
+         fToolTipVisibleTimer->setTimerListener(this);

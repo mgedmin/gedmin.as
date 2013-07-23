@@ -1,0 +1,27 @@
+Eilės nr.,Stud. paž. nr.,Vardas ir pavardė,Naudotojo vardas,Užduotis,Pogrupis,1uzd,data,pastabos,2uzd,data,pastabos,3uzd,data,pastabos
+1.,0311131 ,Aleksandr Aniščenko,alan3323,(žaidimas nim), ,1.5-0.7+0.1,2005-05-26,atsiskaitymą priėmė kolega; C++; +0.1 nes užduotis graži ir tvarkinga,1.5-0.4,2005-05-26,atsiskaitymą priėmė kolega,1-0.1,2005-05-26,atsiskaitymą priėmė kolega
+2.,0311138 ,Liudas Bakšys,liba1437, , 
+3.,0311157 ,Edvinas Bilius,edbi3372,14, ,1.5-0.1,2005-04-14,atsiskaitymą priėmė kolega,1.5,2005-04-28,Java,1.0+0.1,2005-05-12,C/Java
+4.,0311176 ,Edita Davolytė,edda3410,12, 
+5.,0311188 ,Darius Ežerskis,daez3433,4, ,1.5-0.5-0.4,2005-05-12,atsiskaitymą priėmė kolega; C; nelabai sugebėjo paaiškinti,1.5-0.2-0.5,2005-05-12,atsiskaitymą priėmė kolega; Java; nelabai sugebėjo paaiškinti,1,2005-05-19,atsiskaitymą priėmė kolega
+6.,0311202 ,Nikolaj Grigorjev,nigr3470,1, ,1.5-0.8-0.1+0.1,2005-06-02,C; tradicinė recv. klaida; multiklientiškumas (fork),1.5-0.5,2005-06-02,Java,1-0.2,2005-06-02,C/Java
+7.,0311219 ,Aurimas Jonušas,aujo3522, , 
+8.,0311222 ,Andrius Juška,anju3531,10, 
+9.,0311232 ,Mindaugas Kiznis,miki3571,9, 
+10.,0311241 ,Dmitrij Kovrigin,dmko3591, , 
+11.,0311435 ,Gintarė Laurinaitytė,gila3638,(bilietų užsakymas), ,1.5-0.1+0.1-0.1,2005-04-14,multiklientiškumas kodas nelabai tvarkingas,1.5+0.2,2005-04-28,Java; AWT gui,1+0.1,2005-05-12,C/Java
+12.,0311261 ,Arūnas Liogas,arli3653, , 
+13.,0311267 ,Dmitrijus Malachovskis,dmma3671,20 , ,1.5-0.3,2005-04-28,C++,1.5,2005-04-28,Java,1+0.3,2005-04-28,C++ su Java
+14.,0311271 ,Darius Margelis,dama3681,6, 
+15.,0311290 ,Martynas Mumgaudis,mamu3741,15, ,1.5-0.3,2005-04-28,C++,1.5-0.1,2005-04-28,Java; netvarkinga,1+0.1,2005-05-12,C++/Java
+16.,0311294 ,Valdemar Narkevič,vana3749,21, ,1.5-0.7,2005-05-26,Java,1.5-0.4+0.1,2005-05-26,C; tvarkinga ir teisinga buferizacija,1-0.1,2005-05-26,C/Java
+17.,0311301 ,Ignas Nedzinskas,igne3759,2, ,1.5-0.2-0.1,2005-04-21,atsiskaitymą priėmė magistrantas; C++; nežinau už ką -0.1,1.5-0.1,2005-04-28,Java; kodas netvarkingas,1+0.3,2005-04-28,C++ su Java
+18.,0311312 ,Gediminas Paurys,gepa3781,5 , ,1.5-0.1-0.1,2005-04-14,C++ kodas netvarkingas programa kažkokia matyta,1.5+0.1,2005-04-21,atsiskaitymą priėmė magistrantas; Java,1+0.3,2005-04-28
+19.,0313473 ,Mindaugas Pielikis,mipi3802,(chat) , ,1.5+0.2+0.5,2005-03-17,C++ Qt GUI multiklientiškumas geras dizainas mažoka komentarų,1.5+0.2+0.5,2005-04-14,truputį kreivas swing GUI multiklientiškumas,1+0.3,2005-04-14
+20.,0311328 ,Miroslav Popugajev,mipo3815,8, ,1.5+0.2+0.5,2005-03-17,C++ soketų enkapsuliacija klase greitai paskaitos metu padarė multiklientiškumą su pthreads labai labai atkaklus,1+0.2,2005-04-14,C/Java,1.5+0.3+0.5,2005-04-21,atsiskaitymą priėmė kolega magistrantas; Java; nežinau už ką +0.5
+21.,0311345 ,Alma Rudytė,alru3853,(picos), ,1.5-0.8-0.2,2005-06-02,C++; nelabai sugebėjo paaiškinti,1.5-0.5-0.2,2005-06-02,Java; nelabai sugebėjo paaiškinti,1-0.2,2005-06-02,C++/Java
+22.,0311347 ,Kęstutis Rutavičius,keru3858,3, ,1.5-0.7+0.1-0.1,2005-05-26,C++; +0.1 už multiklientiškumą (select loop); -0.1 už tradcinę read klaidą,1.5-0.4,2005-05-26,Java; multiklientiškumas,1-0.2,2005-06-02,C++/Java
+23.,0311348 ,Donatas Ruzgys,doru3859,11 , ,1.5-0.3,2005-04-28,C,1.5-0.2,2005-05-12,Java,1+0.1,2005-05-12,C/Java; pasitiki recv
+24.,0311366 ,Raimond Stačkovski,rast3921,16, 
+25.,0311401 ,Rytis Tvarogelskas,rytv3957,19, ,1.5-0.1,2005-04-14,atsiskaitymą priėmė kolega,1.5+0.1,2005-04-21,atsiskaitymą priėmė kolega
+26.,0311166 ,Remigijus Čeikauskas,rece4042,7, ,1.5+0.1,2005-04-07,atsiskaitymą priėmė kolega: multiklientiškumas labai viskas gražu,1.5,2005-04-28,Java,1+0.3,2005-04-28

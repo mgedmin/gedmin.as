@@ -1,0 +1,29 @@
+This package contains updated Lithuanian time zone (Europe/Vilnius: in 1998
+Lithuanian time zone changed to CET; in 1999 -- back to EET; in 2000 -- to
+EET without daylight savings).
+
+Files
+-----
+
+Europe/Vilnius      compiled time zone data
+lithuania           this contains all required data to compile the updated
+                    time zone
+europe.diff         unified diff for `europe' file as found in tzdata2000d
+                    package by by Arthur David Olson et.al.
+
+
+Installation
+------------
+
+Either overwrite your old Europe/Vilnius in /usr/share/zoneinfo (for
+Slackware distribution, other distributions might use other directories)
+or use `zic' to do that:
+
+  # zic lithuania
+
+You can then use `timeconfig' or a similair program to set you local time
+zone to Europe/Vilnius.
+
+
+Marius Gedminas
+<marius@gedmin.as>

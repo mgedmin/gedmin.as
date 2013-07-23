@@ -1,0 +1,231 @@
+This IceWM patch:
+* Displays additional information in the ppp status tooltip:
+    [phone@]netdevice: during HH:MM:SS
+    sent XXX b/Kb/Mb/Gb/Tb (now at speed cps/K/s/M/s),
+    received YYY b/Kb/Mb/Gb/Tb (now at speed cps/K/s/M/s).
+* Allows multiline tooltips
+* Adds functions to YFont and YPaint for multiline text handling
+* Ctrl-double click now also resets graph scale
+
+Marius Gedminas
+marius@gedmin.as
+http://gedmin.as/icewm/
+
+diff -u ./src/apppstatus.cc.orig ./src/apppstatus.cc
+--- ./src/apppstatus.cc.orig	Sun Feb 13 17:53:24 2000
++++ ./src/apppstatus.cc	Sat Jun 24 11:49:22 2000
+@@ -110,17 +110,81 @@
+ 
+ void NetStatus::updateToolTip() {
+     char status[96];
++
+     int t = time(NULL) - start_time;
++
+     int o = cur_obytes - start_obytes;
++    const char *ounit = "b";
++    if (o >= 10*1024) {
++        o /= 1024;
++        ounit = "Kb";
++    }
++    if (o >= 10*1024) {
++        o /= 1024;
++        ounit = "Mb";
++    }
++    if (o >= 10*1024) {
++        o /= 1024;
++        ounit = "Gb";
++    }
++    if (o >= 10*1024) {
++        o /= 1024;
++        ounit = "Tb";
++    }
++
+     int i = cur_ibytes - start_ibytes;
++    const char *iunit = "b";
++    if (i >= 10*1024) {
++        i /= 1024;
++        iunit = "Kb";
++    }
++    if (i >= 10*1024) {
++        i /= 1024;
++        iunit = "Mb";
++    }
++    if (i >= 10*1024) {
++        i /= 1024;
++        iunit = "Gb";
++    }
++    if (i >= 10*1024) {
++        i /= 1024;
++        iunit = "Tb";
++    }
++
++    const int last = NET_SAMPLES - 1;
++    int os = ppp_out[last];
++    const char *osunit = "cps";
++    if (os >= 1024) {
++        os /= 1024;
++        osunit = "K/s";
++    }
++    if (os >= 1024) {
++        os /= 1024;
++        osunit = "M/s";
++    }
++
++    int is = ppp_in[last];
++    const char *isunit = "cps";
++    if (is >= 1024) {
++        is /= 1024;
++        isunit = "K/s";
++    }
++    if (is >= 1024) {
++        is /= 1024;
++        isunit = "M/s";
++    }
+ 
+-    if (t <= 0)
++    if (!isUp())
+         sprintf(status, "%s:",
+                 netDevice);
+     else
+-        sprintf(status, "%s@%s: Sent: %db Rcvd: %db in %ds",
+-                phoneNumber, netDevice,
+-                o, i, t);
++        sprintf(status, "%s%s%s: during %d:%02d:%02d\n"
++                        "sent %d %s (now %d %s),\n"
++                        "received %d %s (now %d %s).",
++                phoneNumber, *phoneNumber == '\0' ? "" : "@", netDevice,
++                t / 3600, t / 60 % 60, t % 60,
++                o, ounit, os, osunit,
++                i, iunit, is, isunit);
+ 
+     setToolTip(status);
+ }
+@@ -132,6 +196,7 @@
+                 start_time = time(NULL);
+                 start_ibytes = cur_ibytes;
+                 start_obytes = cur_obytes;
++                maxBytes = 0;
+             } else {
+                 if (fNetCommand && fNetCommand[0])
+                     app->runCommand(fNetCommand);
+
+diff -u ./src/ytooltip.cc.orig ./src/ytooltip.cc
+--- ./src/ytooltip.cc.orig	Sat Jun 24 11:13:18 2000
++++ ./src/ytooltip.cc	Sat Jun 24 11:28:13 2000
+@@ -49,7 +49,7 @@
+         int y = toolTipFont->ascent() + 2;
+         g.setFont(toolTipFont);
+         g.setColor(toolTipFg);
+-        g.drawChars(fText, 0, strlen(fText), 3, y);
++        g.drawMultilineChars(fText, 0, strlen(fText), 3, y);
+     }
+ }
+ 
+@@ -58,8 +58,8 @@
+     if (tip) {
+         fText = newstr(tip);
+         if (fText) {
+-            int w = toolTipFont->textWidth(fText);
+-            int h = toolTipFont->ascent();
++            int w = toolTipFont->multilineTextWidth(fText);
++            int h = toolTipFont->multilineTextHeight(fText);
+ 
+             setSize(w + 6, h + 7);
+         } else {
+
+diff -u ./src/ypaint.h.orig ./src/ypaint.h
+--- ./src/ypaint.h.orig	Sat Jun 24 11:15:17 2000
++++ ./src/ypaint.h	Sat Jun 24 11:16:17 2000
+@@ -79,6 +79,8 @@
+ 
+     int textWidth(const char *str) const;
+     int textWidth(const char *str, int len) const;
++    int multilineTextWidth(const char *str) const;
++    int multilineTextHeight(const char *str) const;
+ private:
+ #ifdef I18N
+     XFontSet font_set;
+@@ -149,6 +151,7 @@
+     void drawRect(int x, int y, int width, int height);
+     void drawArc(int x, int y, int width, int height, int a1, int a2);
+     void drawChars(const char *data, int offset, int len, int x, int y);
++    void drawMultilineChars(const char *data, int offset, int len, int x, int y);
+     void drawCharUnderline(int x, int y, const char *str, int charPos);
+     void drawPixmap(YPixmap *pix, int x, int y);
+     void drawClippedPixmap(Pixmap pix, Pixmap clip,
+
+diff -u ./src/ypaint.cc.orig ./src/ypaint.cc
+--- ./src/ypaint.cc.orig	Sat Jun 24 11:16:20 2000
++++ ./src/ypaint.cc	Sat Jun 24 11:32:02 2000
+@@ -200,6 +200,7 @@
+ #endif
+     if (afont) XFreeFont(app->display(), afont);
+ }
++
+ int YFont::textWidth(const char *str) const {
+ #ifdef I18N
+     if (multiByte) {
+@@ -222,6 +223,41 @@
+     }
+ }
+ 
++int YFont::multilineTextWidth(const char *str) const {
++    int width = 0;
++    const char *start = str;
++    const char *end;
++    do {
++	end = strchr(start, '\n');
++	int line_width;
++	if (end) {
++	    line_width = textWidth(start, end - start);
++	    start = end + 1;
++	} else {
++	    line_width = textWidth(start);
++	}
++	if (line_width > width)
++	    width = line_width;
++    } while (end);
++    return width;
++}
++
++int YFont::multilineTextHeight(const char *str) const {
++    int total_height = 0;
++    const char *start = str;
++    const char *end;
++    do {
++	end = strchr(start, '\n');
++	if (end) {
++	    total_height += height();
++	    start = end + 1;
++	} else {
++	    total_height += ascent();
++	}
++    } while (end);
++    return total_height;
++}
++
+ Graphics::Graphics(YWindow *window) {
+     XGCValues gcv;
+ 
+@@ -284,6 +320,21 @@
+     {
+         XDrawString(display, drawable, gc, x, y, data + offset, len);
+     }
++}
++
++void Graphics::drawMultilineChars(const char *data, int offset, int len, int x, int y) {
++    const char *start = data + offset;
++    const char *limit = start + len;
++    while (start < limit) {
++	const char *end = strchr(start, '\n');
++	if (!end)
++	    end = strchr(start, '\0');
++	if (end > limit)
++	    end = limit;
++	drawChars(start, 0, end - start, x, y);
++	y += font ? font->height() : 1;
++	start = end + 1;
++    };
+ }
+ 
+ void Graphics::drawCharsEllipsis(const char *str, int len, int x, int y, int maxWidth) {

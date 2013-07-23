@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Algoritmų analizė</title>
+  <link rev="made" href="mailto:marius@gedmin.as" />
+  <link rel="stylesheet" type="text/css" href="http://gedmin.as/style.css" />
+  <meta name="Author" content="Marius Gedminas" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://mgedmin.myopenid.com/" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <link rel="openid2.local_id" href="http://mgedmin.myopenid.com/" />
+  <meta http-equiv="X-XRDS-Location"
+        content="http://www.myopenid.com/xrds?username=mgedmin.myopenid.com" />
+  
+</head>
+<body>
+
+<div class="toolbox langbox">
+<div class="title">Language</div>
+  <a href="index-lt.html"
+     title="Lithuanian"><img src="http://gedmin.as/lt.png" alt="Lt" title="Lithuanian" height="16" width="26" /></a>
+  <span class="sep">::</span>
+  <a href="index-en.html"
+     title="English"><img src="http://gedmin.as/en.png" alt="En" title="English" height="16" width="26" /></a>
+</div>
+
+<div class="title">
+<h1 class="title">Algoritmų analizė</h1>
+</div>
+
+<div class="navbar">
+<span class="right">
+<a href="http://gedmin.as/sitemap/index-lt.html">Turinys</a>
+<span class="hide">|</span>
+</span>
+
+  <a href="http://gedmin.as/index-lt.html"
+     title="Mariaus namai">Namai</a>
+  &gt;
+  <a href="http://gedmin.as/study/index-lt.html"
+     title="Studijos">Studijos</a>
+  &gt;
+  <a href="http://gedmin.as/study/icpc/index-lt.html"
+     title="ACM studentų programavimo varžybos">ICPC</a>
+  &gt;
+  <strong>algoritmų analizė</strong>
+</div>
+
+<div class="content">
+
+
+
+
+<h2>Algoritmų analizė</h2>
+
+<!--
+<p>Programa - - tai algoritmas, užrašytas kuria nors programavimo kalba.</p>
+  -->
+
+<p>Kaip galima būtų įvertinti algoritmų efektyvumą?  Paprastai žiūrima į
+du dalykus:</p>
+<ul>
+  <li>veikimo laiką</li>
+  <li>sunaudojamos atminties kiekį</li>
+</ul>
+
+<p>Konkrečiais matavimo vienetais (baitais ar sekundėmis) vertinti tai yra
+sunku, nes konkretūs skaičiai priklauso nuo naudojamos programavimo kalbos,
+kompiliatoriaus ir apskritai visos aplinkos, o taip pat „geležies“ galimybių.
+Todėl yra įpasta naudoti <em>asimptotinę notaciją</em></p>
+
+
+<p>Užrašas f(x) = O(g(x)) reiškia „funkcija f auga lėčiau už funkciją
+g(x)“.</p>
+
+<p>Pažymėkime algoritmo veikimo laiką funkcija T(n), kur n yra pradinių
+duomenų dydis.  Užrašas T(n) = O(n) reiškia, jog ši funkcija yra daugiau ar
+mažiau tiesiogiai proporcinga duomenų dydžiui, T(n) = O(n<sup>2</sup>) reikštų,
+kad programos veikimo laikas yra proporcingas duomenų dydžio kvadratui ir t.t.
+</p>
+
+<p>Formaliai užrašas T(n) = O(f(n)) reiškia, jog egzistuoja tokios konstantos
+c bei n<sub>0</sub>, kad visiems n &ge; n<sub>0</sub> teisinga nelygybė
+T(n) &lt; c·f(n).  Išvertus į žmonių kalbą tai reiškia, kad esant pakankamai
+dideliems n programos veikimo laikas yra proporcingas funkcijai f(n).</p>
+
+<p>Nesunku įsitikinti, kad O(a f(n)) = O(f(n)), t.y. galime funkciją f(n)
+dauginti ar dalinti iš bet kokios teigiamos konstantos a ir nieko tuo
+nepakeisime.  Taip pat galime įsitikinti, kad O(f(n) + g(n)) = O(f(n)) +
+O(g(n)).  Dar viena naudinga lygybė yra O(f(n) + g(n)) = O(f(n)) jei g(n) =
+O(f(n)), t.y. pridėję lėčiau augančią funkciją g(n) prie greičiau augančios
+funkcijos f(n) nieko nepakeisime.
+</p>
+
+<p>Praktiškai tai reiškia, kad jei f(n) yra bet koks n-tojo laipsnio
+daugianaris, galime ignoruoti visus narius, išskyrus pirmąjį: O(2n<sup>4</sup>
++ n<sup>3</sup> - 10000n + 17) = O(n<sup>4</sup>).
+</p>
+
+<p>Panašiai užrašas f(x) = &#x03A9;(g(x)) reiškia, jog funkcija f(x) auga
+greičiau už funkciją g(x): egzistuoja konstantos c bei n<sub>0</sub>, kad
+visiems n &ge; n<sub>0</sub> teisinga f(x) &gt; c·g(x).</p>
+
+<p>Užrašas f(x) = &#x0398;(g(x)) reiškia, jog funkcija f(x) auga tokiu pat
+greičiu, kaip ir funkcija funkciją g(x): egzistuoja konstantos c<sub>1</sub>,
+c<sub>2</sub> bei n<sub>0</sub>, kad visiems n &ge; n<sub>0</sub> teisinga
+nelygybė c<sub>1</sub>·g(x) &lt; f(x) &lt; c<sub>2</sub>·g(x).</p>
+
+<p>Asimptotiniai sąryšiai tarp funkcijų primena įprastus ženklus &le;, =,
+&ge;.  Vienas skirtumas: ne visos funkcijos yra asimptotiškai sulyginimos,
+tad kartais nei vienas iš aukščiau minėtų sąryšių netinka.</p>
+
+<p>Dažniausiai pasitaikantys sąryšiai „didėjimo tvarka“: O(1), O(log n), O(n),
+O(n log n), O(n<sup>2</sup>), ..., O(n<sup>1000</sup>), ...,
+O(2<sup>n</sup>).
+</p>
+
+<!-- XXX įkišk ten sqrt(n), n!, 3^n, e^n, n^n -->
+
+
+</div>
+
+<p />
+
+<div class="bottombar">
+<hr class="hide" />
+<span class="valid">
+<a href="http://validator.w3.org/check/referer"><img
+        src="http://gedmin.as/valid-xhtml11.png"
+        alt="Valid XHTML 1.1!" height="31" width="88" /></a>
+<a href="http://jigsaw.w3.org/css-validator/"><img
+        src="http://gedmin.as/valid-css.png"
+        src="http://jigsaw.w3.org/css-validator/images/vcss" 
+        alt="Valid CSS!" height="31" width="88" /></a>
+</span>
+<span class="lastupdated">
+Paskutiniai pakeitimai: 2012-10-09
+</span>
+
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+prog ETerm Eterm Eterm
+prog Mutt mutt Eterm -t mutt
+#prog XTerm xterm gnome-terminal
+#prog XTerm xterm xterm
+#prog FTE fte fte
+#prog Netscape netscape netscape

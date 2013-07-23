@@ -1,0 +1,27 @@
+Eilės nr.,Stud. paž. nr.,Vardas ir pavardė,Naudotojo vardas,Užduotis,Pogrupis,1uzd,data,pastabos,2uzd,data,pastabos,3uzd,data,pastabos
+1.,0411169,Paulius Aleliūnas,paal4576,3 (krepšininkai),,1.5-0.2+0.1,2006-04-24,Java; multiklientiškumas,1.5-0.2,2006-05-10,C++; ,1+0.1,2006-05-10,C++/Java; 
+2.,0311138,Liudas Bakšys,liba1437
+3.,0411189,Artur Baniukevič,arba4578,4,,1.5+0.1,2006-04-03,Java; multiklientiškumas,1.5+0.1+0.1,2006-04-19,C++; multiklientiškumas,1+0.3,2006-04-19,C++/Java
+4.,0411200,Ernestas Blažys,erbl4579,2 (picos),,1.5+0.1,2006-04-03,Java; multiklientiškumas,1.5,2006-04-24,C++,1+0.3,2006-04-24,C++/Java
+5.,0411219,Andrius Dirvanauskas,andi4508,15,,1.5+0.2+0.1+0.1,2006-03-20,C++; multiklientiškumas (+0.1); tradicinė recv klaida kurią po dviejų savaičių pataisė (+0.1 nes negalėjo atsiskaityti 13 d. kuri buvo išeiginė o norėjau 0.1 balu pakelti už klaidos ištaisymą),1.5+0.3+0.5,2006-03-20,Java; multiklientiškumas ir gražus GUI (+0.5) tradicinė recv klaida kurią pratybų metu pataisė,1+0.3,2006-03-20,C++/Java
+6.,9710975,Vladas Freimanas,vlfr0489,23 (network tools),,1.5+0.1,2006-04-03,Java; multiklientiškumas,1.5-0.4+0.1,2006-05-24,C++; multiklientiškumas; ,1-0.1,2006-05-24,C++/Java; 
+7.,0411228,Sergej Galkin,sega4509,14,,1.5+0.2-0.1,2006-03-20,C++; tradicinė recv klaidelė (-0.1),1.5+0.2,2006-04-03,Java,1+0.3,2006-04-24,C++/Java
+8.,0411240,Oleg Grinkevič,olgr4510,20,,1.5-0.2,2006-04-24,Java,1.5-0.1,2006-05-05,C++; ,1+0.2,2006-05-05,C++/Java; 
+9.,0411251,Liudas Jankauskas,lija4511,16,,1.5+0.1,2006-03-27,C++; programa labai matya bet pratybų metu pakeitė pagal mano užsakymą,1.5+0.2+0.1,2006-04-03,Java; multiklientiškumas,1+0.3,2006-04-03,C++/Java
+10.,0311214,Artūras Jasevičius,arja3509,11,,1.5+0.1,2006-03-27,Java,1.5-0.1+0.1,2006-05-03,C++; gražus kodas,1+0.2,2006-05-03,C++/Java; 
+11.,0311228,Audrius Kildušis,auki3565
+12.,0311261,Arūnas Liogas,arli3653
+13.,0212343,Paulius Maruška,pama1427
+14.,0311276,Kristina Matutytė,krma3700,2 (videonuoma),,1.5+0.1+0.1,2006-03-27,Java; multiklientiškumas,1.5-0.1,2006-04-24,C++; tradicinė recv klaida,1+0.3,2006-04-28,C++/Java; 
+15.,0411319,Deividas Mickūnas,demi4515,5,,1.5+0.1,2006-04-03,C++; multiklientiškumas,1.5-0.1,2006-04-24,Java; negražus kodas,1+0.3,2006-04-24,C++/Java
+16.,0311291,Darjuš Naganovič,dana3742
+17.,0411349,Justinas Pečiūra,jupe3797,6,,1.5,2006-04-07,Java,1.5,2006-04-24,C++,1+0.3,2006-04-24,C++/Java
+18.,0411372,Juozas Rimša,juri4518,7,,1.5+0.1+0.1,2006-03-27,C++; multiklientiškumas,1.5+0.1+0.1,2006-04-21,Java; multiklientiškumas,1+0.3,2006-04-21,C++/Java
+19.,0411380,Sigita Sabaliauskaitė,sisa4519,19,,1.5,2006-04-03,Java,1.5+0.1,2006-04-19,C++,1+0.3,2006-04-19,C++/Java
+20.,0311373,Gediminas Stasiūnas,gest3918
+21.,0411398,Aleksandr Stelmach,alst4520,12,,1.5+0.1,2006-04-03,Java; multiklientiškumas,1.5,2006-04-24,C++,1+0.3,2006-04-24,C++/Java
+22.,0411406,Robert Svatkovskij,rosv4521,10,,1.5-0.5,2006-05-17,Java; ,1.5-0.3,2006-05-17,C++; ,1+0.0,2006-05-17,C++/Java; 
+23.,0411442,Saulius Vingilis,savi4525,21,,1.5-0.5,2006-05-19,Java; ,1.5-0.3,2006-05-19,C++; ,1+0.0,2006-05-19,C++/Java; 
+24.,0411451,Jekaterina Zorina,jezo4526,1 (reiktų patikslinimo),,1.5-0.4,2006-05-10,Java; ,1.5-0.2,2006-05-12,C++; ,1+0.1,2006-05-12,C++/Java; 
+25.,0411415,Irma Šimaitytė,irsi4522,9,,1.5,2006-04-03,C++,1.5+0.1+0.1,2006-04-19,Java; multiklientiškumas,1+0.3,2006-04-24,C++/Java
+26.,0411424,Aleksas Šulnius,alsu4523,8,,1.5+0.1,2006-03-27,C++,1.5+0.2-0.1,2006-04-03,Java; netvarkingas kodas,1+0.3,2006-04-03,C++/Java

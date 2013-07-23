@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Įvairūs skriptai</title>
+  <link rev="made" href="mailto:marius@gedmin.as" />
+  <link rel="stylesheet" type="text/css" href="http://gedmin.as/style.css" />
+  <meta name="Author" content="Marius Gedminas" />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://mgedmin.myopenid.com/" />
+  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
+  <link rel="openid2.local_id" href="http://mgedmin.myopenid.com/" />
+  <meta http-equiv="X-XRDS-Location"
+        content="http://www.myopenid.com/xrds?username=mgedmin.myopenid.com" />
+  
+</head>
+<body>
+
+<div class="toolbox langbox">
+<div class="title">Language</div>
+  <a href="index-lt.html"
+     title="Lithuanian"><img src="http://gedmin.as/lt.png" alt="Lt" title="Lithuanian" height="16" width="26" /></a>
+  <span class="sep">::</span>
+  <a href="index-en.html"
+     title="English"><img src="http://gedmin.as/en.png" alt="En" title="English" height="16" width="26" /></a>
+</div>
+
+<div class="title">
+<h1 class="title">Įvairūs skriptai</h1>
+</div>
+
+<div class="navbar">
+<span class="right">
+<a href="http://gedmin.as/sitemap/index-lt.html">Turinys</a>
+<span class="hide">|</span>
+</span>
+
+  <a href="http://gedmin.as/index-lt.html"
+     title="Mariaus namai">Namai</a>
+  &gt;
+  <strong>Įvairūs</strong>
+</div>
+
+<div class="content">
+
+
+
+
+<h2>Įvairūs skriptai</h2>
+
+<h3 id="test-lt">test-lt</h3>
+
+<p>Pora shell skriptų, padedančių diagnozuoti „lietuvinimo“ problemas.
+Vienas iš jų skirtas žmonėms, norintiems naudoti įprastą ISO 8859-13 koduotę,
+kitas -- drąsuoliams, norintiems naudoti UTF-8 koduotę.  Pavyzdys:
+</p>
+
+<blockquote class="example">
+<pre>
+$ sh test-lt.sh
+--- Lokalė (C biblioteka)
+Tvarkoje
+
+--- Lokalė (X Window System)
+Tvarkoje
+
+--- ISO-8859-13 X Window System šriftai
+Tvarkoje
+
+--- X11 klaviatūra
+Tvarkoje
+
+--- GNU bash bei kitos readline naudojančios programos
+Tvarkoje
+
+--- UTF-8 lietuviškos raidės bei kabutės
+Mažosios: ąčęėįšųūž
+Didžiosios: ĄČĘĖĮŠŲŪŽ
+Atidarančios ir uždarančios kabutės: „“
+</pre>
+</blockquote>
+
+<ul>
+<li><a href="test-lt.sh">test-lt.sh</a></li>
+<li><a href="test-lt-utf8.sh">test-lt-utf8.sh</a></li>
+</ul>
+
+
+<h3 id="explain-module">explain-module</h3>
+
+<p>Tai — Perl skriptas, paaiškinantis, ko ieško Linux kernelis,
+bandydamas užkrauti pseudo-modulį panašų į „char-major-6“,
+„net-pf-10“ ar „sound-service-0-3“.  Pvz.:
+</p>
+
+<blockquote class="example"><pre>
+$ explain-module char-major-6 net-pf-10 sound-service-0-3
+char-major-6: Parallel printer devices
+net-pf-10: protocol family AF_INET6 -- IP version 6
+sound-service-0-3: Digital audio (/dev/dsp*, /dev/audio*) for card #0
+</pre></blockquote>
+
+<ul>
+<li><a href="explain-module.pl">explain-module.pl</a></li>
+</ul>
+
+
+</div>
+
+<p />
+
+<div class="bottombar">
+<hr class="hide" />
+<span class="valid">
+<a href="http://validator.w3.org/check/referer"><img
+        src="http://gedmin.as/valid-xhtml11.png"
+        alt="Valid XHTML 1.1!" height="31" width="88" /></a>
+<a href="http://jigsaw.w3.org/css-validator/"><img
+        src="http://gedmin.as/valid-css.png"
+        src="http://jigsaw.w3.org/css-validator/images/vcss" 
+        alt="Valid CSS!" height="31" width="88" /></a>
+</span>
+<span class="lastupdated">
+Paskutiniai pakeitimai: 2012-10-09
+</span>
+
+</body>
+</html>
+
+
+
+
+
+
+

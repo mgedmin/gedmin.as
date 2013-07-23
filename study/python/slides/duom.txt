@@ -1,0 +1,5 @@
+Jonukas 10
+Maryte 10
+Petriukas 8
+Jonukas 5
+Asiliukas 2

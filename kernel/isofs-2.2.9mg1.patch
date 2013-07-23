@@ -1,0 +1,169 @@
+Two things bugged me with Joliet CD-ROMs:
+  * All files were executable (mode=0444 fixed only files with dots in 
+    their names) despite the setting of `noexec' flag.
+  * Often there would be 8.3 DOSish filenames in ALL UPPER CASE (at least
+    on home made CD-Rs).
+
+This patch addresses both issues:
+  * None of the regular files are given execute permissions if `noexec'
+    mount flag is active.
+  * A new iso9660 mount flag is added: `lowercase'.  If set, it translates
+    all-uppercase file names on Joliet CD-ROMs to lower case.  Plain
+    ISO9660 already has `map=normal', and Rock Ridge doesn't need this
+    (being case sensitive et al), thus only Joliet CDs are affected.
+
+-- 
+Marius Gedminas
+<mgedmin@takas.lt> (email no longer valid; use <marius@gedmin.as> now)
+
+Here is the patch (against stock 2.2.9):
+
+diff -u linux/fs/isofs/inode.c.orig linux/fs/isofs/inode.c
+--- linux/fs/isofs/inode.c.orig	Tue Dec 29 20:40:35 1998
++++ linux/fs/isofs/inode.c	Mon Jun 14 20:44:57 1999
+@@ -7,6 +7,12 @@
+  *      1995  Mark Dobie - allow mounting of some weird VideoCDs and PhotoCDs.
+  *	1997  Gordon Chaffee - Joliet CDs
+  *	1998  Eric Lammerts - ISO 9660 Level 3
++ *     1999  Marius Gedminas - `noexec' and `lowercase' mount flags
++ *
++ *  1999-06-14   Hack by Marius Gedminas <mgedmin@takas.lt>:
++ *  If `noexec' was given to mount, remove execute permissions from files.
++ *  New mount flag `lowercase' converts all-uppercase Joliet file names to 
++ *  lower case.
+  */
+ 
+ #include <linux/config.h>
+@@ -126,6 +131,7 @@
+ 	uid_t uid;
+ 	char *iocharset;
+ 	unsigned char utf8;
++	unsigned char lowercase;
+ };
+ 
+ /*
+@@ -294,6 +300,7 @@
+ 	popt->uid = 0;
+ 	popt->iocharset = NULL;
+ 	popt->utf8 = 0;
++	popt->lowercase = 0;
+ 	if (!options) return 1;
+ 	for (this_char = strtok(options,","); this_char; this_char = strtok(NULL,",")) {
+ 	        if (strncmp(this_char,"norock",6) == 0) {
+@@ -320,6 +327,10 @@
+ 			*value++ = 0;
+ 
+ #ifdef CONFIG_JOLIET
++	        if (strncmp(this_char,"lowercase",9) == 0) {
++		  popt->lowercase = 1;
++		  continue;
++		}
+ 		if (!strcmp(this_char,"iocharset") && value) {
+ 			popt->iocharset = value;
+ 			while (*value && *value != ',')
+@@ -754,6 +765,7 @@
+ 	s->u.isofs_sb.s_uid = opt.uid;
+ 	s->u.isofs_sb.s_gid = opt.gid;
+ 	s->u.isofs_sb.s_utf8 = opt.utf8;
++	s->u.isofs_sb.s_lowercase = opt.lowercase;
+ 	/*
+ 	 * It would be incredibly stupid to allow people to mark every file on the disk
+ 	 * as suid, so we merely allow them to set the default permissions.
+@@ -1090,14 +1102,21 @@
+ 		inode->i_mode = inode->i_sb->u.isofs_sb.s_mode;
+ 		inode->i_nlink = 1;
+ 	        inode->i_mode |= S_IFREG;
+-		/* If there are no periods in the name,
+-		 * then set the execute permission bit
+-		 */
+-		for(i=0; i< raw_inode->name_len[0]; i++)
+-			if(raw_inode->name[i]=='.' || raw_inode->name[i]==';')
+-				break;
+-		if(i == raw_inode->name_len[0] || raw_inode->name[i] == ';')
+-			inode->i_mode |= S_IXUGO; /* execute permission */
++		if(IS_NOEXEC(inode)) {
++			/* If "noexec" was given to mount, remove
++			 * execute permission (for regular files).
++			 */
++	    		inode->i_mode &= ~S_IXUGO;
++		} else {
++			/* If there are no periods in the name,
++			 * then set the execute permission bit
++			 */
++			for(i=0; i< raw_inode->name_len[0]; i++)
++				if(raw_inode->name[i]=='.' || raw_inode->name[i]==';')
++					break;
++			if(i == raw_inode->name_len[0] || raw_inode->name[i] == ';')
++				inode->i_mode |= S_IXUGO; /* execute permission */
++		}
+ 	}
+ 	inode->i_uid = inode->i_sb->u.isofs_sb.s_uid;
+ 	inode->i_gid = inode->i_sb->u.isofs_sb.s_gid;
+
+diff -u linux/fs/isofs/joliet.c.orig linux/fs/isofs/joliet.c
+--- linux/fs/isofs/joliet.c.orig	Wed Aug 26 18:54:41 1998
++++ linux/fs/isofs/joliet.c	Mon Jun 14 13:42:44 1999
+@@ -4,6 +4,10 @@
+  *  (C) 1996 Gordon Chaffee
+  *
+  *  Joliet: Microsoft's Unicode extensions to iso9660
++ *
++ *  1999-06-14   Hack by Marius Gedminas <mgedmin@takas.lt>:
++ *  New mount flag `lowercase' converts all-uppercase Joliet file names to 
++ *  lower case.
+  */
+ 
+ #include <linux/string.h>
+@@ -77,10 +80,12 @@
+ 		    unsigned char *outname)
+ {
+ 	unsigned char utf8;
++	unsigned char lowercase;
+ 	struct nls_table *nls;
+-	unsigned char len = 0;
++	unsigned char len = 0, tmp;
+ 
+ 	utf8 = inode->i_sb->u.isofs_sb.s_utf8;
++	lowercase = inode->i_sb->u.isofs_sb.s_lowercase;
+ 	nls = inode->i_sb->u.isofs_sb.s_nls_iocharset;
+ 
+ 	if (utf8) {
+@@ -100,6 +105,26 @@
+ 	 */
+ 	while (len >= 2 && (outname[len-1] == '.')) {
+ 		len--;
++	}
++	
++	/*
++	 * Hack by Marius Gedminas <mgedmin@takas.lt>:
++	 * Convert all-uppercase file names to lowercase
++	 */
++	if (lowercase) {
++		tmp = len; 
++		while (tmp && !(outname[tmp-1] >= 'a' && outname[tmp-1] <= 'z')) {
++			tmp--;
++		}
++	
++		if (tmp == 0) {
++			/* No lowercase letters are present */
++    			for (tmp = len; tmp--; ) {
++				if (outname[tmp] >= 'A' && outname[tmp] <= 'Z') {
++					outname[tmp] |= 0x20;	/* lower case */
++				}
++			}
++		}
+ 	}
+ 
+ 	return len;
+
+diff -u linux/include/linux/iso_fs_sb.h.orig linux/include/linux/iso_fs_sb.h
+--- linux/include/linux/iso_fs_sb.h.orig	Wed Aug 26 18:54:41 1998
++++ linux/include/linux/iso_fs_sb.h	Mon Jun 14 13:39:54 1999
+@@ -16,6 +16,7 @@
+ 	unsigned char s_rock;
+ 	unsigned char s_joliet_level;
+ 	unsigned char s_utf8;
++	unsigned char s_lowercase;
+ 	unsigned char s_cruft; /* Broken disks with high
+ 				  byte of length containing
+ 				  junk */

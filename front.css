@@ -1,0 +1,76 @@
+body {
+    color: black;
+    background: white;
+}
+
+#heading {
+    margin: 48pt 48pt 36pt 60pt;
+}
+
+#me, #title {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+h1 {
+    margin: 0 0 0 18pt;
+    padding: 0;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 36pt;
+    color: black;
+}
+
+h2 {
+    margin: -6pt 0 0 60pt;
+    padding: 0;
+    font-family: serif;
+    font-weight: normal;
+    font-size: 18pt;
+    color: #808080
+}
+
+h3 {
+    margin: 0 0 0 84pt;
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 600pt;
+    text-align: center;
+}
+
+li {
+    padding: 0;
+    display: inline-block;
+    margin-left: 48pt;
+    margin-top: 12pt;
+    font-family: sans-serif;
+    font-weight: normal;
+    font-size: 24pt;
+}
+
+a:link,
+a:visited {
+    color: #ccc;
+    text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: #444;
+    text-decoration: none;
+}
+
+#email {
+    margin-top: 96pt;
+    max-width: 600pt;
+    text-align: center;
+}
+

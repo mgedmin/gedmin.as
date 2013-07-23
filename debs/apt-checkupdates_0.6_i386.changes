@@ -1,0 +1,21 @@
+Format: 1.7
+Date: Wed, 06 Aug 2008 15:21:55 +0300
+Source: apt-checkupdates
+Binary: apt-checkupdates
+Architecture: source all
+Version: 0.6
+Distribution: intrepid
+Urgency: low
+Maintainer: Marius Gedminas <mgedmin@b4net.lt>
+Changed-By: Marius Gedminas <marius@gedmin.as>
+Description: 
+ apt-checkupdates - Automatically check and download Debian updates every night
+Changes: 
+ apt-checkupdates (0.6) intrepid; urgency=low
+ .
+   * Set locale to C to avoid localised messages that we can't filter.
+   * Switch versioning scheme to Debian native.
+Files: 
+ cd14757df8335817715749dc4adaaf21 276 admin optional apt-checkupdates_0.6.dsc
+ bcd29eb81fa4d88dd276cd3ae873273d 4393 admin optional apt-checkupdates_0.6.tar.gz
+ 953b6b6849f312c33bb3bee9df79e5b5 3004 admin optional apt-checkupdates_0.6_all.deb

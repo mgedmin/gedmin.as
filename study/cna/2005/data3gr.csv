@@ -1,0 +1,28 @@
+Eilės nr.,Stud. paž. nr.,Vardas ir pavardė,Naudotojo vardas,Užduotis,Pogrupis,1uzd,data,pastabos,2uzd,data,pastabos,3uzd,data,pastabos
+1.,0311125 ,Donatas Adamonis,doad3312,(kalendorius) , ,1.5,2005-04-07,atsiskaitymą priėmė kolega: multiklientiškumas (max 3 klientai); kodas tvarkingas; komentarai; grubiai išjungus klientą lieka „zombiai“ ,1.5-0.2,2005-05-12,Java,1,2005-05-19,C/Java
+2.,0311135 ,Andrius Bagdonavičius,anba3336,6, ,1.5-0.8-0.1+0.4+0.5,2005-06-02,C++; Qt gui; graži kodo struktūra; programa ne iki galo baigta; tradicinė recv klaida; atnešė medicininę pažymą nuo balandžio 12 iki gegužės 13 d.,1.5-0.5+0.5,2005-06-02,Java; +0.5 už tą pačią pažymą,1-0.2,2005-06-02,C++/Java
+3.,0311145 ,Marius Barysas,maba3355,16, ,1.5-0.2,2005-04-21,atsiskaitymą priėmė kolega; Java,1.5-0.2+0.1,2005-05-12,C; multiklientiškumas,1,2005-05-19,C/Java
+4.,0311154 ,Artūras Bernatavičius,arbe3368,22 , ,1.5-0.5+0.5,2005-05-12,C++; Qt gui,1.5-0.5+0.5,2005-06-02,Java; GUI; multiklientiškumas,1-0.2,2005-06-02,C++/Java
+5.,0110636 ,Andrius Beržinskas,anbe1830, , 
+6.,0311164 ,Egidijus Cibulskas,egci3401,9, ,1.5-0.3,2005-04-28,atsiskaitymą priėmė kolega,1.5-0.3,2005-05-20,atsiskaitymą priėmė kolega,1,2005-05-20,atsiskaitymą priėmė kolega; C/Java
+7.,0311186 ,Tautvydas Duda,tadu3427,4 , ,1.5+0.5-0.1,2005-04-07,atsiskaitymą priėmė kolega: multiklientiškumas „scientific“ skaičiuotuvas skaičiuoja ne tik po vieną veiksmą bet ir visą eilę suvestų veiksmų (atpažįsta skliaustus operatorių prioritetus ir t.t.) gražus kodas komentarai.. Puikus pristatymas.. ; tradicinė read() klaida,1.5-0.1,2005-04-28,Java; pasitiki kad read duos būtent tiek duomenų kiek reikia,1+0.3,2005-04-28
+8.,0311197 ,Paulius Giniotas,pagi3458,15, ,1.5-0.3,2005-04-28,C,1.5-0.4,2005-05-26,atsiskaitymą priėmė kolega; Java,1-0.1,2005-05-26,atsiskaitymą priėmė kolega
+9.,0010568 ,Mindaugas Jakimavičius,mija1191,(žaidimas go), 
+10.,0311229 ,Romualdas Kilius,roki3566, , 
+11.,0311239 ,Artur Kovaliov,arko3588,21, ,1.5-0.1,2005-04-15,atsiskaitymą priėmė kolega; Java,1.5+0.1,2005-04-28,atsiskaitymą priėmė kolega; multiklientiškumas,1+0.2,2005-05-06,atsiskaitymą priėmė kolega; C++/Java
+12.,0311250 ,Valentas Kurauskas,vaku3621,(failų sinchronizavimas), ,1.5+0.1+0.3,2005-03-31,multiklientiškumas; sudėtinga užduotis; kodas galėtų būti kiek tvarkingesnis...,1,2005-04-28,C/Java; sunkiai bet galų gale suveikė,1.5+0.1+0.5,2005-05-12,Java informatyvus GUI
+13.,0311259 ,Dainius Liegus,dali3651,(išėjo akademinių atostogų), 
+14.,0311269 ,Nerijus Malinauskas,nema3676,(akcijų portfelis) , ,1.5+0.2+0.5,2005-03-17,Java GUI geras kodo dizainas (suskirstytas klasėmis) prie kodo stiliaus galima prisikabinti,1.5-0.5+0.5+0.2,2005-06-02,atsiskaitymą priėmė kolega magistrantas; C++; klientas PocketPC platformoje; sirgo nuo gegužės 10 iki 25 (pažymą rodė kolegai),1-0.2+0.2,2005-06-02,atsiskaitymą priėmė kolega; sirgo (žr. praeitą pastabą)
+15.,0311436 ,Andžej Monkevič,anmo3736,3, 
+16.,0311300 ,Paulius Navickas,pana4120,(chat) , ,1.5-0.7+0.1+0.2-0.1,2005-05-26,C++; multiklientiškumas (pthreads); gražus kodas ir tvarkinga programa; tradicinė recv klaida.,1.5-0.4,2005-05-26,Java,1-0.1-0.1,2005-05-26,C++/Java; tradicinė recv klaida.
+17.,0212378 ,Jurgis Ostašius,juos2741,20, ,1.5,2005-04-07,Java,1.5,2005-04-28,atsiskaitymą priėmė kolega; C,1,2005-05-19,C/Java
+18.,0311310 ,Vidmantas Paulauskas,vipa3778,19, ,1.5-0.3,2005-04-28,atsiskaitymą priėmė kolega; Java,1.5-0.3,2005-05-19,atsiskaitymą priėmė magistrantas,1,2005-05-19,atsiskaitymą priėmė magistrantas
+19.,0311325 ,Marijus Plančiūnas,mapl3809, , 
+20.,0311336 ,Marius Radžius,mara3831,(kelionių agentūra) , ,1.5-0.5,2005-05-12,C++; pasitiki receiva,1.5-0.4,2005-05-27,atsiskaitymą priėmė kolega; Java,1-0.1,2005-05-27,atsiskaitymą priėmė kolega magistrantas; C++/Java
+21.,0212419 ,Juliana Rudak,juru2830,11 , ,1.5-0.6-0.1,2005-05-19,C++; tradicinė klaida su recv,1.5-0.3+0.1,2005-05-19,Java; multiklientiškumas,1,2005-05-19,C++/Java
+22.,0311346 ,Saulius Rupainis,saru3856,2 (e-parduotuvė) , ,1.5+0.3,2005-04-07,atsiskaitymą priėmė kolega: multiklientiškumas komentarai tvarkingas kodas..,1.5,2005-04-28,multiklientiškumas; tikisi iš receivo gauti tiek kiek reikia,1+0.3,2005-04-28
+23.,0311365 ,Gediminas Sprainys,gesp3901,10, ,1.5-0.6+0.1,2005-05-19,atsiskaitymą priėmė kolega; C; multiklientiškumas,1.5-0.4,2005-05-26,atsiskaitymą priėmė kolega; Java,1-0.2,2005-06-02,atsiskaitymą priėmė kolega; C++/Java
+24.,0311410 ,Arūnas Vareika,arva3984,7, ,1.5+0.3,2005-04-07,atsiskaitymą priėmė kolega: panaudotas MD5 duomenų tikrinimui multiklientishkumas kodas galetu buti tvarkingesnis..,1.5+0.4,2005-04-28,multiklientiškumas GUI geras tinklo protokolas sourceai vos vos netvarkingi,1,2005-05-19
+25.,0311418 ,Jelena Vimuntytė,jevi4003,1, ,1.5-0.5,2005-05-12,C,1.5-0.2,2005-05-12,Java,1+0.1,2005-05-12,C/Java
+26.,0311427 ,Jurij Zigmund,juzi4033,2 (videonuoma), ,1.5-0.3,2005-04-28,atsiskaitymą priėmė kolega; C,1.5-0.2,2005-05-12,Java,1-0.1,2005-05-26,C/Java
+27.,0311391 ,Mantas Šliažas,masl4083,14 , ,1.5-0.1+0.1,2005-04-14,Java; multiklientiškumas,1.5,2005-04-28,C++,1+0.1,2005-05-12,C++/Java

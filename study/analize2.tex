@@ -1,0 +1,1730 @@
+\documentclass[a4paper]{article}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{inputenc}
+\usepackage[T1,LT]{fontenc}
+\inputencoding{cpRIM}      
+
+% Margins
+\addtolength{\hoffset}{-2cm}
+\addtolength{\textwidth}{4cm}
+\addtolength{\voffset}{-1cm}
+\addtolength{\textheight}{2cm}
+
+% Macros
+\makeatletter
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\BDD}{\mathop{\operator@font BDD}\nolimits} 
+\newcommand{\const}{\mathop{\operator@font const}\nolimits} 
+\newcommand{\grad}{\mathop{\operator@font grad}\nolimits} 
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\dx}{\ud x}
+\newcommand{\dt}{\ud t}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\arccot}{\mathop{\operator@font arccot}\nolimits} 
+\makeatother
+
+%\newcommand{\Def}[1]{\emph{#1}}
+%\newcommand{\Def}[1]{\underline{#1}}
+%\newcommand{\Def}[1]{\textnormal{\textsf{#1}}}
+%\newcommand{\Def}[1]{\textbf{#1}}
+\newcommand{\Def}[1]{\textnormal{\textbf{#1}}}
+
+
+% Lithuanian standards
+
+% Maybe be consistent with Lithuanian traditions?
+%\renewcommand{\tan}{\mathop{\operator@font tg}\nolimits} 
+%\renewcommand{\arctan}{\mathop{\operator@font arctg}\nolimits} 
+%\renewcommand{\cot}{\mathop{\operator@font ctg}\nolimits} 
+%\renewcommand{\arccot}{\mathop{\operator@font arcctg}\nolimits} 
+
+\renewcommand{\labelenumii}{\theenumii)}
+\renewcommand{\partname}{dalis}
+ 
+\makeatletter
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+       \Large\bfseries \thepart~\partname
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+\makeatother
+
+% Environments
+
+\newtheorem{ap}{Apibrëþimas}[section]
+\newtheorem{tg}[ap]{Teiginys}
+\newtheorem{tgg}[ap]{Teiginiai}
+\newtheorem{tr}[ap]{Teorema}
+\newtheorem{lm}[ap]{Lema}
+\newtheorem{ps}[ap]{Pastaba}
+\newtheorem{pss}[ap]{Pastabos}
+\newtheorem{isv}[ap]{Iðvada}
+\newtheorem{isvv}[ap]{Iðvados}
+\newtheorem{pvz}[ap]{Pavyzdys}
+\newtheorem{pvzz}[ap]{Pavyzdþiai}
+
+\newenvironment{ps*}{\par\noindent\textbf{Pastaba}\begin{em}}{\end{em}}
+\newenvironment{pss*}{\par\noindent\textbf{Pastabos}\begin{em}}{\end{em}}
+\newenvironment{pvz*}{\par\noindent\textbf{Pavyzdys}\begin{em}}{\end{em}}
+\newenvironment{pvzz*}{\par\noindent\textbf{Pavyzdþiai}\begin{em}}{\end{em}}
+
+\newenvironment{pseudoisv}[1]{\par\noindent\textbf{Iðvada #1}\begin{em}}{\end{em}}
+
+% Layout
+
+\title{Matematinës analizës konspektai \\ {\small (be árodymø)}}
+\author{Marius Gedminas \\ pagal V.~Mackevièiaus paskaitas}
+\date{I kursas, pavasario semestras (1998--1999~m.)}
+
+\pagestyle{fancy}
+\lhead{\nouppercase{\leftmark}}
+\chead{}
+\rhead{\nouppercase{\rightmark}}
+\lfoot{Matematinës analizës konspektai}
+\cfoot{\thepage}
+\rfoot{\copyright~M.~Gedminas, 1999~04~14 -- 1999~05~24}
+
+\begin{document}
+\maketitle
+
+\part{Integravimas}
+
+\section{Neapibrëþtinis integralas}					% 1
+
+\begin{ap}								% 1.1
+Sakoma, kad funkcija $F: I \to \R$ (\/$I \subset \R$ -- intervalas) yra
+funkcijos $f: I \to \R$ \Def{pirmykðtë} funkcija, jei $F'(x) = f(x)$ su
+visais $x \in I$.
+\end{ap}
+
+\begin{tg}								% 1.2
+Jei $F_1$ ir $F_2$ yra funkcijos $f: I \to \R$ pirmykðtës funkcijos, tai
+$F_1 - F_2$ yra konstanta (t.y. $\exists C \in \R \quad \forall x \in I
+\quad F_1(x) - F_2(x) = C$\/).
+\end{tg}
+
+\begin{ap}								% 1.3
+Funkcijos $f: I \to \R$ \Def{neapibrëþtiniu integralu} vadinama visø jos
+pirmykðèiø fun\-k\-ci\-jø (besiskirianèiø tik konstanta) ðeima.
+\[
+  \int f(x) \,\dx := \left\{ F(x) + C, \quad C \in \R, \quad F' = f
+  \right\}
+\]
+(su sàlyga, kad $f(x)$ turi pirmykðèiø funkcijø).
+Daþnai raðoma tiesiog $\int f(x)\,\dx = F(x) + C$.
+\end{ap}
+
+\begin{tg}[Pagrindiniø integralø lentelë]~\par				% 1.4
+\begin{enumerate}
+  \item \makebox[0.5\textwidth][l]{
+          \(\displaystyle
+            \int x^\alpha \,\dx = \frac{x^{\alpha+1}}{\alpha+1} + C \quad
+            (\alpha \ne -1) \) }
+          \(\displaystyle
+            \int \frac{\dx}{x} = \ln |x| + C \)
+  \item \makebox[0.5\textwidth][l]{
+          \(\displaystyle \int \sin x \,\dx = - \cos x + C \) }
+          \(\displaystyle \int \cos x \,\dx = \sin x + C \)
+  \item \makebox[0.5\textwidth][l]{
+          \(\displaystyle \int \frac{\dx}{\sin^2 x} = - \cot x + C \) }
+          \(\displaystyle \int \frac{\dx}{\cos^2 x} = \tan x + C \)
+  \item   \(\displaystyle \int \frac{\dx}{1+x^2} = \arctan x + C_1 = - \arccot x + C_2 \)
+  \item \makebox[0.5\textwidth][l]{
+          \(\displaystyle \int a^x\,\dx = \frac{a^x}{\ln a} + C \) }
+          \(\displaystyle \int e^x\,\dx = e^x + C \)
+\end{enumerate}
+\end{tg}
+
+\begin{tg}[Savybës]\label{NI-s}~\par					% 1.5
+\begin{enumerate}
+  \item (Tiesiðkumas)
+    \[ \int (\alpha f + \beta g)(x)\,\dx = \alpha \int f(x)\,\dx + \beta \int g(x)\,\dx
+    \]
+    (su sàlyga, kad $\int f(x)\,\dx$ ir $\int g(x)\,\dx$ egzistuoja)
+  \item (Kintamøjø keitimo formulë) \label{NI-KKF}
+    Jei $\int f(x)\,\dx = F(x) + C$, tai
+    \[ \int f(\phi(t)) \phi'(t) \,\dt = F(\phi(t)) + C
+    \]
+    èia $\phi$ -- bet kokia diferencijuojama funkcija su reikðmiø sritimi $R(\phi) \subset I$,
+    kur $I = D(f)$ -- $f$ apibrëþimo sritis.
+  \item (Integravimo dalimis formulë) \label{NI-IDF}
+    Jei $f, g : I \to \R$ yra diferencijuojamos funkcijos, tai
+    \[ \int f(x)g'(x)\,\dx = f(x)g(x) - \int f(g(x)f'(x)\,\dx
+    \]
+    su sàlyga, kad egzistuoja vienas ið nurodytø integralø.
+\end{enumerate}
+\begin{ps*}
+Visose nurodytose lygybëse dalyvauja ne funkcijos, o funkcijø ðeimos. Pvz., 1-à lygybæ
+suprantame taip: Jei $F \in \int f(x)\,\dx$, o $G \in \int g(x)\,\dx$, tai $\alpha F +
+\beta G \in \int (\alpha f + \beta g)(x)\,\dx$.
+\end{ps*}
+\end{tg}
+
+\begin{ap}[Diferencialo sàvoka]						% 1.6
+Funkcijos $f: I \to \R$ \Def{diferencialu} taðke $x$ vadinama funkcija
+$\ud f(x) := f'(x) \,\dx$, $\dx \in \R \quad (*)$. $\Delta f(x) =
+f(x+\dx)-f(x) \approx \ud f(x)$, kai $\dx$ yra ``maþas''.
+Imkime $f(x)$ ir nagrinëkime $\ud f(x) = f'(x)\,\dx$. Tarkime, $x =
+\phi(x)$, $t \in I$.
+Tada $\ud f(\phi(t)) = f'(\phi(t))\phi'(t)\,\dt = f'(\phi(t))\,\ud\phi(t)$. Arba
+$\ud f(\phi) = f'(\phi) \,\ud \phi$. Tai reiðkia, kad $(*)$ iðlieka teisinga, jei
+vietoje $x$ ástatome bet kokià funkcijà $\phi(t)$. Ði savybë vadinama diferencialo
+\Def{invariantiðkumu} kintamojo keitimo atþvilgiu.
+
+Dabar \ref{NI-s}.\ref{NI-KKF} bei \ref{NI-s}.\ref{NI-IDF} galime formuluoti taip:
+\[ \int f(\phi(t)) \,\ud \phi(t) = F(\phi(t)) + C
+\]
+\[ \int f(x)\,\ud g(x) = f(x)g(x) - \int f(g(x))\,\ud f(x)
+\]
+\end{ap}
+
+\begin{pvzz}~\par							% 1.7
+\begin{enumerate}
+  \item \(\displaystyle 						% 1.7.1
+          \int \cos^2 x \underbrace{\sin x \,\dx}_{= - \ud(\cos x)}
+          = - \int (\cos x)^2 \,\ud(\cos x)
+          = - \frac{\cos^3 x}{3} + C
+        \)
+  \item \(\displaystyle 						% 1.7.2
+          \int \cos^3 x \,\dx = \int \cos^2 x \underbrace{\cos x \,\dx}_{= \ud(\sin x)}
+          = \int (1 - \sin^2 x) \,\ud(\sin x) = \int \ud(\sin x) - \int \sin^2x \,\ud(\sin x)
+          = \sin x - \frac{\sin^3 x}{3} + C
+        \)
+  \item \(\displaystyle 						% 1.7.3
+          \int \cos^2 x \,\dx = \int \frac{1 + \cos 2x}{2} \,\dx
+          = \frac{1}{2}\int \dx + \frac{1}{2}\int \cos 2x \,\dx
+          = \frac{x}{2} + \frac{1}{4}\int \cos 2x \,\ud(2x)
+          = \frac{x}{2} + \frac{1}{4}\sin 2x + C
+        \)
+  \item \(\displaystyle 						% 1.7.4
+          \int \ln x \,\dx = x \ln x - \int x \,\ud(\ln x)
+          = x \ln x - \int \frac{x}{x} \,\dx = x \ln x - x + C
+          = x (\ln x - 1) + C
+        \)
+  \item \(\displaystyle 						% 1.7.5
+          \int \frac{x \,\dx}{1 + x^2} = \int\frac{\frac{1}{2}\ud(x^2+1)}{x^2+1}
+          = \frac{1}{2} \ln(x^2+1) + C
+        \)
+  \item[5'] \(\displaystyle 						% 1.7.5'
+          \int \frac{x \,\dx}{1 + x^4} = \int\frac{\frac{1}{2}\dx^2}{1+x^4}
+          = \frac{1}{2} \arctan x^2 + C
+        \)
+  \item \(\displaystyle 						% 1.7.6
+          \int \arctan x \,\dx = x \arctan x - \int x \,\ud \arctan x
+          = x \arctan x - \int \frac{x}{1+x^2}\,\dx
+          = x \arctan x - \frac{1}{2}\ln(1+x^2)
+        \)
+  \item \begin{eqnarray*}
+          I &:=& \int e^x \underbrace{\sin x \,\dx}_{= - \ud(\cos x)}
+          = - \int e^x \,\ud \cos x
+          = - \left( e^x \cos x - \int \cos x \,\ud e^x \right)
+          = - e^x \cos x + \int e^x \underbrace{\cos x \,\dx}_{= \ud(\sin x)}	=\\
+          &=& - e^x \cos x + \int e^x \,\ud(\sin x)
+          = e^x (\sin x - \cos x) - \int \sin x \,\ud e^x			=\\
+          &=& e^x (\sin x - \cos x) - \int e^x \sin x \,\dx
+          = e^x (\sin x - \cos x) - I						=\\
+          I  &=& e^x (\sin x - \cos x) - I					\\
+          2I &=& e^x (\sin x - \cos x)						\\
+          I  &=& \frac{e^x}{2} (\sin x - \cos x)
+        \end{eqnarray*}
+\end{enumerate}
+\end{pvzz}
+
+
+\section{Funkcijos be antros rûðies trûkiø}				% 2
+
+\begin{ap}								% 2.1
+Sakykime, $I \subset \R$ -- intervalas. $D(I)$ þymësime visø funkcijø $f: I \to \R$,
+neturinèiø antros rûðies trûkiø aibæ. Tai yra
+\[D(I) := \left\{ f: I \to \R, \quad \forall x \in I \quad
+  \exists f(x+0) = \lim_{t \downarrow x} f(t) \in \R \textrm{  ir  }
+  \exists f(x-0) = \lim_{t \uparrow x} f(t) \in \R
+  \right\}\]
+(intervalo $I$ galuose imamos ribos tik ið vienos pusës).
+
+Funkcijas, priklausanèias $D(I)$ èia vadinsime \Def{reguliariomis}.
+Taip pat þymësime $D[a, b] := D\left([a, b]\right)$.
+\end{ap}
+
+\begin{tg}								% 2.2
+Jei $f_n \in D(I)$, $n \in \N$ ir $f_n \rightrightarrows f$ intervale $I$, tai
+$f \in D(I)$.
+\end{tg}
+
+\begin{ap}								% 2.3
+Funkcija $f: I \to \R$ (\/$I = [a,\,b]$\/) vadinama \Def{laiptine funkcija}, jei
+intervalà $[a,\,b]$ galima suskaidyti á baigtiná skaièiø intervalø $I_1$, $I_2$,
+\ldots, $I_k$, kuriuose $f$ yra pastovi: $f(x) = y_i$, kai $x \in I_i$, $i = 1,
+\ldots, k$.
+
+Tokiø funkcijø klasæ þymësime $S[a, b]$.
+\end{ap}
+
+\begin{tg}								% 2.4
+Tarkime, $f \in C[a, b]$. Paþymëkime $x_k^n := a + \frac{b-a}{n}k$, $k = 0, \ldots, n$.
+Apibrëþkime $\phi_n \in S[a, b]$ lygybe
+\[
+  \phi_n(x) := \left\{\begin{array}{ll}
+                        f(x_k^n), & x \in [x_k^n,\,x_{k+1}^n) \\
+                        f(b), & x = b
+                      \end{array}\right.
+\]
+Tada $\phi_n \rightrightarrows f$, $n \to \infty$ intervale $[a,\,b]$.
+\end{tg}
+
+\begin{ps}								% 2.5
+Teiginys liks teisingas, jei vietoje $x_k^n = a + \frac{b-a}{n}k$ imsime bet kokius
+$a = x_0^n < x_1^n < \ldots < x_n^n = b$ taip, kad $\max_i |x_{i+1}^n - x_i^n| \to
+0$, kai $n \to \infty$ ir vietoje funkcijos f reikðmiø $f(x_k^n)$ kairiuosiuose
+intervalø $[x_k^n,\,x_{k+1}^n)$ galuose imsime reikðmes $f(\xi_k^n)$ su
+$\xi_k^n \in [x_k^n,\,x_{k+1}^n]$.
+\end{ps}
+
+\begin{tr}								% 2.6
+Tarkime, $f \in D[a, b]$. Tada
+\begin{enumerate}
+  \item Egzistuoja seka $(\phi_n \in S[a, b])$: $\phi_n \rightrightarrows f$, $n \to \infty$.
+  \item Funkcijos $f$ trûkio taðkø aibë yra baigtinë arba skaièioji
+  \item $f$ yra aprëþta
+\end{enumerate}
+\end{tr}
+
+
+\section{Apibrëþtinis integralas}					% 3
+
+\begin{ap}								% 3.1
+Tarkime, kad funkcija $\phi \in S[a, b]$ ágyja reikðmes $y_1, y_2, \ldots, y_k$
+atitinkamai intervaluose $I_1$, $I_2$, \ldots, $I_k$ (\/$\bigcap_{i=1}^k I_i = [a,\,b]$\/)
+Funkcijos $\phi$ \Def{integralu} intervale $[a,\,b]$ vadinamas skaièius
+\( \sum_{i=1}^k y_i |I_i|
+\)
+(èia $|I_i|$ -- intervalo $I_i$ ilgis).
+
+Funkcijos $\phi$ integralas intervale $[a,\,b]$ þymimas
+\[ \int_a^b \phi(x)\,\dx,
+   \qquad
+   \int_a^b \phi,
+   \qquad
+   \int_{[a,\,b]} \phi
+\]
+\end{ap}
+
+\begin{tg}[Integralo apibrëþimo korektiðkumas]				% 3.2
+Laiptinës funkcijos integralo apibrëþimas ne\-pri\-klau\-so nuo
+intervalo $[a,\,b]$ skaidinio funkcijos $\phi$ pastovumo intervalais.
+\end{tg}
+
+\begin{tg}[Laipsniniø funkcijø integralo savybës]~\par			% 3.3
+\begin{enumerate}
+  \item (Tiesiðkumas)
+    Jei $\phi, \psi \in S[a, b]$, $\alpha, \beta \in \R$, tai
+    \[ \int_a^b (\alpha \phi + \beta \psi)(x)\,\dx =
+        \alpha \int_a^b \phi(x)\,\dx + \beta \int_a^b \psi(x)\,\dx
+    \]
+  \item (Adityvumas)
+    Jei $\phi \in S[a, b]$, $a < c < b$, tai
+    \[ \int_a^b \phi(x)\,\dx =
+        \int_a^c \phi(x)\,\dx + \int_c^b \phi(x)\,\dx
+    \]
+  \item (Monotoniðkumas)
+    Jei $\phi, \psi \in S[a, b]$ ir $\phi \le \psi$, tai
+    \[ \int_a^b \phi(x)\,\dx \le \int_a^b \psi(x)\,\dx
+    \]
+  \item
+    \[ \left| \int_a^b \phi(x)\,\dx \right| \le \int_a^b \left|\phi(x)\right|\,\dx
+    \]
+\end{enumerate}
+\begin{ps*}
+Nemaþindami bendrumo visada galime laikyti, kad dviejø laiptiniø funkcijø $\phi$ ir
+$\psi$ atitinkantys intervalo $[a,\,b]$ skaidiniai ir jø pastovumo intervalai sutampa.
+\end{ps*}
+\end{tg}
+
+\begin{ap}								% 3.4
+Funkcijos $f \in D[a,b]$ \Def{integralu} intervale $[a,\,b]$ vadinama riba
+\[
+  \int_a^b f(x)\,\dx := \lim_{n \to \infty} \int_a^b \phi_n(x)\,\dx
+\]
+Èia $\phi_n$ -- bet kokia laiptiniø funkcijø seka, tolygiai konverguojanti á $f$ intervale
+$[a,\,b]$.
+\end{ap}
+
+\begin{tg}[Integralo egzistavimas ir apibrëþimo korektiðkumas]		% 3.5
+Apibrëþime nurodytos ribos vi\-sa\-da egzistuoja ir nepriklauso nuo
+pasirinktos sekos $(\phi_n)$.
+\end{tg}
+
+\begin{pvz}								% 3.6
+$f \in C[0, 1]$, $\phi_n(x) := \left\{\begin{array}{ll}
+    f\left(\frac{k}{n}\right),& x \in \left[\frac{k}{n},\,\frac{k+1}{n}\right) \\
+    f(1),& x = 1 \end{array}\right.$.
+Jau árodëme, kad $\phi_n \rightrightarrows f$.
+\[
+  \int_0^1 f(x)\,\dx = \lim_{n \to \infty} \int_0^1 \phi_n(x)\,\dx =
+  = \lim_{n \to \infty} \sum_{k=0}^{n-1} f\left(\frac{k}{n}\right) \frac{1}{n}
+  = \lim_{n \to \infty} \frac{1}{n} \sum_{k=0}^{n-1} f\left(\frac{k}{n}\right)
+\]
+\begin{enumerate}
+  \item $f(x) = x^2$, $x \in [0,\,1]$
+        \(\displaystyle  \int_0^1 x^2\,\dx = \frac{1}{3}\)
+  \item \(\displaystyle
+        \lim_{n \to \infty} \frac{1^{100}+\cdots+n^{100}}{n^{101}}
+        = \int_0^1 x^{100}\,\dx = \frac{1}{101}\)
+\end{enumerate}
+\end{pvz}
+
+\begin{tg}[Integralo savybës]~\par					% 3.7
+\begin{enumerate}
+  \item (Tiesiðkumas)
+    Jei $f, g \in D[a, b]$, $\alpha, \beta \in \R$, tai
+    \[ \int_a^b (\alpha f + \beta g)(x)\,\dx =
+        \alpha \int_a^b f(x)\,\dx + \beta \int_a^b g(x)\,\dx
+    \]
+  \item (Adityvumas)
+    Jei $f \in D[a, b]$, $a < c < b$, tai
+    \[ \int_a^b f(x)\,\dx =
+        \int_a^c f(x)\,\dx + \int_c^b f(x)\,\dx
+    \]
+  \item (Monotoniðkumas)
+    Jei $f, g \in D[a, b]$ ir $f \le g$, tai
+    \[ \int_a^b f(x)\,\dx \le \int_a^b g(x)\,\dx
+    \]
+  \item
+    Jei $f \in D[a, b]$, tai
+    \[ \left| \int_a^b f(x)\,\dx \right| \le \int_a^b \left|f(x)\right|\,\dx
+    \]
+  \item (Tolydumas tolygaus konvergavimo atþvilgiu)
+    Jei $D[a, b] \ni f_n \rightrightarrows f$, tai
+    \[ \int_a^b f_n(x)\,\dx \to \int_a^b f(x)\,\dx
+    \]
+  \item[5'.]
+    Jei $\forall n \quad f_n \in D[a,b]$ ir $\sum_{n=1}^\infty f_n$ konverguoja tolygiai
+    intervale $[a,\,b]$, tai
+    \[ \int_a^b \left( \sum_{n=1}^\infty f_n(x) \right)\,\dx
+       = \sum_{n=1}^\infty \int_a^b f_n(x)\,\dx
+    \]
+\end{enumerate}
+\end{tg}
+
+\begin{tg}\label{3.8}							% 3.8
+Sakykime, $f \in D[a,b]$. Paþymëkime $F(x) := \int_a^x f(t)\,\dt$, $x \in [a,\,b]$
+($F$ vadinsime integralu su kintamu virðutiniu rëþiu). Tada
+\begin{enumerate}
+  \item $F \in C[a, b]$ (tolydi)
+  \item Jei $f$ tolydi taðke $x \in [a,\,b]$, tai $F$ yra diferencijuojama taðke
+        $x_0$ ir $F'(x_0) = f(x_0)$. Atskiru atveju, jei $f$ yra toldyi visuose
+        taðkuose (\/$f \in C[a,b]$\/), tai $F$ yra $f$ pirmykðtë funkcija.
+\end{enumerate}
+\end{tg}
+
+\begin{tg}[Niutono-Leibnico formulë]					% 3.9
+Jei $F$ yra funkcijos $f \in C[a,b]$ pirmykðtë funkcija intervale $[a,\,b]$,
+tai $\int_a^b f(x)\,\dx = F(b) - F(a)$.
+\end{tg}
+
+\begin{pss}\label{3.10}~\par						% 3.10
+\begin{enumerate}
+  \item \label{3.10.1}
+        Niutono-Leibnico formulë liks teisinga ir kai $a > b$, jei susitarsime, kad
+        \[ \int_a^b f(x)\,\dx = - \int_b^a f(x)\,\dx \]
+  \item Priimta þymëti
+        \[ F(x) \Big|_a^b := F(b)-F(a) \]
+        Tokiu atveju
+        \[ \int_a^b f = F\Big|_a^b \]
+  \item $F \in C[a,b]$ vadinama \Def{apibendrinta} funkcijos $f \in D[a,b]$ pirmykðte
+        funkcija, jei $F'(x) = f(x)$ visuose funkcijos $f$ tolydumo taðkuose.
+        
+        \ref{3.8} teginys teigia, kad kiekvienai funkcijai $f$ egzistuoja apibendrinta
+        pirmykðtë funkcija. Niutono-Leibnico formulë ðiuo atveju irgi lieka teisinga.
+\end{enumerate}
+\end{pss}
+
+\begin{tg}[Kintamojo keitimo formulë]					% 3.11
+Jei $f \in C[a,b]$, $\phi \in C^1[\alpha, \beta]$, $R(\phi) \subset [a,\,b]$, 
+$\phi(\alpha) = a$, $\phi(\beta) = b$, tai
+\[\int_a^b f(x)\,\dx = \int_a^b f(\phi(t))\,\ud \phi(t) := \int_a^b f(\phi(t))\phi'(t)\,\dt\]
+\begin{ps*} Ði formulë teisinga ir kai $a > b$ ir/arba $\alpha > \beta$ (þr. 
+\ref{3.10}.\ref{3.10.1}).
+\end{ps*}
+\end{tg}
+
+\begin{pvz}								% 3.12
+\(\displaystyle
+  \int_{-a}^a \sqrt{a^2-x^2}\,\dx = \frac{\pi a^2}{2}
+\)
+\end{pvz}
+
+\begin{tg}[Integravimo dalimis formulë]					% 3.13
+Jei $f, g \in C^1[a, b]$, tai
+\[ \int_a^b f(x)g'(x)\,\dx = f(x)g(x)\Big|_a^b - \int_a^b g(x)f'(x)\,\dx
+\]
+arba trumpai
+\[ \int_a^b f\,\ud g = fg\Big|_a^b - \int_a^b g\,\ud f
+\]
+\end{tg}
+
+\begin{pvz}[Teiloro formulë su integraliniu liekamuoju nariu]		% 3.14
+\label{3.14}
+Tarkime, kad $f \in C^{n+1}[x_0, x]$. Tada
+\begin{eqnarray*}
+f(x) &=& f(x_0) + f'(x_0)(x-x_0) + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
++ \frac{1}{n!} \int_{x_0}^x f^{n+1}(t)(x-t)^n\,\dt
+\end{eqnarray*}
+\end{pvz}
+
+\begin{tg}[Funkcijø sekø ir eiluèiø diferencijavimas panariui]		% 3.15
+~\par
+\begin{enumerate}
+  \item Tarkime, kad
+    \begin{enumerate}
+      \item $\forall n \in \N \quad f_n \in C^1[a,b]$
+      \item $\exists \lim_{n \to \infty} f_n(a) \in \R$
+      \item $f_n' \rightrightarrows g$
+    \end{enumerate}
+    Tada $f_n \rightrightarrows f \in C[a,b]$ ir $\lim_{n \to \infty} f_n'(x)
+    = f'(x)$ (\/$= g(x)$\/).
+  \item Jei
+    \begin{enumerate}
+      \item $\forall n \in \N \quad f_n \in C^1[a,b]$
+      \item $\sum_{n=1}^\infty f_n(a)$ konverguoja.
+      \item $\sum_{n=1}^\infty f_n'(a)$ konverguoja tolygiai intervale $[a,\,b]$.
+    \end{enumerate}
+    Tada $\left( \sum_{n=1}^\infty f_n(a) \right)' = \sum_{n=1}^\infty f_n'(a)$
+    intervale $[a,\,b]$.
+\end{enumerate}
+\begin{ps*}
+$f_n'$ tolygus konvergavimas yra esminis. Pvz., $f_n(x) = \frac{1}{n}\sin(nx)
+\rightrightarrows 0$, $x \in \R$, bet $f_n'(x) = \cos (nx)$ konverguoja tik
+taðke $x = 0$, ir tai $f_n'(x) \ne 0$.
+\end{ps*}
+\end{tg}
+
+\begin{isv}[Laipsninës eilutës diferencijavimas panariui]		% 3.16
+Laipsninæ eilutæ galima diferencijuoti panariui jos konvergavimo intervale:
+\[
+  \left( \sum_{n=0}^\infty c_n (x-a)^n \right)' =
+  \sum_{n=1}^\infty n c_n (x-a)^{n-1}
+  \qquad x \in (a-R,\,a+R)
+\]
+Èia $R$ -- eilutës konvergavimo spindulys.
+\begin{ps*}
+Dël panaðios prieþasties laipsninæ eilutæ galima integruoti panariui:
+\[
+  \int_a^x \sum_{n=0}^\infty \left( c_n (t-a)^n \right) \,\dt 
+  = \sum_{n=0}^\infty c_n \int_a^x (t-a)^n ,\dt
+  = \sum_{n=0}^\infty \frac{c_n}{n+1} (x-a)^{n+1}
+  \qquad x \in (a-R,\,a+R)
+\]
+\end{ps*}
+\end{isv}
+
+\begin{pvzz}~\par							% 3.17
+\begin{enumerate}
+  \item \(\displaystyle 
+           f(x) = \sum_{n=1}^\infty \frac{x^n}{n}, \quad x \in (-1,\,1)
+	\)
+        \[ \ln(1+x) = \sum_{n=1}^\infty (-1)^{n+1} \frac{x^n}{n} 
+	   \qquad x \in (-1,\,1)    
+	\]
+  \item \(\displaystyle f(x) = \sum_{n=0}^\infty (n+1) x^n, \quad x \in (-1,\,1)
+        \)
+        \[ f(x) = \frac{1}{(1-x)^2}
+	   \qquad x \in (-1,\,1)    
+	\]
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}[Vidutinës reikðmës teorema]					% 3.18
+Jei $f, g \in D[a, b]$, $m \le f(x) \le M$, $x \in [a,\,b]$, $g \ge 0$
+(arba $g \le 0$\/), tai $\exists \mu \in [m, M]$:
+\[
+  \int_a^b fg = \mu \int_a^b g
+\]
+Jei be to $f \in C[a,b]$, tai $\exists c \in [a,\,b]$:
+\[
+  \int_a^b fg = f(c) \int_a^b g
+\]
+Atskiru atveju, kai $f \in C[a,b]$, $g \equiv 1$, $\exists c \in [a,\,b]$:
+\[
+  \int_a^b f = f(c) \cdot (b-a)
+\]
+\end{tg}
+
+\begin{pvz}[\ref{3.14} tæsinys]						% 3.19
+\[
+  R_n(x_0, x) = \frac{1}{n!} \int_{x_0}^x f^{n+1}(t)(x-t)^n\,\dt
+\]
+\begin{enumerate}
+  \item (Lagranþo pavidalo liekamasis narys)
+        Vidutinës reikðmës teoremoje imkime $f := f^{n+1}(t)$, o $g := (x-t)^n$,
+	$a = x_0$, $b = x$. Tada $\exists c \in [x_0,\,x]:$
+	\[
+	  R_n(x_0, x) = \frac{f^{n+1}(c)}{(n+1)!}(x-x_0)^{n+1}
+	\]
+  \item (Koði pavidalo liekamasis narys)
+        Imkime $f := f^{(n+1)}(t)(x-t)^n$, $g := 1$. Tada
+	\[
+	  R_n(x_0, x) = \frac{f^{n+1}(c)(x-c)^n(x-x_0)}{n!}
+	\]
+   \item (Peano pavidalo liekamasis narys)
+        $f \in C^n[x_0, x]$
+        \begin{eqnarray*}
+	  f(x) &=& \ldots = P_n(x_0, x) + \frac{1}{(n-1)!} \int_{x_0}^x
+           \left( f^{(n)}(t) - f^{(n)}(x_0) \right)(x-t)^{n-1}\,\dt =\\
+	   &=& P_n(x_0, x) + Q_n(x_0, x) \\
+	  \left| Q_n(x_0, x) \right| &\le& 
+	    \max_{t\in[x_0,\,x]} \left|f^{(n)}(t)-f^{(n)}(x_0)\right| \cdot
+	      \frac{1}{(n-1)!} \int_{x_0}^x (x-t)^{n-1}\,\dt =\\
+	  &=& \max_{t\in[x_0,\,x]} \left|f^{(n)}(t)-f^{(n)}(x_0)\right| \cdot
+	      \frac{|x-x_0|^n}{n!} = o\left(|x-x_0|^n\right)
+	\end{eqnarray*}
+\end{enumerate}
+\end{pvz}
+
+
+\section{Integralo taikymai}						% 4
+
+\begin{ap}[Kreivinës trapecijos plotas]					% 4.1
+$A := \left\{ (x,\,y):\quad f_1(x) \le y \le f_2(x), a \le x \le b \right\}
+\subset \R^2$, $f_1, f_2 \in D[a, b]$, $f_1 \le f_2$
+Tokia figûra vadinama \Def{kreivine trapecija}.
+
+Jei $f_1, f_2 \in S[a, b]$, tai $A$ plotas yra
+$S(A) = \int_a^b \left(f_2(x)-f_1(x)\right)\,\dx$
+
+Bendru atveju ðià lygybæ laikysime kreivinës trapecijis \Def{ploto} $S(A)$ apibrëþimu.
+\end{ap}                
+
+\begin{pvz}[Elipsës plotas]						% 4.2
+\[ A := \left\{ (x,\,y):\quad \frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1 \right\}
+\]
+\[ A = \left\{ (x,\,y):\quad |y| \le b \sqrt{1-\frac{x^2}{a^2}}, \quad -a \le x \le a \right\}
+\]
+\[
+  S(A) = \int_{-a}^a 2b \sqrt{1-\frac{x^2}{a^2}}\,\dx = \frac{2b}{a} \int_{-a}^a
+  \sqrt{a^2-x^2}\,\dx = \frac{2b}{a} \cdot \frac{\pi a^2}{2} = \pi a b 
+\]
+\end{pvz}
+
+\begin{ap}[Kûnø tûriø skaièiavimai]					% 4.3
+Aibës (kûno) $A \subset \R^3$ \Def{pjûviu} taðke $x \in \R$ vadinama aibë
+\[ A_x := \left\{ (y,\,z):\quad (x,\,y,\,z) \in A \right\} \subset \R^2
+\]
+Jei $A_x = \emptyset$ kai $x \not\in [a,\,b]$, tai kûno $A$ \Def{tûriu} vadinsime
+skaièiø
+\[ V(A) := \int_a^b S(A_x) \,\dx
+\]                              
+su sàlyga, kad integralas egzistuoja.
+\end{ap}
+
+\begin{pvzz}~\par							% 4.4
+\begin{enumerate}
+  \item (Sukinio tûris)
+  
+        $A = \left\{ (x,\,y,\,z):\quad a \le x \le b, \quad y^2+z^2 \le f^2(x) \right\}$,
+        $f(x) \ge 0$, $x \in [a,\,b]$.
+        \[ V(A) = \int_a^b \pi f^2(x) \,\dx = \pi\int_a^b f^2(x)\,\dx
+        \]
+  \item (Rutulio tûris)                                                                 
+  
+        $A = \left\{ (x,\,y,\,z):\quad x^2+y^2+z^2 \le R^2 \right\} 
+           = \left\{ (x,\,y,\,z):\quad x \in [-R,\,R], \quad y^2+z^2 \le R^2-x^2 =: f^2(x) \right\}$.
+        \[ V(A) = \pi \int_{-R}^R (R^2-x^2) \,\dx = \pi \left(R^2x - \frac{x^3}{3}\right)\Big|_{-R}^R =
+           \pi \left( \frac{2R^3}{3} - \left( \frac{2R^3}{3} \right) \right) =
+           \frac{4\pi R^3}{3}
+        \]
+  \item (Piramidës tûris)  
+  	Pasirinkime koordinaèiø sistemà: virðûnë taðke $(0,0,0)$, aukðtinës
+  	pagrindas -- $(H,0,0)$. $S$ -- pagrindo plotas.
+  	\[ S(A_x) = \frac{x^2}{H^2} \cdot S \]
+  	\[ V(A) = \int_0^H \frac{x^2}{H^2} \cdot S \,\dx =
+  	   \frac{S}{H^2} \int_0^H x^2\,\dx = \frac{S}{H^2} \frac{x^2}{3} \Big|_0^H
+  	   = \frac{SH}{3} \]
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 4.5
+Funkcijos $f: [a,\,b] \to \R^k$ vadinamos \Def{vektorinëmis realaus kintamojo
+funkcijomis}. Tokià funkcijà galima apibrëþti taip:
+$f(x) = \left( f_1(x),\, f_2(x), \ldots,\, f_k(x) \right)$, $x \in [a,\,b]$,
+$f_i : [a,\,b] \to \R$, $i = 1,2,\ldots,k$.
+Funkcijos $f_i$ vadinamos funkcijos $f$ \Def{koordinatinëmis funkcijomis}.
+
+Sakome, kad $f : [a,\,b] \to \R^k$ yra tolydi (diferencijuojama, integruojama ir
+t.t.), jei visos jos koordinatinës funkcijos yra tolydþios (atitinkamai diferencijuojamos
+ir t.t.).
+
+Tokios funkcijos iðvestinë
+\[f'(x) = \left( f_1'(x),\, f_2'(x), \ldots,\, f_k'(x) \right)\]
+o integralas
+\[\int_a^b f(x)\,\dx = \left( \int_a^b f_1(x)\,\dx,\, \int_a^b f_2(x)\,\dx, \ldots,\, 
+\int_a^b f_k(x)\,\dx \right)\] 
+\end{ap}
+
+\begin{tg}~\par								% 4.6
+\begin{enumerate}
+  \item Jei $F \in C^1([a,\,b], \R^k)$ (t.y. $F:[a,\,b]\to \R^k$ ir $F \in C^1[a,b]$\/),
+        tai \[ \int_a^b F'(x)\,\dx = F(b)-F(a) \]
+  \item Jei $F \in D([a,\,b], \R^k)$, tai 
+        \[ \left| \int_a^b f(x)\,\dx \right| \le \int_a^b \left|f(x)\right|\,\dx
+        \]
+\end{enumerate}
+\end{tg}
+
+\begin{ap}								% 4.7
+Tolydi funkcija $\gamma: [a,\,b] \to \R^k$ vadinama \Def{kreive} erdvëje $\R^k$.
+Tolydþiai diferencijuojamos kreivës vadinamos \Def{glodþiomis} (kartais papildomai
+reikalaujama, kad $\forall x \in [a,\,b] \quad \gamma'(x) \ne 0$\/).
+
+Kreivë $\gamma$ vadinamà \Def{iðtiesinama}, jei 
+\[ l(\gamma) = l(\gamma, a, b) :=
+\sup \Big\{ \sum_{k=1}^m \big| \gamma(x_k) - \gamma(x_{k-1}) \big| : \quad 
+a = x_0 < x_1 < \ldots < x_m = b, \quad m \in \N \Big\} < +\infty \]
+
+Skaièius $l(\gamma)$ vadinamas kreivës \Def{ilgiu}.
+\end{ap}
+
+\begin{pss}~\par\label{4.8}						% 4.8
+\begin{enumerate}
+  \item Kreive daþnai patogu vadinti ne atvaizdá $\gamma : [a,\,b] \to \R^k$, 
+        o vaizdà $\Gamma = \gamma([a,\,b]) \subset \R^k$. Tada funkcija $\gamma$
+        vadinama kreivës $\Gamma$ \Def{parametrizacija}.
+  \item \label{4.8.2}
+        Kreivës ir jos ilgio apibrëþimai prasmingi ir kai $k = 1$. Tokiu atveju
+        kreivës ilgis $l(\gamma)$ dar vadinamas funkcijos $\gamma$ \Def{variacija}.
+        Jei $l(\gamma) < +\infty$, $\gamma$ vadinama \Def{baigtinës variacijos 
+        funkcija}.
+\end{enumerate}
+\end{pss}
+
+\begin{tr}[Kreivës ilgio formulë]\label{4.9}				% 4.9
+Kiekviena glodi kreivë $\gamma: [a,\,b] \to \R^k$ yra iðtiesinama ir
+\[
+  l(\gamma) = \int_a^b |\gamma'(x)| \,\dx =
+  \int_a^b \sqrt{\gamma_1'^2(x)+\cdots+\gamma_1'^k(x)} \,\dx =
+\]
+\end{tr}
+
+\begin{pseudoisv}{$\mathbf{\ref{4.9}'}$}				% 4.9^2
+Jei $\tau : [\alpha,\,\beta] \to [a,\,b]$ yra grieþtai didëjanti (maþëjanti)
+tolydþiai diferencijuojama bijekcija ir $\tilde{\gamma} := \gamma \circ \tau
+: [\alpha,\,\beta] \to \R^k$, tai $l(\tilde{\gamma}) = l(\gamma)$.
+(Kreivës ilgis nepriklauso nuo parametrizacijos.)
+\end{pseudoisv}
+
+\begin{pvz}[Bendra integralo taikymø schema]\label{4.10}		% 4.10
+Tarkime, norime apibrëþti dydá $Q = Q[a,b]$, kuris 
+\begin{enumerate}
+  \item priklauso nuo intervalo $[a,\,b]$
+  \item turi adityvumo savybæ:
+        \[ Q[a,b] = Q[a,c] + Q[c,b], \quad c \in [a,\,b]
+        \]
+\end{enumerate}
+Tarkime, kad dël kokiø nors prieþasèiø turime pagrindo manyti, jog labai siauram
+intervalui $Q[x, x+\dx] \approx q(x)\,\dx$, kai $\dx$ -- ``maþas''. Tada natûralu
+apibrëþti
+\[
+  Q[a, b] = \int_a^b q(x)\,\dx
+\]
+\end{pvz}
+
+\begin{pvz}[Sukimosi pavirðiaus plotas]					% 4.11
+Tarkime, kad glodi kreivë $\gamma: [\alpha,\,\beta] \to \R^2$ apsukama apie $Ox$ aðá.
+Sakykime, kad $\gamma(t) = \left(x(t), y(t)\right)$, $y(t) \ge 0$, $t \in [\alpha,\,\beta]$.
+Paimkime fiksuotà $t \in [\alpha,\,\beta]$ ir nagrinëkime juostelæ nuo $t$ iki $t+\dt$.
+$S[t, t+\dt]$ apytikriai sudaro nupjautiná kûgá, kurio pagrindø spinduliai yra $r \approx
+y(t)$ ir $R = y(t+\dt)$ o sudaromoji $L \approx \int_t^{t+\dt} \big|\gamma'(s)\big|\,\ud s
+\approx \big|\gamma'(t)\big|\,\dt$.
+Ið èia   
+\[ S[t,t+\dt] \approx \pi (r+R) L \approx \pi \big(y(t)+y(t+\dt)\big) \big|\gamma'(t)\big|\,\dt
+\approx 2\pi y(t) \big|\gamma'(t)\big|\,\dt
+\]                                         
+Remiantis \ref{4.10}
+\[
+  S = S[\alpha, \beta] = \int_\alpha^\beta 2\pi y(t) \big|\gamma'(t)\big|\,\dt
+  = 2\pi\int_\alpha^\beta y(t) \sqrt{x'^2(t) + y'^2(t)} \,\dt
+\]
+Reiðkinys $\sqrt{x'^2(t) + y'^2(t)}$ vadinamas \Def{kreivës ilgio diferencialu} $\ud l(t)$.
+Taigi,
+\[ S = 2\pi \int_\alpha^\beta y(t) \,\ud l(t)
+\]
+\end{pvz}
+
+\begin{pvzz}[Kreivës ilgis]~\par							% 4.12
+\begin{enumerate}
+  \item $y = f(x)$, $x \in [a,\,b]$
+  	Galime imti parametrizacijà $\gamma(t) = (t, f(t))$, $t \in [a,\,b]$. Remiantis
+  	\ref{4.9}, $l(\gamma) = \int_a^b \sqrt{1+f'^2(x)}\,\dx$.
+  \item (Kreivë polinëse koordinatëse)
+        $r = r(\phi)$, $\phi \in (\phi_1,\,\phi_2)$
+        Parametrizacija: $\gamma(t) = \big(r(t)\cos t, r(t)\sin t\big)$, $t \in (\phi_1,\,\phi_2)$.
+        \begin{eqnarray*}
+        l(\gamma) &=& \int_{\phi_1}^{\phi_2}\sqrt{x'^2(t)+y'^2(t)}\,\dt
+        = \int_{\phi_1}^{\phi_2}\sqrt{(r'(t)\cos t - r(t)\sin t)^2 + (r'(t)\sin t + r(t)\cos t)^2}\,\dt =\\
+        &=& \int_{\phi_1}^{\phi_2}\sqrt{r'^2(t)+r^2(t)}\,\dt
+        \end{eqnarray*}
+  \item (Apskritimo ilgis)
+        Parametrizacija: $\gamma(t) = \big(r\cos t, r\sin t\big)$, $t \in (0,2\pi)$.
+  	\[ l(\gamma) = \int_0^{2\pi} \sqrt{0+r^2}\,\dt = 2\pi r
+  	\]
+  \item (Kardioidë)
+        $r(\phi) = 1 + \cos \phi$, $\phi \in [0,\,2\pi]$
+        \[ l = \ldots = 8
+        \]
+\end{enumerate}
+\end{pvzz}
+
+\begin{pvz}[Sferos plotas]						% 4.13
+Sukam apskritimà polinëse koordinatëse: $r(\phi) = R$, $\phi \in [0,\,\pi]$
+\[
+  S = 2\pi \int_0^\pi \underbrace{R \sin \phi}_{y} \cdot \underbrace{R \,\ud\phi}_
+  {\ud l(\phi)} = 2\pi R^2(-\cos \phi)\Big|_0^\pi = 4\pi R^2
+\]
+\end{pvz}
+
+\begin{pvz}[Kreivinio sektoriaus plotas]				% 4.14
+$r = r(\phi)$, $\phi \in [\phi_1,\,\phi_2]$. Plotas $S = S[\phi_1,\phi_2]$ tenkina
+adityvumo savybæ ir
+\[ S[\phi, \phi+\ud\phi] \approx \frac{r(\phi)^2\ud\phi}{2}
+\]
+Taigi, galime apibrëþti
+\[ S[\phi_1,\phi_2] := \frac{1}{2}\int_{\phi_1}^{\phi_2} r^2(\phi)\,\ud\phi
+\]
+
+\begin{pvz*} (Kardioidës plotas)
+$r(\phi) = 1+\cos\phi$.
+\[ S = \frac{1}{2}\int_0^{2\pi} (1+\cos\phi)^2\,\ud\phi
+     = \frac{1}{2}\int_0^{2\pi} \left(1+\frac{1+\cos 2\phi}{2}\right)\,\ud\phi
+     = \frac{1}{2}\cdot\frac{3}{2}\cdot 2\pi = \frac{3\pi}{2}
+\]
+\end{pvz*}
+\end{pvz}
+
+\begin{pvzz}[Taikymai mechanikoje]~\par					% 4.14
+\begin{enumerate}
+  \item (Kintamos jëgos darbas)
+        Taðkui judant intervale $[a,\,b]$ taðke $x$ já veikia jëga $F(x)$. Tos jëgos
+        atliekamas darbas intervale $[x,x+\dx] \approx F(x)\,\dx$. Ið èia
+        \[ A = A[a,\,b] = \int_a^b F(x)\,\dx
+        \]
+        (jei jëga $F_1(x)$ veikia kampu $\alpha(x)$, imame $F(x) := F_1(x) \cos \alpha(x)$\/).
+  \item (Kreivës statinis momentas ir masës centras)
+        Tarkime, kad turime materialiø taðkø su masëmis $m_1, m_2, \ldots, m_k$ sistemà 
+        plokðtumoje. Ðios sistemos \Def{statiniu momentu} tiesës $l$ atþvilgiu vadinamas
+        skaièius $\sum_{i=1}^k d_i m_i$, èia $d_i$ -- atstumas nuo $i$-tojo taðko iki tiesës
+        (vienoje tiesës pusëje teigiamas, kitoje neigiamas).
+        
+        Ðios sitemos \Def{masës centru} vadinamas toks taðkas, kuriame sukoncentravus
+        visà sistemos masæ, jos statiniai momentai bet kokiø tiesiø atþvilgiu nepasikeis.
+        
+        Tarkime, turime kreivæ $\gamma: [a,\,b] \to \R^2$, kurios masë proporcinga ilgiui.
+        Bandykime apibrëþti statiná momentà $M_x = M_x[a,b]$ $Ox$ aðies atþvilgiu.
+        $M[t, t+\Delta t] \approx y(t) \int_{t}^{t+\Delta t} \big|\gamma'(s)\big|\,\ud s
+        \approx y(t)\big|\gamma'(s)\big|\Delta t$.
+        Tada 
+        \[ M_x := \int_a^b y(t)\big|\gamma'(t)\big|\,\dt = \int_a^b y\,\ud l
+        \]                                                                  
+        analogiðkai
+        \[ M_y := \int_a^b x\,\ud l
+        \]                  
+        
+        Tarkime, kreivës masë $M = \int_a^b\big|\gamma'(t)\big|\,\dt$ (t.y. lygi ilgiui).
+        Masës centro koordinatës yra $(x_0, y_0)$. Tada $M_x = M \cdot y_0$, $M_y = M \cdot x_0$,
+        taigi masës centras yra taðke $\left(\frac{M_y}{M},\frac{M_x}{M}\right)$.
+        
+  \item (Kreivinës trapecijos statinis momentas ir masës centras)
+        Kreivinë trapecija $A = \{(x,y): \quad a\le x \le b, \quad f_1(x) \le y \le f_2(x) \}$.
+        Tarkime, kad masë proporcinga plotui. Tada
+        \begin{eqnarray*}
+          M[x, x+\Delta x] &\approx& \underbrace{(f_2(x)-f_1(x))\Delta x}_{\textrm{masë}}
+          \cdot \underbrace{\frac{f_1(x)+f_2(x)}{2}}_{\textrm{atstumas nuo $Ox$ iki masës centro}}
+          = \\
+          &=& \frac{f_2^2(x)-f_1^2(x)}{2}\Delta x \\
+          M_x &=& \frac{1}{2}\int_a^b\big(f_2^2(x)-f_1^2(x)\big)\,\dx	\\
+          M_y &=& \int_a^b x\big(f_2(x)-f_1(x)\big)\,\dx \\
+          x_0 &=& \frac{M_y}{M} \\
+          y_0 &=& \frac{M_x}{M}
+        \end{eqnarray*}                          
+  \item (Pusapskritimio ir pusskritulio masiø centrai)
+        $r(\phi) = R$, $\phi \in [0, \pi]$,
+        $y(\phi) = R \sin \phi$,
+        $\ud l = R \,\ud \phi$
+        \begin{eqnarray*}
+          M_x &=& \int_0^\pi y(\phi) R \,\ud\phi 
+              = R^2 \int_0^\pi \sin \phi \,\ud\phi 
+              = 2R^2 \\
+          M_y &=& \int_0^\pi x(\phi) R \,\ud\phi 
+              = 0 \\
+          x_0 &=& 0 \\
+          y_0 &=& \frac{2R}{\pi}
+        \end{eqnarray*}         
+        
+        Pusskrituliui analogiðkai
+        \begin{eqnarray*}
+          x_0 &=& 0 \\
+          M_x &=& \frac{1}{2}\int_{-R}^R (\sqrt{(R^2-x^2)^2} - 0^2) \,\dx
+              = \frac{1}{2} \left(R^2 x - \frac{x^3}{3}\right) \Big|_{-R}^R
+              = \frac{2R^3}{3} \\
+          y_0 &=& \frac{4R}{3\pi}
+        \end{eqnarray*}         
+\end{enumerate}
+\end{pvzz}
+
+
+\section{Kiti integralo apibrëþimai (Rymano ir Styltjeso)}		% 5
+
+\begin{ap}								% 5.1
+Intervalo $[a,\,b]$ \Def{skaidiniu} vadinama bet kokia baigtinë sutvarkyta
+intervalo $[a,\,b]$ taðkø aibë $P = \{ a = x_0 < x_1 < \ldots < x_k = b \}$
+(\/$k \ge 2$\/). Intervalai $[x_i, x_{i+1}]$ (\/$i = 0, \ldots, k-1$\/) vadinami
+\Def{skaidinio $P$ intervalais}. Skaièius $|P| := max_{0 \le i \le k-1} |x_{i+1}-x_i|$
+-- skaidinio $P$ \Def{diametru} (\Def{smulkiu}, \Def{skersmeniu} ir t.t.). Skaièiø rinkinys
+$\xi = (\xi_0, \ldots, \xi_{k-1})$ vadinamas skaidinio $P$ \Def{tarpiniu skaidiniu},
+jei $\xi_i \in [x_i, x_{i+1}]$, $i = 0, \ldots, k-1$.
+
+Funkcijos $f: [a,\,b] \to \R$ \Def{Rymano integraline suma}, atitinkanèia skaidiná
+$P$ ir tarpiná skaidiná $\xi$, vadinamas skaièius 
+\[ S(f, P, \xi) := \sum_{i=0}^{k-1} f(\xi_i)\Delta x, \qquad \Delta x_i:= x_{i+1}-x_i
+\]                                                                                     
+Raðysime $J = \lim_{|P|\to 0} S(f, P, \xi)$, jei $\forall \epsilon > 0 \quad \exists
+\delta > 0: |S(f, P, \xi) - J| < \epsilon$, kai $|P| \le \delta$ (nepriklausomai nuo
+$P$ ir $\xi$ pasirinkimo). Tokiu atveju sakoma, kad $f$ yra \Def{integruojama Rymano
+prasme} intervale $[a,\,b]$, o skaièius $J$ vadinamas funkcijos $f$ \Def{Rymano
+integralu} intervale $[a,\,b]$. Já þymësime
+\[ (R) \int_a^b f(x)\,\dx \qquad \textrm{arba trumpai} \qquad (R) \int_a^b f
+\]                                                                        
+Visø Rymano prasme integruojamø intervale $[a,\,b]$ funkcijø aibæ þymësime $R[a,b]$.
+\end{ap}
+
+\begin{pss}~\par							% 5.2
+\begin{enumerate}
+  \item (Apibrëþimas ``sekø kalba'')
+        Sakysime, kad $J = \lim_{|P|\to 0} S(f, P, \xi)$, jei $\forall$ sekai $(P^n, \xi^n)$,
+        su kuria $|P^n| \to 0$, turime $J = \lim_{n \to \infty} S(f, P^n, \xi^n)$
+  \item Atkreipkime dëmesá, kad
+        \[ S(f, P, \xi) = \int \phi(x) \,\dx, \qquad
+           \phi(x) := \left\{ \begin{array}{ll} f(\xi_i) & x \in [x_i, x_{i+1})\\
+                                                f(b) & x = b
+                              \end{array} \right.
+        \]
+        Todël $J = \lim_{n \to \infty} S(f, P^n, \xi^n) = \lim_{n \to \infty}
+        \int_a^b \phi(x) \,\dx$, be to $\phi_n \to f$ (nebûtinai tolygiai).
+\end{enumerate}
+\end{pss}
+
+\begin{tg}[Rymano integralo savybës]~\par				% 5.3
+\begin{enumerate}
+  \item Jei $f \in R[a,b]$, tai $f$ yra aprëþta intervale $[a,\,b]$.
+  \item (Tiesiðkumas)
+        Jei $f, g \in R[a,b]$, $\alpha, \beta \in \R$, tai $\alpha f + \beta g \in R[a,b]$ ir
+        \[ (R) \int_a^b(\alpha f + \beta g)\,\dx = \alpha (R) \int_a^b f\,\dx
+           + \beta (R) \int_a^b g\,\dx
+        \]
+   \item (Monotoniðkumas)
+         Jei $f, g \in R[a,b]$ ir $f \le g$, tai
+         \[ (R) \int_a^b f\,\dx \le (R) \int_a^b g\,\dx
+         \]                                           
+         Atskiru atveju
+         \[ \left| (R) \int_a^b f\,\dx \right| \le (R) \int_a^b |f| \,\dx
+         \]
+   \item Jei $R[a,b] \ni f_n \rightrightarrows f$ intervale $[a,\,b]$, tai $f \in R[a,b]$ ir
+         \[ (R) \int_a^b f_n\,\dx \to (R) \int_a^b f\,\dx
+         \]
+\end{enumerate}
+\end{tg}
+
+\begin{tg}[``Mackevièiaus'' ir Rymano integralø palyginimai]		% 5.4
+$D[a,b] \subset R[a,b]$ (be to, $D[a,b] \ne R[a,b]$\/) ir $\int_a^b f = (R) \int_a^b f$,
+jei $f \in D[a,b]$.
+\begin{ps*} Nuo ðiol prieð Rymano integralà neberaðysime $(R)$.
+\end{ps*}
+\end{tg}
+
+\begin{ap}								% 5.5
+Funkcijos $f:[a,b] \to \R$ \Def{variacija} intervale $[a,\,b]$ vadinamas skaièius
+\[V(f, a, b) := \sup \Big\{\sum_{i=0}^{k-1} |f(x_{i+1}) - f(x_i)|: \quad 
+  a = x_0 < x_1 < \ldots < x_k = b, \quad k \in \N \Big\} \le +\infty
+\]
+(formaliai tai yra kreivës vienmatëje erdvëje ilgis. Þr. \ref{4.8}.\ref{4.8.2}).
+
+Jei $V(f) := V(f, a, b)$ (kai $a, b$ aiðkûs ið konteksto) $< +\infty$, tai sakoma,
+kad $f$ \Def{turi baigtinæ variacijà} intervale $[a,\,b]$ arba yra \Def{baigtinës
+variacijos funkcija}. Visø tokiø funkcijø aibæ þymësime $V[a,b]$.
+
+\begin{ps*}
+Formaliai baigtinës variacijos funkcija -- tai iðtiesinama kreivë erdvëje $\R$,
+o jos variacija -- kreivës ilgis.
+\end{ps*}
+\end{ap}
+
+\begin{tg}~\par								% 5.6
+\begin{enumerate}
+  \item Jei funkcija $f: [a,\,b] \to \R$ turi aprëþtà iðvestinæ intervale $[a,\,b]$,
+        iðskyrus galbût baigtiná skaièiø pirmo tipo trûkio taðkø, tai $f \in V[a,b]$.
+        Atskiru atveju, jei $f \in C^1[a,b]$, tai $f \in V[a,b]$ ir $V(f,a,b) =
+        \int_a^b |f'(x)|\,\dx$.
+  \item Jei $f$ yra dviejø didëjanèiø funkcijø skirtumas, tai $f \in V[a,b]$.
+\end{enumerate}
+\begin{ps*}
+Bet kurià baigtinës variacijos funkcijà galima iðreikðti dviejø didëjanèiø funkcijø
+skirtumu.
+\end{ps*}
+\end{tg}
+
+\begin{ap}								% 5.7
+Sakykime, funkcija $f \in S[a,b]$ ágyja reikðmes $y_k$ intervaluose $I_k$ ($k = 0, 1,
+\ldots, m-1$) su galais $x_k$ ir $x_{k+1}$ (\/$I_k$ uþdarumas nesvarbus). Funkcijos
+$f$ \Def{Styltjeso integralu} funkcijos $g \in V[a,b]$ atþvilgiu vadinamas skaièius
+\[ 
+  \int_a^b f\,\ud g = \int_a^b f(x)\,\ud g(x) :=
+  \sum_{k=0}^{m-1} y_k \cdot \big(g(x_{k+1})-g(x_k)\big)
+\]                                                      
+Funkcijos $f\in D[a,b]$ Styltjeso integralu funkcijos $g \in V[a,b]$ atþvilgiu vadinamas
+skaièius
+\[ \int_a^b f\,\ud g = \lim_{n \to \infty} \int_a^b \phi_n\,\ud g
+\]                                                               
+kur $S[a,b] \ni \phi_n \rightrightarrows f$.
+\end{ap}
+
+\begin{tg}~\par								% 5.8
+\begin{enumerate}
+  \item (Styltjeso integralo egzistavimas ir korektiðkumas)
+        Apibrëþime nurodyta riba visada egzistuoja ir nepriklauso nuo $(\phi_n)$ pasirinkimo.
+  \item $f \in D[a,b]$, $g \in V[a,b]$, tada
+        \[
+          \left|\int_a^b f\,\ud g\right| \le \|f\| \cdot V(g)
+        \]                                                   
+        èia $\|f\| := \sup_{x \in [a,b]} |f(x)|$ -- funkcijos $f$ \Def{norma}.
+  \item Jei $f \in C[a,b]$ ir $g \in C^1[a,b]$, tai
+        \[ \int_a^b f(x)\,\ud g(x) = \underbrace{\int_a^b f(x) g'(x)\,\dx}_
+        \textrm{``Mackevièiaus'' integralas}
+        \]
+\end{enumerate}
+\begin{ps*}
+Su 3) savybe (\/$\ud g(x) = g'(x)\,\dx$\/) formalus diferencialo naudojimas ágyja konkretesnæ
+prasmæ.
+\end{ps*}
+\end{tg}
+
+\begin{tg}~\par								% 5.9
+\begin{enumerate}
+  \item (Kintamojo keitimo ir Niutono-Leibnico formulës)
+        Jei $f\in C[a,b]$, o $\phi \in C[\alpha,\beta]\cap V[\alpha,\beta]$,
+        $R(\phi) \subset [a,\,b]$, tai
+        \[
+          \int_\alpha^\beta f\big(\phi(t)\big) \,\ud \phi(t)
+          = \int_{\phi(\alpha)}^{\phi(\beta)} f(x)\,\dx
+          = F\big(\phi(\beta)\big) - F\big(\phi(\alpha)\big)
+        \]                                  
+        (èia $F' = f$, t.y. $F$ yra $f$ pirmykðtë funkcija).
+  \item (Integravimo dalimis formulë)
+        Jei $f, g \in C[a,b] \cap V[a,b]$, tai
+        \[
+           \int_a^b f\,\ud g = fg \Big|_a^b - \int_a^b g\,\ud f
+        \]
+\end{enumerate}
+\end{tg}
+
+\begin{pss}~\par							% 5.10
+\begin{enumerate}
+  \item Þr. Mackevièiaus vadovëlá (dël nebûtino funkcijos tolydumo).
+  \item Galima bûtø apibrëþti Rymano-Styltjeso integralà, bet neapsimoka:
+        Lebego integralas apima visus atvejus.
+\end{enumerate}
+\end{pss}
+
+
+\section{Netiesioginiai integralai}					% 6
+
+\begin{ap}								% 6.1
+$f \in D[a,b)$, $-\infty < a < b \le +\infty$. Jei $\exists \lim_{c\uparrow b}
+\int_a^c f(x)\,\dx \in \overline{R}$, tai ði riba vadinama funkcijos $f$
+\Def{netiesioginiu integralu} (NI) intervale $[a,b)$. Þymime kaip ir
+anksèiau: $\int_a^b f(x)\,\dx$. Kartais þymima $\int_a^{b-0} f(x)\,\dx$ 
+(jei $b < +\infty$\/).
+
+Jei NI $\int_a^b f(x)\,\dx \in \R$, tai sakoma, kad NI $\int_a^b f(x)\,\dx$
+\Def{konverguoja}, prieðingu atveju -- \Def{diverguoja}
+
+Analogiðkai apibrëþiamas NI intervale $(a, b]$.
+
+Jei $f \in D(a, b)$, $-\infty \le a < b \le +\infty$, tai NI
+\[
+  \int_a^b f(x)\,\dx = \int_a^c f(x)\,\dx + \int_c^b f(x)\,\dx, 
+  \qquad c \in (a, b)
+\]
+su sàlyga, kad visi NI egzistuoja ir deðinëje negauname neapibrëþumo.
+\end{ap}
+
+\begin{pss}~\par							% 6.2
+\begin{enumerate}
+  \item Galima apibrëþti netiesioginá Rymano integralà. $f: [a,b)\to\R$ ir
+        $\forall c < b \quad f \in R[a,c]$. Toliau analogiðkai
+	\[ (R) \int_a^b f = \lim_{c \uparrow b} (R) \int_a^c f
+	\]
+  \item Jei $f \in D[a,b)$ ir $f \ge 0$, tai NI $\int_a^b f(x)\,\dx$
+        egzistuoja (nes $\int_a^c f(x)\,\dx$, $c \in [a,b)$ -- didëjanti
+	funkcija). Tokiu atveju galime raðyti
+	\[
+	  \int_a^b f(x)\,\dx \textrm{ konverguoja}
+            \Longleftrightarrow
+	  \int_a^b f(x)\,\dx < +\infty
+	\]
+  \item Èia ir toliau visus teiginius formuluojame funkcijoms ið $D[a, b)$,
+        nes atvejai $D(a, b]$ yra analogiðki.
+\end{enumerate}
+\end{pss}
+
+\begin{pvzz}~\par							% 6.3
+\begin{enumerate}
+  \item \(\displaystyle
+          \int_a^b \frac{dx}{(b-x)^p} < +\infty
+           \quad \Longleftrightarrow \quad
+	  p < 1
+        \)
+  \item[1'] \(\displaystyle
+          \int_0^1 \frac{dx}{x^p} < +\infty
+           \quad \Longleftrightarrow \quad
+	  p < 1
+        \)
+  \item \(\displaystyle
+          \int_1^\infty \frac{dx}{x^p} < +\infty
+           \quad \Longleftrightarrow \quad
+	  p > 1
+        \)
+  \item \(\displaystyle
+          \int_0^\infty e^{-x}\,\dx = 1
+        \)
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}[Netiesioginiø integralø palyginimas]				% 6.4
+Sakykime, $f, g \in D[a,b)$. Tada
+\begin{enumerate}
+  \item $0 \le f \le g \quad \Longrightarrow \quad \int_a^b f \le \int_a^b g$
+        Atskiru atveju, jei $\int_a^b g < +\infty$, tai $\int_a^b f < +\infty$
+	(jei $g$ konverguoja, tai $f$ irgi konverguoja) ir atvirkðèiai, jei
+	$\int_a^b f = +\infty$, tai ir $\int_a^b g = +\infty$.
+  \item Jei $f, g \ge 0$ ir $\exists \mu = \lim_{x \to b} \frac{f(x)}{g(x)}
+        \in [0, +\infty)$ ir $\int_a^b g < +\infty$, tai $\int_a^b f < +\infty$.
+	Atskiru atveju, kai $\mu \in (0,+\infty)$ turime
+	$\int_a^b f < +\infty \quad \Longleftrightarrow \quad \int_a^b g < +\infty$
+\end{enumerate}
+\end{tg}
+
+\begin{pvzz}~\par							% 6.5
+\begin{enumerate}
+  \item (Oilerio tikimybinis integralas)
+        \(\displaystyle \int_0^{+\infty} e^{-x^2}\,\dx = 2 - e^{-1} < +\infty \)
+  \item \(\displaystyle \int_1^{+\infty} x^{\alpha} e^{-x^\beta}\,\dx < +\infty \)
+\end{enumerate}
+\end{pvzz}
+
+\begin{ap}								% 6.6
+Sakoma, kad NI $\int_a^b f(x)\,\dx$ \Def{konverguoja absoliuèiai}, jei
+$\int_a^b |f(x)| \,\dx < +\infty$. Jei NI $\int_a^b f(x)\,\dx$ konverguoja,
+bet $\int_a^b |f(x)|\,\dx = +\infty$, sakoma, kad jis \Def{konverguoja
+reliatyviai}.
+\end{ap}
+
+\begin{tg}								% 6.7
+Jei NI $\int_a^b f(x)\,\dx$ konverguoja absoliuèiai, tai jis konverguoja.
+\end{tg}
+
+\begin{pss}								% 6.8
+``Teisingai'' perëjæ prie ribos NLF, KKF ir IDF gausime atitinkamas
+formules ne\-tie\-sio\-gi\-niams integralams.
+\begin{enumerate}
+  \item (NLF) $\int_a^c f(x)\,\dx = F(c)-F(a)$, $a \le c < b$
+        Pereikime prie ribos:
+	$\int_a^b f(x)\,\dx = F(b)-F(a)$, kur $F(b) := \lim_{c\uparrow b}F(c)$.
+	Tiksliau bûtø raðyti
+	\[ \int_a^{b-0} f(x)\,\dx = F(b-0)-F(a)
+	\]
+  \item (IDF) $\int_a^c f\,\ud g = fg\Big|_a^c - \int_a^c g\,\ud f$.
+        Kai $c \uparrow b$, turime
+	$\int_a^b f\,\ud g = fg\Big|_a^b - \int_a^b g\,\ud f$, kur
+	$fg\Big|_a^b := \lim_{c \uparrow b} fg\Big|_a^c$.
+	(Su sàlyga, kad visos ribos egzistuoja. Beje, jei dvi ið jø egzistuoja,
+	tai egzistuos ir treèia).
+  \item (KKF) analogiðka.
+\end{enumerate}
+\end{pss}
+
+\begin{pvzz}~\par							% 6.9
+\begin{enumerate}
+  \item \(\displaystyle \int_0^1 \frac{\dx}{\sqrt{x}} = 2
+        \)
+  \item \(\displaystyle \int_0^\infty xe^{-x}\,\dx = 1
+        \)
+  \item \(\displaystyle \int_1^\infty e^{-\frac{1}{x}} \frac{1}{x^2}\,\dx = 1-e^{-1}
+        \)
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}[Abelio-Dirichle poþymis]					% 6.10
+Tarkime, kad $f \in C[a,b]$, $g \in C^2[a,b]$ ir
+\begin{enumerate}
+  \item $\left| \int_a^x f(t)\,\dt \right| \le M < +\infty$, $x \in [a,b)$
+  \item $g(x) \downarrow 0$ (monotoniðkai) kai $x \uparrow b$.
+\end{enumerate}
+Tada NI $\int_a^b f(x)g(x)\,\dx$ konverguoja ir $\left| \int_a^b f(x)g(x)\,\dx \right|
+\le M g(a)$.  
+
+\begin{ps*}
+Kaip ir Abelio-Dirichle poþymá eilutëms, já apsimoka naudoti tik kai NI ágyja tiek
+teigiamø, tiek neigiamø reikðmiø.
+\end{ps*}
+\end{tg}
+
+\begin{pvz}								% 6.11
+\(\displaystyle \int_1^\infty \frac{\sin x}{x}\,\dx\) konverguoja (reliayviai).
+\(\displaystyle \int_0^\infty \frac{\sin x}{x}\,\dx\) taip pat konverguoja.
+\end{pvz}
+
+\begin{tg}[Integralinis eiluèiø konvergavimo poþymis]			% 6.12
+Jei $f: [1, +\infty) \to [0, +\infty)$ mo\-no\-to\-nið\-kai maþëja, tai
+\[ 
+   \sum_{n=1}^\infty f(n) < +\infty \quad \Longleftrightarrow \quad
+   \int_1^\infty f(x)\,\dx < +\infty
+\]
+\end{tg}
+
+\begin{pvzz}~\par							% 6.13
+\begin{enumerate}
+  \item \[ \sum_{n=1}^\infty \frac{1}{n^p} < +\infty
+           \quad \Longleftrightarrow \quad
+           \int_1^\infty \frac{\dx}{x^p} < +\infty
+           \quad \Longleftrightarrow \quad
+           p > 1
+        \]
+  \item \[ \sum_{n=2}^\infty \frac{1}{n \ln^p n} < +\infty
+           \quad \Longleftrightarrow \quad
+           \int_2^\infty \frac{\dx}{x \ln^p x} 
+           = \int_{\ln 2}^\infty \frac{\ud \ln x}{\ln^p x} < +\infty
+           \quad \Longleftrightarrow \quad
+           p > 1
+        \]
+\end{enumerate}
+\end{pvzz}
+
+%
+% ---------------------------------------------------------------------
+%
+
+\newpage
+\setcounter{section}{0}
+\part{Keliø kintamøjø funkcijø diferencijavimas}
+
+\section{Erdvë $\R^k$}							% 1
+
+{\small Þr. V.~Mackevièiaus atsiøstus konspektus.}
+
+\section{Funkcijos riba ir tolydumas}					% 2
+
+Ðiame paragrafe nagrinësime funkcijas $f: D \to Y$, $D \subset X = \R^k$,
+$Y = \R^m$.  Kai $m = 1$, $f$ -- \Def{$k$-kintamøjø reali funkcija} (arba
+realioji funkcija erdvëje $\R^k$).  Kai $k = 1$, $f$ -- \Def{vektorinë
+realaus kintamojo funkcija}.
+
+Dauguma toliau formuluojamø teiginiø galioja bet kokioms metrinëms erdvëms
+$X$ ir $Y$.
+
+\begin{ap}								% 2.1
+Tarkime, $f: D \to Y$, $x^0 \in D'$. Sakoma, kad funkcijos $f$ \Def{riba}
+taðke $x^0$ yra $y \in Y$, jei
+\[ \forall \eps > 0 \quad \exists \delta > 0 \quad d(f(x), y) < \eps
+\textrm{ kai } 0 < d(x, x^0) < \delta
+\]                                   
+Tokiu atveju raðoma $y = \lim_{x \to x^0} f(x)$.
+\end{ap}
+
+\begin{tg}								% 2.2
+Tarkime, $f: D \to Y$, $x^0 \in D'$. Tada ðie teiginiai ekvivalentûs:
+\begin{enumerate}
+  \item \(\displaystyle \lim_{x \to x^0} f(x) = y
+        \)
+  \item Kiekvienai sekai $D \setminus \{x^0\} \ni x^n \to x^0$ teisinga
+        \( f(x^n) \to y$, kai $n \to \infty$.
+\end{enumerate}
+\end{tg}
+
+\begin{pvzz}~\par							% 2.3
+\begin{enumerate}
+  \item \(\displaystyle \lim_{x \to 0} \frac{x_1^2 x_2^2}{x_1^2 + x_2^2} = 0 \)
+  \item \(\displaystyle \not\exists \lim_{x \to 0} \frac{x_1 x_2}{x_1^2 + x_2^2} \)
+\end{enumerate}
+\end{pvzz}
+
+\begin{pss}~\par							% 2.4
+\begin{enumerate}
+  \item Ir daugiamaèiu atveju galime kalbëti apie begalines ribas:
+
+	\(\displaystyle \lim_{x \to x^0} f(x) = +\infty \textrm{, jei }
+	  \forall \Delta \in \R \quad \exists \delta > 0 \quad
+	  f(x) > \Delta \textrm{ kai } 0 < d(x, x^0) < \delta
+	\)
+  \item \(\displaystyle \lim_{x \to x^0} f(x) = y, \quad x^0 = (x^0_1, \ldots, x^0_k) 
+          \textrm{, jei kiekvienai sekai } x^0 \ne x \to x^0 \textrm{ turime, kad }
+          f(x^n) \to y \textrm{, kai } \quad n \to \infty
+	\)
+\end{enumerate}
+\end{pss}
+
+\begin{tg}								% 2.5
+$f, g: D \to \R$ $(m = 1)$, $\lim_{x \to x^0} f(x) = a \in \R$, 
+$\lim_{x \to x^0} g(x) = b \in \R$.  Tada
+\begin{enumerate}
+  \item \(\displaystyle \lim_{x \to x^0} \big(f(x) + g(x)\big) = a + b\)
+  \item \(\displaystyle \lim_{x \to x^0} \big(f(x) g(x)\big) = a b\)
+  \item Jei be to $b \ne 0$, tai
+        \(\displaystyle \lim_{x \to x^0} \frac{f(x)}{g(x)} = \frac{a}{b}\)
+\end{enumerate}
+\end{tg}
+
+\begin{ap}								% 2.6
+Sakoma, kad funkcija $f: D \to Y$ yra \Def{tolydi} taðke $x^0 \in D$, jei
+\[ \forall \eps > 0 \quad \exists \delta > 0 \quad d(f(x), x^0) < \eps,
+   \textrm{ kai } d(x, x^0) < \delta
+\]
+\begin{ps*}
+Kai $x^0 \in D'$, tolydumas taðke $x^0$ ekvivalentus lygybei $\lim_{x \to x^0} = f(x^0)$.
+Kai $x^0$ -- izoliuotas $D$ taðkas, bet kokia funkcija yra tolydi tame taðke.
+\end{ps*}
+\end{ap} 
+
+\begin{tg}~\par								% 2.7
+\begin{enumerate}
+  \item Jei $f, g: D \to \R$ yra tolydþios taðke $x^0 \in D$, tai $f+g$, $fg$ ir,
+        jei $g(x^0) \ne 0$, $\frac{f}{g}$ yra tolydþios taðke $x^0$.
+  \item Jei $f: D \to \widetilde{D} \subset Y$ yra tolydi taðke $x^0 \in D$, o 
+        $g: \widetilde{D} \to Z$ yra tolydi taðke $y^0 := f(x^0)$, tai funkcija
+        $g \circ f$ yra tolydi taðke $x^0$.
+  \item Funkcija $f = (f_1, f_2, \ldots, f_m) : D \subset X \to \R^m$ yra tolydi
+        taðke $x^0 \in D$ tada ir tik tada, kai visos koordinatinës funkcijos 
+        $f_i: D \to \R$ yra tolydþios taðke $x^0$.
+\end{enumerate}
+\end{tg}       
+
+\begin{pvzz}~\par							% 2.8
+\begin{enumerate}
+  \item $f(x) = C = \const$, yra tolydi visuose taðkuose $x \in D$.
+  \item $\phi_i(x) := x_i$, $x = (x_1, x_2, \ldots, x_k) \in \R^k$ -- \Def{koordinatinë
+        funkcija}, arba tiesiog \Def{koordinatë}. $\phi_i$ yra tolydi visuose taðkuose.
+  \item $P(x) = \sum c_{\alpha_1 \alpha_2 \ldots \alpha_k} x_1^{n_1}x_2^{n_2} \cdots 
+        x_k^{n_k}$, $x \in \R^k$, $c_{\alpha_1 \alpha_2 \ldots \alpha_k} \in \R$,
+        $n_i \in \N \cup \{0\}$, be to, sumoje yra baigtinis skaièius nariø.  Funkcija $P$
+        vadinama \Def{$k$ kintamøjø daugianariu}.  Ji yra tolydi visuose taðkuose.
+  \item Metrika $d: X \times X \to \R$ -- tolydi funkcija.
+        (Erdvëje $X^2 = X \times X$ metrikà galime apibrëþti taip:
+        $d_2 \big( (x^1, x^2), (y^1, y^2) \big) := \sqrt{d(x^1,y^1)^2 + d(x^2,y^2)^2}$).
+\end{enumerate}
+\end{pvzz}
+
+\begin{tg}								% 2.9
+Sakykime, $f: X \to Y$.  Tada ðie teiginiai ekvivalentûs:
+\begin{enumerate}
+  \item $f \in C(X, Y)$  (t.y. $f$ tolydi visuose metrinës ervës $X$ taðkuose).
+  \item Kiekvienos atvirosios aibës $G$ erdvëje $Y$ pirmavaizdis $f^{-1}(G)$ --
+        atviroji aibë erdvëje $X$.
+  \item Kiekvienos uþdarosios aibës $F$ erdvëje $Y$ pirmavaizdis $f^{-1}(F)$ --
+        uþdaroji aibë erdvëje $X$.
+  \item Su kiekviena aibe $A \in X$ turime $F(\overline{A}) \subset \overline{F(A)}$.
+\end{enumerate}
+\end{tg}
+
+\begin{tg}								% 2.10
+Jei $f \in C(X, Y)$, $K \subset X$ -- kompaktiðka aibë, tai $f(K) \subset Y$ -- taip
+pat kompaktiðka aibë.
+\end{tg}
+
+\begin{isvv}~\par							% 2.11
+\begin{enumerate}
+  \item (Vejerðtraso teorema).  Jei $f \in C(K) = C(K, \R)$, $K \subset X$ -- kompaktiðka
+        aibë, tai $f(K)$ -- aprëþta aibë ir $\exists x^1, x^2 \quad f(x^1) = \sup f(K),
+        \quad f(x^2) = \inf f(K)$ (funkcija $f$ ágyja didþiausià ir maþiausià reikðmes).
+  \item Jei $f \in C(K, K_1)$ -- bijekcija, $K \subset X$, $K_1 \subset Y$ -- kompaktiðkos
+        aibës, tai $f^{-1} \in C(K_1, K)$ (t.y. $f^{-1}$ taip pat tolydi).
+\end{enumerate}
+\end{isvv}
+
+\begin{ap}								% 2.12
+Funkcija $f: X \to Y$ vadinama \Def{tolygiai tolydþia} aibëje $A \subset X$, jei
+\[
+  \forall \eps > 0 \quad \exists \delta > 0 \quad
+    d\big(f(x^1), f(x^2)\big) < \eps \textrm{ kai }
+    d(x^1, x^2) < \delta, \quad x^1, x^2 \in A.
+\]
+\end{ap}
+
+\begin{tr}[Kantoro teorema]						% 2.13
+Jei $f \in C(X, Y)$, tai $f$ yra tolygiai tolydi kiekvienoje kompaktiðkoje
+aibëje $K \subset X$.
+\end{tr}
+
+
+\section{Keliø kintamøjø funkcijø diferencijavimas}			% 3
+
+\newcommand{\aA}{\mathcal{A}}
+\newcommand{\aL}{\mathcal{L}}
+
+\begin{ap}[Tiesinës algebros prisiminimai]				% 3.1
+Atvaizdis $\aA: \R^k \to \R^m$ vadinamas \Def{tiesiniu}, jei $\forall x, y \in \R^k$,
+$\alpha, \beta \in \R$, $\aA(\alpha x + \beta y) = \alpha \aA x + \beta \aA y$.
+
+Kai $k = 1$, $\aA$ vadinamas \Def{tiesiniu funkcionalu}.
+
+Visø tokiø atvaizdþiø aibë yra tiesinë erdvë $\aL(\R^k, \R^m)$.  Bet koká toká tiesiná
+atvaizdá galime uþraðyti formule
+\[
+  (\aA x)_i = \sum_{j=1}^k a_{ij} x_j
+  \qquad i = 1 \ldots m
+  \quad a_{ij} \in \R
+\]         
+(Èia ir toliau þymësime $\aA x := \aA(x)$).
+
+Tiesinio atvaizdþio \Def{matrica} 
+\[
+  [A] := \pmatrix{a_{11} & \cdots & a_{1k} \cr
+                  \vdots & \ddots & \vdots \cr
+                  a_{m1} & \cdots & a_{mk}}
+\]
+
+Savybës:
+\begin{enumerate}
+  \item $[A+B] = [A] + [B]$
+  \item $[\lambda A] = \lambda [A]$
+  \item $[BA] = [B][A]$
+\end{enumerate}
+
+Vektoriai $x = (x_1, x_2, \ldots, x_k)$, $y = (y_1, y_2, \ldots, y_m)$. Tada
+\[
+  y = \aA x \qquad \Longleftrightarrow \qquad y^T = [A] x^T
+\]
+
+Daþnai vietoje eilutiniø vektoriø imami stulpeliniai ir raðoma tiesiog $y = [A]x$.
+\end{ap}
+
+\begin{ap}								% 3.2
+Jei $A$ -- matrica, tai skaièius 
+\[\|A\|_e := \sqrt{\sum_{i,j} (A)_{ij}^2}
+\]
+vadinamas jos \Def{euklidine norma}, o 
+\[\|A\| := \sup_{|x|=1} |Ax|
+\]                               
+-- jos \Def{operatorine norma}.
+\end{ap}
+
+\begin{tg}								% 3.3
+$\|\cdot\|$ ir $\|\cdot\|_e$ yra normos erdvëje $\aL(R^k, \R^m)$, be to
+\begin{enumerate}
+  \item $|Ax| \le \|A\| \cdot |x|$, $x \in R^k$
+  \item $\|A\| \le \|A\|_e \le \sqrt{k} \|A\|$
+\end{enumerate}
+\end{tg}
+                                                                                 
+\noindent
+Toliau ðiame skyriuje $D$ þymësime atviràjà aibæ erdvëje $R^k$ (jei nepasakyta kitaip).
+
+\begin{ap}								% 3.4
+Sakoma, kad funkcija $f: D \to \R^m$ yra \Def{diferencijuojama} taðke $x \in D$, jei
+$\exists \aA \in \aL(\R^k, \R^m)$ toks, kad
+\[
+  f(x+h) - f(x) = \aA(h) + o(h) \qquad \textrm{kai } h \to \vec{0}
+\]
+arba
+\[
+  \lim_{h \to \vec{0}} \frac{|f(x+h) - f(x) - \aA(h)|}{|h|} = 0
+\]
+
+Atvaizdis $\aA$ vadinamas funkcijos $f$ \Def{diferencialu} taðke $x$ ir þymimas
+$\ud f(x)$, o jo matrica $[A]$ -- funkcijos $f$ \Def{iðvestine} taðke $x$ ir þymima
+$f'(x)$.
+
+Taigi, $\ud f(x) = f'(x) \cdot h = f'(x) \cdot \pmatrix{h_1 \cr \vdots \cr h_n}$.
+\end{ap}
+
+\begin{tg}[Iðvestinës savybës]~\par					% 3.5
+\begin{enumerate}
+  \item Jei $f$ diferencijuojama taðke $x \in D$, tai $f'(x)$ apibrëþta vienareikðmiðkai.
+  \item Jei $f$ diferencijuojama taðke $x \in D$, tai $f$ tolydi tame taðke.
+  \item Jei $f(x) = C = \const$, $x \in D$, tai $f'(x) = \mathbf{0}$ (nulinë matrica).
+  \item Jei $A \in \aL(\R^k, \R^m)$, tai $\aA'(x) = [A]$ (\/$\ud \aA(x) = \aA$).
+        (Vienmaèiu atveju turime $\ud(ax) = a\dx$ arba $(ax)' = a$).
+  \item $(f \pm g)'(x) = f'(x) \pm g'(x)$, jei funkcijos $f$ ir $g$ diferencijuojamos
+        taðke $x$.
+  \item $(\lambda f)'(x) = \lambda f'(x)$, jei funkcija $f$ diferencijuojama
+        taðke $x$.
+  \item Jei $f: D \to D_1 \subset \R^m$ diferencijuojama taðke $x \in D$, o 
+        $g: D_1 \to \R^l$ diferencijuojama taðke $y = f(x)$, tai $g \circ f$ diferencijuojama
+        taðke $x$ ir $(g \circ f)'(x) = g'\big(f(x)\big)\cdot f'(x)$.
+\end{enumerate}
+\end{tg}
+
+\begin{ap}								% 3.6
+Tarkime, $f: D \to \R$, $x^0 \in D$. Funkcijos $f$ \Def{(kryptine) iðvestine} kryptimi
+$\vec{a} \in \R^k$ vadinamas skaièius
+\[
+  \frac{\partial f}{\partial a}(x^0) := \lim_{t \to 0} \frac{f(x^0+ta) - f(x^0)}{t}
+\]
+(su sàlyga, kad riba egzistuoja).  Atskiru atveju, kai $a = e_j = (0, \ldots, 0, 1, 0, \ldots,
+0)$, iðvestinë $\frac{\partial f}{\partial e_j}(x^0)$ vadinama \Def{daline iðvestine}
+taðke $x^0$ $x_j$ atþvilgiu (arba ``pagal $x_j$'', arba ``$j$-toji dalinë iðvestinë'') ir
+þymima
+\[
+  \frac{\partial f}{\partial x_j}(x^0),	\qquad
+  f'_{x_j}(x^0),			\qquad
+  D_j f(x^0),				\qquad
+  \frac{\ud f}{\ud x_j}(x^0)
+\]
+
+Taigi,
+\[
+  \frac{\partial f}{\partial x_j}(x^0) := \lim_{t \to 0} 
+    \frac{f(x^0_1, \ldots, x^0_{j-1}, x^0_j + t, x^0_{j+1}, \ldots, x^0_k) - f(x^0)}{t}
+\]
+\end{ap}                     
+
+\newcommand{\DI}[2]{\frac{\partial f_{#1}}{\partial x_{#2}}}
+\newcommand{\DIx}[2]{\DI{#1}{#2}(x)}
+\newcommand{\DDI}[3]{\frac{\partial^2 f_{#1}}{\partial x_{#2}\partial x_{#3}}}
+
+\begin{tg}\label{3.7}~\par						% 3.7
+\begin{enumerate}
+  \item \label{3.7.1}
+        Jei $f: D \to \R^m$ yra diferencijuojama taðke $x \in D$, tai
+        \[
+           f'(x) = \pmatrix{ \DIx{1}{1} & \DIx{1}{2} & \cdots & \DIx{1}{k} \cr
+                             \vdots & \vdots & \ddots & \vdots \cr
+                             \DIx{m}{1} & \DIx{m}{2} & \cdots & \DIx{m}{k} }
+        \]
+  
+        Kai $m = 1$, $f'(x) = \left(\DIx{}{1}, \DIx{}{2}, \ldots, \DIx{}{k}\right) =: \grad f(x)$
+        -- funkcijos $f$ \Def{gradientas} taðke $x$.
+  \item Diferencijuojamos funkcijos $f: D \to \R$ iðvestinë kryptimi $\vec{a} \in \R^k$
+        yra lygi
+        \[
+           \frac{\partial f}{\partial a}(X) = \langle \grad f(x), a \rangle
+        \]                                                                 
+        ($\langle \cdot, \cdot \rangle$ -- skaliarinë sandauga).
+\end{enumerate}
+\end{tg}
+
+\begin{pss}~\par							% 3.8
+\begin{enumerate}
+  \item Bendru atveju \ref{3.7}.\ref{3.7.1} atvirkðèias teiginys nëra teisingas --
+        ið visø funkcijos daliniø iðvestiniø egzistavimo neiðplaukia funkcijos
+        diferencijuojamumas.
+        
+        Funkcijos diferencijuojamumui taðke pakanka, kad to taðko aplinkoje egzistuotø
+        visos dalinës iðvestinës, o tame taðke jos bûtø tolydþios.
+  \item Jei $g(t) = (f \circ \phi)(t)$, $t \in I \subset \R$, $f: D \to \R$, $\phi: I \to D$,
+        kitaip sakant, $g(t) = f(\phi_1(t), \phi_2(t), \ldots, \phi_k(t))$, $t \in I$, tai
+        \[
+          g'(t) = \sum_{i=0}^k \frac{\partial f}{\partial x_i}\big(\phi_i(t)\big) \cdot 
+          \phi_i'(t) \qquad t \in I
+        \]
+\end{enumerate}
+\end{pss}
+
+% FIXME KODËL NEVEIKIA \nopagebreak??? Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu!
+\pagebreak % jei veiktø tie prakeikti \nopagebreak, ðito nereikëtø
+\begin{tg}(Lagranþo vidutinës reikðmës teorema)~\nopagebreak[4]\par\nopagebreak[4]		% 3.9
+\begin{enumerate}\nopagebreak[4]
+  \item Tarkime, kad $f: D \to \R^m$ turi visas tolydþias iðvestines srityje $D \subset \R^k$
+        (þymësime $f \in C^1(D, \R^m)$) ir $[x, y] := \{(1-t)x + ty : t \in [0, 1] \} \subset
+        D$ (\/\Def{atkarpa}), $x, y \in \R^k$. Tada $\exists z \in [x, y]:$
+        \[
+          |f(y)-f(x)| \le \| f'(z) \| \cdot |y-x|
+        \]                                       
+  \item Jei be to $m = 1$, tai $\exists z \in [x, y]:$
+        \[
+          f(y)-f(x) = \langle f'(z), (y-x) \rangle
+        \]
+\end{enumerate}
+\end{tg}
+
+\begin{ps}								% 3.10
+Kai $m > 1$, lygybës gali ir nebûti.
+\end{ps}
+
+\begin{ap}								% 3.11
+Tarkime, kad funkcija $f: D \to \R$ turi dalinæ iðvestinæ $\DI{}{i}$ srityje
+$D$. Jei egzistuoja dalinë iðvestinë $\frac{\partial}{\partial x_j}\left(\DI{}{i}\right)$,
+tai ji vadinama funkcijos $f$ \Def{antrosios eilës daline iðvestine} pagal $x_i$ ir $x_j$
+ir þymima
+\[
+   \DDI{}{j}{i},		\qquad
+   f''_{x_i x_j},		\qquad
+   D_{ij} f,			\qquad
+   \frac{\partial^2 f}{\partial^2 x_i} := \DDI{}{i}{i}
+\]
+
+Jei $f$ turi tolydþias visas antros eilës (dalines) iðvestines srityje $D$, tai raðoma
+$f \in C^2(D)$.
+
+Analogiðkai apibrëþiamos treèios, ketvirtos ir kitø eiltu iðvestinës.
+\end{ap}
+
+\begin{tr}								% 3.12
+Tarkime, kad funkcija $f: D \to \R$ turi dalines iðvestines $\DDI{}{j}{i}$ ir
+$\DDI{}{i}{j}$ taðko $x \in D$ aplinkoje, tolydþias taðke $x$. Tada
+\[
+  \DDI{}{j}{i}(x) = \DDI{}{i}{j}(x)
+\]
+\end{tr}
+
+\begin{tr}[Teiloro formulë]						% 3.13
+Tarkime, $f \in C^s(D)$. Jei $x^0 \in D$, $U_\delta(x^0) \subset D$, tai
+$\forall x \in U_\delta(x^0) \quad \exists \Theta = \Theta(x^0, x) \in (0, 1):$
+\[
+  f(x) = \sum_{n=0}^{s-1} \frac{1}{n!}
+         \sum_{j_1, j_2, \ldots, j_n = 1}^k
+         \frac{\partial^n f(x^0)}{\partial x_{j_1} \cdots \partial x_{j_n}}
+         (x_{j_1} - x^0_{j_1}) \cdots (x_{j_n} - x^0_{j_n}) 
+         + R_s(x^0, x)
+\]                    
+kur
+\[
+  R_s(x^0, x) = \frac{1}{s!}
+         \sum_{j_1, j_2, \ldots, j_s = 1}^k
+         \frac{\partial^s f\big(x^0 + \Theta(x-x^0)\big)}{\partial x_{j_1} \cdots \partial x_{j_s}}
+         (x_{j_1} - x^0_{j_1}) \cdots (x_{j_s} - x^0_{j_s}) 
+\]                    
+
+\begin{ps*}
+Ði formulë uþsiraðo panaðiai á vienmatá atvejá naudojant multiindeksus.
+\Def{Multiindeksas} -- tai rinkinys $n = (n_1, \ldots, n_m)$, $n_i \in \N\cup\{0\}$.
+$|n| := n_1 + \cdots + n_m$.
+
+Jei $x \in \R^k$, $n = (n_1, \ldots, n_k)$, tai
+\[ x^n := x_1^{n_1}x_2^{n_2}\cdots x_k^{n_k}
+\]
+\[ \partial x^n := \partial x_1^{n_1} \partial x_2^{n_2}\cdots \partial x_k^{n_k}
+\]
+\[ f^{(n)}(x) := \frac{\partial^{|n|} f(x)}{\partial x^n}
+\]
+
+Tada Teiloro formulë atrodo taip:
+\[
+   f(x) = \underbrace{\sum_{|n| = 0}^s}
+             _{\equiv \sum_{k=0}^s \sum_{|n| = k}}
+          \frac{f^{(n)}(x^0)}{|n|!} (x-x^0)^n +
+          \frac{1}{s!} \sum_{|n|=s} f^{(n)} \big(x^0 + \Theta(x-x^0)\big) (x-x^0)^n
+\]
+\end{ps*}
+\end{tr}
+
+\begin{isv}(Teiloro formulë su Peano liekamuoju nariu)			% 3.14
+Tomis paèiomis sàlygomis
+\[
+  f(x) = \sum_{n=0}^s \frac{1}{n!}
+         \sum_{j_1, j_2, \ldots, j_n = 1}^k
+         \frac{\partial^n f(x^0)}{\partial x_{j_1} \cdots \partial x_{j_n}}
+         (x_{j_1} - x^0_{j_1}) \cdots (x_{j_n} - x^0_{j_n}) 
+         + o(|x-x^0|^s), \qquad x \to x^0
+\]                                       
+(t.y. $\frac{R_{s+1}(x^0, x)}{|x-x^0|^s} \to 0$, $x \to x^0$).
+\end{isv}
+
+\begin{ap}								% 3.15
+Taðkas $x^0 \in D$ vadinamas funkcijos $f: D \to \R$ \Def{lokaliojo maksimumo}
+(\/\Def{minimumo}) \Def{taðku}, jei $\exists \eps > 0: \quad f(x) \le f(x^0)$
+(atitinkamai $f(x) \ge f(x^0)$), kai $x \in U_\eps(x^0)$.  Lokaliojo maksimumo
+ir minimumo taðkai vadinami \Def{ekstremumo taðkais} arba tiesiog \Def{ekstremumais}.
+\end{ap}
+
+\begin{tg}[Bûtina ekstremumo sàlyga]					% 3.16
+Jei funkcija $f: D \to \R$ turi taðke $x^0 \in D$ ekstremumà ir jame yra diferencijuojama,
+tai $f'(x^0) = \vec{0} = (0, 0, \ldots, 0)$, t.y.
+$\forall i = 1 \ldots k \quad \DI{}{i}(x^0) = 0$.
+\end{tg}
+
+\begin{tr}[Pakankamos ekstremumo sàlygos]				% 3.17
+Tarkime, kad $f \in C^2(D)$, $f'(x^0) = \vec{0}$. Paþymëkime
+\[
+  a(h) := \sum_{i, j = 1}^{k} \DDI{}{i}{j}(x^0) h_i h_j
+  \qquad h \in \R^k
+\]      
+\begin{enumerate}
+  \item Jei kvadratinë forma $a(h)$ teigiamai apibrëþta (t.y. $a(h) > 0$ kai $h \ne \vec{0}$),
+        tai funkcija $f$ taðke $x_0$ turi lokaløjá minimumà.
+  \item Jei kvadratinë forma $a(h)$ neigiamai apibrëþta (t.y. $a(h) < 0$ kai $h \ne \vec{0}$),
+        tai funkcija $f$ taðke $x_0$ turi lokaløjá maksimumà.
+  \item Jei $a$ -- neapibrëþta kvadratinë forma (t.y. $\exists h^1, h^2 \ne \vec{0}:$
+        $a(h^1) > 0$ ir $a(h^2) < 0$), tai funkcija taðke $x^0$ ekstremumo neturi.
+        Tokie taðkai vadinami \Def{balno taðkais}
+\end{enumerate}                                  
+\begin{ps*}
+Ne visi atvejai iðsemti: jei $\forall h \quad a(h) > 0$ bet $\exists h^0 \ne \vec{0} \quad a(h^0) = 0$,
+ði teorema atsakymo neduoda.
+\end{ps*}
+\end{tr}
+
+\begin{pvz}								% 3.18
+$k = 2$,
+\[A = \pmatrix{ \frac{\partial^2 f}{\partial x^2} (x^0) & 
+                \frac{\partial^2 f}{\partial x \partial y} (x^0) \cr
+                \frac{\partial^2 f}{\partial x \partial y} (x^0) &
+                \frac{\partial^2 f}{\partial y^2} (x^0) }
+\]
+$a(x) = x^T A x$
+
+Remsimës Silvestro kriterijumi:
+$\Delta_1 := \frac{\partial^2 f}{\partial x^2} (x^0)$, $\Delta_2 := |A|$.
+
+Jei $\Delta_1 > 0, \Delta_2 > 0$, tai $x^0$ -- minimumo taðkas.
+
+Jei $\Delta_1 < 0, \Delta_2 > 0$, tai $x^0$ -- maksimumo taðkas.
+
+Jei $\Delta_2 < 0$, tai $x^0$ nëra ekstremumo taðkas.
+
+Kitais atvejais ($\Delta_2 = 0$ arba $\Delta_2 > 0$ ir $\Delta_1 = 0$) atsakymo reikës
+ieðkoti kitais bûdais.
+\end{pvz}
+
+% ----------
+% Templates:
+
+%\begin{tg}								% 6.
+%
+%\end{tg}
+
+%\begin{enumerate}
+%  \item 
+%  \item 
+%\end{enumerate}
+
+%\begin{pvzz}~\par							% 6.
+%\begin{enumerate}
+%  \item 
+%  \item 
+%\end{enumerate}
+%\end{pvzz}
+
+% FIXME: ...
+
+\end{document}
