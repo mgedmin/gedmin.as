@@ -11,12 +11,17 @@ run: build
 	bin/blogofile serve -s website
 
 .PHONY: push
-push: build
-	git push
-	ssh fridge 'cd src/gedmin.as && git pull && make build'
+push: bin/ghp-import build
+	bin/ghp-import -m "Update site" website/_site/
+	git push --all
+	ssh fridge 'cd gedmin.as && git pull'
 
 bin/blogofile: bin/pip
 	bin/pip install blogofile==0.7.1
+	touch -c $@
+
+bin/ghp-import: bin/pip
+	bin/pip install ghp-import
 	touch -c $@
 
 bin/pip:
