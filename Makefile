@@ -1,14 +1,14 @@
 .PHONY: build
 build: env/bin/blogofile
-	env/bin/blogofile -s website build
+	env/bin/blogofile build -s website
 
 .PHONY: vbuild
 vbuild: env/bin/blogofile
-	env/bin/blogofile -s website -v build
+	env/bin/blogofile build -s website -v
 
 .PHONY: run
 run: build
-	env/bin/blogofile -s website serve
+	env/bin/blogofile serve -s website
 
 .PHONY: push
 push: build
