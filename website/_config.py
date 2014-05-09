@@ -118,6 +118,7 @@ site.map = '''
         about/
 
         pyconlt2012/
+        pyconlt2014/
 
         study/
           * python/

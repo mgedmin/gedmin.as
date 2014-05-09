@@ -7,6 +7,9 @@
 <h2>News</h2>
 <dl class="news">
 
+<dt>2012-05-09</dt>
+<dd><a href="pyconlt2014/index-en.html">PyCon-LT 2014</a>
+
 <dt>2012-04-28</dt>
 <dd><a href="pyconlt2012/index-en.html">PyCon-LT 2012</a>
 </dd>
