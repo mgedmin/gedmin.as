@@ -14,8 +14,8 @@ run: build
 preview: website/_site/
 	xdg-open website/_site/index.html
 
-.PHONY: push
-push: bin/ghp-import build
+.PHONY: publish
+publish: bin/ghp-import build
 	bin/ghp-import -m "Update site" website/_site/
 	git push --all
 	ssh fridge 'cd gedmin.as && git pull'
