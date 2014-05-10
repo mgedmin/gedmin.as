@@ -4,7 +4,7 @@
 
 <h2>My PyCon-LT 2014 talk</h2>
 
-<p><a href="http://pycon.akl.lt/">PyCon-LT 2014</a> happened in Vilnius in
+<p><a href="http://pycon.lt/">PyCon-LT 2014</a> happened in Vilnius in
 2014.  I gave a talk about my history with Python (2002&ndash;2014).</p>
 
 <ul>
