@@ -1,0 +1,60 @@
+==================================================================
+https://keybase.io/mgedmin
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://gedmin.as
+  * I am mgedmin (https://keybase.io/mgedmin) on keybase.
+  * I have a public key with fingerprint 8121 AD32 F00A 8094 748A  6CD0 9157 445D E7A6 D78F
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "8121ad32f00a8094748a6cd09157445de7a6d78f",
+            "host": "keybase.io",
+            "key_id": "9157445de7a6d78f",
+            "kid": "0111a9ef79043bf37b4fd41301f1c38a191610e1d45c92552c9cf2d7bb156eca0f740a",
+            "uid": "ffcd5e1edb586fb58db122b0cbb56419",
+            "username": "mgedmin"
+        },
+        "service": {
+            "hostname": "gedmin.as",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1433338386,
+    "expire_in": 157680000,
+    "prev": "4a3e633b43ea7c0d9488d467736c1050173fd194d7cf126730d27a6095153cab",
+    "seqno": 3,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+owFtUj1rVEEUXTfYKBax0M5iwG5Z5s73vMK1sDLYKYIgy3xuhmTfe773siaEYGOR
+zthapRAbwd+gtViqpLAT7MVWcGaNnbeY4Z57zpm5l3tyZWM03nz58M7jH2++vrjw
+8cMtO3rQjG8cItv4A1Qdop2wvmKqF6Fru1QPqEIKCBhPScTYKKyZZMoI57EGLhnj
+PkgjvFQRTdB20xdFtrGmD9PUZCwn8+Qz+h/+zrqAAcDoEKXGjNpIpWXRM6AYIjiq
+DGgQgAN4xp0mnBOnXSReWgtcBGdwlAybbLe3tovReR4geMuViPnwFgix2FnLBQNd
+iH3oarMMmb1cBL9MNTqaoAyukgtlAqWRc8Lf+tT0Wdd2zdC4ZjfD28PQ9lWRDQdt
+4T0Ndn7uMLep9nmGWbEKXZ+aGlWQmW5IxRIYzaGoEhMU9tvUhXkqDC6FwjnKO2GV
+LZmhQVBqGQ1GOuw1U8ozISUVDjDHIGn0oJmXLgIRkmJP8nCx5sCpMxaVnp7UDapo
+/qZZZMs+LWoz7HUBHV06nm1cXC/Av5XYHN//NHo13iW3f83O7n47Rdfeo5/fr0/f
+3RydPr9a3Xv7+3N1mTzy7dbsy+uzk2d/AA==
+=xEcm
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mgedmin
+
+==================================================================
