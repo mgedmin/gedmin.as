@@ -16,7 +16,7 @@ preview: website/_site/
 
 .PHONY: publish
 publish: bin/ghp-import build
-	bin/ghp-import -m "Update site" website/_site/
+	bin/ghp-import -n -m "Update site" website/_site/
 	git push --all
 	ssh fridge 'cd gedmin.as && git pull'
 
