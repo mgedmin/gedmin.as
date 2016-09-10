@@ -5,5 +5,5 @@ RewriteRule ^(news|about)-(en|lt)\.html$ /$1/index-$2.html [R,L]
 RewriteRule ^(icpc|python)(/.*)?$ /study/$1$2 [R,L]
 RewriteRule ^study/inf98/(autumn2002|spring2003)\.html$ /study/inf98/$1/index-lt.html [R,L]
 
-# Let me git clone https://gedmin.as/dotfiles (or scripts)
-RewriteRule ^(scripts|dotfiles)(/.*)?$ https://github.com/mgedmin/$1$2 [R=301,L]
+# Let me git clone https://gedmin.as/dotfiles (or scripts, or dotvim)
+RewriteRule ^(scripts|dotfiles|dotvim)(/.*)?$ https://github.com/mgedmin/$1$2 [R=301,L]
