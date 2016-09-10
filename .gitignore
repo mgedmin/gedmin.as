@@ -9,3 +9,5 @@ tags
 include/
 lib/
 local/
+share/
+pip-selfcheck.json
