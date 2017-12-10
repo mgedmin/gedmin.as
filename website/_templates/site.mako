@@ -8,12 +8,6 @@
   <link rev="made" href="mailto:marius@gedmin.as" />
   <link rel="stylesheet" type="text/css" href="${self.stylesheet()}" />
   <meta name="Author" content="Marius Gedminas" />
-  <link rel="openid.server" href="http://www.myopenid.com/server" />
-  <link rel="openid.delegate" href="http://mgedmin.myopenid.com/" />
-  <link rel="openid2.provider" href="http://www.myopenid.com/server" />
-  <link rel="openid2.local_id" href="http://mgedmin.myopenid.com/" />
-  <meta http-equiv="X-XRDS-Location"
-        content="http://www.myopenid.com/xrds?username=mgedmin.myopenid.com" />
   ${self.extra_head()}
 </head>
 <body>
