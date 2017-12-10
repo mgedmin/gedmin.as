@@ -67,12 +67,11 @@ ${next.body()}
 <div class="bottombar">
 <hr class="hide" />
 <span class="valid">
-<a href="http://validator.w3.org/check/referer"><img
+<a href="https://validator.w3.org/check/referer"><img
         src="${bf.config.site.url}/valid-xhtml11.png"
         alt="Valid XHTML 1.1!" height="31" width="88" /></a>
-<a href="http://jigsaw.w3.org/css-validator/"><img
+<a href="https://jigsaw.w3.org/css-validator/"><img
         src="${bf.config.site.url}/valid-css.png"
-        src="http://jigsaw.w3.org/css-validator/images/vcss" 
         alt="Valid CSS!" height="31" width="88" /></a>
 </span>
 <span class="lastupdated">
