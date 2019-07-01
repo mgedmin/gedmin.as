@@ -15,6 +15,7 @@ import csv
 import time
 import logging
 import datetime
+import subprocess
 
 from mako.template import Template
 from blogofile.cache import Cache
@@ -416,15 +417,30 @@ def get_subpages():
 # Automatic modification time
 #
 
+def is_git_modified(filename):
+    return subprocess.check_output([
+        'git', 'status', '--porcelain', '--', filename
+    ]) != ""
+
+
+def get_git_mtime(filename):
+    return float(subprocess.check_output([
+        'git', 'log', '-1', '--format=%ad', '--date=unix', '--', filename,
+    ]))
+
+
 @expose()
 def get_mtime_str(format='%Y-%m-%d', source=None):
     filename = bf.template_context.template_name
     if source:
         filename = os.path.join(os.path.dirname(filename), source)
-    try:
-        mtime = os.stat(filename).st_mtime
-    except OSError:
-        mtime = time.time()
+    if not is_git_modified(filename):
+        mtime = get_git_mtime(filename)
+    else:
+        try:
+            mtime = os.stat(filename).st_mtime
+        except OSError:
+            mtime = time.time()
     return time.strftime(format, time.localtime(mtime))
 
 
