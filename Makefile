@@ -14,6 +14,12 @@ run: build
 preview: website/_site/
 	xdg-open website/_site/index.html
 
+.PHONY: diff
+diff: bin/ghp-import build
+	ghp-import -m "Preview" -b gh-temp website/_site/
+	-git diff -p --stat origin/gh-pages gh-temp
+	git branch -D gh-temp
+
 .PHONY: publish
 publish: bin/ghp-import build
 	bin/ghp-import -n -m "Update site" website/_site/
