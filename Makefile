@@ -32,5 +32,5 @@ bin/ghp-import: bin/pip
 	touch -c $@
 
 bin/pip:
-	virtualenv .
+	virtualenv -p python2.7 .
 
