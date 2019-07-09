@@ -4,7 +4,7 @@
 !
 ! to add this one do
 !
-!   gsettings set org.gnome.Epiphany adblock-filters ['https://gedmin.as/adblock.txt', 'https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt']
+!   gsettings set org.gnome.Epiphany adblock-filters "['https://gedmin.as/adblock.txt', 'https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt']"
 !
 ! see also https://gitlab.gnome.org/GNOME/epiphany/issues/77 and https://ar.al/2018/07/17/enabling-better-blocker-in-gnome-web/
 !
