@@ -105,9 +105,11 @@ def post_build():
     output_dir = bf.writer.output_dir
     for dirpath, dirnames, filenames in os.walk(output_dir):
         filename = os.path.join(dirpath, 'index.html')
-        if not os.path.exists(filename):
+        lang_index = 'index-%s.html' % site.default_lang
+        alt_filename = os.path.join(dirpath, lang_index)
+        if not os.path.exists(filename) and os.path.exists(alt_filename):
             log.info('Creating symlink %s' % filename)
-            os.symlink('index-%s.html' % site.default_lang, filename)
+            os.symlink(lang_index, filename)
 
 
 #

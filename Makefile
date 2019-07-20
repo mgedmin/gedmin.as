@@ -26,6 +26,21 @@ publish: bin/ghp-import build
 	git push --all
 	ssh fridge 'cd gedmin.as && git pull'
 
+# web key directory
+GPG_ID = 8121AD32F00A8094748A6CD09157445DE7A6D78F
+EMAIL = marius@gedmin.as
+
+.PHONY: wkd
+wkd:
+	rm -rf openpgpkey
+	mkdir openpgpkey
+	echo $(GPG_ID) $(EMAIL) | /usr/lib/gnupg/gpg-wks-client -v --install-key
+	mkdir -p website/.well-known/openpgpkey
+	touch website/.well-known/openpgpkey/policy
+	rm -rf website/.well-known/openpgpkey/hu
+	mv openpgpkey/gedmin.as/hu website/.well-known/openpgpkey/
+	rm -rf openpgpkey
+
 website/_site:
 	$(make) build
 
