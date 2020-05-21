@@ -3,10 +3,6 @@ anchors = 1
 
 [filtering]
 ignore =
-  # don't check outside links yet
-  ^mailto:
-  ^http
-
   # 403 forbidden because there's no referrer
   http://validator.w3.org/check/referer
 
