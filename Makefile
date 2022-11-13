@@ -24,7 +24,7 @@ diff: bin/ghp-import build      ##: diff changes since last publication
 publish: bin/ghp-import build   ##: publish the site
 	bin/ghp-import -n -m "Update site" website/_site/
 	git push --all
-	ssh fridge 'cd gedmin.as && git pull'
+	ssh root@egle 'cd /var/www/gedmin.as && git pull'
 
 # web key directory
 GPG_ID = 8121AD32F00A8094748A6CD09157445DE7A6D78F
