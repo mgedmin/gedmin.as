@@ -86,9 +86,11 @@ def post_build():
         filename = os.path.join(dirpath, 'index.html')
         lang_index = 'index-%s.html' % site.default_lang
         alt_filename = os.path.join(dirpath, lang_index)
-        if not os.path.exists(filename) and os.path.exists(alt_filename):
-            log.info('Creating symlink %s' % filename)
-            os.symlink(lang_index, filename)
+        if os.path.exists(alt_filename):
+            if not os.path.exists(filename):
+                log.info('Creating symlink %s' % filename)
+                os.symlink(lang_index, filename)
+            bf.writer.generated_files.append(filename)
 
 
 #

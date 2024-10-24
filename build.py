@@ -96,8 +96,7 @@ class SiteGenerator:
         if not self.failed:
             if self.post_build_hook:
                 self.run_post_build_hook()
-            else:
-                self.clean_old_files()
+            self.clean_old_files()
 
     def load_config(self):
         self.site = Site()
@@ -170,10 +169,15 @@ class SiteGenerator:
         self.generated_files.append(dest)
 
     def run_post_build_hook(self):
-        self.bf.writer = Bag(output_dir=str(self.dest_dir))
+        generated_files = []
+        self.bf.writer = Bag(
+            output_dir=str(self.dest_dir),
+            generated_files=generated_files,
+        )
         self.info('running post_build() hook from _config.py')
         if not self.dry_run:
             self.post_build_hook()
+            self.generated_files.extend(map(pathlib.Path, generated_files))
 
     def clean_old_files(self):
         to_clean = set(self.preexisting_files) - set(self.generated_files)
