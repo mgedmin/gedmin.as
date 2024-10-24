@@ -408,9 +408,13 @@ def get_subpages():
 #
 
 def is_git_modified(filename):
-    return subprocess.check_output([
-        'git', 'status', '--porcelain', '--', filename
-    ], text=True) != ""
+    if 'git_status_cache' not in bf:
+        bf.git_status_cache = {
+            line[3:] for line in subprocess.check_output([
+                'git', 'status', '--porcelain', '--', 'website/'
+            ], text=True).splitlines()
+        }
+    return filename in bf.git_status_cache
 
 
 def get_git_mtime(filename):
