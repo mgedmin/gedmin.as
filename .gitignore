@@ -12,3 +12,5 @@ local/
 share/
 pip-selfcheck.json
 pyvenv.cfg
+__pycache__/
+gedmin.as.egg-info/

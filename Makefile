@@ -1,30 +1,47 @@
+PUBLISH_BRANCH = gh-pages
+DEPLOY_SERVER = root@egle
+DEPLOY_DIR = /var/www/gedmin.as
+
+output_dir = website/_site
+
 .PHONY: build
-build: bin/blogofile            ##: build the website in ./website
-	bin/blogofile build -s website
-
-.PHONY: vbuild
-vbuild: bin/blogofile           ##: build the website, verbosely
-	bin/blogofile build -s website -v
-
-.PHONY: run
-run: build                      ##: start a development web server
-	bin/blogofile serve -s website
+build:                  ##: build a preview
+	uv run build -q
 
 .PHONY: preview
-preview: website/_site/         ##: preview the website in a browser
-	xdg-open website/_site/index.html
+preview: build          ##: build a preview and open it in a browser
+	xdg-open $(output_dir)/index.html
+
+.PHONY: watch
+watch:                  ##: watch for changes and rebuild the preview
+	$(MAKE) build WEBSITE_TARGET=production
+	uv run live
+
+.PHONY: checklinks
+checklinks: build       ##: check for broken links
+	uv run linkchecker -f linkcheckerrc --file-output=html $(output_dir)
 
 .PHONY: diff
-diff: bin/ghp-import build      ##: diff changes since last publication
-	ghp-import -m "Preview" -b gh-temp website/_site/
-	-git diff -p --stat origin/gh-pages gh-temp
+diff: gh-temp           ##: compare built files against current version
+	-git diff origin/gh-pages gh-temp
 	git branch -D gh-temp
 
+.PHONY: diffstat
+diffstat: gh-temp       ##: summarize the diff
+	-git diff --stat origin/gh-pages gh-temp
+	git branch -D gh-temp
+
+.PHONY: gh-temp
+gh-temp:
+	$(MAKE) build WEBSITE_TARGET=production
+	ghp-import -m "Preview" -b gh-temp $(output_dir)
+
 .PHONY: publish
-publish: bin/ghp-import build   ##: publish the site
-	bin/ghp-import -n -m "Update site" website/_site/
+publish:                ##: build and push changes to the live site
+	$(MAKE) build WEBSITE_TARGET=production
+	uv run ghp-import -b $(PUBLISH_BRANCH) -n -m "Update site" $(output_dir)
 	git push --all
-	ssh root@egle 'cd /var/www/gedmin.as && git pull'
+	ssh $(DEPLOY_SERVER) 'cd $(DEPLOY_DIR) && git pull'
 
 # web key directory
 GPG_ID = 8121AD32F00A8094748A6CD09157445DE7A6D78F
@@ -41,19 +58,13 @@ wkd:                            ##: (re)generate the web key directory
 	mv openpgpkey/gedmin.as/hu website/.well-known/openpgpkey/
 	rm -rf openpgpkey
 
-website/_site:
-	$(make) build
+.PHONY: clean
+clean:                  ##: clean generated content and caches
+	rm -rf $(output_dir) __pycache__/ *.egg-info/ linkchecker-out.html
 
-bin/blogofile: bin/pip
-	bin/pip install blogofile==0.7.1
-	touch -c $@
-
-bin/ghp-import: bin/pip
-	bin/pip install ghp-import
-	touch -c $@
-
-bin/pip:
-	virtualenv -p python2.7 .
+.PHONY: realclean
+realclean: clean        ##: clean everything
+	rm -rf .venv/
 
 include help.mk
 HELP_WIDTH = 16

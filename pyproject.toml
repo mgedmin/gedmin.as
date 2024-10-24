@@ -1,0 +1,32 @@
+[project]
+name = "gedmin.as"
+version = "0.2.0"
+authors = [
+    {name = "Marius Gedminas", email = "marius@gedmin.as"},
+]
+description = "Sources for https://gedmin.as"
+classifiers = [
+    "Proprietary :: Not For PyPI",
+]
+license = {text = "proprietary"}
+requires-python = ">=3.12"
+dependencies = [
+    "ghp-import2>=1.0.1",
+    "linkchecker>=10.5.0",
+    "livereload>=2.7.0",
+    "mako>=1.3.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/mgedmin/gedmin.as/"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["build", "live"]
+
+[project.scripts]
+build = "build:main"
+live = "live:main"
