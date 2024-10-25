@@ -7,7 +7,6 @@ import pathlib
 import subprocess
 import time
 
-from mako.template import Template
 from pygit2 import Repository
 from pygit2.enums import ObjectType
 

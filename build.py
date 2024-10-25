@@ -18,7 +18,6 @@ from contextlib import contextmanager
 
 from mako.exceptions import text_error_template
 from mako.lookup import TemplateLookup
-from mako.template import Template
 
 
 class Bag(dict):
