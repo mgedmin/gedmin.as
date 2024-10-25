@@ -9,7 +9,7 @@ import time
 
 from mako.template import Template
 from pygit2 import Repository
-from pygit2.enums import ObjectType, SortMode
+from pygit2.enums import ObjectType
 
 log = logging.getLogger('config')
 
