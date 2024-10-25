@@ -146,8 +146,17 @@ class SiteGenerator:
         dest = self.dest_of(path)
         self.info(self.format_action("copy", dest))
         if not self.dry_run:
-            shutil.copy2(path, dest)
+            if not self.up_to_date(path, dest):
+                shutil.copy2(path, dest)
         self.generated_files.append(dest)
+
+    def up_to_date(self, src, dest):
+        try:
+            ss = src.lstat()
+            ds = dest.lstat()
+        except OSError:
+            return False
+        return (ss.st_size, ss.st_mtime) == (ds.st_size, ds.st_mtime)
 
     def render_mako_template(self, path):
         dest = self.dest_of(path).with_suffix('')
