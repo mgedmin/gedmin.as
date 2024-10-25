@@ -1,13 +1,15 @@
 # Configuration for build.py
-import os
 import csv
-import time
-import logging
 import datetime
+import logging
+import os
+import pathlib
 import subprocess
+import time
 
 from mako.template import Template
-
+from pygit2 import Repository
+from pygit2.enums import ObjectType, SortMode
 
 log = logging.getLogger('config')
 
@@ -364,6 +366,7 @@ def get_site_map_root():
 def pre_build():
     check_site_map_completeness()
     load_git_status_cache()
+    compute_git_mtimes()
 
 
 def check_site_map_completeness():
@@ -428,7 +431,68 @@ def is_git_modified(filename):
     return filename in bf.git_status_cache
 
 
+def walk_tree(repo, tree, path=None):
+    if path is None:
+        path = pathlib.Path('.')
+    for entry in tree:
+        if entry.type == ObjectType.BLOB:
+            yield path / entry.name
+        elif entry.type == ObjectType.TREE:
+            yield from walk_tree(repo, repo[entry.id], path / entry.name)
+
+
+def diff_trees(repo, tree_a, tree_b, path=None):
+    if path is None:
+        path = pathlib.Path('.')
+    for entry_b in tree_b:
+        try:
+            entry_a = tree_a[entry_b.name]
+        except KeyError:
+            # added in tree_b
+            if entry_b.type == ObjectType.BLOB:
+                yield path / entry_b.name
+            elif entry_b.type == ObjectType.TREE:
+                yield from diff_trees(
+                    repo,
+                    {},
+                    repo[entry_b.id],
+                    path / entry_b.name,
+                )
+            continue
+        if entry_a.id != entry_b.id:
+            # modified in tree_b
+            if entry_b.type == ObjectType.BLOB:
+                yield path / entry_b.name
+            if entry_a.type == entry_b.type == ObjectType.TREE:
+                yield from diff_trees(
+                    repo,
+                    repo[entry_a.id],
+                    repo[entry_b.id],
+                    path / entry_b.name,
+                )
+
+
+def compute_git_mtimes():
+    repo = Repository('.git')
+    commit = repo[repo.head.target]
+    files = set(walk_tree(repo, commit.tree))
+    mtimes = {}
+    while files and commit.parents:
+        parent = commit.parents[0]
+        for filename in diff_trees(repo, parent.tree, commit.tree):
+            mtimes.setdefault(filename, commit.author.time)
+            files.discard(filename)
+        commit = parent
+    for filename in files:
+        mtimes[filename] = commit.author.time
+    bf.git_mtime_cache = mtimes
+
+
 def get_git_mtime(filename):
+    if mtime := bf.git_mtime_cache.get(pathlib.Path(filename)):
+        return mtime
+    # This should never be used:
+    log.warning('Failed to discover git modification time of %s', filename)
     return float(subprocess.check_output([
         'git', 'log', '-1', '--format=%ad', '--date=unix', '--', filename,
     ], text=True))
