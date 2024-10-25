@@ -9,15 +9,12 @@ A very simple static site generator, Blogofile-style
 """
 
 import argparse
-import concurrent.futures
 import fnmatch
 import os
 import pathlib
 import shutil
 import sys
-import threading
 from contextlib import contextmanager
-from functools import partial
 
 from mako.exceptions import text_error_template
 from mako.lookup import TemplateLookup
@@ -37,23 +34,12 @@ class Site(Bag):
         self.template_vars = {}
 
 
-class ThreadLocalBagHolder(threading.local):
-
-    def __init__(self):
-        self.bag = Bag()
-
-
 class BlogofileCompat(Bag):
+    pass
 
-    def __init__(self):
-        self._thread_local = ThreadLocalBagHolder()
 
-    @property
-    def template_context(self):
-        return self._thread_local.bag
-
-    def reset_template_context(self):
-        self._thread_local.bag = Bag()
+class BlogofileTemplateContext(Bag):
+    pass
 
 
 @contextmanager
@@ -99,7 +85,6 @@ class SiteGenerator:
         self.load_config()
         if self.pre_build_hook:
             self.run_pre_build_hook()
-        tasks = []
         for dirpath, dirnames, filenames in self.source_dir.walk():
             dirnames[:] = self.filter_files(dirnames)
             filenames[:] = self.filter_files(filenames)
@@ -107,11 +92,9 @@ class SiteGenerator:
             for filename in filenames:
                 path = dirpath / filename
                 if filename.endswith('.mako'):
-                    tasks.append(partial(self.render_mako_template, path))
+                    self.render_mako_template(path)
                 else:
-                    tasks.append(partial(self.copy_file, path))
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            concurrent.futures.wait([executor.submit(fn) for fn in tasks])
+                    self.copy_file(path)
         if not self.failed:
             if self.post_build_hook:
                 self.run_post_build_hook()
@@ -172,7 +155,7 @@ class SiteGenerator:
             path.read_text(),
             lookup=template_lookup,
         )
-        self.bf.reset_template_context()
+        self.bf.template_context = BlogofileTemplateContext()
         self.bf.template_context.template_name = str(path)
         self.bf.config = Bag(site=self.site)
         self.bf.writer = Bag(template_lookup=template_lookup)
