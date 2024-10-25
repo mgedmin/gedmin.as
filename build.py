@@ -114,9 +114,11 @@ class SiteGenerator:
         self.template_lookup = TemplateLookup(
             directories=[self.source_dir, self.template_dir],
             input_encoding='UTF-8',
-            output_encoding='UTF-8',
             encoding_errors='replace',
         )
+        # *sigh* so that <%inherit file="_templates/site.mako"> would find
+        # things relative to the website root and not the calling template
+        self.template_lookup.adjust_uri = lambda uri, relative_to: uri
 
     def filter_files(self, filenames):
         return sorted(
@@ -127,6 +129,9 @@ class SiteGenerator:
                 fnmatch.fnmatch(f, pat) for pat in self.allowed_hidden_files
             )
         )
+
+    def uri_of(self, path):
+        return str(path.relative_to(self.source_dir))
 
     def dest_of(self, path):
         return self.dest_dir.joinpath(path.relative_to(self.source_dir))
@@ -161,10 +166,7 @@ class SiteGenerator:
     def render_mako_template(self, path):
         dest = self.dest_of(path).with_suffix('')
         self.info(self.format_action("mako", dest))
-        template = Template(
-            path.read_text(),
-            lookup=self.template_lookup,
-        )
+        template = self.template_lookup.get_template(self.uri_of(path))
         self.bf.template_context = BlogofileTemplateContext()
         self.bf.template_context.template_name = str(path)
         self.bf.config = Bag(site=self.site)

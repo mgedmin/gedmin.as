@@ -215,8 +215,9 @@ def get_trail_templates(filename, lang):
 
 
 def get_template(filename):
-    with open(filename) as f:
-        return Template(f.read(), lookup=bf.writer.template_lookup)
+    return bf.writer.template_lookup.get_template(
+        filename.removeprefix('website/')
+    )
 
 
 def get_template_info(filename):
