@@ -85,6 +85,7 @@ class SiteGenerator:
         self.load_config()
         if self.pre_build_hook:
             self.run_pre_build_hook()
+        self.init_mako()
         for dirpath, dirnames, filenames in self.source_dir.walk():
             dirnames[:] = self.filter_files(dirnames)
             filenames[:] = self.filter_files(filenames)
@@ -108,6 +109,14 @@ class SiteGenerator:
         exec(config_file.read_text(), globs)
         self.pre_build_hook = globs.get('pre_build')
         self.post_build_hook = globs.get('post_build')
+
+    def init_mako(self):
+        self.template_lookup = TemplateLookup(
+            directories=[self.source_dir, self.template_dir],
+            input_encoding='UTF-8',
+            output_encoding='UTF-8',
+            encoding_errors='replace',
+        )
 
     def filter_files(self, filenames):
         return sorted(
@@ -143,22 +152,14 @@ class SiteGenerator:
     def render_mako_template(self, path):
         dest = self.dest_of(path).with_suffix('')
         self.info(self.format_action("mako", dest))
-        # NB: adding path.parent to the directories here is not what Blogofile
-        # did, but it makes sense to me
-        template_lookup = TemplateLookup(
-            directories=[self.source_dir, self.template_dir, path.parent],
-            input_encoding='UTF-8',
-            output_encoding='UTF-8',
-            encoding_errors='replace',
-        )
         template = Template(
             path.read_text(),
-            lookup=template_lookup,
+            lookup=self.template_lookup,
         )
         self.bf.template_context = BlogofileTemplateContext()
         self.bf.template_context.template_name = str(path)
         self.bf.config = Bag(site=self.site)
-        self.bf.writer = Bag(template_lookup=template_lookup)
+        self.bf.writer = Bag(template_lookup=self.template_lookup)
         try:
             html = template.render(bf=self.bf, **self.site.template_vars)
         except Exception:
