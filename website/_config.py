@@ -353,15 +353,17 @@ def parse_site_map(site_map):
     return root
 
 
+site.site_map_root = parse_site_map(site.map)
+
+
 @expose()
 def get_site_map_root():
-    if 'site_map_root' not in bf.template_context:
-        bf.template_context.site_map_root = parse_site_map(site.map)
-    return bf.template_context.site_map_root
+    return site.site_map_root
 
 
 def pre_build():
     check_site_map_completeness()
+    load_git_status_cache()
 
 
 def check_site_map_completeness():
@@ -412,13 +414,17 @@ def get_subpages():
 # Automatic modification time
 #
 
+def load_git_status_cache():
+    bf.git_status_cache = {
+        line[3:] for line in subprocess.check_output([
+            'git', 'status', '--porcelain', '--', 'website/'
+        ], text=True).splitlines()
+    }
+
+
 def is_git_modified(filename):
     if 'git_status_cache' not in bf:
-        bf.git_status_cache = {
-            line[3:] for line in subprocess.check_output([
-                'git', 'status', '--porcelain', '--', 'website/'
-            ], text=True).splitlines()
-        }
+        load_git_status_cache()
     return filename in bf.git_status_cache
 
 
