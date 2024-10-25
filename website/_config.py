@@ -371,14 +371,17 @@ def check_site_map_completeness():
                       for n in root.traverse()
                       for lang in languages)
     existing = set()
-    for dirpath, dirnames, filenames in os.walk('.'):
+    for dirpath, dirnames, filenames in os.walk('website'):
         for lang in languages:
             filename = 'index-%s.html.mako' % lang
             if (
                 filename in filenames
-                and dirpath[2:] not in site.excluded_from_site_map
+                and (
+                    dirpath.removeprefix('website/')
+                    not in site.excluded_from_site_map
+                )
             ):
-                existing.add(os.path.join(dirpath, filename)[2:])
+                existing.add(os.path.join(dirpath, filename))
     not_in_site_map = existing - in_site_map
     for name in sorted(not_in_site_map):
         log.warning("Site-map doesn't include %s" % name)

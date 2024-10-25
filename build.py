@@ -83,6 +83,8 @@ class SiteGenerator:
         self.generated_files = []
         self.failed = []
         self.load_config()
+        if self.pre_build_hook:
+            self.run_pre_build_hook()
         for dirpath, dirnames, filenames in self.source_dir.walk():
             dirnames[:] = self.filter_files(dirnames)
             filenames[:] = self.filter_files(filenames)
@@ -104,6 +106,7 @@ class SiteGenerator:
         globs = dict(site=self.site, bf=self.bf, Bag=Bag)
         config_file = self.config_file.resolve()
         exec(config_file.read_text(), globs)
+        self.pre_build_hook = globs.get('pre_build')
         self.post_build_hook = globs.get('post_build')
 
     def filter_files(self, filenames):
@@ -167,6 +170,11 @@ class SiteGenerator:
         if not self.dry_run:
             dest.write_text(html)
         self.generated_files.append(dest)
+
+    def run_pre_build_hook(self):
+        self.info('running pre_build() hook from _config.py')
+        if not self.dry_run:
+            self.pre_build_hook()
 
     def run_post_build_hook(self):
         generated_files = []
