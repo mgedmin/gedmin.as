@@ -2,7 +2,7 @@
 A very simple static site generator, Blogofile-style
 
 - Recursively walks through ./website/
-- Ignores files starting with a _ or a .
+- Ignores files starting with a _ or a . (with some exceptions)
 - Renders files ending with .mako
 - Copies all other files unmodified
 - Puts the output in ./website/_site/
@@ -200,7 +200,7 @@ class SiteGenerator:
 
     def clean_old_files(self):
         to_clean = set(self.preexisting_files) - set(self.generated_files)
-        for dest in sorted(to_clean):
+        for dest in sorted(to_clean, reverse=True):
             self.info(self.format_action("clean", dest))
             if not self.dry_run:
                 if dest.is_dir():
