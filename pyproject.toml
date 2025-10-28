@@ -28,12 +28,6 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 py-modules = ["build", "live"]
 
-[tool.uv]
-dev-dependencies = [
-    "austin-dist>=3.7.0",
-    "austin-tui>=1.2.3",
-]
-
 [project.scripts]
 build = "build:main"
 live = "live:main"
